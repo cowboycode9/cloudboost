@@ -2,17 +2,17 @@ name: Transcript
 
 on:
   workflow_run:
-    workflows: ["Voiceover"]  # This matches the workflow name exactly
+    workflows: ["Voiceover"]  # Must match the workflow name exactly
     types:
       - completed
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   transcribe:
     runs-on: ubuntu-latest
 
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
-    
+
     permissions:
       contents: write
       actions: read
@@ -30,6 +30,14 @@ jobs:
           git config --local user.email "intellectra9@outlook.com"
           git pull origin main --rebase || git pull origin main
 
+      - name: Clean preinstalled packages to free space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          echo "🧹 Space freed"
+
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
@@ -38,12 +46,13 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
+      - name: Install dependencies (lightweight)
         run: |
           python -m pip install --upgrade pip
-          pip install torch==2.4.1 torchvision torchaudio
-          pip install git+https://github.com/openai/whisper.git
-          pip install git+https://github.com/m-bain/whisperx.git
+          pip install torch==2.4.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+          pip install git+https://github.com/openai/whisper.git --no-deps
+          pip install git+https://github.com/m-bain/whisperx.git --no-deps
+          pip install numpy soundfile tqdm
 
       - name: Transcribe entire audio with WhisperX word-level timestamps
         run: |
@@ -63,7 +72,7 @@ jobs:
               device,
               compute_type=compute_type,
               language="en",
-              vad_filter=False   # ⬅ FIXED - disables Pyannote VAD to prevent crash
+              vad_filter=False  # FIX: prevents Pyannote VAD crash
           )
 
           print("Loading audio...")
@@ -91,42 +100,35 @@ jobs:
           print("Word-level alignment completed")
 
           os.makedirs("Trans", exist_ok=True)
-
           files_to_replace = ["Trans/t1.txt", "Trans/timestamps.txt", "Trans/transcription.json"]
+
           for file_path in files_to_replace:
               if os.path.exists(file_path):
                   os.remove(file_path)
-                  print(f"Removed existing file: {file_path}")
 
           with open("Trans/t1.txt", "w", encoding="utf-8") as f:
               f.write("WhisperX FULL Word-Level Transcription Results\n")
               f.write("=" * 60 + "\n\n")
-
               for i, segment in enumerate(result["segments"]):
-                  segment_text = segment.get("text", "").strip()
-                  segment_start = segment.get("start", 0)
-                  segment_end = segment.get("end", 0)
-
-                  f.write(f"SEGMENT {i+1}: [{segment_start:.2f}s - {segment_end:.2f}s]\n")
-                  f.write(f"Text: \"{segment_text}\"\n")
-
+                  text = segment.get("text", "").strip()
+                  start = segment.get("start", 0)
+                  end = segment.get("end", 0)
+                  f.write(f"SEGMENT {i+1}: [{start:.2f}s - {end:.2f}s]\n")
+                  f.write(f"Text: \"{text}\"\n")
                   if "words" in segment and segment["words"]:
                       f.write("Word-level timestamps:\n")
                       for j, word in enumerate(segment["words"]):
-                          word_text = word.get("word", "").strip()
-                          word_start = word.get("start", 0)
-                          word_end = word.get("end", 0)
-                          f.write(f"  {j+1:2d}. \"{word_text}\" -> {word_start:.2f}s - {word_end:.2f}s\n")
+                          wtext = word.get("word", "").strip()
+                          wstart = word.get("start", 0)
+                          wend = word.get("end", 0)
+                          f.write(f"  {j+1:2d}. \"{wtext}\" -> {wstart:.2f}s - {wend:.2f}s\n")
                   f.write("\n" + "-" * 50 + "\n\n")
 
           with open("Trans/timestamps.txt", "w", encoding="utf-8") as f:
               for segment in result["segments"]:
-                  if "words" in segment and segment["words"]:
+                  if "words" in segment:
                       for word in segment["words"]:
-                          word_text = word.get("word", "").strip()
-                          word_start = word.get("start", 0)
-                          word_end = word.get("end", 0)
-                          f.write(f"{word_text},{word_start:.2f},{word_end:.2f}\n")
+                          f.write(f"{word['word']},{word['start']:.2f},{word['end']:.2f}\n")
 
           with open("Trans/transcription.json", "w", encoding="utf-8") as f:
               json.dump(result, f, indent=2, ensure_ascii=False)
@@ -137,13 +139,11 @@ jobs:
       - name: Commit and push transcription files
         run: |
           git add Trans/
-
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-            git commit -m "🔄 Update WhisperX word-level transcription: ${timestamp}"
+            git commit -m "🔄 Update WhisperX transcription: ${timestamp}"
             git pull origin main --rebase || git pull origin main --strategy-option=ours
             git push origin main
-            echo "📌 Successfully pushed updated transcription"
-          fi
+            echo "📌 Successfully pushed transcription files"

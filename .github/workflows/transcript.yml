@@ -1,99 +1,172 @@
-name: WhisperX Transcription
+name: Transcript
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Voiceover"] 
+    types:
+      - completed
+  workflow_dispatch: 
 
 jobs:
-  run:
+  transcribe:
     runs-on: ubuntu-latest
-
+    
+    # Only run if the triggering workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
+    
+    permissions:
+      contents: write
+      actions: read
+      
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      # --- NEW STEP: FREE UP DISK SPACE ---
+      - name: Free Disk Space (Ubuntu)
+        run: |
+          echo "Freeing up disk space..."
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          echo "Disk space freed."
 
-    - name: Free disk space
-      run: |
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /opt/ghc
-        sudo rm -rf /usr/local/lib/node_modules
-        sudo rm -rf /usr/local/share/powershell
-        sudo rm -rf /usr/local/share/chromium
+      # 1) Checkout your repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
+      # 2) Pull latest changes
+      - name: Pull latest changes
+        run: |
+          git config --local user.name "intellectra9"
+          git config --local user.email "intellectra9@outlook.com"
+          git pull origin main --rebase || git pull origin main
 
-    - name: Install PyTorch CPU
-      run: |
-        pip install --upgrade pip
-        pip install torch==2.1.1+cpu torchvision==0.16.1+cpu torchaudio==2.1.1+cpu \
-          --index-url https://download.pytorch.org/whl/cpu
+      # 3) Install ffmpeg
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-    - name: Install WhisperX & dependencies
-      run: |
-        pip install git+https://github.com/m-bain/whisperx.git --no-deps
-        pip install transformers==4.36.2
-        pip install faster-whisper==0.10.0
-        pip install ffmpeg-python soundfile numpy
+      # 4) Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Create and run transcription script
-      run: |
-        cat << 'EOF' > script.py
-import whisperx, torch, json, os
+      # 5) Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip --no-cache-dir
+          
+          # 1. Install CPU-only Torch 2.5.1 (Fixes the "UnpicklingError")
+          # 2. Use --no-cache-dir (Fixes "No space left on device")
+          pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu --no-cache-dir
+          
+          # Install Whisper packages without caching
+          pip install git+https://github.com/openai/whisper.git --no-cache-dir
+          pip install git+https://github.com/m-bain/whisperx.git --no-cache-dir
 
-AUDIO_FILE = "audio.mp3"
-device = "cpu"
-compute_type = "int8"
+      # 6) Run WhisperX transcription
+      - name: Transcribe entire audio with WhisperX word-level timestamps
+        run: |
+          python -c "
+          import whisperx
+          import os
+          import json
+          
+          # Force CPU usage
+          device = 'cpu'
+          compute_type = 'float32'
+          batch_size = 16
+          
+          audio_file = 'Audio/a1.mp3'
 
-model = whisperx.load_model("large-v2", device, compute_type=compute_type)
-audio = whisperx.load_audio(AUDIO_FILE)
-result = model.transcribe(audio)
+          print('Loading WhisperX model...')
+          model = whisperx.load_model('base', device, compute_type=compute_type, language='en')
 
-align_model, metadata = whisperx.load_align_model(
-    language_code=result["language"], device=device
-)
-aligned_result = whisperx.align(
-    result["segments"], align_model, metadata, audio, device
-)
+          print('Loading audio...')
+          audio = whisperx.load_audio(audio_file, sr=16000)
 
-diarize_model = whisperx.DiarizationPipeline(use_auth_token=None, vad_filter=False)
-diarize_segments = diarize_model(audio)
-result = whisperx.assign_word_speakers(diarize_segments, aligned_result)
+          print('Transcribing audio...')
+          result = model.transcribe(audio, batch_size=batch_size)
+          print('Initial transcription completed')
 
-os.makedirs("output", exist_ok=True)
+          print('Loading alignment model...')
+          model_a, metadata = whisperx.load_align_model(language_code=result['language'], device=device)
 
-# JSON
-with open("output/transcription.json", "w", encoding="utf-8") as f:
-    json.dump(result, f, indent=2, ensure_ascii=False)
+          print('Aligning for word-level timestamps...')
+          result = whisperx.align(result['segments'], model_a, metadata, audio, device, return_char_alignments=False)
+          print('Word-level alignment completed')
 
-# TXT
-with open("output/transcription.txt", "w", encoding="utf-8") as f:
-    for seg in result["segments"]:
-        speaker = seg.get("speaker", "Unknown")
-        f.write(f"{speaker}: {seg['text'].strip()}\n")
+          # Create Trans folder
+          os.makedirs('Trans', exist_ok=True)
+          
+          # Remove existing files
+          files_to_replace = ['Trans/t1.txt', 'Trans/timestamps.txt', 'Trans/transcription.json']
+          for file_path in files_to_replace:
+              if os.path.exists(file_path):
+                  os.remove(file_path)
+                  print(f'Removed existing file: {file_path}')
 
-# SRT
-def format_srt_time(t):
-    hours = int(t // 3600)
-    minutes = int((t % 3600) // 60)
-    seconds = t % 60
-    return f"{hours:02}:{minutes:02}:{seconds:06.3f}".replace('.', ',')
+          # Write detailed results
+          with open('Trans/t1.txt', 'w', encoding='utf-8') as f:
+              f.write('WhisperX FULL Word-Level Transcription Results\\n')
+              f.write('=' * 60 + '\\n\\n')
+              
+              for i, segment in enumerate(result['segments']):
+                  segment_text = segment.get('text', '').strip()
+                  segment_start = segment.get('start', 0)
+                  segment_end = segment.get('end', 0)
+                  
+                  f.write(f'SEGMENT {i+1}: [{segment_start:.2f}s - {segment_end:.2f}s]\\n')
+                  f.write(f'Text: \"{segment_text}\"\\n')
+                  
+                  if 'words' in segment and segment['words']:
+                      f.write('Word-level timestamps:\\n')
+                      for j, word in enumerate(segment['words']):
+                          word_text = word.get('word', '').strip()
+                          word_start = word.get('start', 0)
+                          word_end = word.get('end', 0)
+                          f.write(f'  {j+1:2d}. \"{word_text}\" -> {word_start:.2f}s - {word_end:.2f}s\\n')
+                  f.write('\\n' + '-' * 50 + '\\n\\n')
 
-with open("output/transcription.srt", "w", encoding="utf-8") as f:
-    for i, seg in enumerate(result["segments"], start=1):
-        start, end = seg["start"], seg["end"]
-        speaker = seg.get("speaker", "Unknown")
-        text = seg["text"].strip()
-        f.write(f"{i}\n{format_srt_time(start)} --> {format_srt_time(end)}\n{speaker}: {text}\n\n")
+          # Write CSV timestamps
+          with open('Trans/timestamps.txt', 'w', encoding='utf-8') as f:
+              for segment in result['segments']:
+                  if 'words' in segment and segment['words']:
+                      for word in segment['words']:
+                          word_text = word.get('word', '').strip()
+                          word_start = word.get('start', 0)
+                          word_end = word.get('end', 0)
+                          f.write(f'{word_text},{word_start:.2f},{word_end:.2f}\\n')
 
-print("🎉 Transcription complete! Files saved inside /output folder")
-EOF
-        python3 script.py
+          # Write JSON output
+          with open('Trans/transcription.json', 'w', encoding='utf-8') as f:
+              json.dump(result, f, indent=2, ensure_ascii=False)
 
-    - name: Upload transcription output
-      uses: actions/upload-artifact@v3
-      with:
-        name: transcription_output
-        path: output
+          print('✅ WhisperX transcription completed for FULL audio!')
+          "
+
+      # 7) Commit and push
+      - name: Commit and push transcription files
+        run: |
+          git add Trans/
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            echo "Committing updated transcription files..."
+            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+            
+            git commit -m "🔄 Update WhisperX word-level transcription: ${timestamp}"
+            
+            echo "Pulling latest changes..."
+            git pull origin main --rebase || { 
+               git pull origin main --strategy-option=ours 
+            }
+            
+            echo "Pushing changes..."
+            git push origin main
+            echo "✅ Done!"
+          fi

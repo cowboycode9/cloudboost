@@ -1,11 +1,36 @@
 {
   "metadata": {
-    "created_at": "2025-12-09T17:25:49.156747Z",
-    "total_sentences": 0,
+    "created_at": "2025-12-09T20:57:03.439227Z",
+    "total_sentences": 3,
     "source_files": {
       "visuals": "Visuals/visuals.json",
       "transcription": "Trans/transcription.json"
     }
   },
-  "sentence_transcriptions": []
+  "sentence_transcriptions": [
+    {
+      "id": "i1",
+      "number": 1,
+      "sentence": "99% people make same type of content which bore people and they don't even know that,",
+      "start": 0.031,
+      "end": 2.821,
+      "duration": 2.79
+    },
+    {
+      "id": "i2",
+      "number": 2,
+      "sentence": "youtube automation is trending right now",
+      "start": 7.417,
+      "end": 9.645,
+      "duration": 2.228
+    },
+    {
+      "id": "i3",
+      "number": 3,
+      "sentence": "basically using ai to generate Content which save their time",
+      "start": 10.026,
+      "end": 12.776,
+      "duration": 2.75
+    }
+  ]
 }

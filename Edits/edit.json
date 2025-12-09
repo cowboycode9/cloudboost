@@ -1,6 +1,10 @@
 {
   "metadata": {
+<<<<<<< Updated upstream
     "created_at": "2025-12-09T20:57:03.439227Z",
+=======
+    "created_at": "2025-12-09T20:57:17.341962Z",
+>>>>>>> Stashed changes
     "total_sentences": 3,
     "source_files": {
       "visuals": "Visuals/visuals.json",
@@ -13,8 +17,13 @@
       "number": 1,
       "sentence": "99% people make same type of content which bore people and they don't even know that,",
       "start": 0.031,
+<<<<<<< Updated upstream
       "end": 2.821,
       "duration": 2.79
+=======
+      "end": 5.952,
+      "duration": 5.921
+>>>>>>> Stashed changes
     },
     {
       "id": "i2",
@@ -29,8 +38,13 @@
       "number": 3,
       "sentence": "basically using ai to generate Content which save their time",
       "start": 10.026,
+<<<<<<< Updated upstream
       "end": 12.776,
       "duration": 2.75
+=======
+      "end": 14.462,
+      "duration": 4.436
+>>>>>>> Stashed changes
     }
   ]
 }

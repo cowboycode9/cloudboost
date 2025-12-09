@@ -19,7 +19,8 @@ jobs:
       actions: read
       
     steps:
-      # --- NEW STEP: FREE UP DISK SPACE ---
+      # --- CRITICAL: FREE UP DISK SPACE ---
+      # Prevents "No space left on device" error
       - name: Free Disk Space (Ubuntu)
         run: |
           echo "Freeing up disk space..."
@@ -54,26 +55,35 @@ jobs:
         with:
           python-version: '3.10'
 
-      # 5) Install dependencies
+      # 5) Install dependencies (FORCE DOWNGRADE METHOD)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip --no-cache-dir
           
-          # 1. Install CPU-only Torch 2.5.1 (Fixes the "UnpicklingError")
-          # 2. Use --no-cache-dir (Fixes "No space left on device")
-          pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu --no-cache-dir
-          
-          # Install Whisper packages without caching
+          # 1. Install WhisperX and its dependencies first (This might install Torch 2.6)
           pip install git+https://github.com/openai/whisper.git --no-cache-dir
           pip install git+https://github.com/m-bain/whisperx.git --no-cache-dir
+          
+          # 2. FORCE REINSTALL Torch to 2.5.1
+          # We use --force-reinstall to overwrite whatever version WhisperX installed.
+          # We use --index-url .../cpu to keep the download small.
+          pip install "torch==2.5.1" "torchaudio==2.5.1" --index-url https://download.pytorch.org/whl/cpu --force-reinstall --no-cache-dir
 
-      # 6) Run WhisperX transcription
+      # 6) Debug: Verify Torch Version
+      - name: Check Torch Version
+        run: |
+          python -c "import torch; print(f'INSTALLED TORCH VERSION: {torch.__version__}')"
+
+      # 7) Run WhisperX transcription
       - name: Transcribe entire audio with WhisperX word-level timestamps
         run: |
           python -c "
           import whisperx
           import os
           import json
+          import torch
+          
+          print(f'Runtime Torch Version: {torch.__version__}')
           
           # Force CPU usage
           device = 'cpu'
@@ -83,6 +93,7 @@ jobs:
           audio_file = 'Audio/a1.mp3'
 
           print('Loading WhisperX model...')
+          # We explicitly set download_root to current dir to avoid permission issues in some envs
           model = whisperx.load_model('base', device, compute_type=compute_type, language='en')
 
           print('Loading audio...')
@@ -148,7 +159,7 @@ jobs:
           print('✅ WhisperX transcription completed for FULL audio!')
           "
 
-      # 7) Commit and push
+      # 8) Commit and push
       - name: Commit and push transcription files
         run: |
           git add Trans/

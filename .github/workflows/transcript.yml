@@ -1,149 +1,99 @@
-name: Transcript
+name: WhisperX Transcription
 
 on:
-  workflow_run:
-    workflows: ["Voiceover"]  # Must match the workflow name exactly
-    types:
-      - completed
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
-  transcribe:
+  run:
     runs-on: ubuntu-latest
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
-
-    permissions:
-      contents: write
-      actions: read
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Pull latest changes
-        run: |
-          git config --local user.name "intellectra9"
-          git config --local user.email "intellectra9@outlook.com"
-          git pull origin main --rebase || git pull origin main
+    - name: Free disk space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /usr/local/lib/node_modules
+        sudo rm -rf /usr/local/share/powershell
+        sudo rm -rf /usr/local/share/chromium
 
-      - name: Clean preinstalled packages to free space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          echo "🧹 Space freed"
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
 
-      - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+    - name: Install PyTorch CPU
+      run: |
+        pip install --upgrade pip
+        pip install torch==2.1.1+cpu torchvision==0.16.1+cpu torchaudio==2.1.1+cpu \
+          --index-url https://download.pytorch.org/whl/cpu
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+    - name: Install WhisperX & dependencies
+      run: |
+        pip install git+https://github.com/m-bain/whisperx.git --no-deps
+        pip install transformers==4.36.2
+        pip install faster-whisper==0.10.0
+        pip install ffmpeg-python soundfile numpy
 
-      - name: Install dependencies (lightweight)
-        run: |
-          python -m pip install --upgrade pip
-          pip install torch==2.4.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
-          pip install git+https://github.com/openai/whisper.git --no-deps
-          pip install git+https://github.com/m-bain/whisperx.git --no-deps
-          pip install numpy soundfile tqdm
+    - name: Create and run transcription script
+      run: |
+        cat << 'EOF' > script.py
+import whisperx, torch, json, os
 
-      - name: Transcribe entire audio with WhisperX word-level timestamps
-        run: |
-          python - << 'EOF'
-          import whisperx
-          import os
-          import json
+AUDIO_FILE = "audio.mp3"
+device = "cpu"
+compute_type = "int8"
 
-          device = "cpu"
-          compute_type = "float32"
-          batch_size = 16
-          audio_file = "Audio/a1.mp3"
+model = whisperx.load_model("large-v2", device, compute_type=compute_type)
+audio = whisperx.load_audio(AUDIO_FILE)
+result = model.transcribe(audio)
 
-          print("Loading WhisperX model...")
-          model = whisperx.load_model(
-              "base",
-              device,
-              compute_type=compute_type,
-              language="en",
-              vad_filter=False  # FIX: prevents Pyannote VAD crash
-          )
+align_model, metadata = whisperx.load_align_model(
+    language_code=result["language"], device=device
+)
+aligned_result = whisperx.align(
+    result["segments"], align_model, metadata, audio, device
+)
 
-          print("Loading audio...")
-          audio = whisperx.load_audio(audio_file, sr=16000)
+diarize_model = whisperx.DiarizationPipeline(use_auth_token=None, vad_filter=False)
+diarize_segments = diarize_model(audio)
+result = whisperx.assign_word_speakers(diarize_segments, aligned_result)
 
-          print("Transcribing audio...")
-          result = model.transcribe(audio, batch_size=batch_size)
-          print("Initial transcription completed")
+os.makedirs("output", exist_ok=True)
 
-          print("Loading alignment model...")
-          model_a, metadata = whisperx.load_align_model(
-              language_code=result["language"],
-              device=device
-          )
+# JSON
+with open("output/transcription.json", "w", encoding="utf-8") as f:
+    json.dump(result, f, indent=2, ensure_ascii=False)
 
-          print("Aligning for word-level timestamps...")
-          result = whisperx.align(
-              result["segments"],
-              model_a,
-              metadata,
-              audio,
-              device,
-              return_char_alignments=False
-          )
-          print("Word-level alignment completed")
+# TXT
+with open("output/transcription.txt", "w", encoding="utf-8") as f:
+    for seg in result["segments"]:
+        speaker = seg.get("speaker", "Unknown")
+        f.write(f"{speaker}: {seg['text'].strip()}\n")
 
-          os.makedirs("Trans", exist_ok=True)
-          files_to_replace = ["Trans/t1.txt", "Trans/timestamps.txt", "Trans/transcription.json"]
+# SRT
+def format_srt_time(t):
+    hours = int(t // 3600)
+    minutes = int((t % 3600) // 60)
+    seconds = t % 60
+    return f"{hours:02}:{minutes:02}:{seconds:06.3f}".replace('.', ',')
 
-          for file_path in files_to_replace:
-              if os.path.exists(file_path):
-                  os.remove(file_path)
+with open("output/transcription.srt", "w", encoding="utf-8") as f:
+    for i, seg in enumerate(result["segments"], start=1):
+        start, end = seg["start"], seg["end"]
+        speaker = seg.get("speaker", "Unknown")
+        text = seg["text"].strip()
+        f.write(f"{i}\n{format_srt_time(start)} --> {format_srt_time(end)}\n{speaker}: {text}\n\n")
 
-          with open("Trans/t1.txt", "w", encoding="utf-8") as f:
-              f.write("WhisperX FULL Word-Level Transcription Results\n")
-              f.write("=" * 60 + "\n\n")
-              for i, segment in enumerate(result["segments"]):
-                  text = segment.get("text", "").strip()
-                  start = segment.get("start", 0)
-                  end = segment.get("end", 0)
-                  f.write(f"SEGMENT {i+1}: [{start:.2f}s - {end:.2f}s]\n")
-                  f.write(f"Text: \"{text}\"\n")
-                  if "words" in segment and segment["words"]:
-                      f.write("Word-level timestamps:\n")
-                      for j, word in enumerate(segment["words"]):
-                          wtext = word.get("word", "").strip()
-                          wstart = word.get("start", 0)
-                          wend = word.get("end", 0)
-                          f.write(f"  {j+1:2d}. \"{wtext}\" -> {wstart:.2f}s - {wend:.2f}s\n")
-                  f.write("\n" + "-" * 50 + "\n\n")
+print("🎉 Transcription complete! Files saved inside /output folder")
+EOF
+        python3 script.py
 
-          with open("Trans/timestamps.txt", "w", encoding="utf-8") as f:
-              for segment in result["segments"]:
-                  if "words" in segment:
-                      for word in segment["words"]:
-                          f.write(f"{word['word']},{word['start']:.2f},{word['end']:.2f}\n")
-
-          with open("Trans/transcription.json", "w", encoding="utf-8") as f:
-              json.dump(result, f, indent=2, ensure_ascii=False)
-
-          print("✅ WhisperX transcription completed!")
-          EOF
-
-      - name: Commit and push transcription files
-        run: |
-          git add Trans/
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-            git commit -m "🔄 Update WhisperX transcription: ${timestamp}"
-            git pull origin main --rebase || git pull origin main --strategy-option=ours
-            git push origin main
-            echo "📌 Successfully pushed transcription files"
+    - name: Upload transcription output
+      uses: actions/upload-artifact@v3
+      with:
+        name: transcription_output
+        path: output

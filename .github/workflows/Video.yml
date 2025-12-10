@@ -42,7 +42,6 @@ jobs:
           # === Config ===  
           AUDIO_FILE = "Audio/a1.mp3"
           EDIT_JSON = "Edits/edit.json"
-          # UPDATED PATH: Pointing to Trans folder
           TRANSCRIPTION_JSON = "Trans/transcription.json"  
           IMAGES_DIR = "Images"
           OUTPUT_DIR = "Video"
@@ -92,7 +91,7 @@ jobs:
               print("📝 Generating caption file...")
               
               # ASS Header
-              # Colors: &H00FFFF (Yellow), &HFFFFFF (White)
+              # UPDATED STYLE: Font is now 'Arial Black', Bold is -1 (True), Outline is 4
               ass_content = """[Script Info]
           ScriptType: v4.00+
           PlayResX: 1920
@@ -100,7 +99,7 @@ jobs:
 
           [V4+ Styles]
           Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-          Style: Default,Arial,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,3,0,2,10,10,60,1
+          Style: Default,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,4,0,2,10,10,60,1
 
           [Events]
           Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -135,12 +134,13 @@ jobs:
                           for k, word_obj in enumerate(chunk):
                               word_text = word_obj['word']
                               # ASS Color Tags: {\c&H00FFFF&} = Yellow, {\c&HFFFFFF&} = White
+                              # We add {\b1} to ensure bold is forced on every word
                               if k <= current_word_idx:
                                   # Highlighted (Yellow)
-                                  text_parts.append(f"{{\\c&H00FFFF&}}{word_text}")
+                                  text_parts.append(f"{{\\c&H00FFFF&}}{{\\b1}}{word_text}")
                               else:
                                   # Not yet spoken (White)
-                                  text_parts.append(f"{{\\c&HFFFFFF&}}{word_text}")
+                                  text_parts.append(f"{{\\c&HFFFFFF&}}{{\\b1}}{word_text}")
                           
                           full_text = " ".join(text_parts)
                           events.append(f"Dialogue: 0,{format_ass_time(state_start)},{format_ass_time(state_end)},Default,,0,0,0,,{full_text}")
@@ -291,7 +291,7 @@ jobs:
 
           git add Video/  
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🎬 Generated video with captions: ${timestamp}" || echo "No changes to commit"  
+          git commit -m "🎬 Generated video with BOLD captions: ${timestamp}" || echo "No changes to commit"  
 
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           git push origin HEAD:main

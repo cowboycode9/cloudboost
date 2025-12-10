@@ -1,4 +1,4 @@
-name: Generate Video (Animated)
+name: Generate Video Animated
 
 on:
   workflow_dispatch:

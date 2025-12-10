@@ -1,4 +1,4 @@
-name: Sentence Level Transcription
+name: Sentence Level Transcriptions
 
 on:
   workflow_run:

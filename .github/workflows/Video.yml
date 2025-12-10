@@ -1,13 +1,19 @@
 name: Generate Video (Animated + Captions)
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Sentence Level Transcription"]
+    types:
+      - completed
+  workflow_dispatch: # Keeps the manual button as an option too
 
 permissions:
   contents: write
 
 jobs:
   generate-video:
+    # ONLY run if the previous workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} 
     runs-on: ubuntu-latest
 
     steps:  

@@ -1,4 +1,4 @@
-name: Generate Video (Optimized)
+name: Generate Video (Animated)
 
 on:
   workflow_dispatch:
@@ -28,7 +28,7 @@ jobs:
         run: |  
           pip install requests pillow
 
-      - name: Create optimized video generation script
+      - name: Create animated video generation script
         run: |
           cat > generate_video.py << 'EOF'
           import os  
@@ -54,7 +54,7 @@ jobs:
           os.makedirs(TEMP_DIR, exist_ok=True)
 
           start_time = time.time()
-          print("🎬 Starting optimized seamless video generation...")
+          print("🎬 Starting animated video generation with Ken Burns effect...")
 
           # === Validate required files ===
           required_files = [AUDIO_FILE, EDIT_JSON]
@@ -98,8 +98,51 @@ jobs:
               print(f"❌ Error getting audio duration: {e}")
               sys.exit(1)
 
-          # === Process images in parallel ===
-          def process_image(segment_data):
+          # === Animation function ===
+          def create_animated_segment(image_path, duration, segment_id, index):
+              """
+              Create animated segment with slow vertical pan (up or down)
+              Alternates between pan down and pan up for visual variety
+              """
+              frames = int(duration * 30)  # 30fps
+              segment_output = os.path.join(TEMP_DIR, f"animated_{segment_id}.mp4")
+              
+              # Alternate between pan down (even index) and pan up (odd index)
+              if index % 2 == 0:
+                  # Pan Down: Start from top, slowly move down
+                  # y moves from 0 to (ih-oh) over the duration
+                  zoom_filter = f"zoompan=z='1.2':d={frames}:x='iw/2-(iw/zoom/2)':y='(ih-oh)*on/{frames}':s=1920x1080:fps=30"
+                  direction = "⬇️ Pan Down"
+              else:
+                  # Pan Up: Start from bottom, slowly move up
+                  # y moves from (ih-oh) to 0 over the duration
+                  zoom_filter = f"zoompan=z='1.2':d={frames}:x='iw/2-(iw/zoom/2)':y='(ih-oh)*(1-on/{frames})':s=1920x1080:fps=30"
+                  direction = "⬆️ Pan Up"
+              
+              cmd = [
+                  "ffmpeg", "-y",
+                  "-loop", "1",
+                  "-i", image_path,
+                  "-vf", f"{zoom_filter},format=yuv420p",
+                  "-t", str(duration),
+                  "-c:v", "libx264",
+                  "-preset", "fast",
+                  "-crf", "23",
+                  "-pix_fmt", "yuv420p",
+                  "-an",  # No audio in segments
+                  segment_output
+              ]
+              
+              try:
+                  result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                  print(f"  ✅ {segment_id}: {direction} ({duration:.2f}s)")
+                  return segment_output
+              except subprocess.CalledProcessError as e:
+                  print(f"  ❌ Animation failed for {segment_id}: {e.stderr}")
+                  return None
+
+          # === Process images and create animated segments ===
+          def process_and_animate_image(segment_data):
               i, segment = segment_data
               segment_id = segment.get("id", f"i{i+1}")
               start_time = segment.get("start", 0)
@@ -116,8 +159,222 @@ jobs:
                   return None, f"Image not found: {image_filename}"
 
               try:
+                  # Process image: resize to 1920x1080
                   with Image.open(image_path) as img:
-                      # Convert to RGB to ensure compatibility
+                      if img.mode != 'RGB':
+                          img = img.convert('RGB')
+                      
+                      # Resize to exact dimensions for consistent output
+                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
+                      
+                      processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
+                      new_img.save(processed_path, "PNG", optimize=True)
+
+                  # Create animated video segment
+                  animated_path = create_animated_segment(
+                      processed_path, 
+                      duration, 
+                      segment_id,
+                      i  # Pass index for alternating direction
+                  )
+                  
+                  if not animated_path:
+                      return None, f"Animation failed for {segment_id}"
+
+                  return {
+                      "id": segment_id,
+                      "video_path": animated_path,
+                      "start": start_time,
+                      "end": end_time,
+                      "duration": duration
+                  }, None
+
+              except Exception as e:
+                  return None, f"Error processing {image_filename}: {e}"
+
+          # Process images and create animations in parallel
+          print("🎨 Creating animated segments...")
+          with ThreadPoolExecutor(max_workers=4) as executor:
+              results = list(executor.map(process_and_animate_image, enumerate(sentence_transcriptions)))
+
+          # Collect valid segments and errors
+          valid_segments = []
+          errors = []
+
+          for result, error in results:
+              if result:
+                  valid_segments.append(result)
+              if error:
+                  errors.append(error)
+
+          if errors:
+              print(f"⚠️ Issues found: {len(errors)}")
+              for error in errors[:5]:
+                  print(f"  - {error}")
+
+          if not valid_segments:
+              print("❌ No valid segments found")
+              sys.exit(1)
+
+          # Sort by start time
+          valid_segments.sort(key=lambda x: x["start"])
+          print(f"✅ Created {len(valid_segments)} animated segments")
+
+          # === Fill gaps between segments ===
+          print("🔧 Filling gaps between segments...")
+
+          for i, segment in enumerate(valid_segments):
+              # Check if there's a gap before the next segment
+              if i < len(valid_segments) - 1:
+                  next_segment = valid_segments[i + 1]
+                  gap_start = segment["end"]
+                  gap_end = next_segment["start"]
+                  
+                  if gap_end > gap_start + 0.1:  # Gap larger than 0.1 seconds
+                      # Extend current segment to fill the gap
+                      old_duration = segment["duration"]
+                      segment["end"] = gap_end
+                      segment["duration"] = gap_end - segment["start"]
+                      
+                      # Re-render the segment with new duration
+                      segment_id = segment["id"]
+                      old_video_path = segment["video_path"]
+                      image_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
+                      
+                      if os.path.exists(image_path):
+                          new_video_path = create_animated_segment(
+                              image_path,
+                              segment["duration"],
+                              f"{segment_id}_extended",
+                              i
+                          )
+                          if new_video_path:
+                              segment["video_path"] = new_video_path
+                              # Remove old video file
+                              try:
+                                  os.remove(old_video_path)
+                              except:
+                                  pass
+                              print(f"🔗 Extended {segment_id}: {old_duration:.2f}s -> {segment['duration']:.2f}s")
+
+          # Extend last segment to end of audio if needed
+          if valid_segments:
+              last_segment = valid_segments[-1]
+              if last_segment["end"] < total_duration:
+                  old_duration = last_segment["duration"]
+                  last_segment["end"] = total_duration
+                  last_segment["duration"] = total_duration - last_segment["start"]
+                  
+                  # Re-render last segment
+                  segment_id = last_segment["id"]
+                  old_video_path = last_segment["video_path"]
+                  image_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
+                  
+                  if os.path.exists(image_path):
+                      new_video_path = create_animated_segment(
+                          image_path,
+                          last_segment["duration"],
+                          f"{segment_id}_final",
+                          len(valid_segments) - 1
+                      )
+                      if new_video_path:
+                          last_segment["video_path"] = new_video_path
+                          try:
+                              os.remove(old_video_path)
+                          except:
+                              pass
+                          print(f"🔚 Extended last segment: {old_duration:.2f}s -> {last_segment['duration']:.2f}s")
+
+          # === Create final video by concatenating segments ===
+          print("🎥 Concatenating animated segments with audio...")
+
+          output_path = os.path.join(OUTPUT_DIR, OUTPUT_FILE)
+
+          # Create concatenation file
+          segments_file = os.path.join(TEMP_DIR, "segments.txt")
+          with open(segments_file, "w") as f:
+              for segment in valid_segments:
+                  # Use absolute path for safety
+                  abs_path = os.path.abspath(segment["video_path"])
+                  f.write(f"file '{abs_path}'\n")
+
+          # Concatenate video segments and add audio
+          concat_cmd = [
+              "ffmpeg", "-y",
+              "-f", "concat",
+              "-safe", "0",
+              "-i", segments_file,
+              "-i", AUDIO_FILE,
+              "-c:v", "copy",  # Copy video codec (no re-encoding)
+              "-c:a", "aac",
+              "-b:a", "192k",
+              "-shortest",  # Match shortest stream (audio)
+              "-movflags", "+faststart",
+              output_path
+          ]
+
+          print("🔧 Executing final FFmpeg concatenation...")
+          try:
+              result = subprocess.run(concat_cmd, capture_output=True, text=True, check=True)
+              
+              if os.path.exists(output_path):
+                  file_size = os.path.getsize(output_path) / (1024*1024)
+                  elapsed = time.time() - start_time
+                  
+                  print("\n" + "="*60)
+                  print("✅ VIDEO GENERATION COMPLETED SUCCESSFULLY!")
+                  print("="*60)
+                  print(f"📁 Output: {output_path}")
+                  print(f"📊 Size: {file_size:.2f} MB")
+                  print(f"⏱️ Time: {elapsed:.2f} seconds")
+                  print(f"🎬 Animation: Smooth vertical panning (up/down)")
+                  print(f"🔊 Audio: Perfectly synced")
+                  print("="*60)
+              else:
+                  print("❌ Output file not created")
+                  sys.exit(1)
+                  
+          except subprocess.CalledProcessError as e:
+              print(f"❌ FFmpeg concatenation failed: {e}")
+              print(f"stderr: {e.stderr}")
+              sys.exit(1)
+
+          # === Cleanup temporary files ===
+          print("🧹 Cleaning up temporary files...")
+          try:
+              shutil.rmtree(TEMP_DIR, ignore_errors=True)
+              print("✅ Cleanup complete")
+          except Exception as e:
+              print(f"⚠️ Cleanup warning: {e}")
+
+          total_time = time.time() - start_time
+          print(f"\n🎉 ALL DONE! Total time: {total_time:.2f} seconds")
+          print("🎥 Your animated video is ready with smooth Ken Burns effect!")
+          EOF
+
+      - name: Run animated video generation
+        run: python3 generate_video.py
+
+      - name: Configure Git  
+        run: |  
+          git config --global user.name "intellect9"  
+          git config --global user.email "intellectra9@outlook.com"  
+
+      - name: Commit and push generated video  
+        env:  
+          GH_PAT: ${{ secrets.GH_PAT }}  
+        run: |  
+          git stash --include-untracked  
+          git pull origin main --rebase || echo "No rebase needed"  
+          git stash pop || true  
+
+          git add Video/  
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")  
+          git commit -m "🎬 Generated animated video (Ken Burns): ${timestamp}" || echo "No changes to commit"  
+
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git  
+          git push origin HEAD:main
+``` Your video is ready!
                       if img.mode != 'RGB':
                           img = img.convert('RGB')
                       

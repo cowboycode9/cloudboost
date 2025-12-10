@@ -2,7 +2,7 @@ name: Sentence Level Transcription
 
 on:
   workflow_run:
-    workflows: ["Transcript"]  # Replace with the actual name of your transcript workflow
+    workflows: ["Transcripts"]  # Replace with the actual name of your transcript workflow
     types:
       - completed
   workflow_dispatch:

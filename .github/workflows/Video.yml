@@ -117,18 +117,14 @@ jobs:
 
               try:
                   with Image.open(image_path) as img:
-                      # Convert to RGB
+                      # Convert to RGB to ensure compatibility
                       if img.mode != 'RGB':
                           img = img.convert('RGB')
                       
-                      # Resize maintaining aspect ratio
-                      img.thumbnail((1920, 1080), Image.Resampling.LANCZOS)
-                      
-                      # Create centered image on black background
-                      new_img = Image.new('RGB', (1920, 1080), (0, 0, 0))
-                      x = (1920 - img.width) // 2
-                      y = (1080 - img.height) // 2
-                      new_img.paste(img, (x, y))
+                      # --- FIX: Force Resize instead of Thumbnail ---
+                      # Using resize((1920, 1080)) forces the image to fill the frame exactly.
+                      # This eliminates any background borders.
+                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
                       
                       # Save processed image
                       processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
@@ -215,7 +211,7 @@ jobs:
           # Create filter complex for seamless transitions
           filter_parts = []
           
-          # Scale all images to exact dimensions
+          # Scale all images to exact dimensions (Redundant safety check but good for FFmpeg)
           for i, segment in enumerate(valid_segments):
               input_idx = i + 1
               filter_parts.append(f"[{input_idx}:v]scale=1920:1080,fps=30,format=yuv420p[v{i}];")
@@ -322,7 +318,7 @@ jobs:
           total_time = time.time() - start_time
           print(f"🎉 Complete! Total time: {total_time:.2f} seconds")
           print("🔊 Seamless audio-video sync achieved!")
-          print("📺 No black screen transitions!")
+          print("📺 FULL SCREEN 16:9 RATIO ENFORCED!")
           EOF
 
       - name: Run optimized video generation

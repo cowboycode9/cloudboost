@@ -1,4 +1,3 @@
-
 name: Generate Images
 
 on:
@@ -29,7 +28,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install google-generativeai requests
+          # google-genai is the new SDK; pillow is needed for handling the image object
+          pip install google-genai pillow
 
       - name: Generate images inline
         env:
@@ -41,33 +41,17 @@ jobs:
           import json
           import time
           import random
-          import google.generativeai as genai
-          from google.api_core import exceptions
+          from google import genai
+          from google.genai import types
 
           # === Config ===
-          api_key = os.getenv("GEMINI_API_KEY")
-          genai.configure(api_key=api_key)
+          # Initialize the new GenAI Client
+          client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
           IMAGES_DIR = "Images"
           VISUALS_JSON = "Visuals/visuals.json"
 
           os.makedirs(IMAGES_DIR, exist_ok=True)
-
-          # === Debug: Check Access ===
-          # This helps confirm if your key has access to Imagen
-          print("🔍 Checking available models for this key...")
-          try:
-              has_imagen = False
-              for m in genai.list_models():
-                  if 'generate_content' in m.supported_generation_methods:
-                      pass # Text models
-                  if 'image' in m.name:
-                      print(f"   - Found Image Model: {m.name}")
-                      has_imagen = True
-              if not has_imagen:
-                  print("⚠️ No specific image generation models found in list_models(). You might not have access to Imagen 3 yet.")
-          except Exception as e:
-              print(f"⚠️ Could not list models: {e}")
 
           # === Find highest iN ===
           def find_highest_image_number():
@@ -97,10 +81,7 @@ jobs:
 
           print(f"🔢 Generating {len(prompts_to_generate)} images...")
 
-          # === Generate images with retry ===
-          # We use the official model name. If this fails, your key likely doesn't have access.
-          imagen_model = genai.ImageGenerationModel("imagen-3.0-generate-001")
-
+          # === Generate images loop ===
           for item in prompts_to_generate:
               number = item["number"]
               prompt = item["prompt"]
@@ -108,48 +89,45 @@ jobs:
               print(f"🔄 Generating i{number}...")
 
               MAX_RETRIES = 3
-              generated_successfully = False
-
+              
               for attempt in range(1, MAX_RETRIES + 1):
                   try:
-                      response = imagen_model.generate_images(
+                      # Using the new SDK syntax
+                      response = client.models.generate_images(
+                          model='imagen-3.0-generate-001', # Use 'imagen-4.0-generate-001' if you have specific access
                           prompt=prompt,
-                          number_of_images=1,
-                          aspect_ratio="16:9",
-                          safety_filter="block_only_high",
+                          config=types.GenerateImagesConfig(
+                              number_of_images=1,
+                              aspect_ratio="16:9", # Matches your previous 1280x720 ratio
+                              safety_filter="block_only_high"
+                          )
                       )
-                      
-                      # Save the image
-                      filename = os.path.join(IMAGES_DIR, f"i{number}.png")
-                      response[0].save(filename)
-                      print(f"✅ Saved: {filename}")
-                      generated_successfully = True
-                      break
 
-                  except exceptions.ResourceExhausted:
-                      wait = 10 * attempt
-                      print(f"⚠️ Rate limited (429). Waiting {wait}s...")
-                      time.sleep(wait)
-                  except exceptions.NotFound:
-                      print(f"❌ Error: Model 'imagen-3.0-generate-001' not found for this API key.")
-                      break
+                      # The response contains PIL Image objects
+                      if response.generated_images:
+                          image_obj = response.generated_images[0].image
+                          filename = os.path.join(IMAGES_DIR, f"i{number}.png")
+                          image_obj.save(filename)
+                          print(f"✅ Saved: {filename}")
+                          break # Success, exit retry loop
+                      else:
+                          print(f"⚠️ No image returned for i{number}")
+                          break
+
                   except Exception as e:
                       print(f"❌ Error on attempt {attempt}: {e}")
                       if attempt < MAX_RETRIES:
-                          time.sleep(5)
+                          wait = 10 * attempt
+                          print(f"⏳ Waiting {wait}s before retry...")
+                          time.sleep(wait)
                       else:
-                          print(f"⚠️ Failed to generate i{number}")
+                          print(f"⚠️ Failed to generate i{number} after retries.")
 
-              if generated_successfully:
-                  delay = random.randint(10, 15)
-                  print(f"⏳ Waiting {delay}s...")
-                  time.sleep(delay)
-              else:
-                  # If we fail (e.g. no access), break the loop to avoid spamming errors
-                  print("⚠️ Stopping generation due to errors.")
-                  exit(1)
+              delay = random.randint(10, 15)
+              print(f"⏳ Waiting {delay}s...")
+              time.sleep(delay)
 
-          print(f"🎉 Finished generating.")
+          print(f"🎉 Finished generating {len(prompts_to_generate)} images.")
           EOF
 
       - name: Configure Git

@@ -1,3 +1,4 @@
+
 name: Generate Images
 
 on:
@@ -28,7 +29,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests
+          pip install google-generativeai requests
 
       - name: Generate images inline
         env:
@@ -38,23 +39,35 @@ jobs:
           import os
           import re
           import json
-          import requests
           import time
           import random
-          import base64
+          import google.generativeai as genai
+          from google.api_core import exceptions
 
           # === Config ===
-          API_KEY = os.getenv("GEMINI_API_KEY")
-          # Using Imagen 3 via Gemini API
-          API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key={API_KEY}"
-          HEADERS = {
-              "Content-Type": "application/json"
-          }
+          api_key = os.getenv("GEMINI_API_KEY")
+          genai.configure(api_key=api_key)
 
           IMAGES_DIR = "Images"
           VISUALS_JSON = "Visuals/visuals.json"
 
           os.makedirs(IMAGES_DIR, exist_ok=True)
+
+          # === Debug: Check Access ===
+          # This helps confirm if your key has access to Imagen
+          print("🔍 Checking available models for this key...")
+          try:
+              has_imagen = False
+              for m in genai.list_models():
+                  if 'generate_content' in m.supported_generation_methods:
+                      pass # Text models
+                  if 'image' in m.name:
+                      print(f"   - Found Image Model: {m.name}")
+                      has_imagen = True
+              if not has_imagen:
+                  print("⚠️ No specific image generation models found in list_models(). You might not have access to Imagen 3 yet.")
+          except Exception as e:
+              print(f"⚠️ Could not list models: {e}")
 
           # === Find highest iN ===
           def find_highest_image_number():
@@ -85,64 +98,58 @@ jobs:
           print(f"🔢 Generating {len(prompts_to_generate)} images...")
 
           # === Generate images with retry ===
+          # We use the official model name. If this fails, your key likely doesn't have access.
+          imagen_model = genai.ImageGenerationModel("imagen-3.0-generate-001")
+
           for item in prompts_to_generate:
               number = item["number"]
               prompt = item["prompt"]
 
               print(f"🔄 Generating i{number}...")
 
-              # Gemini (Imagen) Payload
-              payload = {
-                  "instances": [
-                      { "prompt": prompt }
-                  ],
-                  "parameters": {
-                      "sampleCount": 1,
-                      "aspectRatio": "16:9" # Maps approx to 1280x720
-                  }
-              }
-
               MAX_RETRIES = 3
-              data = {}
+              generated_successfully = False
 
               for attempt in range(1, MAX_RETRIES + 1):
                   try:
-                      response = requests.post(API_URL, headers=HEADERS, json=payload)
-                      response.raise_for_status()
-                      data = response.json()
-                      break
-                  except requests.exceptions.HTTPError as err:
-                      if response.status_code == 429 and attempt < MAX_RETRIES:
-                          wait = 10 * attempt
-                          print(f"⚠️ 429 Rate limited. Waiting {wait}s before retry {attempt}...")
-                          time.sleep(wait)
-                      else:
-                          print(f"❌ HTTP Error: {err}")
-                          # Print error body for debugging
-                          print(response.text)
-                          data = {}
-                          break
-
-              # Parse Gemini Response (Base64)
-              if "predictions" in data and data["predictions"]:
-                  try:
-                      b64_image = data["predictions"][0]["bytesBase64Encoded"]
-                      img_data = base64.b64decode(b64_image)
+                      response = imagen_model.generate_images(
+                          prompt=prompt,
+                          number_of_images=1,
+                          aspect_ratio="16:9",
+                          safety_filter="block_only_high",
+                      )
                       
+                      # Save the image
                       filename = os.path.join(IMAGES_DIR, f"i{number}.png")
-                      with open(filename, "wb") as f:
-                          f.write(img_data)
+                      response[0].save(filename)
                       print(f"✅ Saved: {filename}")
+                      generated_successfully = True
+                      break
+
+                  except exceptions.ResourceExhausted:
+                      wait = 10 * attempt
+                      print(f"⚠️ Rate limited (429). Waiting {wait}s...")
+                      time.sleep(wait)
+                  except exceptions.NotFound:
+                      print(f"❌ Error: Model 'imagen-3.0-generate-001' not found for this API key.")
+                      break
                   except Exception as e:
-                      print(f"❌ Error decoding/saving i{number}: {e}")
+                      print(f"❌ Error on attempt {attempt}: {e}")
+                      if attempt < MAX_RETRIES:
+                          time.sleep(5)
+                      else:
+                          print(f"⚠️ Failed to generate i{number}")
+
+              if generated_successfully:
+                  delay = random.randint(10, 15)
+                  print(f"⏳ Waiting {delay}s...")
+                  time.sleep(delay)
               else:
-                  print(f"⚠️ API error or no data for i{number}: {data}")
+                  # If we fail (e.g. no access), break the loop to avoid spamming errors
+                  print("⚠️ Stopping generation due to errors.")
+                  exit(1)
 
-              delay = random.randint(10, 15)
-              print(f"⏳ Waiting {delay}s to respect rate limit...")
-              time.sleep(delay)
-
-          print(f"🎉 Finished generating {len(prompts_to_generate)} images.")
+          print(f"🎉 Finished generating.")
           EOF
 
       - name: Configure Git
@@ -164,3 +171,5 @@ jobs:
 
           git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git
           git push origin HEAD:main
+
+

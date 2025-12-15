@@ -32,7 +32,7 @@ jobs:
 
       - name: Generate images inline
         env:
-          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 - <<EOF
           import os
@@ -41,12 +41,13 @@ jobs:
           import requests
           import time
           import random
+          import base64
 
           # === Config ===
-          API_KEY = os.getenv("TOGETHER_API_KEY")
-          API_URL = "https://api.together.xyz/v1/images/generations"
+          API_KEY = os.getenv("GEMINI_API_KEY")
+          # Using Imagen 3 via Gemini API
+          API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key={API_KEY}"
           HEADERS = {
-              "Authorization": f"Bearer {API_KEY}",
               "Content-Type": "application/json"
           }
 
@@ -90,15 +91,19 @@ jobs:
 
               print(f"🔄 Generating i{number}...")
 
+              # Gemini (Imagen) Payload
               payload = {
-                  "model": "black-forest-labs/FLUX.1-schnell-Free",
-                  "prompt": prompt,
-                  "steps": 4,
-                  "height": 720,
-                  "width": 1280
+                  "instances": [
+                      { "prompt": prompt }
+                  ],
+                  "parameters": {
+                      "sampleCount": 1,
+                      "aspectRatio": "16:9" # Maps approx to 1280x720
+                  }
               }
 
               MAX_RETRIES = 3
+              data = {}
 
               for attempt in range(1, MAX_RETRIES + 1):
                   try:
@@ -113,16 +118,23 @@ jobs:
                           time.sleep(wait)
                       else:
                           print(f"❌ HTTP Error: {err}")
+                          # Print error body for debugging
+                          print(response.text)
                           data = {}
                           break
 
-              if "data" in data and data["data"]:
-                  image_url = data["data"][0]["url"]
-                  img_data = requests.get(image_url).content
-                  filename = os.path.join(IMAGES_DIR, f"i{number}.png")
-                  with open(filename, "wb") as f:
-                      f.write(img_data)
-                  print(f"✅ Saved: {filename}")
+              # Parse Gemini Response (Base64)
+              if "predictions" in data and data["predictions"]:
+                  try:
+                      b64_image = data["predictions"][0]["bytesBase64Encoded"]
+                      img_data = base64.b64decode(b64_image)
+                      
+                      filename = os.path.join(IMAGES_DIR, f"i{number}.png")
+                      with open(filename, "wb") as f:
+                          f.write(img_data)
+                      print(f"✅ Saved: {filename}")
+                  except Exception as e:
+                      print(f"❌ Error decoding/saving i{number}: {e}")
               else:
                   print(f"⚠️ API error or no data for i{number}: {data}")
 

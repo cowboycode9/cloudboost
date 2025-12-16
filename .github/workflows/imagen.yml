@@ -40,12 +40,17 @@ jobs:
           import json
           import time
           import random
+          import io
           from google import genai
           from google.genai import types
+          from PIL import Image
 
           # === Config ===
-          # Initialize the new GenAI Client
-          client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+          # The client automatically picks up the API key from the GEMINI_API_KEY environment variable
+          client = genai.Client()
+          
+          # Using the model ID from your snippet
+          MODEL_ID = "imagen-3.0-generate-001" 
 
           IMAGES_DIR = "Images"
           VISUALS_JSON = "Visuals/visuals.json"
@@ -91,22 +96,33 @@ jobs:
               
               for attempt in range(1, MAX_RETRIES + 1):
                   try:
-                      # API Call
-                      response = client.models.generate_images(
-                          model='imagen-3.0-generate-001',
+                      # Using the dict config structure you provided
+                      result = client.models.generate_images(
+                          model=MODEL_ID,
                           prompt=prompt,
-                          config=types.GenerateImagesConfig(
+                          config=dict(
                               number_of_images=1,
-                              aspect_ratio="16:9",
-                              # removed safety_filter to fix validation error
+                              output_mime_type="image/png",
+                              aspect_ratio="16:9", 
                           )
                       )
 
-                      # Handle Response
-                      if response.generated_images:
-                          image_obj = response.generated_images[0].image
+                      # Handle the generated image
+                      if result.generated_images:
+                          # We take the first image
+                          generated_image = result.generated_images[0]
+                          
+                          # Depending on SDK version, .image might be the PIL object or bytes wrapper
+                          # We try your snippet's approach with a BytesIO safety wrapper
+                          if hasattr(generated_image.image, 'image_bytes'):
+                              image_data = generated_image.image.image_bytes
+                              image = Image.open(io.BytesIO(image_data))
+                          else:
+                              # Fallback if the SDK returns the PIL object directly
+                              image = generated_image.image
+
                           filename = os.path.join(IMAGES_DIR, f"i{number}.png")
-                          image_obj.save(filename)
+                          image.save(filename)
                           print(f"✅ Saved: {filename}")
                           break 
                       else:
@@ -118,6 +134,37 @@ jobs:
                       if attempt < MAX_RETRIES:
                           wait = 10 * attempt
                           print(f"⏳ Waiting {wait}s before retry...")
+                          time.sleep(wait)
+                      else:
+                          print(f"⚠️ Failed to generate i{number} after retries.")
+
+              delay = random.randint(10, 15)
+              print(f"⏳ Waiting {delay}s...")
+              time.sleep(delay)
+
+          print(f"🎉 Finished generating {len(prompts_to_generate)} images.")
+          EOF
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "intellect9"
+          git config --global user.email "intellectra9@outlook.com"
+
+      - name: Commit and push generated images
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git stash --include-untracked
+          git pull origin main --rebase || echo "No rebase needed"
+          git stash pop || true
+
+          git add Images/
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+          git commit -m "🖼️ Generated images: ${timestamp}" || echo "No changes to commit"
+
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git
+          git push origin HEAD:main
+
                           time.sleep(wait)
                       else:
                           print(f"⚠️ Failed to generate i{number} after retries.")

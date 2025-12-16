@@ -28,7 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # google-genai is the new SDK; pillow is needed for handling the image object
           pip install google-genai pillow
 
       - name: Generate images inline
@@ -92,24 +91,24 @@ jobs:
               
               for attempt in range(1, MAX_RETRIES + 1):
                   try:
-                      # Using the new SDK syntax
+                      # API Call
                       response = client.models.generate_images(
-                          model='imagen-3.0-generate-001', # Use 'imagen-4.0-generate-001' if you have specific access
+                          model='imagen-3.0-generate-001',
                           prompt=prompt,
                           config=types.GenerateImagesConfig(
                               number_of_images=1,
-                              aspect_ratio="16:9", # Matches your previous 1280x720 ratio
-                              safety_filter="block_only_high"
+                              aspect_ratio="16:9",
+                              # removed safety_filter to fix validation error
                           )
                       )
 
-                      # The response contains PIL Image objects
+                      # Handle Response
                       if response.generated_images:
                           image_obj = response.generated_images[0].image
                           filename = os.path.join(IMAGES_DIR, f"i{number}.png")
                           image_obj.save(filename)
                           print(f"✅ Saved: {filename}")
-                          break # Success, exit retry loop
+                          break 
                       else:
                           print(f"⚠️ No image returned for i{number}")
                           break

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "created_at": "2026-01-02T16:15:22.161031Z",
-    "total_sentences": 316,
+    "created_at": "2026-01-04T22:31:28.922736Z",
+    "total_sentences": 234,
     "source_files": {
       "visuals": "Visuals/visuals.json",
       "transcription": "Trans/transcription.json"
@@ -11,1159 +11,575 @@
     {
       "id": "i1",
       "number": 1,
-      "sentence": "This is Marcus,",
+      "sentence": "This is Marcus, and he's got a huge problem.",
       "start": 0.031,
-      "end": 0.873,
-      "duration": 0.842
+      "end": 2.416,
+      "duration": 2.385
     },
     {
       "id": "i2",
       "number": 2,
-      "sentence": "and he's got a huge problem.",
-      "start": 1.274,
-      "end": 2.416,
-      "duration": 1.142
-    },
-    {
-      "id": "i3",
-      "number": 3,
-      "sentence": "See, Marcus is just like you and me.",
+      "sentence": "See, Marcus is just like you and me today.",
       "start": 2.877,
       "end": 4.761,
       "duration": 1.884
     },
     {
-      "id": "i4",
-      "number": 4,
-      "sentence": "He scrolls through Blue Book in the morning,",
+      "id": "i3",
+      "number": 3,
+      "sentence": "He scrolls through Blue Book in the morning every day.",
       "start": 5.221,
       "end": 7.125,
       "duration": 1.904
     },
     {
-      "id": "i5",
-      "number": 5,
-      "sentence": "checks his Search Engine Kong email,",
+      "id": "i4",
+      "number": 4,
+      "sentence": "Checks his Search Engine Kong email multiple times daily.",
       "start": 7.506,
       "end": 8.548,
       "duration": 1.042
     },
     {
-      "id": "i6",
-      "number": 6,
-      "sentence": "watches videos on Video Tube,",
+      "id": "i5",
+      "number": 5,
+      "sentence": "Watches videos on Video Tube for hours and hours.",
       "start": 9.67,
       "end": 11.334,
       "duration": 1.664
     },
     {
-      "id": "i7",
-      "number": 7,
-      "sentence": "and orders dinner from Shopping Elephant.",
+      "id": "i6",
+      "number": 6,
+      "sentence": "And orders dinner from Shopping Elephant every single night.",
       "start": 11.735,
       "end": 13.538,
       "duration": 1.803
     },
     {
+      "id": "i7",
+      "number": 7,
+      "sentence": "All free. Not a single banana spent. Marcus felt smart.",
+      "start": 14.019,
+      "end": 16.885,
+      "duration": 2.866
+    },
+    {
       "id": "i8",
       "number": 8,
-      "sentence": "All free.",
-      "start": 14.019,
-      "end": 14.44,
-      "duration": 0.421
-    },
-    {
-      "id": "i9",
-      "number": 9,
-      "sentence": "Not a single banana spent.",
-      "start": 14.921,
-      "end": 16.123,
-      "duration": 1.202
-    },
-    {
-      "id": "i10",
-      "number": 10,
-      "sentence": "Marcus feels pretty good about this.",
-      "start": 16.604,
-      "end": 18.428,
-      "duration": 1.824
-    },
-    {
-      "id": "i11",
-      "number": 11,
-      "sentence": "Why pay for anything when you can get it all for free, right?",
+      "sentence": "Why pay for anything when it's all free, right?",
       "start": 18.408,
       "end": 21.435,
       "duration": 3.027
     },
     {
-      "id": "i12",
-      "number": 12,
-      "sentence": "But last month,",
+      "id": "i9",
+      "number": 9,
+      "sentence": "But last month something very strange happened to Marcus.",
       "start": 21.856,
-      "end": 22.497,
-      "duration": 0.641
-    },
-    {
-      "id": "i13",
-      "number": 13,
-      "sentence": "something strange happened.",
-      "start": 22.838,
-      "end": 23.86,
-      "duration": 1.022
-    },
-    {
-      "id": "i14",
-      "number": 14,
-      "sentence": "Marcus got a notification from his bank.",
-      "start": 24.321,
-      "end": 26.185,
-      "duration": 1.864
-    },
-    {
-      "id": "i15",
-      "number": 15,
-      "sentence": "Someone tried to open three credit cards in his name.",
-      "start": 26.686,
-      "end": 29.232,
-      "duration": 2.546
-    },
-    {
-      "id": "i16",
-      "number": 16,
-      "sentence": "His personal information?",
-      "start": 29.693,
-      "end": 30.795,
-      "duration": 1.102
-    },
-    {
-      "id": "i17",
-      "number": 17,
-      "sentence": "Sold on the dark web.",
-      "start": 31.337,
-      "end": 32.399,
-      "duration": 1.062
-    },
-    {
-      "id": "i18",
-      "number": 18,
-      "sentence": "His location data?",
-      "start": 32.84,
-      "end": 33.762,
-      "duration": 0.922
-    },
-    {
-      "id": "i19",
-      "number": 19,
-      "sentence": "Tracked and packaged 47 times in a single month.",
-      "start": 34.183,
-      "end": 37.851,
-      "duration": 3.668
-    },
-    {
-      "id": "i20",
-      "number": 20,
-      "sentence": "His face?",
-      "start": 37.831,
-      "end": 38.432,
-      "duration": 0.601
-    },
-    {
-      "id": "i21",
-      "number": 21,
-      "sentence": "Scanned and stored in databases he didn't even know existed.",
-      "start": 39.013,
-      "end": 42.217,
-      "duration": 3.204
-    },
-    {
-      "id": "i22",
-      "number": 22,
-      "sentence": "And those ads that follow him everywhere,",
-      "start": 42.698,
-      "end": 44.561,
-      "duration": 1.863
-    },
-    {
-      "id": "i23",
-      "number": 23,
-      "sentence": "selling him things he only thought about buying?",
-      "start": 45.002,
-      "end": 47.005,
-      "duration": 2.003
-    },
-    {
-      "id": "i24",
-      "number": 24,
-      "sentence": "Yeah, that's not a coincidence.",
-      "start": 47.445,
-      "end": 49.508,
-      "duration": 2.063
-    },
-    {
-      "id": "i25",
-      "number": 25,
-      "sentence": "Marcus realized something terrifying.",
-      "start": 49.528,
-      "end": 51.171,
-      "duration": 1.643
-    },
-    {
-      "id": "i26",
-      "number": 26,
-      "sentence": "He'd been paying all along.",
-      "start": 51.591,
-      "end": 52.853,
+      "end": 23.118,
       "duration": 1.262
     },
     {
-      "id": "i27",
-      "number": 27,
-      "sentence": "Just not with bananas.",
-      "start": 53.274,
-      "end": 54.235,
-      "duration": 0.961
-    },
-    {
-      "id": "i28",
-      "number": 28,
-      "sentence": "See, in the modern jungle,",
-      "start": 54.836,
-      "end": 56.418,
-      "duration": 1.582
-    },
-    {
-      "id": "i29",
-      "number": 29,
-      "sentence": "free has become the most expensive word you'll ever encounter.",
-      "start": 56.799,
-      "end": 60.244,
-      "duration": 3.445
-    },
-    {
-      "id": "i30",
-      "number": 30,
-      "sentence": "You're always paying—",
-      "start": 60.224,
-      "end": 61.326,
-      "duration": 1.102
-    },
-    {
-      "id": "i31",
-      "number": 31,
-      "sentence": "with your privacy, your attention, your mental health,",
-      "start": 61.607,
-      "end": 64.512,
-      "duration": 2.905
-    },
-    {
-      "id": "i32",
-      "number": 32,
-      "sentence": "and sometimes even your democracy.",
-      "start": 64.873,
-      "end": 66.596,
-      "duration": 1.723
-    },
-    {
-      "id": "i33",
-      "number": 33,
-      "sentence": "And the monkeys running the plantations?",
-      "start": 67.057,
-      "end": 68.7,
-      "duration": 1.643
-    },
-    {
-      "id": "i34",
-      "number": 34,
-      "sentence": "They're getting obscenely rich off what you thought was free.",
-      "start": 69.241,
-      "end": 71.825,
-      "duration": 2.584
-    },
-    {
-      "id": "i35",
-      "number": 35,
-      "sentence": "This is the hidden cost of free, explained.",
-      "start": 72.266,
-      "end": 74.61,
-      "duration": 2.344
-    },
-    {
-      "id": "i36",
-      "number": 36,
-      "sentence": "THE ILLUSION OF FREE",
-      "start": 75.071,
-      "end": 76.193,
-      "duration": 1.122
-    },
-    {
-      "id": "i37",
-      "number": 37,
-      "sentence": "But how did we get here?",
-      "start": 76.614,
-      "end": 77.396,
-      "duration": 0.782
-    },
-    {
-      "id": "i38",
-      "number": 38,
-      "sentence": "How did free become the most dangerous word in the jungle?",
-      "start": 77.897,
-      "end": 80.882,
-      "duration": 2.985
-    },
-    {
-      "id": "i39",
-      "number": 39,
-      "sentence": "Let's rewind to the early days of the digital jungle,",
-      "start": 80.862,
-      "end": 83.826,
-      "duration": 2.964
-    },
-    {
-      "id": "i40",
-      "number": 40,
-      "sentence": "back in the 1990s and early 2000s.",
-      "start": 84.226,
-      "end": 87.029,
-      "duration": 2.803
+      "id": "i10",
+      "number": 10,
+      "sentence": "Marcus got a scary notification from his bank today.",
+      "start": 24.321,
+      "end": 24.842,
+      "duration": 0.521
     },
     {
       "id": "i41",
       "number": 41,
-      "sentence": "Back then, things were simple.",
-      "start": 87.59,
-      "end": 89.132,
-      "duration": 1.542
-    },
-    {
-      "id": "i42",
-      "number": 42,
-      "sentence": "You wanted software? You paid bananas for it.",
-      "start": 89.552,
-      "end": 91.775,
-      "duration": 2.223
-    },
-    {
-      "id": "i43",
-      "number": 43,
-      "sentence": "You bought a CD, installed Microsoft Office, and owned it forever.",
-      "start": 92.235,
-      "end": 95.84,
-      "duration": 3.605
-    },
-    {
-      "id": "i44",
-      "number": 44,
-      "sentence": "You wanted to connect with friends?",
-      "start": 96.34,
-      "end": 97.482,
-      "duration": 1.142
-    },
-    {
-      "id": "i45",
-      "number": 45,
-      "sentence": "You paid for an internet connection and maybe a hosting service for your blog.",
-      "start": 98.042,
-      "end": 101.567,
-      "duration": 3.525
-    },
-    {
-      "id": "i46",
-      "number": 46,
-      "sentence": "The deal was straightforward.",
-      "start": 101.987,
-      "end": 103.128,
-      "duration": 1.141
-    },
-    {
-      "id": "i47",
-      "number": 47,
-      "sentence": "You paid bananas, you got a product, end of story.",
-      "start": 103.589,
-      "end": 106.312,
-      "duration": 2.723
-    },
-    {
-      "id": "i48",
-      "number": 48,
-      "sentence": "But then the plantation owners saw an opportunity.",
-      "start": 106.733,
-      "end": 109.536,
-      "duration": 2.803
-    },
-    {
-      "id": "i49",
-      "number": 49,
-      "sentence": "See, Blue Book Monkey, Search Engine Kong, and their friends realized something crucial.",
-      "start": 109.516,
-      "end": 114.44,
-      "duration": 4.924
-    },
-    {
-      "id": "i50",
-      "number": 50,
-      "sentence": "If they made their services free,",
-      "start": 114.941,
-      "end": 116.422,
-      "duration": 1.481
-    },
-    {
-      "id": "i51",
-      "number": 51,
-      "sentence": "they could get every single monkey in the jungle to sign up.",
-      "start": 116.783,
-      "end": 119.685,
-      "duration": 2.902
-    },
-    {
-      "id": "i52",
-      "number": 52,
-      "sentence": "Millions, then billions of users.",
-      "start": 120.206,
-      "end": 122.007,
-      "duration": 1.801
-    },
-    {
-      "id": "i53",
-      "number": 53,
-      "sentence": "And once you had that many monkeys using your platform,",
-      "start": 122.548,
-      "end": 125.19,
-      "duration": 2.642
-    },
-    {
-      "id": "i54",
-      "number": 54,
-      "sentence": "you didn't need to charge them bananas.",
-      "start": 125.57,
-      "end": 127.172,
-      "duration": 1.602
-    },
-    {
-      "id": "i55",
-      "number": 55,
-      "sentence": "You could charge someone else entirely.",
-      "start": 127.652,
-      "end": 129.234,
-      "duration": 1.582
-    },
-    {
-      "id": "i56",
-      "number": 56,
-      "sentence": "This is when the famous phrase emerged:",
-      "start": 129.694,
-      "end": 131.496,
-      "duration": 1.802
-    },
-    {
-      "id": "i57",
-      "number": 57,
-      "sentence": "If you're not paying for the product, you ARE the product.",
-      "start": 131.996,
-      "end": 134.298,
-      "duration": 2.302
-    },
-    {
-      "id": "i58",
-      "number": 58,
-      "sentence": "Let me be clear.",
-      "start": 134.739,
-      "end": 135.359,
-      "duration": 0.62
-    },
-    {
-      "id": "i59",
-      "number": 59,
-      "sentence": "This isn't some conspiracy theory.",
-      "start": 135.86,
-      "end": 137.381,
-      "duration": 1.521
-    },
-    {
-      "id": "i60",
-      "number": 60,
-      "sentence": "This is their actual business model.",
-      "start": 137.862,
-      "end": 139.523,
-      "duration": 1.661
-    },
-    {
-      "id": "i61",
-      "number": 61,
-      "sentence": "You, Marcus, your grandmother, your kids—",
-      "start": 139.503,
-      "end": 142.728,
-      "duration": 3.225
-    },
-    {
-      "id": "i62",
-      "number": 62,
-      "sentence": "you're not the customer.",
-      "start": 143.068,
-      "end": 143.91,
-      "duration": 0.842
-    },
-    {
-      "id": "i63",
-      "number": 63,
-      "sentence": "You're the product being sold to advertisers, data brokers, and anyone willing to pay for access to your information and attention.",
-      "start": 144.35,
-      "end": 150.34,
-      "duration": 5.99
-    },
-    {
-      "id": "i64",
-      "number": 64,
-      "sentence": "Here's the math that'll make you sick.",
-      "start": 152.283,
-      "end": 153.825,
-      "duration": 1.542
-    },
-    {
-      "id": "i65",
-      "number": 65,
-      "sentence": "The average monkey's data is worth somewhere between 200 to 400 bananas per year to these tech giants.",
-      "start": 154.306,
-      "end": 159.954,
-      "duration": 5.648
-    },
-    {
-      "id": "i66",
-      "number": 66,
-      "sentence": "Multiply that by billions of users,",
-      "start": 160.916,
-      "end": 162.919,
-      "duration": 2.003
-    },
-    {
-      "id": "i67",
-      "number": 67,
-      "sentence": "and you're looking at trillions of bananas in value.",
-      "start": 163.34,
-      "end": 165.583,
-      "duration": 2.243
-    },
-    {
-      "id": "i68",
-      "number": 68,
-      "sentence": "And how much of that do you see?",
-      "start": 166.024,
-      "end": 167.586,
-      "duration": 1.562
-    },
-    {
-      "id": "i69",
-      "number": 69,
-      "sentence": "Zero. Nothing. Not a single banana.",
-      "start": 167.566,
-      "end": 170.071,
-      "duration": 2.505
-    },
-    {
-      "id": "i70",
-      "number": 70,
-      "sentence": "But wait, there's more.",
-      "start": 170.492,
-      "end": 171.714,
-      "duration": 1.222
+      "sentence": "This is their actual business model they openly admit.",
+      "start": 191.989,
+      "end": 197.777,
+      "duration": 5.788
     },
     {
       "id": "i71",
       "number": 71,
-      "sentence": "It's not just that you're not getting paid.",
-      "start": 172.195,
-      "end": 173.738,
-      "duration": 1.543
-    },
-    {
-      "id": "i72",
-      "number": 72,
-      "sentence": "You're actually losing bananas in the process.",
-      "start": 174.199,
-      "end": 176.223,
-      "duration": 2.024
-    },
-    {
-      "id": "i73",
-      "number": 73,
-      "sentence": "Your attention gets hijacked, making you less productive.",
-      "start": 176.764,
-      "end": 179.49,
-      "duration": 2.726
-    },
-    {
-      "id": "i74",
-      "number": 74,
-      "sentence": "Your mental health deteriorates, costing you therapy bananas.",
-      "start": 179.951,
-      "end": 183.718,
-      "duration": 3.767
-    },
-    {
-      "id": "i75",
-      "number": 75,
-      "sentence": "Your data gets breached, leading to identity theft that costs you thousands.",
-      "start": 183.698,
-      "end": 187.784,
-      "duration": 4.086
-    },
-    {
-      "id": "i76",
-      "number": 76,
-      "sentence": "The free services are actually draining your banana account while filling theirs.",
-      "start": 188.324,
-      "end": 192.23,
-      "duration": 3.906
-    },
-    {
-      "id": "i77",
-      "number": 77,
-      "sentence": "And this, my friends, is by design.",
-      "start": 192.81,
-      "end": 195.214,
-      "duration": 2.404
-    },
-    {
-      "id": "i78",
-      "number": 78,
-      "sentence": "Not accident. Design.",
-      "start": 195.674,
-      "end": 197.136,
-      "duration": 1.462
-    },
-    {
-      "id": "i79",
-      "number": 79,
-      "sentence": "HOW THE PLANTATION WORKS",
-      "start": 197.577,
-      "end": 198.638,
-      "duration": 1.061
+      "sentence": "But it doesn't stop at what you do there.",
+      "start": 356.292,
+      "end": 356.492,
+      "duration": 0.2
     },
     {
       "id": "i80",
       "number": 80,
-      "sentence": "So how exactly does this plantation operate?",
-      "start": 199.239,
-      "end": 201.943,
-      "duration": 2.704
-    },
-    {
-      "id": "i81",
-      "number": 81,
-      "sentence": "How do they extract all this value from you without you noticing?",
-      "start": 201.923,
-      "end": 205.311,
-      "duration": 3.388
-    },
-    {
-      "id": "i82",
-      "number": 82,
-      "sentence": "Let's break it down.",
-      "start": 205.731,
-      "end": 206.453,
-      "duration": 0.722
-    },
-    {
-      "id": "i83",
-      "number": 83,
-      "sentence": "First, the data collection system.",
-      "start": 206.954,
-      "end": 208.718,
-      "duration": 1.764
-    },
-    {
-      "id": "i84",
-      "number": 84,
-      "sentence": "Every time you open Blue Book, Search Engine Kong, or Video Tube, the tracking begins.",
-      "start": 209.199,
-      "end": 214.29,
-      "duration": 5.091
-    },
-    {
-      "id": "i85",
-      "number": 85,
-      "sentence": "Every click you make? Recorded.",
-      "start": 214.912,
-      "end": 216.435,
-      "duration": 1.523
-    },
-    {
-      "id": "i86",
-      "number": 86,
-      "sentence": "Every pause? Measured down to the millisecond.",
-      "start": 217.016,
-      "end": 219.983,
-      "duration": 2.967
-    },
-    {
-      "id": "i87",
-      "number": 87,
-      "sentence": "Every scroll? Analyzed for engagement patterns.",
-      "start": 219.963,
-      "end": 222.627,
-      "duration": 2.664
-    },
-    {
-      "id": "i88",
-      "number": 88,
-      "sentence": "They know which posts make you stop scrolling.",
-      "start": 223.148,
-      "end": 225.071,
-      "duration": 1.923
-    },
-    {
-      "id": "i89",
-      "number": 89,
-      "sentence": "Which videos you watch all the way through.",
-      "start": 225.531,
-      "end": 227.354,
-      "duration": 1.823
-    },
-    {
-      "id": "i90",
-      "number": 90,
-      "sentence": "Which ads you almost clicked but didn't.",
-      "start": 227.815,
-      "end": 229.537,
-      "duration": 1.722
-    },
-    {
-      "id": "i91",
-      "number": 91,
-      "sentence": "But it doesn't stop at what you do on their platforms.",
-      "start": 229.998,
-      "end": 232.322,
-      "duration": 2.324
-    },
-    {
-      "id": "i92",
-      "number": 92,
-      "sentence": "Oh no.",
-      "start": 232.923,
-      "end": 233.203,
+      "sentence": "They know when you leave home every morning precisely.",
+      "start": 409.908,
+      "end": 410.188,
       "duration": 0.28
     },
     {
-      "id": "i93",
-      "number": 93,
-      "sentence": "They track you across the entire jungle.",
-      "start": 233.704,
-      "end": 235.687,
-      "duration": 1.983
+      "id": "i98",
+      "number": 98,
+      "sentence": "Because it works extremely well for selling products efficiently.",
+      "start": 516.481,
+      "end": 521.988,
+      "duration": 5.507
     },
     {
-      "id": "i94",
-      "number": 94,
-      "sentence": "See those innocent little Like buttons on random websites?",
-      "start": 236.208,
-      "end": 238.952,
-      "duration": 2.744
-    },
-    {
-      "id": "i95",
-      "number": 95,
-      "sentence": "Those Sign in with Blue Book options?",
-      "start": 239.513,
-      "end": 241.175,
-      "duration": 1.662
-    },
-    {
-      "id": "i96",
-      "number": 96,
-      "sentence": "Those are tracking pixels.",
-      "start": 241.716,
-      "end": 242.858,
-      "duration": 1.142
-    },
-    {
-      "id": "i97",
-      "number": 97,
-      "sentence": "They're watching you even when you think you've left their territory.",
-      "start": 243.358,
-      "end": 246.443,
-      "duration": 3.085
-    },
-    {
-      "id": "i99",
-      "number": 99,
-      "sentence": "They see everything.",
-      "start": 255.436,
-      "end": 255.536,
-      "duration": 0.1
-    },
-    {
-      "id": "i104",
-      "number": 104,
-      "sentence": "Seriously.",
-      "start": 270.118,
-      "end": 271.962,
-      "duration": 1.844
-    },
-    {
-      "id": "i105",
-      "number": 105,
-      "sentence": "Next, the auction house.",
-      "start": 278.316,
-      "end": 283.807,
-      "duration": 5.491
+      "id": "i102",
+      "number": 102,
+      "sentence": "Then there's the psychological manipulation happening constantly every day.",
+      "start": 552.384,
+      "end": 557.751,
+      "duration": 5.367
     },
     {
       "id": "i119",
       "number": 119,
-      "sentence": "Then there's the psychological manipulation.",
-      "start": 359.097,
-      "end": 363.305,
-      "duration": 4.208
+      "sentence": "The plantation owners don't just track users who signed.",
+      "start": 646.889,
+      "end": 649.593,
+      "duration": 2.704
     },
     {
-      "id": "i123",
-      "number": 123,
-      "sentence": "Infinite scroll?",
-      "start": 385.019,
-      "end": 388.603,
-      "duration": 3.584
+      "id": "i129",
+      "number": 129,
+      "sentence": "Search Engine Kong can predict when you're getting sick.",
+      "start": 711.789,
+      "end": 712.671,
+      "duration": 0.882
     },
     {
-      "id": "i126",
-      "number": 126,
-      "sentence": "Notification badges?",
-      "start": 405.742,
-      "end": 408.967,
-      "duration": 3.225
+      "id": "i133",
+      "number": 133,
+      "sentence": "They know you better than you know yourself now.",
+      "start": 728.742,
+      "end": 733.106,
+      "duration": 4.364
     },
     {
-      "id": "i128",
-      "number": 128,
-      "sentence": "The pull-to-refresh gesture?",
-      "start": 413.633,
-      "end": 413.733,
-      "duration": 0.1
+      "id": "i227",
+      "number": 227,
+      "sentence": "Can't buy them? Copy features and crush them ruthlessly.",
+      "start": 1245.184,
+      "end": 1250.729,
+      "duration": 5.545
     },
     {
-      "id": "i131",
-      "number": 131,
-      "sentence": "Engineered.",
-      "start": 419.02,
-      "end": 420.803,
-      "duration": 1.783
+      "id": "i257",
+      "number": 257,
+      "sentence": "And here's the really cynical part about all this.",
+      "start": 1402.66,
+      "end": 1402.741,
+      "duration": 0.081
     },
     {
-      "id": "i134",
-      "number": 134,
-      "sentence": "They knew this.",
-      "start": 436.569,
-      "end": 436.649,
-      "duration": 0.08
+      "id": "i258",
+      "number": 258,
+      "sentence": "These plantation owners invest in each other strategically always.",
+      "start": 1405.365,
+      "end": 1410.252,
+      "duration": 4.887
     },
     {
-      "id": "i138",
-      "number": 138,
-      "sentence": "The plantation owners don't just track monkeys who sign up.",
-      "start": 451.279,
-      "end": 451.4,
-      "duration": 0.121
-    },
-    {
-      "id": "i140",
-      "number": 140,
-      "sentence": "How?",
-      "start": 470.165,
-      "end": 472.311,
-      "duration": 2.146
-    },
-    {
-      "id": "i145",
-      "number": 145,
-      "sentence": "And these profiles are sophisticated.",
-      "start": 506.009,
-      "end": 506.089,
-      "duration": 0.08
-    },
-    {
-      "id": "i152",
-      "number": 152,
-      "sentence": "THE REAL COST",
-      "start": 554.046,
-      "end": 554.167,
-      "duration": 0.121
-    },
-    {
-      "id": "i159",
-      "number": 159,
-      "sentence": "Not millions. Billions.",
-      "start": 594.09,
-      "end": 599.475,
-      "duration": 5.385
-    },
-    {
-      "id": "i162",
-      "number": 162,
-      "sentence": "But here's the thing.",
-      "start": 625.44,
-      "end": 625.901,
-      "duration": 0.461
-    },
-    {
-      "id": "i168",
-      "number": 168,
-      "sentence": "And yes, governments.",
-      "start": 656.603,
-      "end": 656.663,
-      "duration": 0.06
-    },
-    {
-      "id": "i170",
-      "number": 170,
-      "sentence": "No warrant needed.",
-      "start": 661.57,
-      "end": 667.199,
-      "duration": 5.629
-    },
-    {
-      "id": "i173",
-      "number": 173,
-      "sentence": "Not so private.",
-      "start": 680.761,
-      "end": 685.629,
-      "duration": 4.868
-    },
-    {
-      "id": "i179",
-      "number": 179,
-      "sentence": "Attention spans? Destroyed.",
-      "start": 709.523,
-      "end": 714.555,
-      "duration": 5.032
-    },
-    {
-      "id": "i188",
-      "number": 188,
-      "sentence": "Their response?",
-      "start": 771.813,
-      "end": 771.893,
-      "duration": 0.08
-    },
-    {
-      "id": "i191",
-      "number": 191,
-      "sentence": "But it gets worse.",
-      "start": 775.597,
-      "end": 781.224,
-      "duration": 5.627
-    },
-    {
-      "id": "i200",
-      "number": 200,
-      "sentence": "Outrage. Fear. Anger.",
-      "start": 816.563,
-      "end": 821.81,
-      "duration": 5.247
-    },
-    {
-      "id": "i202",
-      "number": 202,
-      "sentence": "Not because monkeys are stupid,",
-      "start": 840.934,
-      "end": 842.136,
-      "duration": 1.202
-    },
-    {
-      "id": "i206",
-      "number": 206,
-      "sentence": "Why?",
-      "start": 856.142,
-      "end": 856.242,
-      "duration": 0.1
-    },
-    {
-      "id": "i217",
-      "number": 217,
-      "sentence": "Think about it.",
-      "start": 907.999,
-      "end": 912.948,
-      "duration": 4.949
-    },
-    {
-      "id": "i218",
-      "number": 218,
-      "sentence": "You create the content.",
-      "start": 907.418,
-      "end": 913.388,
-      "duration": 5.97
-    },
-    {
-      "id": "i219",
-      "number": 219,
-      "sentence": "You provide the data.",
-      "start": 907.418,
-      "end": 913.388,
-      "duration": 5.97
-    },
-    {
-      "id": "i220",
-      "number": 220,
-      "sentence": "You generate the engagement.",
-      "start": 907.418,
-      "end": 913.388,
-      "duration": 5.97
-    },
-    {
-      "id": "i222",
-      "number": 222,
-      "sentence": "And they're collecting all the bananas.",
-      "start": 919.819,
-      "end": 921.021,
-      "duration": 1.202
-    },
-    {
-      "id": "i223",
-      "number": 223,
-      "sentence": "Meanwhile, regular monkeys?",
-      "start": 914.29,
-      "end": 919.779,
-      "duration": 5.489
-    },
-    {
-      "id": "i228",
-      "number": 228,
-      "sentence": "But here's the really sinister part.",
-      "start": 959.301,
-      "end": 959.401,
-      "duration": 0.1
-    },
-    {
-      "id": "i230",
-      "number": 230,
-      "sentence": "They pay for premium services with better privacy.",
-      "start": 970.295,
-      "end": 970.375,
-      "duration": 0.08
-    },
-    {
-      "id": "i231",
-      "number": 231,
-      "sentence": "They use private networks.",
-      "start": 974.04,
-      "end": 979.047,
-      "duration": 5.007
-    },
-    {
-      "id": "i233",
-      "number": 233,
-      "sentence": "Poor monkeys?",
-      "start": 981.19,
-      "end": 984.976,
-      "duration": 3.786
-    },
-    {
-      "id": "i236",
-      "number": 236,
-      "sentence": "THE PLANTATION OWNERS GET RICHER",
-      "start": 1003.226,
-      "end": 1003.306,
-      "duration": 0.08
-    },
-    {
-      "id": "i242",
-      "number": 242,
-      "sentence": "But the scandals? They're endless.",
-      "start": 1033.298,
-      "end": 1034.379,
-      "duration": 1.081
-    },
-    {
-      "id": "i247",
-      "number": 247,
-      "sentence": "And their response every time?",
-      "start": 1074.094,
-      "end": 1074.254,
-      "duration": 0.16
-    },
-    {
-      "id": "i253",
-      "number": 253,
-      "sentence": "They just buy them.",
-      "start": 1106.026,
-      "end": 1111.98,
-      "duration": 5.954
-    },
-    {
-      "id": "i254",
-      "number": 254,
-      "sentence": "Instagram, WhatsApp—acquired and absorbed.",
-      "start": 1106.026,
-      "end": 1111.98,
-      "duration": 5.954
-    },
-    {
-      "id": "i271",
-      "number": 271,
-      "sentence": "Shopping Elephant, aka Amazon,",
-      "start": 1205.466,
-      "end": 1211.233,
-      "duration": 5.767
-    },
-    {
-      "id": "i280",
-      "number": 280,
-      "sentence": "But they still collect data.",
-      "start": 1265.984,
-      "end": 1266.865,
-      "duration": 0.881
-    },
-    {
-      "id": "i299",
-      "number": 299,
-      "sentence": "Classic corporate doublespeak.",
-      "start": 1364.835,
-      "end": 1369.745,
-      "duration": 4.91
-    },
-    {
-      "id": "i306",
-      "number": 306,
-      "sentence": "Great question.",
-      "start": 1407.988,
-      "end": 1411.494,
-      "duration": 3.506
-    },
-    {
-      "id": "i310",
-      "number": 310,
-      "sentence": "he decided to quit.",
-      "start": 1430.161,
-      "end": 1436.009,
-      "duration": 5.848
-    },
-    {
-      "id": "i312",
-      "number": 312,
-      "sentence": "He lasted three days.",
-      "start": 1444.4,
-      "end": 1449.767,
-      "duration": 5.367
-    },
-    {
-      "id": "i313",
-      "number": 313,
-      "sentence": "Why?",
-      "start": 1444.4,
-      "end": 1445.161,
-      "duration": 0.761
-    },
-    {
-      "id": "i319",
-      "number": 319,
-      "sentence": "His kids' school sends announcements through Blue Book groups.",
+      "id": "i270",
+      "number": 270,
+      "sentence": "The consent that's mandatory if you want modern life.",
       "start": 1476.899,
       "end": 1482.351,
       "duration": 5.452
     },
     {
+      "id": "i271",
+      "number": 271,
+      "sentence": "The improvements that are really about making surveillance effective.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i272",
+      "number": 272,
+      "sentence": "Why you can't just quit these platforms easily.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i273",
+      "number": 273,
+      "sentence": "Now some monkeys might be thinking, why not quit?",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i274",
+      "number": 274,
+      "sentence": "Great question, let me introduce you to Marcus's story.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i275",
+      "number": 275,
+      "sentence": "See, Marcus got fed up with all this nonsense.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i276",
+      "number": 276,
+      "sentence": "After learning about the surveillance, manipulation, and exploitation here.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i277",
+      "number": 277,
+      "sentence": "He decided to quit, delete Blue Book, ditch everything.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i278",
+      "number": 278,
+      "sentence": "He lasted three days before coming back defeated.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i279",
+      "number": 279,
+      "sentence": "Why? Because he's being held hostage by networks.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i280",
+      "number": 280,
+      "sentence": "First, the social hostage situation trapping him completely.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i281",
+      "number": 281,
+      "sentence": "Marcus's entire family coordinates on Blue Book every day.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i282",
+      "number": 282,
+      "sentence": "His grandmother posts updates there, cousins organize events always.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i283",
+      "number": 283,
+      "sentence": "His kids' school sends announcements through Blue Book groups.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i284",
+      "number": 284,
+      "sentence": "When Marcus deleted his account, he stopped getting invitations.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i285",
+      "number": 285,
+      "sentence": "He missed his nephew's birthday party, didn't see invite.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i286",
+      "number": 286,
+      "sentence": "His mother got upset because he wasn't liking posts.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i287",
+      "number": 287,
+      "sentence": "His friends thought he was being weird and antisocial.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i288",
+      "number": 288,
+      "sentence": "Just check Blue Book, they'd say when sharing things.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i289",
+      "number": 289,
+      "sentence": "But he couldn't anymore, he was locked out completely.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i290",
+      "number": 290,
+      "sentence": "Leaving these platforms means social isolation for monkeys today.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i291",
+      "number": 291,
+      "sentence": "And for social creatures like us, that's impossible.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i292",
+      "number": 292,
+      "sentence": "Then there's infrastructure dependence locking him in completely.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i293",
+      "number": 293,
+      "sentence": "Marcus's email from Search Engine Kong? Connected to everything.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i294",
+      "number": 294,
+      "sentence": "His banking app, work account, shopping, all logins connected.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i295",
+      "number": 295,
+      "sentence": "Changing it meant updating hundreds of accounts, many impossible.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i296",
+      "number": 296,
+      "sentence": "And some services won't let you change email at all.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i297",
+      "number": 297,
+      "sentence": "His photos and videos? All backed up to clouds.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i298",
+      "number": 298,
+      "sentence": "Years of memories, all locked in their ecosystem completely.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i299",
+      "number": 299,
+      "sentence": "The maps he uses to navigate? Owned by Kong.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i300",
+      "number": 300,
+      "sentence": "The alternatives? Either terrible or also collecting data anyway.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i301",
+      "number": 301,
+      "sentence": "The alternatives problem is real and frustrating for everyone.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i302",
+      "number": 302,
+      "sentence": "Sure, there are privacy-focused alternatives out there supposedly.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i303",
+      "number": 303,
+      "sentence": "But they have a fraction of the users nobody uses.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i304",
+      "number": 304,
+      "sentence": "Trying to get your friends to join different app?",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i305",
+      "number": 305,
+      "sentence": "Good luck with that, they're already on Blue Book.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i306",
+      "number": 306,
+      "sentence": "And they're not downloading another app just for you.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i307",
+      "number": 307,
+      "sentence": "And here's the ironic part about privacy alternatives actually.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i308",
+      "number": 308,
+      "sentence": "Many privacy-focused alternatives still collect some data too anyway.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i309",
+      "number": 309,
+      "sentence": "They just collect less of it, not zero though.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i310",
+      "number": 310,
+      "sentence": "Or they charge you money for not being surveilled.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i311",
+      "number": 311,
+      "sentence": "So your choice becomes, surrender data or pay money.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i312",
+      "number": 312,
+      "sentence": "Either way, you're paying something no matter what happens.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i313",
+      "number": 313,
+      "sentence": "Finally, there's the convenience addiction holding everyone hostage now.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i314",
+      "number": 314,
+      "sentence": "Marcus got used to one-click ordering everything instantly now.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i315",
+      "number": 315,
+      "sentence": "Personalized recommendations that actually match his taste perfectly always.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i316",
+      "number": 316,
+      "sentence": "All his devices syncing automatically without any effort needed.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i317",
+      "number": 317,
+      "sentence": "Remembering passwords for him so he never has to.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i318",
+      "number": 318,
+      "sentence": "Auto-filling forms saving him time and effort every day.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i319",
+      "number": 319,
+      "sentence": "Going back to old way felt like time traveling backwards.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
       "id": "i320",
       "number": 320,
-      "sentence": "When Marcus deleted his account, he stopped getting invited to things.",
+      "sentence": "Look up directions manually? Type in address every time?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1171,7 +587,7 @@
     {
       "id": "i321",
       "number": 321,
-      "sentence": "He missed his nephew's birthday party because he didn't see the invitation.",
+      "sentence": "Remember all your passwords? It's not impossible, but annoying.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1179,7 +595,7 @@
     {
       "id": "i322",
       "number": 322,
-      "sentence": "His mother got upset because he wasn't liking her posts anymore.",
+      "sentence": "And the plantation owners know this dependency very well.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1187,7 +603,7 @@
     {
       "id": "i323",
       "number": 323,
-      "sentence": "His friends thought he was being weird and antisocial.",
+      "sentence": "They've made their services so convenient and integrated everywhere.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1195,7 +611,7 @@
     {
       "id": "i324",
       "number": 324,
-      "sentence": "Just check Blue Book, they'd say when trying to share something.",
+      "sentence": "That leaving feels like punishment instead of freedom now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1203,7 +619,7 @@
     {
       "id": "i325",
       "number": 325,
-      "sentence": "But he couldn't anymore.",
+      "sentence": "So Marcus re-downloaded Blue Book after his failure.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1211,7 +627,7 @@
     {
       "id": "i326",
       "number": 326,
-      "sentence": "Leaving these platforms means social isolation.",
+      "sentence": "He told himself he'd just use it less carefully.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1219,7 +635,7 @@
     {
       "id": "i327",
       "number": 327,
-      "sentence": "And for social creatures like monkeys, that's not really an option.",
+      "sentence": "Check it only once a day, turn off notifications.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1227,7 +643,7 @@
     {
       "id": "i328",
       "number": 328,
-      "sentence": "Then there's infrastructure dependence.",
+      "sentence": "That lasted about a week before old habits returned.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1235,7 +651,7 @@
     {
       "id": "i329",
       "number": 329,
-      "sentence": "Marcus's email from Search Engine Kong?",
+      "sentence": "Because that's how addiction works in the real world.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1243,15 +659,15 @@
     {
       "id": "i330",
       "number": 330,
-      "sentence": "Connected to everything.",
-      "start": 1478.623,
+      "sentence": "And these platforms are designed to be addictive always.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 3.728
+      "duration": 5.071
     },
     {
       "id": "i331",
       "number": 331,
-      "sentence": "His banking app, his work account, his shopping accounts, his other social media logins.",
+      "sentence": "The resistance fights back against the plantations finally now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1259,7 +675,7 @@
     {
       "id": "i332",
       "number": 332,
-      "sentence": "Changing it meant updating hundreds of accounts,",
+      "sentence": "But it's not all doom and gloom, there's hope.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1267,7 +683,7 @@
     {
       "id": "i333",
       "number": 333,
-      "sentence": "and some services won't let you change your email at all.",
+      "sentence": "There are monkeys fighting back against the plantations today.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1275,7 +691,7 @@
     {
       "id": "i334",
       "number": 334,
-      "sentence": "His photos and videos?",
+      "sentence": "Regulatory pressure is building up across the world now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1283,7 +699,7 @@
     {
       "id": "i335",
       "number": 335,
-      "sentence": "All backed up to the cloud services run by these plantation owners.",
+      "sentence": "The European Union has been leading the charge effectively.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1291,7 +707,7 @@
     {
       "id": "i336",
       "number": 336,
-      "sentence": "Years of memories, all locked in their ecosystem.",
+      "sentence": "The GDPR forced companies to be more transparent finally.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1299,7 +715,7 @@
     {
       "id": "i337",
       "number": 337,
-      "sentence": "The maps he uses to navigate?",
+      "sentence": "Gave monkeys the right to delete their data completely.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1307,7 +723,7 @@
     {
       "id": "i338",
       "number": 338,
-      "sentence": "Owned by Search Engine Kong.",
+      "sentence": "It's not perfect, but it's something better than nothing.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1315,7 +731,7 @@
     {
       "id": "i339",
       "number": 339,
-      "sentence": "The alternatives? Either terrible or also collecting his data.",
+      "sentence": "Now they're pushing the Digital Markets Act aggressively forward.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1323,7 +739,7 @@
     {
       "id": "i340",
       "number": 340,
-      "sentence": "The alternatives problem is real.",
+      "sentence": "Which aims to prevent plantation owners abusing dominant positions.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1331,7 +747,7 @@
     {
       "id": "i341",
       "number": 341,
-      "sentence": "Sure, there are privacy-focused alternatives.",
+      "sentence": "Forcing interoperability and preventing anti-competitive practices always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1339,7 +755,7 @@
     {
       "id": "i342",
       "number": 342,
-      "sentence": "But they have a fraction of the users.",
+      "sentence": "Actual competition allowed finally in the market today.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1347,7 +763,7 @@
     {
       "id": "i343",
       "number": 343,
-      "sentence": "Trying to get your friends to join a different messaging app?",
+      "sentence": "And the fines? They're getting serious and bigger now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1355,23 +771,23 @@
     {
       "id": "i344",
       "number": 344,
-      "sentence": "Good luck.",
+      "sentence": "Billions of bananas for violations, that's real money now.",
       "start": 1477.28,
-      "end": 1479.304,
-      "duration": 2.024
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i345",
       "number": 345,
-      "sentence": "They're already on Blue Book Messenger, and they're not downloading another app just for you.",
-      "start": 1476.899,
+      "sentence": "Blue Book Monkey has been fined multiple times already.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.452
+      "duration": 5.071
     },
     {
       "id": "i346",
       "number": 346,
-      "sentence": "And here's the ironic part.",
+      "sentence": "Search Engine Kong has been hit with record breaking penalties.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1379,7 +795,7 @@
     {
       "id": "i347",
       "number": 347,
-      "sentence": "Many of the privacy-focused alternatives? They still collect some data.",
+      "sentence": "Of course, to these companies, even billion fines are nothing.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1387,7 +803,7 @@
     {
       "id": "i348",
       "number": 348,
-      "sentence": "They just collect less of it.",
+      "sentence": "Just the cost of doing business as usual for them.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1395,7 +811,7 @@
     {
       "id": "i349",
       "number": 349,
-      "sentence": "Or they charge you bananas for the privilege of not being surveilled.",
+      "sentence": "But at least it's something, it's some pressure.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1403,7 +819,7 @@
     {
       "id": "i350",
       "number": 350,
-      "sentence": "So your choice becomes: surrender your data for free access, or pay money to surrender slightly less data.",
+      "sentence": "Class action lawsuits are emerging from regular monkeys finally.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1411,7 +827,7 @@
     {
       "id": "i351",
       "number": 351,
-      "sentence": "Either way, you're paying.",
+      "sentence": "Regular monkeys banding together to sue for privacy violations.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1419,7 +835,7 @@
     {
       "id": "i352",
       "number": 352,
-      "sentence": "Finally, there's the convenience addiction.",
+      "sentence": "Data breaches and anti-competitive behavior being challenged in court.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1427,7 +843,7 @@
     {
       "id": "i353",
       "number": 353,
-      "sentence": "Marcus got used to one-click ordering.",
+      "sentence": "Some settlements have reached billions of bananas in value.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1435,7 +851,15 @@
     {
       "id": "i354",
       "number": 354,
-      "sentence": "Personalized recommendations that actually match his taste.",
+      "sentence": "Though, let's be honest, victims usually see pennies only.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i355",
+      "number": 355,
+      "sentence": "While the lawyers get the bulk of the settlement money.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1443,7 +867,7 @@
     {
       "id": "i356",
       "number": 356,
-      "sentence": "Remembering passwords for him.",
+      "sentence": "But again, it's pressure, it's something at least.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1451,15 +875,15 @@
     {
       "id": "i357",
       "number": 357,
-      "sentence": "Auto-filling forms.",
-      "start": 1479.364,
+      "sentence": "Awareness is growing among monkeys across the jungle now.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 2.987
+      "duration": 5.071
     },
     {
       "id": "i358",
       "number": 358,
-      "sentence": "Going back to the old way of doing things felt like time traveling to the stone age.",
+      "sentence": "Documentaries like The Social Dilemma exposed how systems work.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1467,7 +891,7 @@
     {
       "id": "i359",
       "number": 359,
-      "sentence": "Look up directions manually?",
+      "sentence": "More monkeys are waking up to the manipulation happening.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1475,7 +899,7 @@
     {
       "id": "i360",
       "number": 360,
-      "sentence": "Type in your address every time?",
+      "sentence": "Privacy is becoming a selling point for new companies.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1483,7 +907,7 @@
     {
       "id": "i361",
       "number": 361,
-      "sentence": "Remember all your passwords?",
+      "sentence": "Even teenagers most addicted are questioning platforms now too.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1491,7 +915,7 @@
     {
       "id": "i362",
       "number": 362,
-      "sentence": "It's not impossible, but it's annoying.",
+      "sentence": "Delete Blue Book movements trend regularly on platforms now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1499,15 +923,7 @@
     {
       "id": "i363",
       "number": 363,
-      "sentence": "And the plantation owners know this.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i364",
-      "number": 364,
-      "sentence": "They've made their services so convenient, so integrated into every aspect of life,",
+      "sentence": "Monkeys are more skeptical of tech companies than ever.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1515,15 +931,15 @@
     {
       "id": "i365",
       "number": 365,
-      "sentence": "that leaving feels like punishment.",
-      "start": 1477.28,
+      "sentence": "Decentralized social networks that don't collect data at all.",
+      "start": 1477.14,
       "end": 1482.351,
-      "duration": 5.071
+      "duration": 5.211
     },
     {
       "id": "i366",
       "number": 366,
-      "sentence": "So Marcus re-downloaded Blue Book.",
+      "sentence": "Privacy-first messaging apps with end-to-end encryption protecting users.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1531,7 +947,7 @@
     {
       "id": "i367",
       "number": 367,
-      "sentence": "He told himself he'd just use it less.",
+      "sentence": "Open-source alternatives to the major platforms being built now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1539,7 +955,7 @@
     {
       "id": "i368",
       "number": 368,
-      "sentence": "Check it only once a day.",
+      "sentence": "User-owned cooperatives where monkeys control the platform completely.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1547,15 +963,15 @@
     {
       "id": "i369",
       "number": 369,
-      "sentence": "Turn off notifications.",
-      "start": 1478.623,
+      "sentence": "These alternatives are small now, but they're growing steadily.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 3.728
+      "duration": 5.071
     },
     {
       "id": "i370",
       "number": 370,
-      "sentence": "That lasted about a week before he was back to his old habits.",
+      "sentence": "And they prove that the current system isn't inevitable.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1563,7 +979,7 @@
     {
       "id": "i371",
       "number": 371,
-      "sentence": "Because that's how addiction works.",
+      "sentence": "There are other ways to build the digital jungle.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1571,7 +987,7 @@
     {
       "id": "i372",
       "number": 372,
-      "sentence": "And these platforms are designed to be addictive.",
+      "sentence": "There have been some victories worth celebrating recently too.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1579,7 +995,7 @@
     {
       "id": "i373",
       "number": 373,
-      "sentence": "THE RESISTANCE FIGHTS BACK",
+      "sentence": "Fruit Company introduced App Tracking Transparency feature successfully.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1587,7 +1003,7 @@
     {
       "id": "i374",
       "number": 374,
-      "sentence": "But it's not all doom and gloom.",
+      "sentence": "Forcing apps to ask permission before tracking you everywhere.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1595,7 +1011,7 @@
     {
       "id": "i375",
       "number": 375,
-      "sentence": "There are monkeys fighting back against the plantations.",
+      "sentence": "Most monkeys said no, costing Blue Book billions in revenue.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1603,7 +1019,7 @@
     {
       "id": "i376",
       "number": 376,
-      "sentence": "Regulatory pressure is building.",
+      "sentence": "Cookie consent requirements forced websites to ask permission always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1611,7 +1027,15 @@
     {
       "id": "i377",
       "number": 377,
-      "sentence": "The European Union has been leading the charge.",
+      "sentence": "Not perfect, but at least you have to know.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i378",
+      "number": 378,
+      "sentence": "Transparency reports show how often governments request your data.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1619,15 +1043,15 @@
     {
       "id": "i379",
       "number": 379,
-      "sentence": "It's not perfect, but it's something.",
-      "start": 1477.14,
+      "sentence": "At least now we know it's happening regularly.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.211
+      "duration": 5.071
     },
     {
       "id": "i380",
       "number": 380,
-      "sentence": "Now they're pushing the Digital Markets Act,",
+      "sentence": "But let's not kid ourselves about the reality here.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1635,7 +1059,7 @@
     {
       "id": "i381",
       "number": 381,
-      "sentence": "which aims to prevent the plantation owners from abusing their dominant positions.",
+      "sentence": "The plantation owners are already finding workarounds for everything.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1643,23 +1067,39 @@
     {
       "id": "i382",
       "number": 382,
-      "sentence": "Forcing interoperability.",
-      "start": 1479.244,
-      "end": 1481.629,
-      "duration": 2.385
+      "sentence": "Fingerprinting your device instead of using cookies now cleverly.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i383",
+      "number": 383,
+      "sentence": "Building shadow profiles outside these regulations and laws completely.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i384",
+      "number": 384,
+      "sentence": "Working with data brokers who operate outside these regulations.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i385",
       "number": 385,
-      "sentence": "And the fines? They're getting serious.",
-      "start": 1477.14,
+      "sentence": "For every hole we plug, they drill two more.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.211
+      "duration": 5.071
     },
     {
       "id": "i386",
       "number": 386,
-      "sentence": "Billions of bananas for violations.",
+      "sentence": "What now? Where does that leave us all today?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1667,7 +1107,7 @@
     {
       "id": "i387",
       "number": 387,
-      "sentence": "Blue Book Monkey has been fined multiple times.",
+      "sentence": "Look, we like to end these stories positively always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1675,7 +1115,7 @@
     {
       "id": "i388",
       "number": 388,
-      "sentence": "Search Engine Kong has been hit with record-breaking penalties.",
+      "sentence": "But let's be real, nothing fundamental has changed yet.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1683,7 +1123,7 @@
     {
       "id": "i389",
       "number": 389,
-      "sentence": "Of course, to these companies, even billion-banana fines are just the cost of doing business.",
+      "sentence": "The plantation owners are more powerful than ever today.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1691,7 +1131,7 @@
     {
       "id": "i390",
       "number": 390,
-      "sentence": "But at least it's something.",
+      "sentence": "Their stock prices keep climbing higher every single day.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1699,7 +1139,7 @@
     {
       "id": "i391",
       "number": 391,
-      "sentence": "Class action lawsuits are emerging.",
+      "sentence": "New free services launch every day across the internet.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1707,7 +1147,7 @@
     {
       "id": "i392",
       "number": 392,
-      "sentence": "Regular monkeys are banding together to sue these companies",
+      "sentence": "And AI is making their surveillance capabilities even stronger.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1715,7 +1155,7 @@
     {
       "id": "i393",
       "number": 393,
-      "sentence": "for privacy violations, data breaches, and anti-competitive behavior.",
+      "sentence": "Most monkeys will keep using these platforms because, well?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1723,7 +1163,7 @@
     {
       "id": "i394",
       "number": 394,
-      "sentence": "Some settlements have reached billions of bananas.",
+      "sentence": "Where else are you gonna go? There's nowhere else.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1731,7 +1171,7 @@
     {
       "id": "i395",
       "number": 395,
-      "sentence": "Though, let's be honest, the victims usually see pennies while the lawyers get the bulk of the settlement.",
+      "sentence": "Convenience trumps privacy every single time for most people.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1739,7 +1179,7 @@
     {
       "id": "i396",
       "number": 396,
-      "sentence": "But again, it's pressure.",
+      "sentence": "The I have nothing to hide mentality persists everywhere.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1747,15 +1187,15 @@
     {
       "id": "i397",
       "number": 397,
-      "sentence": "Awareness is growing.",
-      "start": 1478.623,
+      "sentence": "Despite all evidence that everyone has something to lose.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 3.728
+      "duration": 5.071
     },
     {
       "id": "i398",
       "number": 398,
-      "sentence": "Documentaries like The Social Dilemma exposed how these systems work.",
+      "sentence": "The system is designed to be inescapable completely.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1763,7 +1203,7 @@
     {
       "id": "i399",
       "number": 399,
-      "sentence": "More monkeys are waking up to the manipulation.",
+      "sentence": "And it's working exactly as intended by the designers.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1771,7 +1211,7 @@
     {
       "id": "i400",
       "number": 400,
-      "sentence": "Privacy is becoming a selling point.",
+      "sentence": "But there are small rebellions you can join today.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1779,7 +1219,7 @@
     {
       "id": "i401",
       "number": 401,
-      "sentence": "Even teenagers, the demographic most addicted to these platforms, are starting to question them.",
+      "sentence": "Use privacy-focused browsers like Firefox or Brave blocking trackers.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1787,7 +1227,7 @@
     {
       "id": "i402",
       "number": 402,
-      "sentence": "Delete Blue Book movements trend regularly.",
+      "sentence": "Install a VPN to mask your location from trackers.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1795,7 +1235,7 @@
     {
       "id": "i403",
       "number": 403,
-      "sentence": "Monkeys are more skeptical of tech companies than ever before.",
+      "sentence": "Use encrypted messaging apps like Signal for private communication.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1803,7 +1243,7 @@
     {
       "id": "i404",
       "number": 404,
-      "sentence": "Alternative platforms are emerging.",
+      "sentence": "Run ad blockers, though many sites will fight you.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1811,7 +1251,15 @@
     {
       "id": "i405",
       "number": 405,
-      "sentence": "Decentralized social networks that don't collect data.",
+      "sentence": "Actually read the privacy settings and turn everything off.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
+    },
+    {
+      "id": "i406",
+      "number": 406,
+      "sentence": "It won't stop all tracking, but reduces data collected.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1819,15 +1267,15 @@
     {
       "id": "i407",
       "number": 407,
-      "sentence": "Open-source alternatives to the major platforms.",
-      "start": 1477.14,
+      "sentence": "Support regulation when your jungle government considers privacy laws.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.211
+      "duration": 5.071
     },
     {
       "id": "i408",
       "number": 408,
-      "sentence": "User-owned cooperatives where the monkeys control the platform instead of corporate overlords.",
+      "sentence": "Let your representatives know you care about this issue.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1835,7 +1283,7 @@
     {
       "id": "i409",
       "number": 409,
-      "sentence": "These alternatives are small now, but they're growing.",
+      "sentence": "Vote for monkeys who take this seriously and act.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1843,7 +1291,7 @@
     {
       "id": "i410",
       "number": 410,
-      "sentence": "And they prove that the current system isn't inevitable.",
+      "sentence": "Consider paying for services instead of using free ones.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1851,7 +1299,7 @@
     {
       "id": "i411",
       "number": 411,
-      "sentence": "There are other ways to build the digital jungle.",
+      "sentence": "Yes, it costs bananas, but you're the customer now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1859,7 +1307,7 @@
     {
       "id": "i412",
       "number": 412,
-      "sentence": "There have been some victories.",
+      "sentence": "At least you're the customer instead of product sold.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1867,7 +1315,7 @@
     {
       "id": "i413",
       "number": 413,
-      "sentence": "Fruit Company introduced App Tracking Transparency,",
+      "sentence": "And most importantly, talk about this with everyone you know.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1875,7 +1323,7 @@
     {
       "id": "i414",
       "number": 414,
-      "sentence": "forcing apps to ask permission before tracking you.",
+      "sentence": "The plantation owners rely on monkeys not understanding what's happening.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1883,7 +1331,7 @@
     {
       "id": "i415",
       "number": 415,
-      "sentence": "Most monkeys said no, costing Blue Book billions in ad revenue.",
+      "sentence": "Spread awareness, have conversations, make noise about this always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1891,7 +1339,7 @@
     {
       "id": "i416",
       "number": 416,
-      "sentence": "Cookie consent requirements forced websites to ask before dropping tracking cookies.",
+      "sentence": "The uncomfortable truth Marcus knows he's being exploited now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1899,7 +1347,7 @@
     {
       "id": "i417",
       "number": 417,
-      "sentence": "Not perfect, but at least you have to be told.",
+      "sentence": "He knows every time he opens Blue Book feeding machine.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1907,7 +1355,7 @@
     {
       "id": "i418",
       "number": 418,
-      "sentence": "Transparency reports show how often governments request your data.",
+      "sentence": "Every time he searches on Search Engine Kong collecting.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1915,7 +1363,7 @@
     {
       "id": "i419",
       "number": 419,
-      "sentence": "At least now we know it's happening.",
+      "sentence": "Every time he asks his home assistant any question.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1923,7 +1371,7 @@
     {
       "id": "i420",
       "number": 420,
-      "sentence": "But let's not kid ourselves.",
+      "sentence": "He's feeding the machine with his data constantly always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1931,7 +1379,7 @@
     {
       "id": "i421",
       "number": 421,
-      "sentence": "The plantation owners are already finding workarounds.",
+      "sentence": "But he uses these services anyway, because his job requires.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1939,7 +1387,7 @@
     {
       "id": "i422",
       "number": 422,
-      "sentence": "Fingerprinting your device instead of using cookies.",
+      "sentence": "Because his friends are on these platforms exclusively together.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1947,23 +1395,23 @@
     {
       "id": "i423",
       "number": 423,
-      "sentence": "Building shadow profiles.",
-      "start": 1477.681,
-      "end": 1481.329,
-      "duration": 3.648
+      "sentence": "Because modern life in jungle demands participation always now.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i424",
       "number": 424,
-      "sentence": "Working with data brokers who operate outside these regulations.",
-      "start": 1476.899,
+      "sentence": "At least now he knows the real cost paid.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.452
+      "duration": 5.071
     },
     {
       "id": "i425",
       "number": 425,
-      "sentence": "For every hole we plug, they drill two more.",
+      "sentence": "He's not under the illusion these services are free.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1971,23 +1419,23 @@
     {
       "id": "i426",
       "number": 426,
-      "sentence": "WHAT NOW?",
+      "sentence": "He understands he's paying with something far more valuable.",
       "start": 1477.28,
-      "end": 1479.304,
-      "duration": 2.024
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i427",
       "number": 427,
-      "sentence": "So where does that leave us?",
-      "start": 1476.899,
+      "sentence": "Than bananas, his privacy, his attention, his peace.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.452
+      "duration": 5.071
     },
     {
       "id": "i428",
       "number": 428,
-      "sentence": "Look, we like to end these stories with a positive note,",
+      "sentence": "And he tries to minimize the damage where he can.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -1995,7 +1443,7 @@
     {
       "id": "i429",
       "number": 429,
-      "sentence": "but let's be real.",
+      "sentence": "A little bit of resistance in impossible system daily.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2003,7 +1451,7 @@
     {
       "id": "i430",
       "number": 430,
-      "sentence": "Nothing fundamental has changed.",
+      "sentence": "Conclusion: Here's the bottom line about everything discussed here.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2011,7 +1459,7 @@
     {
       "id": "i431",
       "number": 431,
-      "sentence": "The plantation owners are more powerful than ever.",
+      "sentence": "Free is the most expensive word in modern jungle.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2019,7 +1467,7 @@
     {
       "id": "i432",
       "number": 432,
-      "sentence": "Their stock prices keep climbing.",
+      "sentence": "You're always paying, always, with your data and attention.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2027,7 +1475,7 @@
     {
       "id": "i433",
       "number": 433,
-      "sentence": "New free services launch every day.",
+      "sentence": "With your mental health, with your privacy, with democracy.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2035,7 +1483,7 @@
     {
       "id": "i434",
       "number": 434,
-      "sentence": "And AI is making their surveillance capabilities even more sophisticated.",
+      "sentence": "The price tag is just hidden and disguised cleverly.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2043,7 +1491,7 @@
     {
       "id": "i435",
       "number": 435,
-      "sentence": "Most monkeys will keep using these platforms because, well, where else are you gonna go?",
+      "sentence": "Buried in terms of service agreements nobody actually reads.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2051,7 +1499,7 @@
     {
       "id": "i436",
       "number": 436,
-      "sentence": "Convenience trumps privacy every single time.",
+      "sentence": "And disguised behind convenient features we love so much.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2059,7 +1507,7 @@
     {
       "id": "i437",
       "number": 437,
-      "sentence": "The I have nothing to hide mentality persists despite all evidence that everyone has something to lose.",
+      "sentence": "The plantation owners built trillion-banana empires this way.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2067,7 +1515,7 @@
     {
       "id": "i438",
       "number": 438,
-      "sentence": "The system is designed to be inescapable, and it's working exactly as intended.",
+      "sentence": "By convincing monkeys they're getting something for nothing always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2075,7 +1523,7 @@
     {
       "id": "i439",
       "number": 439,
-      "sentence": "But there are small rebellions you can join.",
+      "sentence": "But nothing is free, ever, remember that always now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2083,7 +1531,7 @@
     {
       "id": "i440",
       "number": 440,
-      "sentence": "Use privacy-focused browsers like Firefox or Brave.",
+      "sentence": "The cost just comes later in ways you don't see.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2091,7 +1539,7 @@
     {
       "id": "i441",
       "number": 441,
-      "sentence": "They block trackers by default.",
+      "sentence": "Your data generating profits you'll never see at all.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2099,7 +1547,7 @@
     {
       "id": "i442",
       "number": 442,
-      "sentence": "Install a VPN to mask your location.",
+      "sentence": "Your attention being sold to the highest bidder always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2107,7 +1555,7 @@
     {
       "id": "i443",
       "number": 443,
-      "sentence": "Use encrypted messaging apps like Signal.",
+      "sentence": "Your psychology being manipulated for engagement and profit constantly.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2115,7 +1563,7 @@
     {
       "id": "i444",
       "number": 444,
-      "sentence": "Run ad blockers, though many sites will fight you on this.",
+      "sentence": "Your information being used in ways you never consented to.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2123,7 +1571,7 @@
     {
       "id": "i445",
       "number": 445,
-      "sentence": "Actually read the privacy settings and turn off everything you can.",
+      "sentence": "And probably don't even know about it happening right now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2131,7 +1579,7 @@
     {
       "id": "i446",
       "number": 446,
-      "sentence": "It won't stop all tracking, but it reduces the data they collect.",
+      "sentence": "So the next time you see the word free?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2139,15 +1587,15 @@
     {
       "id": "i447",
       "number": 447,
-      "sentence": "Support regulation.",
-      "start": 1479.364,
+      "sentence": "Attached to an app, a service, or platform?",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 2.987
+      "duration": 5.071
     },
     {
       "id": "i448",
       "number": 448,
-      "sentence": "When your jungle government considers privacy laws, let your representatives know you care.",
+      "sentence": "Ask yourself, what am I really trading for this?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2155,7 +1603,7 @@
     {
       "id": "i449",
       "number": 449,
-      "sentence": "Vote for monkeys who take this seriously.",
+      "sentence": "What's the hidden price? What am I giving up?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2163,7 +1611,7 @@
     {
       "id": "i450",
       "number": 450,
-      "sentence": "Consider paying for services instead of using free ones.",
+      "sentence": "What am I giving up in exchange for convenience?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2171,7 +1619,7 @@
     {
       "id": "i451",
       "number": 451,
-      "sentence": "Yes, it costs bananas, but at least you're the customer instead of the product.",
+      "sentence": "Remember, if it seems too good to be true?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2179,7 +1627,7 @@
     {
       "id": "i452",
       "number": 452,
-      "sentence": "And most importantly, talk about this.",
+      "sentence": "It definitely is and you're being played somehow.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2187,7 +1635,7 @@
     {
       "id": "i453",
       "number": 453,
-      "sentence": "The plantation owners rely on monkeys not understanding what's happening.",
+      "sentence": "And as we like to say on this channel?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2195,7 +1643,7 @@
     {
       "id": "i454",
       "number": 454,
-      "sentence": "Spread awareness. Have conversations. Make noise.",
+      "sentence": "Always follow the bananas, follow the money trail always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2203,31 +1651,39 @@
     {
       "id": "i455",
       "number": 455,
-      "sentence": "The uncomfortable truth.",
-      "start": 1478.523,
-      "end": 1481.629,
-      "duration": 3.106
+      "sentence": "In this case, your data is the bananas exactly.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i456",
       "number": 456,
-      "sentence": "Marcus knows he's being exploited now.",
-      "start": 1477.14,
+      "sentence": "And the plantation owners are collecting trillions of them.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.211
+      "duration": 5.071
+    },
+    {
+      "id": "i457",
+      "number": 457,
+      "sentence": "While you see nothing, zero, absolutely nothing at all.",
+      "start": 1477.28,
+      "end": 1482.351,
+      "duration": 5.071
     },
     {
       "id": "i458",
       "number": 458,
-      "sentence": "But he uses these services anyway.",
-      "start": 1477.14,
+      "sentence": "But there's still hope if we act together now.",
+      "start": 1477.28,
       "end": 1482.351,
-      "duration": 5.211
+      "duration": 5.071
     },
     {
       "id": "i459",
       "number": 459,
-      "sentence": "Because his job requires Video conference calls.",
+      "sentence": "Awareness is the first step toward real change always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2235,7 +1691,7 @@
     {
       "id": "i460",
       "number": 460,
-      "sentence": "Because his friends are on these platforms.",
+      "sentence": "Collective action can work, we've seen governments push back.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2243,7 +1699,7 @@
     {
       "id": "i461",
       "number": 461,
-      "sentence": "Because modern life in the jungle demands participation.",
+      "sentence": "We've seen class action lawsuits having real impact finally.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2251,7 +1707,7 @@
     {
       "id": "i462",
       "number": 462,
-      "sentence": "At least now he knows the real cost.",
+      "sentence": "We've seen alternative platforms emerge as real options now.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2259,7 +1715,7 @@
     {
       "id": "i463",
       "number": 463,
-      "sentence": "He's not under the illusion that these services are free.",
+      "sentence": "It won't be easy, and it won't be quick.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2267,7 +1723,7 @@
     {
       "id": "i464",
       "number": 464,
-      "sentence": "He understands he's paying with something far more valuable than bananas—his privacy, his attention, his peace of mind.",
+      "sentence": "But monkeys strong together, we can build better systems.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2275,7 +1731,7 @@
     {
       "id": "i465",
       "number": 465,
-      "sentence": "And he tries to minimize the damage where he can.",
+      "sentence": "If enough of us demand better treatment and change?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2283,7 +1739,7 @@
     {
       "id": "i466",
       "number": 466,
-      "sentence": "A little bit of resistance in a system designed to make resistance nearly impossible.",
+      "sentence": "If enough of us support regulation and accountability?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2291,7 +1747,7 @@
     {
       "id": "i467",
       "number": 467,
-      "sentence": "CONCLUSION Here's the bottom line.",
+      "sentence": "If enough of us vote with our attention carefully?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2299,7 +1755,7 @@
     {
       "id": "i468",
       "number": 468,
-      "sentence": "Free is the most expensive word in the modern jungle.",
+      "sentence": "And our data, maybe we can build better jungle.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2307,7 +1763,7 @@
     {
       "id": "i469",
       "number": 469,
-      "sentence": "You're always paying. Always.",
+      "sentence": "Maybe build a digital jungle that serves monkeys fairly.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2315,7 +1771,7 @@
     {
       "id": "i470",
       "number": 470,
-      "sentence": "With your data, with your attention, with your mental health, with your privacy, with your democracy itself.",
+      "sentence": "Instead of exploiting them for profit and control constantly.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2323,7 +1779,7 @@
     {
       "id": "i471",
       "number": 471,
-      "sentence": "The price tag is just hidden,",
+      "sentence": "Until then, at least you know what you're paying.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2331,7 +1787,7 @@
     {
       "id": "i472",
       "number": 472,
-      "sentence": "buried in terms of service agreements and disguised behind convenient features.",
+      "sentence": "Every time you click I agree without reading anything.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2339,7 +1795,7 @@
     {
       "id": "i473",
       "number": 473,
-      "sentence": "The plantation owners have built trillion-banana empires by convincing monkeys that they're getting something for nothing.",
+      "sentence": "If any monkeys are confused, just remember this:",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2347,7 +1803,7 @@
     {
       "id": "i474",
       "number": 474,
-      "sentence": "But nothing is free. Ever.",
+      "sentence": "This is a simple satirical explainer about free services.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2355,7 +1811,7 @@
     {
       "id": "i475",
       "number": 475,
-      "sentence": "The cost just comes later, in ways you don't immediately see.",
+      "sentence": "And the real costs associated with them for everyone.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2363,7 +1819,7 @@
     {
       "id": "i476",
       "number": 476,
-      "sentence": "Your data generating profits you'll never see.",
+      "sentence": "This video is purely for educational purposes only always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2371,7 +1827,7 @@
     {
       "id": "i477",
       "number": 477,
-      "sentence": "Your attention being sold to the highest bidder.",
+      "sentence": "Any resemblance to actual companies is purely coincidental humor.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2379,7 +1835,7 @@
     {
       "id": "i478",
       "number": 478,
-      "sentence": "Your psychology being manipulated for engagement.",
+      "sentence": "The metaphorical framework using monkeys, bananas, and plantations?",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2387,7 +1843,7 @@
     {
       "id": "i479",
       "number": 479,
-      "sentence": "Your information being used in ways you never consented to and probably don't even know about.",
+      "sentence": "Is used to make complex topics more accessible always.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2395,7 +1851,7 @@
     {
       "id": "i480",
       "number": 480,
-      "sentence": "So the next time you see the word free attached to an app, a service, a platform,",
+      "sentence": "And entertaining to understand for broad audience here.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2403,7 +1859,7 @@
     {
       "id": "i481",
       "number": 481,
-      "sentence": "ask yourself: What am I really trading for this?",
+      "sentence": "Please do not sue Monkey, I'm just explaining.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2411,7 +1867,7 @@
     {
       "id": "i482",
       "number": 482,
-      "sentence": "What's the hidden price?",
+      "sentence": "Let me know what you'd like to see covered next.",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
@@ -2419,122 +1875,10 @@
     {
       "id": "i483",
       "number": 483,
-      "sentence": "What am I giving up in exchange for this convenience?",
+      "sentence": "Thank you so much for watching until the end!",
       "start": 1477.28,
       "end": 1482.351,
       "duration": 5.071
-    },
-    {
-      "id": "i484",
-      "number": 484,
-      "sentence": "Remember: If it seems too good to be true, it definitely is.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i485",
-      "number": 485,
-      "sentence": "And as we like to say on this channel, always follow the bananas.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i486",
-      "number": 486,
-      "sentence": "In this case, your data IS the bananas.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i487",
-      "number": 487,
-      "sentence": "And the plantation owners are collecting trillions of them while you see nothing.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i488",
-      "number": 488,
-      "sentence": "But there's still hope.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i489",
-      "number": 489,
-      "sentence": "Awareness is the first step.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i490",
-      "number": 490,
-      "sentence": "Collective action can work.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i491",
-      "number": 491,
-      "sentence": "We've seen governments start to push back.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i492",
-      "number": 492,
-      "sentence": "We've seen class action lawsuits.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i493",
-      "number": 493,
-      "sentence": "We've seen alternative platforms emerge.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i494",
-      "number": 494,
-      "sentence": "It won't be easy, and it won't be quick.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i495",
-      "number": 495,
-      "sentence": "But monkeys strong together.",
-      "start": 1477.28,
-      "end": 1482.351,
-      "duration": 5.071
-    },
-    {
-      "id": "i497",
-      "number": 497,
-      "sentence": "maybe, just maybe, we can build a digital jungle that actually serves the monkeys instead of exploiting them.",
-      "start": 1477.14,
-      "end": 1482.351,
-      "duration": 5.211
-    },
-    {
-      "id": "i499",
-      "number": 499,
-      "sentence": "Thank you so much for watching.",
-      "start": 1477.14,
-      "end": 1482.351,
-      "duration": 5.211
     }
   ]
 }

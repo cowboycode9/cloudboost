@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository  
         uses: actions/checkout@v4
         with:
-          lfs: true # Crucial for pulling existing LFS files
+          lfs: true 
 
       - name: Set up Python  
         uses: actions/setup-python@v5  
@@ -39,8 +39,14 @@ jobs:
           from concurrent.futures import ThreadPoolExecutor
 
           # Config
-          AUDIO_FILE, EDIT_JSON, TRANS_JSON = "Audio/a1.mp3", "Edits/edit.json", "Trans/transcription.json"
-          IMAGES_DIR, OUTPUT_DIR, TEMP_DIR = "Images", "Video", "temp_gen"
+          AUDIO_FILE = "Audio/a1.mp3"
+          EDIT_JSON = "Edits/edit.json"
+          TRANS_JSON = "Trans/transcription.json"
+          IMAGES_DIR = "Images"
+          OUTPUT_DIR = "Video"
+          TEMP_DIR = "temp_gen"
+          OUTPUT_FILE = "final_video.mp4"
+          
           os.makedirs(OUTPUT_DIR, exist_ok=True)
           os.makedirs(TEMP_DIR, exist_ok=True)
 
@@ -48,77 +54,196 @@ jobs:
               return f"{int(s//3600):01d}:{int((s%3600)//60):02d}:{int(s%60):02d}.{int((s*100)%100):02d}"
 
           # Load Data
-          if not os.path.exists(EDIT_JSON) or not os.path.exists(TRANS_JSON):
-              print("Missing source files")
-              sys.exit(1)
-
           with open(EDIT_JSON) as f: edit_data = json.load(f)
           with open(TRANS_JSON) as f: trans_data = json.load(f)
 
-          # Generate Subtitles (Word-level highlighting)
-          ass_head = "[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,4,0,2,10,10,60,1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
-          events = []
-          for seg in trans_data.get("segments", []):
-              words = seg.get("words", [])
-              # Group words into chunks of 3 for display
-              for i in range(0, len(words), 3):
-                  chunk = words[i:i+3]
-                  for j in range(len(chunk)):
-                      state_start = chunk[j]['start']
-                      state_end = chunk[j+1]['start'] if j < len(chunk)-1 else chunk[j]['end']
+          sentence_transcriptions = edit_data.get("sentence_transcriptions", [])
+
+          # === Generate Word-Level Subtitles ===
+          def generate_subtitles(trans_data, output_path):
+              ass_content = "[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,4,0,2,10,10,60,1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
+              events = []
+              
+              for seg in trans_data.get("segments", []):
+                  words = seg.get("words", [])
+                  # Create events for highlighting each word in the chunk
+                  for j in range(len(words)):
+                      current_word_idx = j
+                      state_start = words[j]['start']
                       
+                      # Duration of this state is until the next word starts
+                      if j < len(words) - 1:
+                          state_end = words[j+1]['start']
+                      else:
+                          state_end = words[j]['end']
+                          
+                      # Build the text string for this state
                       text_parts = []
-                      for k, word_obj in enumerate(chunk):
+                      for k, word_obj in enumerate(words):
                           word_text = word_obj['word']
-                          if k <= j:
+                          # ASS Color Tags: {\c&H00FFFF&} = Yellow, {\c&HFFFFFF&} = White
+                          # We add {\b1} to ensure bold is forced on every word
+                          if k <= current_word_idx:
+                              # Highlighted (Yellow)
                               text_parts.append(f"{{\\c&H00FFFF&}}{{\\b1}}{word_text}")
                           else:
+                              # Not yet spoken (White)
                               text_parts.append(f"{{\\c&HFFFFFF&}}{{\\b1}}{word_text}")
                       
                       full_text = " ".join(text_parts)
                       events.append(f"Dialogue: 0,{format_ass_time(state_start)},{format_ass_time(state_end)},Default,,0,0,0,,{full_text}")
 
-          with open("captions.ass", "w") as f: f.write(ass_head + "\n".join(events))
+              with open(output_path, "w") as f:
+                  f.write(ass_content + "\n".join(events))
+              
+              print(f"✅ Captions generated: {output_path}")
 
-          # Get Duration
-          dur = float(subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", AUDIO_FILE], capture_output=True, text=True).stdout.strip())
+          # === Generate the Subtitles ===
+          generate_subtitles(trans_data, "captions.ass")
 
-          # Process Segments
-          def make_seg(data):
-              idx, seg = data
-              sid, s, e = seg.get("id", f"i{idx+1}"), seg.get("start", 0), seg.get("end", 0)
-              d = e - s
-              if d <= 0 or not os.path.exists(f"Images/{sid}.png"): return None
-              img = Image.open(f"Images/{sid}.png").convert('RGB').resize((1920, 1080), Image.Resampling.LANCZOS)
-              img.save(f"{TEMP_DIR}/{sid}.png")
-              out = f"{TEMP_DIR}/{sid}.mp4"
-              z, fps = 1.2, 30
-              y = f"'ih*(1-1/{z})*on/{int(d*fps)}'" if idx%2==0 else f"'ih*(1-1/{z})*(1-on/{int(d*fps)})'"
-              cmd = ["ffmpeg", "-y", "-loop", "1", "-i", f"{TEMP_DIR}/{sid}.png", "-vf", f"zoompan=z={z}:d={int(d*fps)}:x='iw*(1-1/{z})/2':y={y}:s=1920x1080:fps={fps},format=yuv420p", "-t", str(d), "-c:v", "libx264", "-crf", "23", "-pix_fmt", "yuv420p", "-an", out]
-              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
-              return out
+          # === Get audio duration ===
+          try:
+              duration_cmd = [
+                  "ffprobe", "-v", "quiet", "-show_entries", "format=duration", 
+                  "-of", "csv=p=0", AUDIO_FILE
+              ]
+              result = subprocess.run(duration_cmd, capture_output=True, text=True, check=True)
+              total_duration = float(result.stdout.strip())
+          except Exception as e:
+              print(f"❌ Error getting audio duration: {e}")
+              sys.exit(1)
 
-          # Sort segments by their index to maintain order
-          raw_segs = list(ThreadPoolExecutor(max_workers=4).map(make_seg, enumerate(edit_data['sentence_transcriptions'])))
-          segs = [s for s in raw_segs if s]
+          # === Animation Logic ===
+          def create_animated_segment(image_path, duration, segment_id, index):
+              frames = int(duration * 30)
+              segment_output = os.path.join(TEMP_DIR, f"animated_{segment_id}.mp4")
+              z = 1.2
+              
+              if index % 2 == 0:
+                  y_expr = f"'ih*(1-1/{z})*on/{frames}'" # Pan Down
+              else:
+                  y_expr = f"'ih*(1-1/{z})*(1-on/{frames})'" # Pan Up
+
+              x_expr = f"'iw*(1-1/{z})/2'"
+              zoom_filter = f"zoompan=z='{z}':d={frames}:x={x_expr}:y={y_expr}:s=1920x1080:fps=30"
+              
+              cmd = [
+                  "ffmpeg", "-y", "-loop", "1", "-i", image_path,
+                  "-vf", f"{zoom_filter},format=yuv420p",
+                  "-t", str(duration),
+                  "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+                  "-pix_fmt", "yuv420p", "-an", segment_output
+              ]
+              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+              return segment_output
+
+          # === Process Images ===
+          def process_and_animate_image(segment_data):
+              i, segment = segment_data
+              segment_id = segment.get("id", f"i{i+1}")
+              start_time = segment.get("start", 0)
+              end_time = segment.get("end", 0)
+              duration = end_time - start_time
+              
+              if duration <= 0: return None
+
+              image_path = os.path.join(IMAGES_DIR, f"{segment_id}.png")
+              if not os.path.exists(image_path): return None
+
+              try:
+                  with Image.open(image_path) as img:
+                      if img.mode != 'RGB': img = img.convert('RGB')
+                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
+                      processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
+                      new_img.save(processed_path, "PNG", optimize=True)
+
+                  return {
+                      "id": segment_id,
+                      "video_path": create_animated_segment(processed_path, duration, segment_id, i),
+                      "start": start_time,
+                      "end": end_time
+                  }
+              except Exception as e:
+                  print(f"Error: {e}")
+                  return None
+
+          print("🎨 Creating animated segments...")
+          with ThreadPoolExecutor(max_workers=4) as executor:
+              results = list(executor.map(process_and_animate_image, enumerate(sentence_transcriptions)))
+
+          valid_segments = [r for r in results if r and r["video_path"]]
+          valid_segments.sort(key=lambda x: x["start"])
+
+          if not valid_segments: 
+              print("❌ No valid segments found.")
+              sys.exit(1)
+
+          # === Check for gaps and extend ===
+          for i, segment in enumerate(valid_segments):
+              if i < len(valid_segments) - 1:
+                  gap_end = valid_segments[i + 1]["start"]
+                  if gap_end > segment["end"] + 0.1:
+                      segment["duration"] = gap_end - segment["start"]
+                      segment["end"] = gap_end
+                      # Re-render extended segment
+                      img_path = os.path.join(TEMP_DIR, f"processed_{segment['id']}.png")
+                      segment["video_path"] = create_animated_segment(img_path, segment["duration"], f"{segment['id']}_ext", i)
+
+          # Extend last segment
+          last = valid_segments[-1]
+          if last["end"] < total_duration:
+              last["duration"] = total_duration - last["start"]
+              img_path = os.path.join(TEMP_DIR, f"processed_{last['id']}.png")
+              last["video_path"] = create_animated_segment(img_path, last["duration"], f"{last['id']}_final", len(valid_segments)-1)
+
+          # === Concatenate and Add Subtitles ===
+          print("🎥 Concatenating and burning captions...")
+          segments_file = os.path.join(TEMP_DIR, "segments.txt")
+          with open(segments_file, "w") as f:
+              for s in valid_segments:
+                  f.write(f"file '{os.path.abspath(s['video_path'])}'\n")
+
+          concat_cmd = [
+              "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+              "-i", segments_file, "-i", AUDIO_FILE,
+              "-vf", "subtitles=captions.ass",
+              "-c:v", "libx264", "-c:a", "aac", "-b:a", "192k",
+              "-shortest", "-movflags", "+faststart",
+              os.path.join(OUTPUT_DIR, OUTPUT_FILE)
+          ]
           
-          with open(f"{TEMP_DIR}/list.txt", "w") as f: 
-              for s in segs: f.write(f"file '{os.path.abspath(s)}'\n")
-
-          # Final Render
-          subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", f"{TEMP_DIR}/list.txt", "-i", AUDIO_FILE, "-vf", "subtitles=captions.ass", "-c:v", "libx264", "-c:a", "aac", "-shortest", "Video/final_video.mp4"], check=True)
+          try:
+              subprocess.run(concat_cmd, check=True, stderr=subprocess.PIPE)
+              print(f"✅ Success! Output: {os.path.join(OUTPUT_DIR, OUTPUT_FILE)}")
+          except subprocess.CalledProcessError as e:
+              print(f"❌ Final render failed: {e.stderr.decode()}")
+              sys.exit(1)
+          
           EOF
 
-      - name: Run generation
+      - name: Run animated video generation
         run: python3 generate_video.py
 
-      - name: Push to LFS
+      - name: Configure Git  
+        run: |  
+          git config --global user.name "intellect9"  
+          git config --global user.email "intellectra9@outlook.com"  
+
+      - name: Commit and push generated video  
         env:  
           GH_PAT: ${{ secrets.GH_PAT }}  
         run: |  
-          git config --global user.name "intellect9"
-          git config --global user.email "intellectra9@outlook.com"
-          
+          git stash --include-untracked  
+          git pull origin main --rebase || echo "No rebase needed"  
+          git stash pop || true  
+
+          git add Video/  
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+          git commit -m "🎬 Generated video with BOLD captions: ${timestamp}" || echo "No changes to commit"  
+
+          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
+          git push origin HEAD:main
+          exit 0          
           # Force LFS for the push
           git lfs install
           

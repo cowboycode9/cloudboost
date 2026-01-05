@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "created_at": "2026-01-04T22:31:28.922736Z",
+    "created_at": "2026-01-05T03:09:16.841500Z",
     "total_sentences": 234,
     "source_files": {
       "visuals": "Visuals/visuals.json",
@@ -13,8 +13,8 @@
       "number": 1,
       "sentence": "This is Marcus, and he's got a huge problem.",
       "start": 0.031,
-      "end": 2.416,
-      "duration": 2.385
+      "end": 2.396,
+      "duration": 2.365
     },
     {
       "id": "i2",
@@ -53,8 +53,8 @@
       "number": 6,
       "sentence": "And orders dinner from Shopping Elephant every single night.",
       "start": 11.735,
-      "end": 13.538,
-      "duration": 1.803
+      "end": 13.518,
+      "duration": 1.783
     },
     {
       "id": "i7",
@@ -116,9 +116,9 @@
       "id": "i98",
       "number": 98,
       "sentence": "Because it works extremely well for selling products efficiently.",
-      "start": 516.481,
+      "start": 516.482,
       "end": 521.988,
-      "duration": 5.507
+      "duration": 5.506
     },
     {
       "id": "i102",

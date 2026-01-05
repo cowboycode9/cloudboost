@@ -48,20 +48,36 @@ jobs:
               return f"{int(s//3600):01d}:{int((s%3600)//60):02d}:{int(s%60):02d}.{int((s*100)%100):02d}"
 
           # Load Data
+          if not os.path.exists(EDIT_JSON) or not os.path.exists(TRANS_JSON):
+              print("Missing source files")
+              sys.exit(1)
+
           with open(EDIT_JSON) as f: edit_data = json.load(f)
           with open(TRANS_JSON) as f: trans_data = json.load(f)
 
-          # Generate Subtitles
+          # Generate Subtitles (Word-level highlighting)
           ass_head = "[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,4,0,2,10,10,60,1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
           events = []
           for seg in trans_data.get("segments", []):
               words = seg.get("words", [])
+              # Group words into chunks of 3 for display
               for i in range(0, len(words), 3):
                   chunk = words[i:i+3]
                   for j in range(len(chunk)):
-                      s, e = chunk[j]['start'], chunk[j+1]['start'] if j<len(chunk)-1 else chunk[j]['end']
-                      txt = " ".join([f"{{\\c{'&H00FFFF&' if k<=j else '&HFFFFFF&'}}}{w['word']}" for k, w in enumerate(chunk)])
-                      events.append(f"Dialogue: 0,{format_ass_time(s)},{format_ass_time(e)},Default,,0,0,0,,{txt}")
+                      state_start = chunk[j]['start']
+                      state_end = chunk[j+1]['start'] if j < len(chunk)-1 else chunk[j]['end']
+                      
+                      text_parts = []
+                      for k, word_obj in enumerate(chunk):
+                          word_text = word_obj['word']
+                          if k <= j:
+                              text_parts.append(f"{{\\c&H00FFFF&}}{{\\b1}}{word_text}")
+                          else:
+                              text_parts.append(f"{{\\c&HFFFFFF&}}{{\\b1}}{word_text}")
+                      
+                      full_text = " ".join(text_parts)
+                      events.append(f"Dialogue: 0,{format_ass_time(state_start)},{format_ass_time(state_end)},Default,,0,0,0,,{full_text}")
+
           with open("captions.ass", "w") as f: f.write(ass_head + "\n".join(events))
 
           # Get Duration
@@ -82,7 +98,10 @@ jobs:
               subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL)
               return out
 
-          segs = sorted([r for r in ThreadPoolExecutor(max_workers=4).map(make_seg, enumerate(edit_data['sentence_transcriptions'])) if r])
+          # Sort segments by their index to maintain order
+          raw_segs = list(ThreadPoolExecutor(max_workers=4).map(make_seg, enumerate(edit_data['sentence_transcriptions'])))
+          segs = [s for s in raw_segs if s]
+          
           with open(f"{TEMP_DIR}/list.txt", "w") as f: 
               for s in segs: f.write(f"file '{os.path.abspath(s)}'\n")
 
@@ -113,12 +132,7 @@ jobs:
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           git pull origin main --rebase
           git push origin HEAD:main
-                      # Create events for highlighting each word in the chunk
-                      for j in range(len(chunk)):
-                          current_word_idx = j
-                          state_start = chunk[j]['start']
-                          
-                          # Duration of this state is until the next word starts
+          # Duration of this state is until the next word starts
                           if j < len(chunk) - 1:
                               state_end = chunk[j+1]['start']
                           else:

@@ -65,81 +65,52 @@ jobs:
               results = []
               last_seg_idx = 0
 
-              print(f"Processing {len(visuals)} visual sentences against {len(segments)} audio segments...")
-
-              for idx, item in enumerate(visuals):
+              for item in visuals:
                   target_text = item["sentence"]
-                  best_match = None
-                  best_score = 0.60  # ✅ FIXED: Raised threshold from 0.45 to 0.60
-                  best_idx = -1  # ✅ FIXED: Track index separately
+                  best_match_idx = -1
+                  best_score = 0.45  # Threshold
                   
-                  # ✅ FIXED: Increased search window from 20 to 35 segments
-                  search_limit = min(last_seg_idx + 35, len(segments))
+                  # Look ahead more broadly (50 segments) to find the next spoken line
+                  search_limit = min(last_seg_idx + 50, len(segments))
                   
                   for i in range(last_seg_idx, search_limit):
                       score = get_similarity(target_text, segments[i]["text"])
                       if score > best_score:
                           best_score = score
-                          best_match = segments[i]
-                          best_idx = i  # ✅ FIXED: Store index but don't update anchor yet
+                          best_match_idx = i
 
-                  if best_match:
-                      # ✅ FIXED: Update anchor AFTER finding best match
-                      last_seg_idx = best_idx + 1
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": target_text,
-                          "start": round(best_match["start"], 3),
-                          "end": round(best_match["end"], 3),
-                          "duration": round(best_match["end"] - best_match["start"], 3)
-                      })
-                      if idx % 50 == 0:
-                          print(f"  Processed {idx}/{len(visuals)} - Match found (score: {best_score:.2f})")
-                  else:
-                      # ✅ FIXED: Better ghost sentence placement with realistic duration
+                  if best_match_idx != -1:
+                      best_match = segments[best_match_idx]
+                      # Ensure start time is not before the previous segment's end time
                       prev_end = results[-1]["end"] if results else 0
-                      ghost_start = prev_end + 1.0  # 1 second buffer
-                      ghost_duration = 2.0  # 2 seconds (readable duration)
+                      start_time = max(best_match["start"], prev_end + 0.001)
+                      end_time = max(best_match["end"], start_time + 0.1)
+                      
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
                           "sentence": target_text,
-                          "start": round(ghost_start, 3),
-                          "end": round(ghost_start + ghost_duration, 3),
-                          "duration": ghost_duration
+                          "start": round(start_time, 3),
+                          "end": round(end_time, 3),
+                          "duration": round(end_time - start_time, 3)
                       })
-                      if idx % 50 == 0:
-                          print(f"  Processed {idx}/{len(visuals)} - No match (ghost sentence)")
-
-              # ✅ FIXED: Post-process to eliminate overlaps
-              print("\nValidating and fixing overlaps...")
-              overlap_count = 0
-              for i in range(1, len(results)):
-                  if results[i]["start"] < results[i-1]["end"]:
-                      overlap_count += 1
-                      # Adjust start time to avoid overlap
-                      results[i]["start"] = results[i-1]["end"] + 0.1
-                      # Ensure end time is still valid
-                      if results[i]["start"] >= results[i]["end"]:
-                          results[i]["end"] = results[i]["start"] + 1.0
-                      results[i]["duration"] = round(results[i]["end"] - results[i]["start"], 3)
-              
-              print(f"Fixed {overlap_count} timing overlaps")
-
-              # ✅ FIXED: Validate final output
-              ghost_count = sum(1 for r in results if r["duration"] >= 1.9 and r["duration"] <= 2.1)
-              print(f"\nFinal Stats:")
-              print(f"  Total sentences: {len(results)}")
-              print(f"  Ghost sentences: {ghost_count}")
-              print(f"  Matched sentences: {len(results) - ghost_count}")
+                      last_seg_idx = best_match_idx + 1 # Move anchor past the match
+                  else:
+                      # If sentence is NOT in audio, place it after the last match
+                      prev_end = results[-1]["end"] if results else 0
+                      results.append({
+                          "id": f"i{item['number']}",
+                          "number": item["number"],
+                          "sentence": target_text,
+                          "start": round(prev_end + 0.01, 3),
+                          "end": round(prev_end + 0.51, 3),
+                          "duration": 0.5
+                      })
 
               output = {
                   "metadata": {
                       "created_at": datetime.utcnow().isoformat() + "Z",
                       "total_sentences": len(results),
-                      "ghost_sentences": ghost_count,
-                      "matched_sentences": len(results) - ghost_count,
                       "source_files": {"visuals": visuals_path, "transcription": trans_path}
                   },
                   "sentence_transcriptions": results
@@ -148,8 +119,6 @@ jobs:
               os.makedirs("Edits", exist_ok=True)
               with open("Edits/edit.json", "w", encoding="utf-8") as f:
                   json.dump(output, f, indent=2, ensure_ascii=False)
-              
-              print(f"\n✅ Successfully generated Edits/edit.json")
 
           if __name__ == "__main__":
               main()
@@ -169,191 +138,6 @@ jobs:
           git stash pop || true
           git add Edits/edit.json
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🔄 Fixed Transcription Sync: ${timestamp}" || echo "No changes"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:mainTest the fixed code by creating a validation script that compares the old and new edit.json files side-by-side
-Create a visual infographic showing the before/after statistics: ghost sentences, overlaps, and timing improvements
-I'm getting errors when running the fixed workflow - help me debug the GitHub Actions logs
-Generate a comprehensive test suite to validate edit.json quality automatically on every run
-Super Agent
-Team Chat
-Ask anything, create anything
-Tool Call
-Function Name:
-Write
-Arguments:
-file_path:
-/home/user/fixed_sentence_transcription.yml
-content:
-name: Sentence Level Transcription
-
-on:
-  workflow_run:
-    workflows: ["Transcript"]
-    types:
-      - completed
-  workflow_dispatch:
-  push:
-    branches: [ main ]
-    paths:
-      - 'Visuals/**'
-      - 'Trans/**'
-
-permissions:
-  contents: write
-
-jobs:
-  generate-transcription:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Generate sentence-level transcription
-        run: |
-          python3 << 'EOF'
-          import json
-          import os
-          import re
-          from datetime import datetime
-          from difflib import SequenceMatcher
-
-          def clean(text):
-              # Remove punctuation and normalize for better matching
-              text = re.sub(r"[^\w\s]", '', text.lower())
-              contractions = {"dont": "do not", "cant": "cannot", "hes": "he is", "im": "i am", "youre": "you are", "theyre": "they are"}
-              words = text.split()
-              return " ".join([contractions.get(w, w) for w in words])
-
-          def get_similarity(a, b):
-              return SequenceMatcher(None, clean(a), clean(b)).ratio()
-
-          def main():
-              trans_path = "Trans/transcription.json"
-              visuals_path = "Visuals/visuals.json"
-              
-              if not os.path.exists(trans_path) or not os.path.exists(visuals_path):
-                  print("Missing source files")
-                  return
-
-              with open(trans_path, 'r') as f:
-                  trans_data = json.load(f)
-              with open(visuals_path, 'r') as f:
-                  visuals = json.load(f)
-
-              segments = trans_data.get("segments", [])
-              results = []
-              last_seg_idx = 0
-
-              print(f"Processing {len(visuals)} visual sentences against {len(segments)} audio segments...")
-
-              for idx, item in enumerate(visuals):
-                  target_text = item["sentence"]
-                  best_match = None
-                  best_score = 0.60  # ✅ FIXED: Raised threshold from 0.45 to 0.60
-                  best_idx = -1  # ✅ FIXED: Track index separately
-                  
-                  # ✅ FIXED: Increased search window from 20 to 35 segments
-                  search_limit = min(last_seg_idx + 35, len(segments))
-                  
-                  for i in range(last_seg_idx, search_limit):
-                      score = get_similarity(target_text, segments[i]["text"])
-                      if score > best_score:
-                          best_score = score
-                          best_match = segments[i]
-                          best_idx = i  # ✅ FIXED: Store index but don't update anchor yet
-
-                  if best_match:
-                      # ✅ FIXED: Update anchor AFTER finding best match
-                      last_seg_idx = best_idx + 1
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": target_text,
-                          "start": round(best_match["start"], 3),
-                          "end": round(best_match["end"], 3),
-                          "duration": round(best_match["end"] - best_match["start"], 3)
-                      })
-                      if idx % 50 == 0:
-                          print(f"  Processed {idx}/{len(visuals)} - Match found (score: {best_score:.2f})")
-                  else:
-                      # ✅ FIXED: Better ghost sentence placement with realistic duration
-                      prev_end = results[-1]["end"] if results else 0
-                      ghost_start = prev_end + 1.0  # 1 second buffer
-                      ghost_duration = 2.0  # 2 seconds (readable duration)
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": target_text,
-                          "start": round(ghost_start, 3),
-                          "end": round(ghost_start + ghost_duration, 3),
-                          "duration": ghost_duration
-                      })
-                      if idx % 50 == 0:
-                          print(f"  Processed {idx}/{len(visuals)} - No match (ghost sentence)")
-
-              # ✅ FIXED: Post-process to eliminate overlaps
-              print("\nValidating and fixing overlaps...")
-              overlap_count = 0
-              for i in range(1, len(results)):
-                  if results[i]["start"] < results[i-1]["end"]:
-                      overlap_count += 1
-                      # Adjust start time to avoid overlap
-                      results[i]["start"] = results[i-1]["end"] + 0.1
-                      # Ensure end time is still valid
-                      if results[i]["start"] >= results[i]["end"]:
-                          results[i]["end"] = results[i]["start"] + 1.0
-                      results[i]["duration"] = round(results[i]["end"] - results[i]["start"], 3)
-              
-              print(f"Fixed {overlap_count} timing overlaps")
-
-              # ✅ FIXED: Validate final output
-              ghost_count = sum(1 for r in results if r["duration"] >= 1.9 and r["duration"] <= 2.1)
-              print(f"\nFinal Stats:")
-              print(f"  Total sentences: {len(results)}")
-              print(f"  Ghost sentences: {ghost_count}")
-              print(f"  Matched sentences: {len(results) - ghost_count}")
-
-              output = {
-                  "metadata": {
-                      "created_at": datetime.utcnow().isoformat() + "Z",
-                      "total_sentences": len(results),
-                      "ghost_sentences": ghost_count,
-                      "matched_sentences": len(results) - ghost_count,
-                      "source_files": {"visuals": visuals_path, "transcription": trans_path}
-                  },
-                  "sentence_transcriptions": results
-              }
-
-              os.makedirs("Edits", exist_ok=True)
-              with open("Edits/edit.json", "w", encoding="utf-8") as f:
-                  json.dump(output, f, indent=2, ensure_ascii=False)
-              
-              print(f"\n✅ Successfully generated Edits/edit.json")
-
-          if __name__ == "__main__":
-              main()
-          EOF
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "intellectra9"
-          git config --global user.email "intellectra9@outlook.com"
-
-      - name: Commit and push transcription file
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git stash --include-untracked
-          git pull origin main --rebase || echo "No rebase needed"
-          git stash pop || true
-          git add Edits/edit.json
-          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🔄 Fixed Transcription Sync: ${timestamp}" || echo "No changes"
+          git commit -m "🔄 Final Sync Fix: ${timestamp}" || echo "No changes"
           git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
+

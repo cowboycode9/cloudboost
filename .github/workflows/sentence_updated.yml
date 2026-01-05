@@ -38,47 +38,15 @@ jobs:
           from datetime import datetime
           from difflib import SequenceMatcher
 
-          def clean_word(word):
-              word = re.sub(r"[^\w\s']", '', word.lower())
-              word = word.replace("'s", "").replace("n't", "nt").replace("'re", "are").replace("'ll", "will").replace("'ve", "have").replace("'d", "would").replace("'m", "am")
-              return word
+          def clean(text):
+              # Remove punctuation and normalize for better matching
+              text = re.sub(r"[^\w\s]", '', text.lower())
+              contractions = {"dont": "do not", "cant": "cannot", "hes": "he is", "im": "i am", "youre": "you are", "theyre": "they are"}
+              words = text.split()
+              return " ".join([contractions.get(w, w) for w in words])
 
-          def is_similar(word1, word2, threshold=0.7):
-              return SequenceMatcher(None, word1, word2).ratio() >= threshold
-
-          def find_sentence_timing(sentence_text, word_segments, start_idx):
-              sentence_words = [clean_word(w) for w in sentence_text.split() if clean_word(w)]
-              if not sentence_words:
-                  return None, start_idx
-
-              matched_indices = []
-              search_ptr = start_idx
-              
-              # Try to find words sequentially, but allow for missing words in the transcript
-              for target in sentence_words:
-                  search_end = min(search_ptr + 40, len(word_segments))
-                  for i in range(search_ptr, search_end):
-                      if clean_word(word_segments[i]["word"]) == target or is_similar(clean_word(word_segments[i]["word"]), target):
-                          matched_indices.append(i)
-                          search_ptr = i + 1
-                          break
-              
-              if len(matched_indices) >= 1:
-                  # If we only matched a few words, ensure they aren't too far apart
-                  first = matched_indices[0]
-                  last = matched_indices[-1]
-                  
-                  # Duration check (sanity)
-                  if word_segments[last]["end"] - word_segments[first]["start"] > 15:
-                      # If it's too long, it's likely a bad match, just take the first word's area
-                      last = first
-
-                  return {
-                      "start": round(word_segments[first]["start"], 3),
-                      "end": round(word_segments[last]["end"], 3)
-                  }, last + 1
-              
-              return None, start_idx
+          def get_similarity(a, b):
+              return SequenceMatcher(None, clean(a), clean(b)).ratio()
 
           def main():
               trans_path = "Trans/transcription.json"
@@ -93,37 +61,43 @@ jobs:
               with open(visuals_path, 'r') as f:
                   visuals = json.load(f)
 
-              # Flatten words from all segments
-              all_words = []
-              for seg in trans_data.get("segments", []):
-                  all_words.extend(seg.get("words", []))
-
+              segments = trans_data.get("segments", [])
               results = []
-              current_word_idx = 0
+              last_seg_idx = 0
 
               for item in visuals:
-                  timing, next_idx = find_sentence_timing(item["sentence"], all_words, current_word_idx)
+                  target_text = item["sentence"]
+                  best_match = None
+                  best_score = 0.45  # Flexible threshold for "ghost" sentences
                   
-                  if timing:
-                      current_word_idx = next_idx
+                  # Look ahead 20 segments to find the next spoken line
+                  search_limit = min(last_seg_idx + 20, len(segments))
+                  for i in range(last_seg_idx, search_limit):
+                      score = get_similarity(target_text, segments[i]["text"])
+                      if score > best_score:
+                          best_score = score
+                          best_match = segments[i]
+                          last_seg_idx = i # Update anchor
+
+                  if best_match:
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": item["sentence"],
-                          "start": timing["start"],
-                          "end": timing["end"],
-                          "duration": round(timing["end"] - timing["start"], 3)
+                          "sentence": target_text,
+                          "start": round(best_match["start"], 3),
+                          "end": round(best_match["end"], 3),
+                          "duration": round(best_match["end"] - best_match["start"], 3)
                       })
                   else:
-                      # Fallback: assign tiny duration at current pointer so we don't crash
-                      last_time = all_words[current_word_idx]["start"] if current_word_idx < len(all_words) else 0
+                      # If sentence is NOT in audio, place it slightly after the last match
+                      prev_end = results[-1]["end"] if results else 0
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": item["sentence"],
-                          "start": last_time,
-                          "end": last_time + 0.1,
-                          "duration": 0.1
+                          "sentence": target_text,
+                          "start": round(prev_end + 0.01, 3),
+                          "end": round(prev_end + 0.51, 3),
+                          "duration": 0.5
                       })
 
               output = {
@@ -157,6 +131,6 @@ jobs:
           git stash pop || true
           git add Edits/edit.json
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🔄 Fixed sentence transcription: ${timestamp}" || echo "No changes to commit"
+          git commit -m "🔄 Final Sync Fix: ${timestamp}" || echo "No changes"
           git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
 

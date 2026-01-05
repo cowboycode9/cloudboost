@@ -1,7 +1,7 @@
 WhisperX FULL Word-Level Transcription Results
 ============================================================
 
-SEGMENT 1: [0.03s - 2.42s]
+SEGMENT 1: [0.03s - 2.40s]
 Text: "This is Marcus, and he's got a huge problem."
 Word-level timestamps:
    1. "This" -> 0.03s - 0.31s
@@ -12,7 +12,7 @@ Word-level timestamps:
    6. "got" -> 1.51s - 1.61s
    7. "a" -> 1.65s - 1.67s
    8. "huge" -> 1.73s - 1.98s
-   9. "problem." -> 2.04s - 2.42s
+   9. "problem." -> 2.04s - 2.40s
 
 --------------------------------------------------
 
@@ -30,7 +30,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 3: [5.22s - 13.54s]
+SEGMENT 3: [5.22s - 13.52s]
 Text: "He scrolls through Blue Book in the morning, checks his search engine con email, watches videos on video tube, and orders dinner from shopping elephant."
 Word-level timestamps:
    1. "He" -> 5.22s - 5.32s
@@ -46,7 +46,7 @@ Word-level timestamps:
   11. "search" -> 7.97s - 8.27s
   12. "engine" -> 8.29s - 8.55s
   13. "con" -> 8.61s - 8.93s
-  14. "email," -> 8.95s - 9.27s
+  14. "email," -> 8.95s - 9.29s
   15. "watches" -> 9.67s - 9.99s
   16. "videos" -> 10.05s - 10.43s
   17. "on" -> 10.51s - 10.57s
@@ -57,7 +57,7 @@ Word-level timestamps:
   22. "dinner" -> 12.26s - 12.48s
   23. "from" -> 12.54s - 12.66s
   24. "shopping" -> 12.76s - 13.10s
-  25. "elephant." -> 13.14s - 13.54s
+  25. "elephant." -> 13.14s - 13.52s
 
 --------------------------------------------------
 
@@ -143,7 +143,7 @@ Word-level timestamps:
    2. "tried" -> 27.03s - 27.25s
    3. "to" -> 27.29s - 27.35s
    4. "open" -> 27.37s - 27.67s
-   5. "three" -> 27.69s - 28.01s
+   5. "three" -> 27.79s - 28.01s
    6. "credit" -> 28.11s - 28.39s
    7. "cards" -> 28.43s - 28.71s
    8. "in" -> 28.77s - 28.81s
@@ -196,10 +196,10 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 13: [42.70s - 47.01s]
+SEGMENT 13: [42.68s - 47.01s]
 Text: "And those ads that follow him everywhere, selling him things he only thought about buying?"
 Word-level timestamps:
-   1. "And" -> 42.70s - 42.76s
+   1. "And" -> 42.68s - 42.76s
    2. "those" -> 42.80s - 43.06s
    3. "ads" -> 43.10s - 43.42s
    4. "that" -> 43.46s - 43.58s
@@ -333,7 +333,7 @@ Word-level timestamps:
    4. "hidden" -> 72.75s - 72.97s
    5. "cost" -> 73.03s - 73.33s
    6. "of" -> 73.39s - 73.43s
-   7. "free," -> 73.55s - 73.81s
+   7. "free," -> 73.55s - 73.83s
    8. "explained," -> 74.13s - 74.61s
    9. "the" -> 75.07s - 75.17s
   10. "illusion" -> 75.25s - 75.71s
@@ -359,7 +359,7 @@ Text: "How did free become the most dangerous word in the jungle?"
 Word-level timestamps:
    1. "How" -> 77.90s - 77.98s
    2. "did" -> 78.02s - 78.14s
-   3. "free" -> 78.30s - 78.50s
+   3. "free" -> 78.28s - 78.50s
    4. "become" -> 78.54s - 78.82s
    5. "the" -> 78.84s - 78.94s
    6. "most" -> 78.98s - 79.14s
@@ -384,7 +384,7 @@ Word-level timestamps:
    8. "the" -> 82.92s - 83.00s
    9. "digital" -> 83.06s - 83.42s
   10. "jungle" -> 83.48s - 83.83s
-  11. "back" -> 84.23s - 84.43s
+  11. "back" -> 84.21s - 84.43s
   12. "in" -> 84.47s - 84.53s
   13. "the" -> 84.55s - 84.61s
   14. "1990s" -> 84.63s - 85.47s
@@ -466,7 +466,7 @@ Word-level timestamps:
    7. "and" -> 99.70s - 99.76s
    8. "maybe" -> 99.83s - 100.08s
    9. "a" -> 100.17s - 100.19s
-  10. "hosting" -> 100.27s - 100.62s
+  10. "hosting" -> 100.27s - 100.61s
   11. "service" -> 100.67s - 100.95s
   12. "for" -> 100.99s - 101.07s
   13. "your" -> 101.11s - 101.21s
@@ -616,7 +616,7 @@ Word-level timestamps:
    2. "is" -> 129.91s - 129.97s
    3. "when" -> 130.01s - 130.13s
    4. "the" -> 130.16s - 130.24s
-   5. "famous" -> 130.29s - 130.59s
+   5. "famous" -> 130.31s - 130.59s
    6. "phrase" -> 130.66s - 130.94s
    7. "emerged." -> 131.01s - 131.50s
 
@@ -675,8 +675,8 @@ Word-level timestamps:
 SEGMENT 45: [139.50s - 143.91s]
 Text: "You, Marcus, your grandmother, your kids, you're not the customer."
 Word-level timestamps:
-   1. "You," -> 139.50s - 140.02s
-   2. "Marcus," -> 140.49s - 140.84s
+   1. "You," -> 139.50s - 140.00s
+   2. "Marcus," -> 140.06s - 140.84s
    3. "your" -> 141.19s - 141.33s
    4. "grandmother," -> 141.37s - 141.85s
    5. "your" -> 142.21s - 142.35s
@@ -698,10 +698,10 @@ Word-level timestamps:
    5. "sold" -> 145.35s - 145.65s
    6. "to" -> 145.71s - 145.79s
    7. "advertisers," -> 145.93s - 146.59s
-   8. "data" -> 146.97s - 147.24s
+   8. "data" -> 146.98s - 147.24s
    9. "brokers," -> 147.28s - 147.66s
   10. "and" -> 148.04s - 148.12s
-  11. "anyone" -> 148.30s - 148.64s
+  11. "anyone" -> 148.32s - 148.64s
   12. "willing" -> 148.70s - 148.96s
   13. "to" -> 149.00s - 149.06s
   14. "pay" -> 149.12s - 149.34s
@@ -715,23 +715,23 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 47: [152.28s - 153.82s]
+SEGMENT 47: [152.28s - 153.81s]
 Text: "Here's the math that'll make you sick."
 Word-level timestamps:
-   1. "Here's" -> 152.28s - 152.48s
+   1. "Here's" -> 152.28s - 152.49s
    2. "the" -> 152.54s - 152.60s
-   3. "math" -> 152.68s - 152.94s
-   4. "that'll" -> 152.98s - 153.22s
-   5. "make" -> 153.24s - 153.36s
-   6. "you" -> 153.40s - 153.50s
-   7. "sick." -> 153.59s - 153.82s
+   3. "math" -> 152.69s - 152.95s
+   4. "that'll" -> 152.99s - 153.23s
+   5. "make" -> 153.25s - 153.37s
+   6. "you" -> 153.41s - 153.51s
+   7. "sick." -> 153.59s - 153.81s
 
 --------------------------------------------------
 
-SEGMENT 48: [154.31s - 160.34s]
+SEGMENT 48: [154.29s - 160.82s]
 Text: "The average monkey's data is worth somewhere between 200 to 400 bananas per year to these tech giants."
 Word-level timestamps:
-   1. "The" -> 154.31s - 154.39s
+   1. "The" -> 154.29s - 154.39s
    2. "average" -> 154.51s - 154.75s
    3. "monkey's" -> 154.81s - 155.13s
    4. "data" -> 155.17s - 155.49s
@@ -739,140 +739,140 @@ Word-level timestamps:
    6. "worth" -> 155.87s - 156.09s
    7. "somewhere" -> 156.17s - 156.51s
    8. "between" -> 156.55s - 156.85s
-   9. "200" -> 156.87s - 157.05s
-  10. "to" -> 157.07s - 157.11s
-  11. "400" -> 157.13s - 158.17s
-  12. "bananas" -> 158.21s - 158.59s
-  13. "per" -> 158.65s - 158.81s
-  14. "year" -> 158.87s - 159.11s
-  15. "to" -> 159.39s - 159.47s
-  16. "these" -> 159.51s - 159.67s
-  17. "tech" -> 159.75s - 159.95s
-  18. "giants." -> 159.99s - 160.34s
+   9. "200" -> 156.87s - 157.01s
+  10. "to" -> 157.03s - 157.11s
+  11. "400" -> 157.13s - 158.18s
+  12. "bananas" -> 158.22s - 158.59s
+  13. "per" -> 158.66s - 158.82s
+  14. "year" -> 158.88s - 159.12s
+  15. "to" -> 159.40s - 159.48s
+  16. "these" -> 159.52s - 159.68s
+  17. "tech" -> 159.76s - 159.96s
+  18. "giants." -> 160.00s - 160.82s
 
 --------------------------------------------------
 
-SEGMENT 49: [160.92s - 165.58s]
+SEGMENT 49: [160.80s - 165.55s]
 Text: "Multiply that by billions of users, and you're looking at trillions of bananas in value."
 Word-level timestamps:
-   1. "Multiply" -> 160.92s - 161.42s
-   2. "that" -> 161.46s - 161.60s
-   3. "by" -> 161.68s - 161.82s
-   4. "billions" -> 161.92s - 162.34s
-   5. "of" -> 162.40s - 162.44s
-   6. "users," -> 162.62s - 162.92s
-   7. "and" -> 163.34s - 163.40s
-   8. "you're" -> 163.42s - 163.56s
-   9. "looking" -> 163.60s - 163.82s
-  10. "at" -> 163.88s - 163.92s
-  11. "trillions" -> 164.06s - 164.52s
-  12. "of" -> 164.58s - 164.62s
-  13. "bananas" -> 164.66s - 165.04s
-  14. "in" -> 165.10s - 165.18s
-  15. "value." -> 165.22s - 165.58s
+   1. "Multiply" -> 160.80s - 161.38s
+   2. "that" -> 161.42s - 161.58s
+   3. "by" -> 161.64s - 161.80s
+   4. "billions" -> 161.88s - 162.30s
+   5. "of" -> 162.36s - 162.40s
+   6. "users," -> 162.58s - 162.88s
+   7. "and" -> 163.30s - 163.36s
+   8. "you're" -> 163.38s - 163.52s
+   9. "looking" -> 163.56s - 163.80s
+  10. "at" -> 163.84s - 163.88s
+  11. "trillions" -> 164.02s - 164.49s
+  12. "of" -> 164.54s - 164.59s
+  13. "bananas" -> 164.63s - 165.01s
+  14. "in" -> 165.07s - 165.15s
+  15. "value." -> 165.19s - 165.55s
 
 --------------------------------------------------
 
-SEGMENT 50: [166.02s - 167.59s]
+SEGMENT 50: [166.01s - 167.19s]
 Text: "And how much of that do you see?"
 Word-level timestamps:
-   1. "And" -> 166.02s - 166.10s
-   2. "how" -> 166.16s - 166.26s
-   3. "much" -> 166.32s - 166.46s
-   4. "of" -> 166.50s - 166.54s
-   5. "that" -> 166.58s - 166.71s
-   6. "do" -> 166.72s - 166.78s
-   7. "you" -> 166.82s - 166.93s
-   8. "see?" -> 167.00s - 167.59s
+   1. "And" -> 166.01s - 166.09s
+   2. "how" -> 166.13s - 166.23s
+   3. "much" -> 166.29s - 166.43s
+   4. "of" -> 166.47s - 166.51s
+   5. "that" -> 166.55s - 166.67s
+   6. "do" -> 166.71s - 166.77s
+   7. "you" -> 166.81s - 166.89s
+   8. "see?" -> 166.97s - 167.19s
 
 --------------------------------------------------
 
-SEGMENT 51: [167.57s - 167.99s]
+SEGMENT 51: [167.69s - 168.01s]
 Text: "Zero."
 Word-level timestamps:
-   1. "Zero." -> 167.57s - 167.99s
+   1. "Zero." -> 167.69s - 168.01s
 
 --------------------------------------------------
 
-SEGMENT 52: [168.47s - 168.73s]
+SEGMENT 52: [168.47s - 168.75s]
 Text: "Nothing."
 Word-level timestamps:
-   1. "Nothing." -> 168.47s - 168.73s
+   1. "Nothing." -> 168.47s - 168.75s
 
 --------------------------------------------------
 
-SEGMENT 53: [169.17s - 170.07s]
+SEGMENT 53: [169.19s - 170.07s]
 Text: "Not a single banana."
 Word-level timestamps:
-   1. "Not" -> 169.17s - 169.29s
-   2. "a" -> 169.33s - 169.37s
-   3. "single" -> 169.41s - 169.65s
+   1. "Not" -> 169.19s - 169.31s
+   2. "a" -> 169.35s - 169.37s
+   3. "single" -> 169.43s - 169.65s
    4. "banana." -> 169.69s - 170.07s
 
 --------------------------------------------------
 
-SEGMENT 54: [170.49s - 171.71s]
+SEGMENT 54: [170.50s - 171.70s]
 Text: "But wait, there's more."
 Word-level timestamps:
-   1. "But" -> 170.49s - 170.59s
-   2. "wait," -> 170.65s - 170.87s
-   3. "there's" -> 171.17s - 171.37s
-   4. "more." -> 171.47s - 171.71s
+   1. "But" -> 170.50s - 170.62s
+   2. "wait," -> 170.68s - 170.90s
+   3. "there's" -> 171.18s - 171.40s
+   4. "more." -> 171.48s - 171.70s
 
 --------------------------------------------------
 
-SEGMENT 55: [172.19s - 173.74s]
+SEGMENT 55: [172.20s - 173.72s]
 Text: "It's not just that you're not getting paid."
 Word-level timestamps:
-   1. "It's" -> 172.19s - 172.29s
-   2. "not" -> 172.36s - 172.48s
-   3. "just" -> 172.54s - 172.72s
+   1. "It's" -> 172.20s - 172.30s
+   2. "not" -> 172.36s - 172.50s
+   3. "just" -> 172.56s - 172.72s
    4. "that" -> 172.76s - 172.86s
-   5. "you're" -> 172.88s - 173.02s
+   5. "you're" -> 172.88s - 173.04s
    6. "not" -> 173.06s - 173.16s
    7. "getting" -> 173.20s - 173.40s
-   8. "paid." -> 173.46s - 173.74s
+   8. "paid." -> 173.46s - 173.72s
 
 --------------------------------------------------
 
 SEGMENT 56: [174.20s - 176.22s]
 Text: "You're actually losing bananas in the process."
 Word-level timestamps:
-   1. "You're" -> 174.20s - 174.32s
-   2. "actually" -> 174.38s - 174.70s
-   3. "losing" -> 174.78s - 175.08s
+   1. "You're" -> 174.20s - 174.34s
+   2. "actually" -> 174.40s - 174.70s
+   3. "losing" -> 174.74s - 175.10s
    4. "bananas" -> 175.14s - 175.52s
-   5. "in" -> 175.56s - 175.62s
-   6. "the" -> 175.64s - 175.70s
-   7. "process." -> 175.74s - 176.22s
+   5. "in" -> 175.58s - 175.62s
+   6. "the" -> 175.66s - 175.72s
+   7. "process." -> 175.76s - 176.22s
 
 --------------------------------------------------
 
-SEGMENT 57: [176.76s - 179.49s]
+SEGMENT 57: [176.77s - 179.51s]
 Text: "Your attention gets hijacked, making you less productive."
 Word-level timestamps:
-   1. "Your" -> 176.76s - 176.91s
-   2. "attention" -> 176.94s - 177.37s
-   3. "gets" -> 177.41s - 177.59s
-   4. "hijacked," -> 177.63s - 178.13s
-   5. "making" -> 178.45s - 178.67s
-   6. "you" -> 178.71s - 178.79s
-   7. "less" -> 178.85s - 178.99s
-   8. "productive." -> 179.05s - 179.49s
+   1. "Your" -> 176.77s - 176.91s
+   2. "attention" -> 176.97s - 177.37s
+   3. "gets" -> 177.43s - 177.59s
+   4. "hijacked," -> 177.63s - 178.15s
+   5. "making" -> 178.45s - 178.69s
+   6. "you" -> 178.71s - 178.81s
+   7. "less" -> 178.85s - 179.01s
+   8. "productive." -> 179.05s - 179.51s
 
 --------------------------------------------------
 
 SEGMENT 58: [179.95s - 183.72s]
 Text: "Your mental health deteriorates, costing you therapy bananas."
 Word-level timestamps:
-   1. "Your" -> 179.95s - 180.07s
+   1. "Your" -> 179.95s - 180.09s
    2. "mental" -> 180.15s - 180.43s
-   3. "health" -> 180.47s - 180.65s
-   4. "deteriorates," -> 180.71s - 181.43s
+   3. "health" -> 180.47s - 180.67s
+   4. "deteriorates," -> 180.71s - 181.45s
    5. "costing" -> 181.85s - 182.24s
-   6. "you" -> 182.25s - 182.40s
-   7. "therapy" -> 182.41s - 182.82s
-   8. "bananas." -> 182.84s - 183.72s
+   6. "you" -> 182.30s - 182.42s
+   7. "therapy" -> 182.44s - 182.82s
+   8. "bananas." -> 182.86s - 183.72s
 
 --------------------------------------------------
 
@@ -1035,7 +1035,7 @@ Word-level timestamps:
    7. "every" -> 217.02s - 217.20s
    8. "pause," -> 217.24s - 217.58s
    9. "measure" -> 218.12s - 218.42s
-  10. "down" -> 218.48s - 218.72s
+  10. "down" -> 218.48s - 218.74s
   11. "to" -> 218.80s - 218.86s
   12. "the" -> 218.90s - 218.96s
   13. "millisecond." -> 219.02s - 219.98s
@@ -1068,7 +1068,7 @@ Word-level timestamps:
    9. "which" -> 225.53s - 225.67s
   10. "videos" -> 225.73s - 226.11s
   11. "you" -> 226.13s - 226.25s
-  12. "watch" -> 226.31s - 226.57s
+  12. "watch" -> 226.31s - 226.55s
   13. "all" -> 226.69s - 226.81s
   14. "the" -> 226.83s - 226.91s
   15. "way" -> 226.95s - 227.05s
@@ -1119,7 +1119,7 @@ SEGMENT 75: [236.21s - 238.95s]
 Text: "See those innocent little like buttons on random websites?"
 Word-level timestamps:
    1. "See" -> 236.21s - 236.35s
-   2. "those" -> 236.39s - 236.55s
+   2. "those" -> 236.39s - 236.57s
    3. "innocent" -> 236.59s - 237.11s
    4. "little" -> 237.15s - 237.37s
    5. "like" -> 237.41s - 237.59s
@@ -1259,7 +1259,7 @@ Word-level timestamps:
    7. "on" -> 265.09s - 265.15s
    8. "toilet" -> 265.23s - 265.57s
    9. "paper" -> 265.59s - 265.85s
-  10. "before" -> 265.91s - 266.15s
+  10. "before" -> 265.91s - 266.17s
   11. "you" -> 266.21s - 266.31s
   12. "do." -> 266.35s - 266.51s
 
@@ -1297,7 +1297,7 @@ Word-level timestamps:
    4. "load" -> 272.36s - 272.54s
    5. "a" -> 272.56s - 272.58s
    6. "webpage" -> 272.64s - 273.17s
-   7. "or" -> 273.40s - 273.46s
+   7. "or" -> 273.38s - 273.46s
    8. "open" -> 273.58s - 273.81s
    9. "an" -> 273.83s - 273.89s
   10. "app," -> 274.07s - 274.61s
@@ -1339,13 +1339,13 @@ Word-level timestamps:
    7. "it's" -> 282.28s - 282.40s
    8. "happening" -> 282.44s - 282.85s
    9. "thousands" -> 282.89s - 283.39s
-  10. "of" -> 283.45s - 283.49s
+  10. "of" -> 283.45s - 283.51s
   11. "times" -> 283.57s - 283.81s
   12. "per" -> 283.87s - 284.01s
   13. "day," -> 284.05s - 284.27s
   14. "just" -> 284.63s - 284.79s
   15. "for" -> 284.85s - 284.95s
-  16. "you." -> 285.01s - 285.15s
+  16. "you." -> 284.99s - 285.15s
 
 --------------------------------------------------
 
@@ -1419,14 +1419,14 @@ Word-level timestamps:
    5. "for" -> 304.05s - 304.15s
    6. "this" -> 304.19s - 304.33s
    7. "access" -> 304.45s - 304.83s
-   8. "because" -> 304.99s - 305.25s
+   8. "because" -> 304.99s - 305.23s
    9. "it" -> 305.29s - 305.33s
   10. "works." -> 305.39s - 306.13s
 
 --------------------------------------------------
 
-SEGMENT 94: [306.11s - 316.82s]
-Text: "A regular ad might get 100 monkeys to buy something, but a precisely targeted ad, shown to the right monkey at the exact moment they're most vulnerable, that converts at 10 times the rate."
+SEGMENT 94: [306.11s - 309.01s]
+Text: "A regular ad might get 100 monkeys to buy something."
 Word-level timestamps:
    1. "A" -> 306.11s - 306.31s
    2. "regular" -> 306.33s - 306.69s
@@ -1437,35 +1437,41 @@ Word-level timestamps:
    7. "monkeys" -> 308.01s - 308.33s
    8. "to" -> 308.39s - 308.45s
    9. "buy" -> 308.49s - 308.63s
-  10. "something," -> 308.69s - 309.01s
-  11. "but" -> 309.41s - 309.51s
-  12. "a" -> 309.57s - 309.59s
-  13. "precisely" -> 309.67s - 310.21s
-  14. "targeted" -> 310.31s - 310.71s
-  15. "ad," -> 310.94s - 311.10s
-  16. "shown" -> 311.50s - 311.71s
-  17. "to" -> 311.77s - 311.83s
-  18. "the" -> 311.88s - 311.95s
-  19. "right" -> 312.02s - 312.22s
-  20. "monkey" -> 312.30s - 312.62s
-  21. "at" -> 312.70s - 312.74s
-  22. "the" -> 312.78s - 312.88s
-  23. "exact" -> 312.96s - 313.36s
-  24. "moment" -> 313.44s - 313.72s
-  25. "they're" -> 313.86s - 314.04s
-  26. "most" -> 314.08s - 314.26s
-  27. "vulnerable," -> 314.32s - 314.76s
-  28. "that" -> 315.20s - 315.32s
-  29. "converts" -> 315.36s - 315.74s
-  30. "at" -> 315.82s - 315.86s
-  31. "10" -> 315.88s - 316.14s
-  32. "times" -> 316.20s - 316.44s
-  33. "the" -> 316.48s - 316.58s
-  34. "rate." -> 316.62s - 316.82s
+  10. "something." -> 308.69s - 309.01s
 
 --------------------------------------------------
 
-SEGMENT 95: [317.28s - 319.26s]
+SEGMENT 95: [309.41s - 316.82s]
+Text: "But a precisely targeted ad, shown to the right monkey at the exact moment they're most vulnerable, that converts at 10 times the rate."
+Word-level timestamps:
+   1. "But" -> 309.41s - 309.51s
+   2. "a" -> 309.57s - 309.59s
+   3. "precisely" -> 309.67s - 310.21s
+   4. "targeted" -> 310.31s - 310.71s
+   5. "ad," -> 310.94s - 311.10s
+   6. "shown" -> 311.50s - 311.71s
+   7. "to" -> 311.77s - 311.83s
+   8. "the" -> 311.88s - 311.95s
+   9. "right" -> 312.02s - 312.22s
+  10. "monkey" -> 312.30s - 312.62s
+  11. "at" -> 312.70s - 312.74s
+  12. "the" -> 312.78s - 312.88s
+  13. "exact" -> 312.96s - 313.36s
+  14. "moment" -> 313.44s - 313.72s
+  15. "they're" -> 313.86s - 314.04s
+  16. "most" -> 314.08s - 314.26s
+  17. "vulnerable," -> 314.32s - 314.76s
+  18. "that" -> 315.20s - 315.32s
+  19. "converts" -> 315.36s - 315.74s
+  20. "at" -> 315.82s - 315.86s
+  21. "10" -> 315.88s - 316.14s
+  22. "times" -> 316.20s - 316.44s
+  23. "the" -> 316.48s - 316.58s
+  24. "rate." -> 316.62s - 316.82s
+
+--------------------------------------------------
+
+SEGMENT 96: [317.28s - 319.26s]
 Text: "Then there's the psychological manipulation."
 Word-level timestamps:
    1. "Then" -> 317.28s - 317.40s
@@ -1476,8 +1482,8 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 96: [319.74s - 324.29s]
-Text: "Make no mistake, these platforms are designed to be addictive, not in a casual way."
+SEGMENT 97: [319.74s - 322.87s]
+Text: "Make no mistake, these platforms are designed to be addictive."
 Word-level timestamps:
    1. "Make" -> 319.74s - 319.88s
    2. "no" -> 319.92s - 320.02s
@@ -1488,16 +1494,22 @@ Word-level timestamps:
    7. "designed" -> 321.76s - 322.17s
    8. "to" -> 322.19s - 322.25s
    9. "be" -> 322.29s - 322.38s
-  10. "addictive," -> 322.43s - 322.87s
-  11. "not" -> 323.33s - 323.45s
-  12. "in" -> 323.49s - 323.53s
-  13. "a" -> 323.55s - 323.59s
-  14. "casual" -> 323.63s - 324.03s
-  15. "way." -> 324.09s - 324.29s
+  10. "addictive." -> 322.43s - 322.87s
 
 --------------------------------------------------
 
-SEGMENT 97: [324.73s - 329.57s]
+SEGMENT 98: [323.33s - 324.29s]
+Text: "Not in a casual way."
+Word-level timestamps:
+   1. "Not" -> 323.33s - 323.45s
+   2. "in" -> 323.49s - 323.53s
+   3. "a" -> 323.55s - 323.59s
+   4. "casual" -> 323.63s - 324.03s
+   5. "way." -> 324.09s - 324.29s
+
+--------------------------------------------------
+
+SEGMENT 99: [324.73s - 329.57s]
 Text: "In a we-hired neuroscientists and psychologists to exploit your brain chemistry kind of way."
 Word-level timestamps:
    1. "In" -> 324.73s - 324.79s
@@ -1517,7 +1529,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 98: [330.03s - 332.77s]
+SEGMENT 100: [330.03s - 332.77s]
 Text: "Infinite scroll, that's not for your convenience."
 Word-level timestamps:
    1. "Infinite" -> 330.03s - 330.31s
@@ -1530,7 +1542,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 99: [332.75s - 336.68s]
+SEGMENT 101: [332.75s - 336.68s]
 Text: "It's to eliminate stopping cues so you never feel like you've reached the end."
 Word-level timestamps:
    1. "It's" -> 332.75s - 332.94s
@@ -1550,7 +1562,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 100: [337.20s - 345.18s]
+SEGMENT 102: [337.20s - 345.18s]
 Text: "Notification badges, designed to trigger anxiety and compulsion, the pull to refresh gesture, literally modeled after slot machines."
 Word-level timestamps:
    1. "Notification" -> 337.20s - 337.80s
@@ -1574,7 +1586,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 101: [345.74s - 349.04s]
+SEGMENT 103: [345.74s - 349.04s]
 Text: "That little dopamine hit when you see new content, engineered."
 Word-level timestamps:
    1. "That" -> 345.74s - 345.86s
@@ -1590,7 +1602,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 102: [349.52s - 357.51s]
+SEGMENT 104: [349.52s - 357.51s]
 Text: "Blue books own internal research, which they tried to hide, show that their platform makes teenage monkeys feel worse about themselves."
 Word-level timestamps:
    1. "Blue" -> 349.52s - 349.74s
@@ -1617,7 +1629,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 103: [357.49s - 361.98s]
+SEGMENT 105: [357.49s - 361.98s]
 Text: "They knew this, and they kept the design anyway because engagement equals bananas."
 Word-level timestamps:
    1. "They" -> 357.49s - 357.67s
@@ -1636,7 +1648,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 104: [362.54s - 364.07s]
+SEGMENT 106: [362.54s - 364.07s]
 Text: "Finally, the profile building."
 Word-level timestamps:
    1. "Finally," -> 362.54s - 362.93s
@@ -1646,7 +1658,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 105: [364.51s - 366.11s]
+SEGMENT 107: [364.51s - 366.11s]
 Text: "This is where it gets truly creepy."
 Word-level timestamps:
    1. "This" -> 364.51s - 364.65s
@@ -1659,7 +1671,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 106: [366.53s - 370.12s]
+SEGMENT 108: [366.53s - 370.12s]
 Text: "The plantation owners don't just track monkeys who sign up."
 Word-level timestamps:
    1. "The" -> 366.53s - 366.61s
@@ -1675,7 +1687,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 107: [370.14s - 374.83s]
+SEGMENT 109: [370.14s - 374.83s]
 Text: "They build what's called shadow profiles for monkeys who never even created accounts."
 Word-level timestamps:
    1. "They" -> 370.14s - 370.24s
@@ -1694,20 +1706,20 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 108: [374.81s - 375.11s]
+SEGMENT 110: [374.81s - 375.11s]
 Text: "How?"
 Word-level timestamps:
    1. "How?" -> 374.81s - 375.11s
 
 --------------------------------------------------
 
-SEGMENT 109: [375.53s - 380.27s]
+SEGMENT 111: [375.53s - 380.27s]
 Text: "Your friends uploaded their contact lists, giving Blue Book your phone number and email."
 Word-level timestamps:
    1. "Your" -> 375.53s - 375.65s
    2. "friends" -> 375.73s - 375.99s
    3. "uploaded" -> 376.23s - 376.59s
-   4. "their" -> 376.63s - 376.75s
+   4. "their" -> 376.63s - 376.77s
    5. "contact" -> 376.81s - 377.27s
    6. "lists," -> 377.35s - 377.65s
    7. "giving" -> 378.01s - 378.23s
@@ -1721,7 +1733,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 110: [380.73s - 382.74s]
+SEGMENT 112: [380.73s - 382.74s]
 Text: "You visited websites with tracking pixels."
 Word-level timestamps:
    1. "You" -> 380.73s - 380.85s
@@ -1733,26 +1745,26 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 111: [383.32s - 384.58s]
+SEGMENT 113: [383.32s - 384.58s]
 Text: "Someone tagged you in a photo."
 Word-level timestamps:
    1. "Someone" -> 383.32s - 383.60s
    2. "tagged" -> 383.64s - 383.92s
    3. "you" -> 383.94s - 384.04s
-   4. "in" -> 384.08s - 384.12s
+   4. "in" -> 384.08s - 384.14s
    5. "a" -> 384.16s - 384.18s
    6. "photo." -> 384.24s - 384.58s
 
 --------------------------------------------------
 
-SEGMENT 112: [385.02s - 385.84s]
+SEGMENT 114: [385.02s - 385.84s]
 Text: "Congratulations!"
 Word-level timestamps:
    1. "Congratulations!" -> 385.02s - 385.84s
 
 --------------------------------------------------
 
-SEGMENT 113: [386.18s - 388.88s]
+SEGMENT 115: [386.18s - 388.88s]
 Text: "You have a profile now, and you never consented to it."
 Word-level timestamps:
    1. "You" -> 386.18s - 386.26s
@@ -1769,7 +1781,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 114: [389.36s - 391.11s]
+SEGMENT 116: [389.36s - 391.11s]
 Text: "And these profiles are sophisticated."
 Word-level timestamps:
    1. "And" -> 389.36s - 389.42s
@@ -1780,7 +1792,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 115: [391.65s - 400.27s]
+SEGMENT 117: [391.65s - 400.27s]
 Text: "Shopping Elephants' algorithm famously figured out a teenage monkey was pregnant before she told her parents, based solely on her shopping patterns."
 Word-level timestamps:
    1. "Shopping" -> 391.65s - 391.97s
@@ -1808,7 +1820,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 116: [400.25s - 404.34s]
+SEGMENT 118: [400.25s - 404.34s]
 Text: "Search engine con can predict when you're about to get sick based on your search history."
 Word-level timestamps:
    1. "Search" -> 400.25s - 400.60s
@@ -1830,7 +1842,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 117: [404.80s - 409.39s]
+SEGMENT 119: [404.80s - 409.39s]
 Text: "Blue book knows when your relationship is about to end based on your communication patterns."
 Word-level timestamps:
    1. "Blue" -> 404.80s - 405.02s
@@ -1851,7 +1863,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 118: [409.91s - 411.45s]
+SEGMENT 120: [409.91s - 411.45s]
 Text: "They know you better than you know yourself."
 Word-level timestamps:
    1. "They" -> 409.91s - 410.03s
@@ -1865,7 +1877,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 119: [411.97s - 413.11s]
+SEGMENT 121: [411.97s - 413.11s]
 Text: "And they're selling that knowledge."
 Word-level timestamps:
    1. "And" -> 411.97s - 412.03s
@@ -1876,7 +1888,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 120: [413.63s - 414.37s]
+SEGMENT 122: [413.63s - 414.37s]
 Text: "The real cost."
 Word-level timestamps:
    1. "The" -> 413.63s - 413.73s
@@ -1885,7 +1897,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 121: [414.89s - 416.10s]
+SEGMENT 123: [414.89s - 416.10s]
 Text: "So what's the actual damage?"
 Word-level timestamps:
    1. "So" -> 414.89s - 415.01s
@@ -1896,21 +1908,21 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 122: [416.60s - 418.50s]
+SEGMENT 124: [416.60s - 418.50s]
 Text: "What does this free jungle really cost us?"
 Word-level timestamps:
    1. "What" -> 416.60s - 416.70s
    2. "does" -> 416.72s - 416.82s
    3. "this" -> 416.86s - 417.00s
    4. "free" -> 417.12s - 417.36s
-   5. "jungle" -> 417.42s - 417.70s
+   5. "jungle" -> 417.44s - 417.70s
    6. "really" -> 417.76s - 417.94s
    7. "cost" -> 418.00s - 418.32s
    8. "us?" -> 418.40s - 418.50s
 
 --------------------------------------------------
 
-SEGMENT 123: [419.02s - 420.06s]
+SEGMENT 125: [419.02s - 420.06s]
 Text: "Let's start with privacy."
 Word-level timestamps:
    1. "Let's" -> 419.02s - 419.18s
@@ -1920,7 +1932,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 124: [420.50s - 421.46s]
+SEGMENT 126: [420.50s - 421.46s]
 Text: "Remember when you had some?"
 Word-level timestamps:
    1. "Remember" -> 420.50s - 420.80s
@@ -1931,14 +1943,14 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 125: [421.92s - 422.37s]
+SEGMENT 127: [421.92s - 422.37s]
 Text: "Yeah."
 Word-level timestamps:
    1. "Yeah." -> 421.92s - 422.37s
 
 --------------------------------------------------
 
-SEGMENT 126: [422.35s - 423.27s]
+SEGMENT 128: [422.35s - 423.27s]
 Text: "Those were good times."
 Word-level timestamps:
    1. "Those" -> 422.35s - 422.56s
@@ -1948,7 +1960,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 127: [423.85s - 429.96s]
+SEGMENT 129: [423.85s - 429.96s]
 Text: "In the past decade, there have been data breaches affecting billions of monkeys, not millions, billions."
 Word-level timestamps:
    1. "In" -> 423.85s - 423.91s
@@ -1965,12 +1977,12 @@ Word-level timestamps:
   12. "of" -> 427.41s - 427.45s
   13. "monkeys," -> 427.53s - 427.89s
   14. "not" -> 428.50s - 428.64s
-  15. "millions," -> 428.70s - 429.08s
+  15. "millions," -> 428.68s - 429.08s
   16. "billions." -> 429.62s - 429.96s
 
 --------------------------------------------------
 
-SEGMENT 128: [430.52s - 439.59s]
+SEGMENT 130: [430.52s - 439.59s]
 Text: "Your email, password, address, phone number, credit card info, all floating around on the dark web, being sold to the highest bidder."
 Word-level timestamps:
    1. "Your" -> 430.52s - 430.66s
@@ -1992,20 +2004,20 @@ Word-level timestamps:
   17. "being" -> 437.57s - 437.81s
   18. "sold" -> 437.93s - 438.23s
   19. "to" -> 438.29s - 438.37s
-  20. "the" -> 438.41s - 438.47s
+  20. "the" -> 438.39s - 438.47s
   21. "highest" -> 438.53s - 438.83s
   22. "bidder." -> 438.91s - 439.59s
 
 --------------------------------------------------
 
-SEGMENT 129: [439.57s - 444.00s]
+SEGMENT 131: [439.57s - 444.00s]
 Text: "But here's the thing, even without breaches, your data is being sold legally."
 Word-level timestamps:
    1. "But" -> 439.57s - 439.71s
    2. "here's" -> 439.77s - 439.95s
    3. "the" -> 440.01s - 440.07s
-   4. "thing," -> 440.13s - 440.36s
-   5. "even" -> 440.84s - 440.98s
+   4. "thing," -> 440.13s - 440.34s
+   5. "even" -> 440.82s - 440.98s
    6. "without" -> 441.04s - 441.32s
    7. "breaches," -> 441.40s - 441.78s
    8. "your" -> 442.14s - 442.28s
@@ -2017,7 +2029,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 130: [444.43s - 450.88s]
+SEGMENT 132: [444.43s - 450.88s]
 Text: "There's an entire industry of data brokers you've never heard of, companies like Axiom, CoreLogic, and Epsilon."
 Word-level timestamps:
    1. "There's" -> 444.43s - 444.61s
@@ -2040,7 +2052,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 131: [451.28s - 455.31s]
+SEGMENT 133: [451.28s - 455.31s]
 Text: "They collect, aggregate, and sell your information to anyone with bananas."
 Word-level timestamps:
    1. "They" -> 451.28s - 451.40s
@@ -2057,18 +2069,18 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 132: [455.85s - 459.88s]
+SEGMENT 134: [455.85s - 459.88s]
 Text: "Insurance companies, employers, landlords, governments."
 Word-level timestamps:
    1. "Insurance" -> 455.85s - 456.27s
-   2. "companies," -> 456.33s - 456.73s
+   2. "companies," -> 456.33s - 456.75s
    3. "employers," -> 457.03s - 457.55s
    4. "landlords," -> 458.09s - 458.62s
    5. "governments." -> 458.96s - 459.88s
 
 --------------------------------------------------
 
-SEGMENT 133: [459.86s - 461.20s]
+SEGMENT 135: [459.86s - 461.20s]
 Text: "And yes, governments."
 Word-level timestamps:
    1. "And" -> 459.86s - 460.08s
@@ -2077,7 +2089,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 134: [461.76s - 466.10s]
+SEGMENT 136: [461.76s - 466.10s]
 Text: "The plantation owners have been caught repeatedly sharing data with surveillance agencies."
 Word-level timestamps:
    1. "The" -> 461.76s - 461.84s
@@ -2090,12 +2102,12 @@ Word-level timestamps:
    8. "sharing" -> 464.09s - 464.39s
    9. "data" -> 464.47s - 464.77s
   10. "with" -> 464.89s - 465.01s
-  11. "surveillance" -> 465.07s - 465.55s
+  11. "surveillance" -> 465.07s - 465.53s
   12. "agencies." -> 465.61s - 466.10s
 
 --------------------------------------------------
 
-SEGMENT 135: [466.68s - 467.38s]
+SEGMENT 137: [466.68s - 467.38s]
 Text: "No warrant needed."
 Word-level timestamps:
    1. "No" -> 466.68s - 466.80s
@@ -2104,7 +2116,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 136: [467.82s - 468.62s]
+SEGMENT 138: [467.82s - 468.62s]
 Text: "They just handed over."
 Word-level timestamps:
    1. "They" -> 467.82s - 467.94s
@@ -2114,7 +2126,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 137: [469.12s - 470.39s]
+SEGMENT 139: [469.12s - 470.39s]
 Text: "That private message you sent?"
 Word-level timestamps:
    1. "That" -> 469.12s - 469.24s
@@ -2125,7 +2137,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 138: [470.89s - 471.69s]
+SEGMENT 140: [470.89s - 471.69s]
 Text: "Not so private."
 Word-level timestamps:
    1. "Not" -> 470.89s - 471.03s
@@ -2134,7 +2146,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 139: [472.17s - 473.74s]
+SEGMENT 141: [472.17s - 473.74s]
 Text: "Now, let's talk about mental health."
 Word-level timestamps:
    1. "Now," -> 472.17s - 472.31s
@@ -2146,7 +2158,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 140: [474.28s - 476.06s]
+SEGMENT 142: [474.28s - 476.06s]
 Text: "The numbers here are horrifying."
 Word-level timestamps:
    1. "The" -> 474.28s - 474.36s
@@ -2157,7 +2169,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 141: [476.04s - 487.12s]
+SEGMENT 143: [476.04s - 487.12s]
 Text: "Since the rise of these platforms, depression rates among monkeys have skyrocketed, especially among the young, anxiety disorders, through the roof, attention spans, destroyed."
 Word-level timestamps:
    1. "Since" -> 476.04s - 476.32s
@@ -2169,7 +2181,7 @@ Word-level timestamps:
    7. "depression" -> 478.19s - 478.67s
    8. "rates" -> 478.73s - 478.93s
    9. "among" -> 479.01s - 479.23s
-  10. "monkeys" -> 479.33s - 479.69s
+  10. "monkeys" -> 479.31s - 479.69s
   11. "have" -> 479.75s - 479.89s
   12. "skyrocketed," -> 479.93s - 480.59s
   13. "especially" -> 481.03s - 481.57s
@@ -2177,7 +2189,7 @@ Word-level timestamps:
   15. "the" -> 481.91s - 481.97s
   16. "young," -> 482.01s - 482.27s
   17. "anxiety" -> 482.75s - 483.19s
-  18. "disorders," -> 483.23s - 483.69s
+  18. "disorders," -> 483.24s - 483.69s
   19. "through" -> 484.24s - 484.42s
   20. "the" -> 484.44s - 484.50s
   21. "roof," -> 484.56s - 484.80s
@@ -2187,16 +2199,16 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 142: [487.58s - 491.37s]
+SEGMENT 144: [487.58s - 491.37s]
 Text: "The average monkey now has an attention span shorter than a goldfish."
 Word-level timestamps:
    1. "The" -> 487.58s - 487.66s
    2. "average" -> 487.78s - 488.04s
    3. "monkey" -> 488.10s - 488.40s
-   4. "now" -> 488.44s - 488.92s
-   5. "has" -> 488.98s - 489.14s
-   6. "an" -> 489.20s - 489.24s
-   7. "attention" -> 489.30s - 489.79s
+   4. "now" -> 488.44s - 488.93s
+   5. "has" -> 488.99s - 489.15s
+   6. "an" -> 489.21s - 489.25s
+   7. "attention" -> 489.31s - 489.79s
    8. "span" -> 489.85s - 490.17s
    9. "shorter" -> 490.25s - 490.55s
   10. "than" -> 490.61s - 490.71s
@@ -2205,10 +2217,10 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 143: [491.95s - 493.95s]
+SEGMENT 145: [491.95s - 493.95s]
 Text: "Sleep disruption from late night scrolling."
 Word-level timestamps:
-   1. "Sleep" -> 491.95s - 492.17s
+   1. "Sleep" -> 491.95s - 492.19s
    2. "disruption" -> 492.23s - 492.75s
    3. "from" -> 492.83s - 492.97s
    4. "late" -> 492.99s - 493.23s
@@ -2217,23 +2229,23 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 144: [494.43s - 497.78s]
+SEGMENT 146: [494.44s - 497.76s]
 Text: "Social comparison, making everyone feel inadequate."
 Word-level timestamps:
-   1. "Social" -> 494.43s - 494.73s
-   2. "comparison," -> 494.77s - 495.36s
-   3. "making" -> 495.57s - 495.86s
+   1. "Social" -> 494.44s - 494.74s
+   2. "comparison," -> 494.78s - 495.36s
+   3. "making" -> 495.58s - 495.86s
    4. "everyone" -> 495.88s - 496.46s
    5. "feel" -> 496.58s - 496.78s
-   6. "inadequate." -> 496.84s - 497.78s
+   6. "inadequate." -> 496.84s - 497.76s
 
 --------------------------------------------------
 
-SEGMENT 145: [497.76s - 500.12s]
+SEGMENT 147: [497.74s - 500.12s]
 Text: "FOMO keeping monkeys glued to their screens."
 Word-level timestamps:
-   1. "FOMO" -> 497.76s - 498.14s
-   2. "keeping" -> 498.18s - 498.48s
+   1. "FOMO" -> 497.74s - 498.14s
+   2. "keeping" -> 498.18s - 498.46s
    3. "monkeys" -> 498.56s - 498.92s
    4. "glued" -> 499.00s - 499.36s
    5. "to" -> 499.42s - 499.48s
@@ -2242,42 +2254,42 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 146: [500.76s - 502.88s]
+SEGMENT 148: [500.76s - 502.89s]
 Text: "Cyberbullying that follows victims home."
 Word-level timestamps:
-   1. "Cyberbullying" -> 500.76s - 501.50s
-   2. "that" -> 501.68s - 501.80s
-   3. "follows" -> 501.86s - 502.14s
-   4. "victims" -> 502.22s - 502.58s
-   5. "home." -> 502.64s - 502.88s
+   1. "Cyberbullying" -> 500.76s - 501.51s
+   2. "that" -> 501.69s - 501.79s
+   3. "follows" -> 501.85s - 502.15s
+   4. "victims" -> 502.23s - 502.59s
+   5. "home." -> 502.65s - 502.89s
 
 --------------------------------------------------
 
-SEGMENT 147: [503.37s - 505.43s]
+SEGMENT 149: [503.37s - 505.43s]
 Text: "It's all connected to these free platforms."
 Word-level timestamps:
    1. "It's" -> 503.37s - 503.47s
    2. "all" -> 503.55s - 503.67s
-   3. "connected" -> 503.73s - 504.13s
-   4. "to" -> 504.19s - 504.25s
+   3. "connected" -> 503.71s - 504.13s
+   4. "to" -> 504.17s - 504.25s
    5. "these" -> 504.31s - 504.47s
    6. "free" -> 504.63s - 504.83s
-   7. "platforms." -> 504.89s - 505.43s
+   7. "platforms." -> 504.87s - 505.43s
 
 --------------------------------------------------
 
-SEGMENT 148: [506.01s - 507.41s]
+SEGMENT 150: [506.01s - 507.43s]
 Text: "And remember, they know this."
 Word-level timestamps:
    1. "And" -> 506.01s - 506.09s
    2. "remember," -> 506.13s - 506.49s
    3. "they" -> 506.91s - 507.01s
    4. "know" -> 507.05s - 507.19s
-   5. "this." -> 507.25s - 507.41s
+   5. "this." -> 507.23s - 507.43s
 
 --------------------------------------------------
 
-SEGMENT 149: [507.99s - 512.14s]
+SEGMENT 151: [507.99s - 512.12s]
 Text: "Blue Book's internal research showed their platform was toxic for teen mental health."
 Word-level timestamps:
    1. "Blue" -> 507.99s - 508.17s
@@ -2285,18 +2297,18 @@ Word-level timestamps:
    3. "internal" -> 508.49s - 508.83s
    4. "research" -> 508.89s - 509.33s
    5. "showed" -> 509.51s - 509.71s
-   6. "their" -> 509.75s - 509.87s
-   7. "platform" -> 509.93s - 510.39s
-   8. "was" -> 510.43s - 510.53s
-   9. "toxic" -> 510.61s - 511.07s
-  10. "for" -> 511.12s - 511.25s
-  11. "teen" -> 511.31s - 511.56s
-  12. "mental" -> 511.62s - 511.88s
-  13. "health." -> 511.92s - 512.14s
+   6. "their" -> 509.74s - 509.88s
+   7. "platform" -> 509.94s - 510.40s
+   8. "was" -> 510.44s - 510.54s
+   9. "toxic" -> 510.62s - 511.08s
+  10. "for" -> 511.12s - 511.24s
+  11. "teen" -> 511.32s - 511.56s
+  12. "mental" -> 511.60s - 511.86s
+  13. "health." -> 511.92s - 512.12s
 
 --------------------------------------------------
 
-SEGMENT 150: [512.64s - 516.04s]
+SEGMENT 152: [512.64s - 516.04s]
 Text: "Their response, bury the research and keep pushing the product."
 Word-level timestamps:
    1. "Their" -> 512.64s - 512.76s
@@ -2304,46 +2316,46 @@ Word-level timestamps:
    3. "bury" -> 513.84s - 514.06s
    4. "the" -> 514.10s - 514.18s
    5. "research" -> 514.24s - 514.68s
-   6. "and" -> 514.88s - 514.96s
+   6. "and" -> 514.88s - 514.94s
    7. "keep" -> 515.02s - 515.22s
-   8. "pushing" -> 515.26s - 515.54s
+   8. "pushing" -> 515.26s - 515.52s
    9. "the" -> 515.56s - 515.62s
-  10. "product." -> 515.68s - 516.04s
+  10. "product." -> 515.66s - 516.04s
 
 --------------------------------------------------
 
-SEGMENT 151: [516.48s - 520.79s]
+SEGMENT 153: [516.48s - 520.79s]
 Text: "Because mental health doesn't show up on quarterly reports, but engagement does."
 Word-level timestamps:
    1. "Because" -> 516.48s - 516.78s
    2. "mental" -> 516.82s - 517.24s
-   3. "health" -> 517.28s - 517.52s
+   3. "health" -> 517.28s - 517.50s
    4. "doesn't" -> 517.68s - 517.96s
    5. "show" -> 518.02s - 518.20s
    6. "up" -> 518.28s - 518.36s
    7. "on" -> 518.44s - 518.50s
-   8. "quarterly" -> 518.60s - 518.98s
+   8. "quarterly" -> 518.60s - 518.99s
    9. "reports," -> 519.04s - 519.49s
-  10. "but" -> 519.88s - 519.97s
-  11. "engagement" -> 520.04s - 520.51s
+  10. "but" -> 519.87s - 519.97s
+  11. "engagement" -> 520.05s - 520.51s
   12. "does." -> 520.55s - 520.79s
 
 --------------------------------------------------
 
-SEGMENT 152: [521.33s - 521.99s]
+SEGMENT 154: [521.31s - 521.99s]
 Text: "But it gets worse."
 Word-level timestamps:
-   1. "But" -> 521.33s - 521.41s
+   1. "But" -> 521.31s - 521.41s
    2. "it" -> 521.45s - 521.49s
-   3. "gets" -> 521.53s - 521.69s
+   3. "gets" -> 521.53s - 521.67s
    4. "worse." -> 521.73s - 521.99s
 
 --------------------------------------------------
 
-SEGMENT 153: [522.53s - 524.93s]
+SEGMENT 155: [522.51s - 524.93s]
 Text: "Democracy itself is under attack."
 Word-level timestamps:
-   1. "Democracy" -> 522.53s - 523.05s
+   1. "Democracy" -> 522.51s - 523.05s
    2. "itself" -> 523.11s - 523.47s
    3. "is" -> 523.79s - 523.85s
    4. "under" -> 523.93s - 524.11s
@@ -2351,7 +2363,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 154: [524.91s - 541.01s]
+SEGMENT 156: [524.91s - 541.01s]
 Text: "The 2016 election, Cambridge Analytica, 87 million blue book profiles harvested and used for psychological warfare, foreign interference, spreading misinformation, echo chambers radicalizing monkeys, polarization tearing the jungle apart."
 Word-level timestamps:
    1. "The" -> 524.91s - 525.09s
@@ -2377,7 +2389,7 @@ Word-level timestamps:
   21. "echo" -> 536.52s - 536.73s
   22. "chambers" -> 536.76s - 537.15s
   23. "radicalizing" -> 537.25s - 537.89s
-  24. "monkeys," -> 537.95s - 538.33s
+  24. "monkeys," -> 537.95s - 538.31s
   25. "polarization" -> 538.85s - 539.59s
   26. "tearing" -> 539.63s - 540.13s
   27. "the" -> 540.17s - 540.25s
@@ -2386,7 +2398,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 155: [541.47s - 548.00s]
+SEGMENT 157: [541.47s - 548.00s]
 Text: "These platforms were designed to maximize engagement and you know what maximizes engagement, outrage,"
 Word-level timestamps:
    1. "These" -> 541.47s - 541.65s
@@ -2400,13 +2412,13 @@ Word-level timestamps:
    9. "you" -> 544.91s - 545.03s
   10. "know" -> 545.08s - 545.22s
   11. "what" -> 545.26s - 545.42s
-  12. "maximizes" -> 545.46s - 546.16s
+  12. "maximizes" -> 545.52s - 546.16s
   13. "engagement," -> 546.22s - 546.70s
   14. "outrage," -> 547.20s - 548.00s
 
 --------------------------------------------------
 
-SEGMENT 156: [547.98s - 554.77s]
+SEGMENT 158: [547.98s - 554.77s]
 Text: "Fear, anger, conspiracy theories spread six times faster than factual information on these platforms."
 Word-level timestamps:
    1. "Fear," -> 547.98s - 548.34s
@@ -2426,7 +2438,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 157: [555.35s - 559.97s]
+SEGMENT 159: [555.35s - 559.97s]
 Text: "Not because monkeys are stupid, but because the algorithm rewards emotional content."
 Word-level timestamps:
    1. "Not" -> 555.35s - 555.49s
@@ -2444,7 +2456,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 158: [560.43s - 566.76s]
+SEGMENT 160: [560.43s - 566.76s]
 Text: "When blue books engineers try to fix this, to reduce divisive content, executive monkeys shut it down."
 Word-level timestamps:
    1. "When" -> 560.43s - 560.55s
@@ -2467,20 +2479,20 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 159: [567.24s - 567.46s]
+SEGMENT 161: [567.24s - 567.46s]
 Text: "Why?"
 Word-level timestamps:
    1. "Why?" -> 567.24s - 567.46s
 
 --------------------------------------------------
 
-SEGMENT 160: [567.90s - 573.21s]
+SEGMENT 162: [567.90s - 573.21s]
 Text: "Because divisive content meant more engagement, more time on platform, more bananas."
 Word-level timestamps:
    1. "Because" -> 567.90s - 568.16s
    2. "divisive" -> 568.24s - 568.73s
    3. "content" -> 568.78s - 569.23s
-   4. "meant" -> 569.30s - 569.47s
+   4. "meant" -> 569.30s - 569.49s
    5. "more" -> 569.55s - 569.71s
    6. "engagement," -> 569.77s - 570.29s
    7. "more" -> 570.69s - 570.85s
@@ -2492,7 +2504,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 161: [573.19s - 577.21s]
+SEGMENT 163: [573.19s - 577.21s]
 Text: "They're literally choosing profit over the stability of democratic jungles."
 Word-level timestamps:
    1. "They're" -> 573.19s - 573.43s
@@ -2502,20 +2514,20 @@ Word-level timestamps:
    5. "over" -> 574.99s - 575.15s
    6. "the" -> 575.17s - 575.25s
    7. "stability" -> 575.29s - 575.87s
-   8. "of" -> 576.03s - 576.09s
+   8. "of" -> 576.03s - 576.07s
    9. "democratic" -> 576.11s - 576.75s
-  10. "jungles." -> 576.83s - 577.21s
+  10. "jungles." -> 576.81s - 577.21s
 
 --------------------------------------------------
 
-SEGMENT 162: [577.77s - 580.58s]
+SEGMENT 164: [577.77s - 580.58s]
 Text: "And they'll keep doing it because there's no real consequence."
 Word-level timestamps:
-   1. "And" -> 577.77s - 577.85s
-   2. "they'll" -> 577.87s - 578.08s
-   3. "keep" -> 578.10s - 578.27s
+   1. "And" -> 577.77s - 577.86s
+   2. "they'll" -> 577.88s - 578.08s
+   3. "keep" -> 578.10s - 578.28s
    4. "doing" -> 578.36s - 578.62s
-   5. "it" -> 578.67s - 578.72s
+   5. "it" -> 578.68s - 578.72s
    6. "because" -> 579.00s - 579.22s
    7. "there's" -> 579.24s - 579.44s
    8. "no" -> 579.48s - 579.68s
@@ -2524,7 +2536,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 163: [581.14s - 583.32s]
+SEGMENT 165: [581.14s - 583.32s]
 Text: "And finally, economic exploitation."
 Word-level timestamps:
    1. "And" -> 581.14s - 581.22s
@@ -2534,7 +2546,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 164: [583.76s - 587.12s]
+SEGMENT 166: [583.76s - 587.13s]
 Text: "The plantation owners have become the richest entities in the jungle."
 Word-level timestamps:
    1. "The" -> 583.76s - 583.86s
@@ -2544,32 +2556,38 @@ Word-level timestamps:
    5. "become" -> 584.94s - 585.22s
    6. "the" -> 585.26s - 585.36s
    7. "richest" -> 585.46s - 585.82s
-   8. "entities" -> 585.98s - 586.34s
-   9. "in" -> 586.38s - 586.60s
-  10. "the" -> 586.64s - 586.70s
-  11. "jungle." -> 586.78s - 587.12s
+   8. "entities" -> 585.98s - 586.35s
+   9. "in" -> 586.38s - 586.61s
+  10. "the" -> 586.64s - 586.71s
+  11. "jungle." -> 586.76s - 587.13s
 
 --------------------------------------------------
 
-SEGMENT 165: [587.60s - 592.55s]
-Text: "Blue book monkey, search engine con, shopping elephant, they're worth trillions combined."
+SEGMENT 167: [587.61s - 590.75s]
+Text: "Blue book monkey, search engine con, shopping elephant."
 Word-level timestamps:
-   1. "Blue" -> 587.60s - 587.80s
-   2. "book" -> 587.84s - 588.04s
-   3. "monkey," -> 588.10s - 588.40s
+   1. "Blue" -> 587.61s - 587.81s
+   2. "book" -> 587.85s - 588.05s
+   3. "monkey," -> 588.11s - 588.41s
    4. "search" -> 588.73s - 588.99s
-   5. "engine" -> 589.00s - 589.25s
-   6. "con," -> 589.26s - 589.57s
+   5. "engine" -> 589.01s - 589.25s
+   6. "con," -> 589.27s - 589.57s
    7. "shopping" -> 589.99s - 590.31s
-   8. "elephant," -> 590.35s - 590.75s
-   9. "they're" -> 591.07s - 591.25s
-  10. "worth" -> 591.29s - 591.49s
-  11. "trillions" -> 591.63s - 592.05s
-  12. "combined." -> 592.11s - 592.55s
+   8. "elephant." -> 590.35s - 590.75s
 
 --------------------------------------------------
 
-SEGMENT 166: [592.99s - 595.29s]
+SEGMENT 168: [591.07s - 592.55s]
+Text: "They're worth trillions combined."
+Word-level timestamps:
+   1. "They're" -> 591.07s - 591.25s
+   2. "worth" -> 591.29s - 591.49s
+   3. "trillions" -> 591.63s - 592.05s
+   4. "combined." -> 592.11s - 592.55s
+
+--------------------------------------------------
+
+SEGMENT 169: [592.99s - 595.29s]
 Text: "They're more powerful than most jungle governments."
 Word-level timestamps:
    1. "They're" -> 592.99s - 593.15s
@@ -2582,216 +2600,252 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 167: [595.87s - 601.72s]
-Text: "And how did they build this wealth by extracting value from billions of monkeys who get paid nothing in return?"
+SEGMENT 170: [595.88s - 597.48s]
+Text: "And how do they build this wealth?"
 Word-level timestamps:
-   1. "And" -> 595.87s - 595.95s
-   2. "how" -> 596.01s - 596.07s
-   3. "did" -> 596.11s - 596.19s
-   4. "they" -> 596.21s - 596.31s
-   5. "build" -> 596.35s - 596.59s
-   6. "this" -> 596.61s - 596.75s
-   7. "wealth" -> 596.83s - 597.05s
-   8. "by" -> 597.57s - 597.69s
-   9. "extracting" -> 597.77s - 598.31s
-  10. "value" -> 598.37s - 598.71s
-  11. "from" -> 598.77s - 598.91s
-  12. "billions" -> 599.05s - 599.48s
-  13. "of" -> 599.53s - 599.58s
-  14. "monkeys" -> 599.62s - 600.05s
-  15. "who" -> 600.12s - 600.22s
-  16. "get" -> 600.25s - 600.38s
-  17. "paid" -> 600.46s - 600.72s
-  18. "nothing" -> 600.74s - 601.18s
-  19. "in" -> 601.24s - 601.30s
-  20. "return?" -> 601.36s - 601.72s
+   1. "And" -> 595.88s - 595.96s
+   2. "how" -> 596.01s - 596.08s
+   3. "do" -> 596.12s - 596.20s
+   4. "they" -> 596.22s - 596.32s
+   5. "build" -> 596.36s - 596.60s
+   6. "this" -> 596.62s - 596.76s
+   7. "wealth?" -> 596.84s - 597.48s
 
 --------------------------------------------------
 
-SEGMENT 168: [602.16s - 602.98s]
-Text: "Think about it."
+SEGMENT 171: [597.46s - 602.65s]
+Text: "By extracting value from billions of monkeys who get paid nothing in return, think about it."
 Word-level timestamps:
-   1. "Think" -> 602.16s - 602.30s
-   2. "about" -> 602.34s - 602.54s
-   3. "it." -> 602.60s - 602.98s
+   1. "By" -> 597.46s - 597.68s
+   2. "extracting" -> 597.76s - 598.28s
+   3. "value" -> 598.34s - 598.70s
+   4. "from" -> 598.76s - 598.88s
+   5. "billions" -> 598.92s - 599.46s
+   6. "of" -> 599.52s - 599.56s
+   7. "monkeys" -> 599.58s - 600.02s
+   8. "who" -> 600.08s - 600.20s
+   9. "get" -> 600.24s - 600.36s
+  10. "paid" -> 600.44s - 600.68s
+  11. "nothing" -> 600.72s - 601.14s
+  12. "in" -> 601.22s - 601.26s
+  13. "return," -> 601.32s - 601.71s
+  14. "think" -> 602.13s - 602.29s
+  15. "about" -> 602.33s - 602.53s
+  16. "it." -> 602.59s - 602.65s
 
 --------------------------------------------------
 
-SEGMENT 169: [602.96s - 610.71s]
-Text: "You create the content, you provide the data, you generate the engagement, you're doing all the work, and they're collecting all the bananas."
+SEGMENT 172: [603.09s - 604.03s]
+Text: "You create the content."
 Word-level timestamps:
-   1. "You" -> 602.96s - 603.20s
-   2. "create" -> 603.22s - 603.44s
-   3. "the" -> 603.48s - 603.54s
-   4. "content," -> 603.60s - 604.04s
-   5. "you" -> 604.46s - 604.60s
-   6. "provide" -> 604.62s - 604.92s
-   7. "the" -> 604.96s - 605.02s
-   8. "data," -> 605.08s - 605.38s
-   9. "you" -> 605.80s - 605.94s
-  10. "generate" -> 605.98s - 606.35s
-  11. "the" -> 606.37s - 606.47s
-  12. "engagement," -> 606.52s - 607.03s
-  13. "you're" -> 607.49s - 607.65s
-  14. "doing" -> 607.67s - 607.89s
-  15. "all" -> 607.93s - 608.25s
-  16. "the" -> 608.29s - 608.37s
-  17. "work," -> 608.43s - 608.67s
-  18. "and" -> 609.13s - 609.19s
-  19. "they're" -> 609.21s - 609.37s
-  20. "collecting" -> 609.41s - 609.77s
-  21. "all" -> 609.81s - 610.13s
-  22. "the" -> 610.17s - 610.25s
-  23. "bananas." -> 610.29s - 610.71s
+   1. "You" -> 603.09s - 603.19s
+   2. "create" -> 603.23s - 603.47s
+   3. "the" -> 603.49s - 603.57s
+   4. "content." -> 603.61s - 604.03s
 
 --------------------------------------------------
 
-SEGMENT 170: [611.25s - 620.17s]
-Text: "Meanwhile, regular monkeys, our wages have stagnated, our cost of living has soared, the banana gap between the rich and everyone else keeps growing."
+SEGMENT 173: [604.49s - 605.39s]
+Text: "You provide the data."
 Word-level timestamps:
-   1. "Meanwhile," -> 611.25s - 611.64s
-   2. "regular" -> 611.96s - 612.26s
-   3. "monkeys," -> 612.30s - 612.66s
-   4. "our" -> 613.28s - 613.36s
-   5. "wages" -> 613.42s - 613.70s
-   6. "have" -> 613.74s - 613.86s
-   7. "stagnated," -> 613.90s - 614.46s
-   8. "our" -> 614.96s - 615.04s
-   9. "cost" -> 615.10s - 615.38s
-  10. "of" -> 615.42s - 615.46s
-  11. "living" -> 615.50s - 615.74s
-  12. "has" -> 615.78s - 615.92s
-  13. "soared," -> 616.00s - 616.28s
-  14. "the" -> 616.73s - 616.81s
-  15. "banana" -> 616.85s - 617.19s
-  16. "gap" -> 617.21s - 617.43s
-  17. "between" -> 617.49s - 617.77s
-  18. "the" -> 617.79s - 617.87s
-  19. "rich" -> 617.89s - 618.21s
-  20. "and" -> 618.45s - 618.53s
-  21. "everyone" -> 618.55s - 619.05s
-  22. "else" -> 619.13s - 619.29s
-  23. "keeps" -> 619.35s - 619.57s
-  24. "growing." -> 619.63s - 620.17s
+   1. "You" -> 604.49s - 604.59s
+   2. "provide" -> 604.63s - 604.93s
+   3. "the" -> 604.97s - 605.03s
+   4. "data." -> 605.09s - 605.39s
 
 --------------------------------------------------
 
-SEGMENT 171: [620.15s - 625.02s]
+SEGMENT 174: [605.81s - 607.04s]
+Text: "You generate the engagement."
+Word-level timestamps:
+   1. "You" -> 605.81s - 605.95s
+   2. "generate" -> 605.99s - 606.35s
+   3. "the" -> 606.37s - 606.47s
+   4. "engagement." -> 606.51s - 607.04s
+
+--------------------------------------------------
+
+SEGMENT 175: [607.52s - 608.68s]
+Text: "You're doing all the work."
+Word-level timestamps:
+   1. "You're" -> 607.52s - 607.66s
+   2. "doing" -> 607.68s - 607.90s
+   3. "all" -> 607.94s - 608.26s
+   4. "the" -> 608.30s - 608.38s
+   5. "work." -> 608.44s - 608.68s
+
+--------------------------------------------------
+
+SEGMENT 176: [609.14s - 610.74s]
+Text: "And they're collecting all the bananas."
+Word-level timestamps:
+   1. "And" -> 609.14s - 609.20s
+   2. "they're" -> 609.22s - 609.38s
+   3. "collecting" -> 609.40s - 609.80s
+   4. "all" -> 609.82s - 610.14s
+   5. "the" -> 610.18s - 610.26s
+   6. "bananas." -> 610.30s - 610.74s
+
+--------------------------------------------------
+
+SEGMENT 177: [611.26s - 614.47s]
+Text: "Meanwhile, regular monkeys, our wages have stagnated."
+Word-level timestamps:
+   1. "Meanwhile," -> 611.26s - 611.64s
+   2. "regular" -> 611.97s - 612.27s
+   3. "monkeys," -> 612.33s - 612.67s
+   4. "our" -> 613.29s - 613.37s
+   5. "wages" -> 613.43s - 613.71s
+   6. "have" -> 613.75s - 613.87s
+   7. "stagnated." -> 613.91s - 614.47s
+
+--------------------------------------------------
+
+SEGMENT 178: [614.97s - 616.31s]
+Text: "Our cost of living has soared."
+Word-level timestamps:
+   1. "Our" -> 614.97s - 615.05s
+   2. "cost" -> 615.11s - 615.39s
+   3. "of" -> 615.43s - 615.47s
+   4. "living" -> 615.51s - 615.75s
+   5. "has" -> 615.79s - 615.93s
+   6. "soared." -> 616.01s - 616.31s
+
+--------------------------------------------------
+
+SEGMENT 179: [616.73s - 620.24s]
+Text: "The banana gap between the rich and everyone else keeps growing."
+Word-level timestamps:
+   1. "The" -> 616.73s - 616.81s
+   2. "banana" -> 616.85s - 617.17s
+   3. "gap" -> 617.22s - 617.46s
+   4. "between" -> 617.50s - 617.78s
+   5. "the" -> 617.80s - 617.88s
+   6. "rich" -> 617.92s - 618.22s
+   7. "and" -> 618.46s - 618.54s
+   8. "everyone" -> 618.72s - 619.06s
+   9. "else" -> 619.14s - 619.30s
+  10. "keeps" -> 619.36s - 619.58s
+  11. "growing." -> 619.64s - 620.24s
+
+--------------------------------------------------
+
+SEGMENT 180: [620.22s - 624.99s]
 Text: "And a big part of that is because we're providing free labor to the richest companies in history."
 Word-level timestamps:
-   1. "And" -> 620.15s - 620.49s
-   2. "a" -> 620.53s - 620.55s
-   3. "big" -> 620.63s - 620.81s
-   4. "part" -> 620.89s - 621.09s
-   5. "of" -> 621.13s - 621.17s
-   6. "that" -> 621.19s - 621.39s
-   7. "is" -> 621.50s - 621.55s
+   1. "And" -> 620.22s - 620.48s
+   2. "a" -> 620.52s - 620.54s
+   3. "big" -> 620.64s - 620.82s
+   4. "part" -> 620.88s - 621.08s
+   5. "of" -> 621.12s - 621.16s
+   6. "that" -> 621.20s - 621.38s
+   7. "is" -> 621.42s - 621.56s
    8. "because" -> 621.62s - 621.86s
-   9. "we're" -> 621.89s - 622.06s
+   9. "we're" -> 621.90s - 622.04s
   10. "providing" -> 622.08s - 622.50s
-  11. "free" -> 622.68s - 622.90s
-  12. "labor" -> 622.96s - 623.26s
-  13. "to" -> 623.30s - 623.42s
-  14. "the" -> 623.44s - 623.50s
-  15. "richest" -> 623.52s - 624.00s
-  16. "companies" -> 624.10s - 624.48s
-  17. "in" -> 624.54s - 624.60s
-  18. "history." -> 624.64s - 625.02s
+  11. "free" -> 622.52s - 622.89s
+  12. "labor" -> 622.95s - 623.25s
+  13. "to" -> 623.31s - 623.41s
+  14. "the" -> 623.45s - 623.51s
+  15. "richest" -> 623.55s - 623.99s
+  16. "companies" -> 624.09s - 624.47s
+  17. "in" -> 624.53s - 624.59s
+  18. "history." -> 624.65s - 624.99s
 
 --------------------------------------------------
 
-SEGMENT 172: [625.44s - 626.88s]
+SEGMENT 181: [625.45s - 626.91s]
 Text: "But here's the really sinister part."
 Word-level timestamps:
-   1. "But" -> 625.44s - 625.54s
-   2. "here's" -> 625.60s - 625.80s
-   3. "the" -> 625.84s - 625.90s
-   4. "really" -> 625.98s - 626.20s
-   5. "sinister" -> 626.26s - 626.62s
-   6. "part." -> 626.66s - 626.88s
+   1. "But" -> 625.45s - 625.53s
+   2. "here's" -> 625.59s - 625.79s
+   3. "the" -> 625.83s - 625.91s
+   4. "really" -> 625.99s - 626.21s
+   5. "sinister" -> 626.25s - 626.61s
+   6. "part." -> 626.67s - 626.91s
 
 --------------------------------------------------
 
-SEGMENT 173: [627.36s - 628.48s]
+SEGMENT 182: [627.37s - 628.50s]
 Text: "Rich monkeys can opt out."
 Word-level timestamps:
-   1. "Rich" -> 627.36s - 627.52s
+   1. "Rich" -> 627.37s - 627.53s
    2. "monkeys" -> 627.58s - 627.86s
-   3. "can" -> 627.90s - 628.02s
-   4. "opt" -> 628.08s - 628.24s
-   5. "out." -> 628.34s - 628.48s
+   3. "can" -> 627.89s - 628.04s
+   4. "opt" -> 628.08s - 628.34s
+   5. "out." -> 628.36s - 628.50s
 
 --------------------------------------------------
 
-SEGMENT 174: [628.97s - 631.61s]
+SEGMENT 183: [628.96s - 631.62s]
 Text: "They pay for premium services with better privacy."
 Word-level timestamps:
-   1. "They" -> 628.97s - 629.09s
-   2. "pay" -> 629.14s - 629.33s
-   3. "for" -> 629.38s - 629.49s
-   4. "premium" -> 629.59s - 630.01s
-   5. "services" -> 630.07s - 630.55s
-   6. "with" -> 630.65s - 630.77s
-   7. "better" -> 630.85s - 631.07s
-   8. "privacy." -> 631.11s - 631.61s
+   1. "They" -> 628.96s - 629.10s
+   2. "pay" -> 629.16s - 629.32s
+   3. "for" -> 629.38s - 629.50s
+   4. "premium" -> 629.60s - 630.00s
+   5. "services" -> 630.08s - 630.56s
+   6. "with" -> 630.66s - 630.78s
+   7. "better" -> 630.86s - 631.06s
+   8. "privacy." -> 631.12s - 631.62s
 
 --------------------------------------------------
 
-SEGMENT 175: [632.03s - 633.15s]
+SEGMENT 184: [632.04s - 633.14s]
 Text: "They use private networks."
 Word-level timestamps:
-   1. "They" -> 632.03s - 632.15s
-   2. "use" -> 632.23s - 632.33s
-   3. "private" -> 632.39s - 632.67s
-   4. "networks." -> 632.73s - 633.15s
+   1. "They" -> 632.04s - 632.16s
+   2. "use" -> 632.22s - 632.34s
+   3. "private" -> 632.38s - 632.68s
+   4. "networks." -> 632.74s - 633.14s
 
 --------------------------------------------------
 
-SEGMENT 176: [633.69s - 636.39s]
+SEGMENT 185: [633.69s - 636.39s]
 Text: "They have lawyers scrub their data from broker databases."
 Word-level timestamps:
-   1. "They" -> 633.69s - 633.79s
-   2. "have" -> 633.83s - 633.95s
+   1. "They" -> 633.69s - 633.81s
+   2. "have" -> 633.85s - 633.95s
    3. "lawyers" -> 633.99s - 634.37s
-   4. "scrub" -> 634.43s - 634.73s
-   5. "their" -> 634.75s - 634.89s
-   6. "data" -> 634.93s - 635.19s
-   7. "from" -> 635.25s - 635.37s
-   8. "broker" -> 635.45s - 635.75s
-   9. "databases." -> 635.79s - 636.39s
+   4. "scrub" -> 634.45s - 634.73s
+   5. "their" -> 634.77s - 634.89s
+   6. "data" -> 634.93s - 635.21s
+   7. "from" -> 635.27s - 635.39s
+   8. "broker" -> 635.47s - 635.77s
+   9. "databases." -> 635.81s - 636.39s
 
 --------------------------------------------------
 
-SEGMENT 177: [636.93s - 637.48s]
+SEGMENT 186: [636.93s - 637.49s]
 Text: "Poor monkeys."
 Word-level timestamps:
-   1. "Poor" -> 636.93s - 637.12s
-   2. "monkeys." -> 637.16s - 637.48s
+   1. "Poor" -> 636.93s - 637.11s
+   2. "monkeys." -> 637.15s - 637.49s
 
 --------------------------------------------------
 
-SEGMENT 178: [638.04s - 642.80s]
+SEGMENT 187: [638.03s - 642.80s]
 Text: "They have no choice but to surrender their data for basic access to modern life."
 Word-level timestamps:
-   1. "They" -> 638.04s - 638.16s
-   2. "have" -> 638.20s - 638.34s
-   3. "no" -> 638.38s - 638.56s
-   4. "choice" -> 638.68s - 639.00s
-   5. "but" -> 639.26s - 639.34s
-   6. "to" -> 639.38s - 639.46s
+   1. "They" -> 638.03s - 638.17s
+   2. "have" -> 638.21s - 638.36s
+   3. "no" -> 638.43s - 638.58s
+   4. "choice" -> 638.67s - 639.02s
+   5. "but" -> 639.28s - 639.36s
+   6. "to" -> 639.40s - 639.48s
    7. "surrender" -> 639.52s - 639.90s
-   8. "their" -> 639.94s - 640.10s
-   9. "data" -> 640.14s - 640.40s
-  10. "for" -> 640.44s - 640.56s
-  11. "basic" -> 640.70s - 641.04s
-  12. "access" -> 641.18s - 641.58s
-  13. "to" -> 641.64s - 641.74s
-  14. "modern" -> 641.80s - 642.10s
-  15. "life." -> 642.14s - 642.80s
+   8. "their" -> 639.96s - 640.10s
+   9. "data" -> 640.16s - 640.40s
+  10. "for" -> 640.46s - 640.56s
+  11. "basic" -> 640.70s - 641.06s
+  12. "access" -> 641.20s - 641.58s
+  13. "to" -> 641.66s - 641.74s
+  14. "modern" -> 641.82s - 642.10s
+  15. "life." -> 642.16s - 642.80s
 
 --------------------------------------------------
 
-SEGMENT 179: [642.78s - 648.01s]
+SEGMENT 188: [642.78s - 648.01s]
 Text: "We're creating a two-tier system where privacy is a luxury only the wealthy can afford."
 Word-level timestamps:
    1. "We're" -> 642.78s - 643.02s
@@ -2812,7 +2866,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 180: [648.47s - 650.11s]
+SEGMENT 189: [648.47s - 650.11s]
 Text: "The plantation owners get richer."
 Word-level timestamps:
    1. "The" -> 648.47s - 648.55s
@@ -2823,7 +2877,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 181: [650.61s - 653.16s]
+SEGMENT 190: [650.61s - 653.16s]
 Text: "Let's talk about the monkeys at the top of these plantations."
 Word-level timestamps:
    1. "Let's" -> 650.61s - 650.77s
@@ -2840,7 +2894,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 182: [653.72s - 658.83s]
+SEGMENT 191: [653.72s - 658.83s]
 Text: "Blue Book Monkey, also known as Metta, built an empire on connecting monkeys for free."
 Word-level timestamps:
    1. "Blue" -> 653.72s - 653.92s
@@ -2861,11 +2915,11 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 183: [659.29s - 664.88s]
+SEGMENT 192: [659.29s - 664.88s]
 Text: "Mark, the face of the plantation, is now worth over 100 billion bananas personally."
 Word-level timestamps:
    1. "Mark," -> 659.29s - 659.57s
-   2. "the" -> 659.91s - 659.99s
+   2. "the" -> 659.91s - 660.01s
    3. "face" -> 660.09s - 660.33s
    4. "of" -> 660.37s - 660.41s
    5. "the" -> 660.45s - 660.51s
@@ -2881,8 +2935,8 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 184: [664.86s - 667.20s]
-Text: "The company worth hundreds of billions more."
+SEGMENT 193: [664.86s - 668.32s]
+Text: "The company worth hundreds of billions more, but the scandals?"
 Word-level timestamps:
    1. "The" -> 664.86s - 665.00s
    2. "company" -> 665.03s - 665.40s
@@ -2890,33 +2944,27 @@ Word-level timestamps:
    4. "hundreds" -> 666.10s - 666.42s
    5. "of" -> 666.46s - 666.50s
    6. "billions" -> 666.58s - 666.92s
-   7. "more." -> 667.00s - 667.20s
+   7. "more," -> 667.00s - 667.20s
+   8. "but" -> 667.66s - 667.76s
+   9. "the" -> 667.78s - 667.84s
+  10. "scandals?" -> 667.90s - 668.32s
 
 --------------------------------------------------
 
-SEGMENT 185: [667.66s - 668.32s]
-Text: "But the scandals?"
-Word-level timestamps:
-   1. "But" -> 667.66s - 667.76s
-   2. "the" -> 667.78s - 667.84s
-   3. "scandals?" -> 667.90s - 668.32s
-
---------------------------------------------------
-
-SEGMENT 186: [668.88s - 669.38s]
+SEGMENT 194: [668.88s - 669.36s]
 Text: "They're endless."
 Word-level timestamps:
    1. "They're" -> 668.88s - 669.04s
-   2. "endless." -> 669.06s - 669.38s
+   2. "endless." -> 669.06s - 669.36s
 
 --------------------------------------------------
 
-SEGMENT 187: [669.90s - 675.01s]
-Text: "Cambridge Analytica where they led a political consulting firm harvest millions of profiles."
+SEGMENT 195: [669.90s - 675.02s]
+Text: "Cambridge Analytica, where they led a political consulting firm harvest millions of profiles."
 Word-level timestamps:
-   1. "Cambridge" -> 669.90s - 670.24s
-   2. "Analytica" -> 670.26s - 670.83s
-   3. "where" -> 671.12s - 671.25s
+   1. "Cambridge" -> 669.90s - 670.25s
+   2. "Analytica," -> 670.27s - 670.85s
+   3. "where" -> 671.13s - 671.25s
    4. "they" -> 671.27s - 671.37s
    5. "led" -> 671.41s - 671.55s
    6. "a" -> 671.59s - 671.63s
@@ -2926,18 +2974,18 @@ Word-level timestamps:
   10. "harvest" -> 673.31s - 673.75s
   11. "millions" -> 673.79s - 674.33s
   12. "of" -> 674.37s - 674.41s
-  13. "profiles." -> 674.49s - 675.01s
+  13. "profiles." -> 674.49s - 675.02s
 
 --------------------------------------------------
 
-SEGMENT 188: [675.55s - 678.64s]
+SEGMENT 196: [675.56s - 678.64s]
 Text: "The internal research showing they harmed teens, which they hid."
 Word-level timestamps:
-   1. "The" -> 675.55s - 675.65s
-   2. "internal" -> 675.71s - 676.03s
-   3. "research" -> 676.11s - 676.53s
-   4. "showing" -> 676.61s - 676.89s
-   5. "they" -> 676.91s - 677.03s
+   1. "The" -> 675.56s - 675.66s
+   2. "internal" -> 675.72s - 676.04s
+   3. "research" -> 676.12s - 676.54s
+   4. "showing" -> 676.62s - 676.90s
+   5. "they" -> 676.92s - 677.04s
    6. "harmed" -> 677.08s - 677.36s
    7. "teens," -> 677.38s - 677.72s
    8. "which" -> 678.06s - 678.20s
@@ -2946,102 +2994,102 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 189: [679.10s - 686.07s]
-Text: "The genocide in Myanmar where their platform was used to coordinate ethnic cleansing and they did virtually nothing to stop it."
+SEGMENT 197: [679.10s - 686.14s]
+Text: "The genocide in Myanmar, where their platform was used to coordinate ethnic cleansing, and they did virtually nothing to stop it."
 Word-level timestamps:
    1. "The" -> 679.10s - 679.20s
-   2. "genocide" -> 679.24s - 679.72s
-   3. "in" -> 679.76s - 679.82s
-   4. "Myanmar" -> 679.86s - 680.30s
-   5. "where" -> 680.62s - 680.74s
-   6. "their" -> 680.76s - 680.88s
-   7. "platform" -> 680.94s - 681.44s
-   8. "was" -> 681.48s - 681.60s
-   9. "used" -> 681.76s - 681.90s
-  10. "to" -> 681.94s - 682.02s
-  11. "coordinate" -> 682.08s - 682.54s
-  12. "ethnic" -> 682.73s - 683.02s
-  13. "cleansing" -> 683.11s - 683.51s
+   2. "genocide" -> 679.24s - 679.73s
+   3. "in" -> 679.76s - 679.83s
+   4. "Myanmar," -> 679.87s - 680.31s
+   5. "where" -> 680.63s - 680.75s
+   6. "their" -> 680.77s - 680.89s
+   7. "platform" -> 680.95s - 681.45s
+   8. "was" -> 681.49s - 681.61s
+   9. "used" -> 681.77s - 681.91s
+  10. "to" -> 681.95s - 682.03s
+  11. "coordinate" -> 682.09s - 682.55s
+  12. "ethnic" -> 682.73s - 683.03s
+  13. "cleansing," -> 683.11s - 683.53s
   14. "and" -> 683.89s - 683.97s
   15. "they" -> 683.99s - 684.09s
   16. "did" -> 684.15s - 684.27s
-  17. "virtually" -> 684.37s - 684.81s
-  18. "nothing" -> 684.95s - 685.21s
-  19. "to" -> 685.25s - 685.31s
-  20. "stop" -> 685.35s - 685.63s
-  21. "it." -> 685.71s - 686.07s
+  17. "virtually" -> 684.37s - 684.82s
+  18. "nothing" -> 684.96s - 685.22s
+  19. "to" -> 685.26s - 685.32s
+  20. "stop" -> 685.36s - 685.64s
+  21. "it." -> 685.72s - 686.14s
 
 --------------------------------------------------
 
-SEGMENT 190: [686.05s - 697.09s]
-Text: "and their response every time, a carefully crafted apology may be a tiny fine that's just cost of doing business and then write back to the same practices, because there's no real accountability."
+SEGMENT 198: [686.12s - 697.10s]
+Text: "and their response every time, a carefully crafted apology may be a tiny fine that's just cost of doing business, and then write back to the same practices, because there's no real accountability."
 Word-level timestamps:
-   1. "and" -> 686.05s - 686.27s
-   2. "their" -> 686.29s - 686.43s
-   3. "response" -> 686.45s - 686.83s
-   4. "every" -> 686.89s - 687.07s
-   5. "time," -> 687.11s - 687.39s
-   6. "a" -> 687.87s - 687.91s
-   7. "carefully" -> 687.97s - 688.39s
-   8. "crafted" -> 688.50s - 688.88s
-   9. "apology" -> 688.94s - 689.44s
-  10. "may" -> 689.76s - 689.90s
-  11. "be" -> 689.92s - 690.00s
-  12. "a" -> 690.06s - 690.08s
-  13. "tiny" -> 690.16s - 690.46s
-  14. "fine" -> 690.56s - 690.88s
-  15. "that's" -> 690.90s - 691.10s
-  16. "just" -> 691.16s - 691.34s
-  17. "cost" -> 691.42s - 691.76s
-  18. "of" -> 691.80s - 691.84s
-  19. "doing" -> 691.92s - 692.12s
-  20. "business" -> 692.20s - 692.58s
-  21. "and" -> 692.99s - 693.07s
-  22. "then" -> 693.09s - 693.23s
-  23. "write" -> 693.27s - 693.47s
-  24. "back" -> 693.53s - 693.77s
+   1. "and" -> 686.12s - 686.28s
+   2. "their" -> 686.30s - 686.42s
+   3. "response" -> 686.46s - 686.84s
+   4. "every" -> 686.90s - 687.08s
+   5. "time," -> 687.12s - 687.38s
+   6. "a" -> 687.88s - 687.92s
+   7. "carefully" -> 687.98s - 688.40s
+   8. "crafted" -> 688.48s - 688.88s
+   9. "apology" -> 688.92s - 689.44s
+  10. "may" -> 689.76s - 689.88s
+  11. "be" -> 689.90s - 690.00s
+  12. "a" -> 690.07s - 690.09s
+  13. "tiny" -> 690.16s - 690.47s
+  14. "fine" -> 690.57s - 690.87s
+  15. "that's" -> 690.93s - 691.11s
+  16. "just" -> 691.17s - 691.33s
+  17. "cost" -> 691.43s - 691.75s
+  18. "of" -> 691.81s - 691.85s
+  19. "doing" -> 691.91s - 692.13s
+  20. "business," -> 692.19s - 692.59s
+  21. "and" -> 692.99s - 693.05s
+  22. "then" -> 693.09s - 693.21s
+  23. "write" -> 693.25s - 693.45s
+  24. "back" -> 693.53s - 693.75s
   25. "to" -> 693.81s - 693.89s
-  26. "the" -> 693.93s - 693.99s
-  27. "same" -> 694.05s - 694.23s
-  28. "practices," -> 694.27s - 694.79s
-  29. "because" -> 695.33s - 695.55s
-  30. "there's" -> 695.59s - 695.79s
-  31. "no" -> 695.89s - 696.05s
-  32. "real" -> 696.15s - 696.35s
-  33. "accountability." -> 696.41s - 697.09s
+  26. "the" -> 693.91s - 693.99s
+  27. "same" -> 694.05s - 694.21s
+  28. "practices," -> 694.25s - 694.81s
+  29. "because" -> 695.34s - 695.55s
+  30. "there's" -> 695.58s - 695.79s
+  31. "no" -> 695.82s - 696.04s
+  32. "real" -> 696.14s - 696.36s
+  33. "accountability." -> 696.40s - 697.10s
 
 --------------------------------------------------
 
-SEGMENT 191: [697.66s - 701.50s]
+SEGMENT 199: [697.64s - 701.93s]
 Text: "Oh, and whenever a competitor threatens their dominance, they just buy them."
 Word-level timestamps:
-   1. "Oh," -> 697.66s - 697.76s
+   1. "Oh," -> 697.64s - 697.72s
    2. "and" -> 698.12s - 698.20s
    3. "whenever" -> 698.24s - 698.56s
    4. "a" -> 698.60s - 698.64s
    5. "competitor" -> 698.70s - 699.20s
-   6. "threatens" -> 699.24s - 699.68s
+   6. "threatens" -> 699.32s - 699.66s
    7. "their" -> 699.72s - 699.86s
-   8. "dominance," -> 699.92s - 700.36s
-   9. "they" -> 700.90s - 701.00s
-  10. "just" -> 701.04s - 701.16s
-  11. "buy" -> 701.18s - 701.34s
-  12. "them." -> 701.38s - 701.50s
+   8. "dominance," -> 699.90s - 700.36s
+   9. "they" -> 700.88s - 701.00s
+  10. "just" -> 701.02s - 701.14s
+  11. "buy" -> 701.18s - 701.33s
+  12. "them." -> 701.37s - 701.93s
 
 --------------------------------------------------
 
-SEGMENT 192: [701.97s - 705.07s]
+SEGMENT 200: [701.95s - 705.07s]
 Text: "Instagram, WhatsApp, acquired and absorbed."
 Word-level timestamps:
-   1. "Instagram," -> 701.97s - 702.51s
-   2. "WhatsApp," -> 702.85s - 703.33s
-   3. "acquired" -> 703.59s - 704.05s
+   1. "Instagram," -> 701.95s - 702.51s
+   2. "WhatsApp," -> 702.85s - 703.31s
+   3. "acquired" -> 703.57s - 704.03s
    4. "and" -> 704.11s - 704.19s
    5. "absorbed." -> 704.25s - 705.07s
 
 --------------------------------------------------
 
-SEGMENT 193: [705.05s - 711.77s]
+SEGMENT 201: [705.05s - 711.27s]
 Text: "can't beat them, buy them, can't buy them, copy their features, and use your massive user base to crush them."
 Word-level timestamps:
    1. "can't" -> 705.05s - 705.31s
@@ -3058,20 +3106,20 @@ Word-level timestamps:
   12. "and" -> 709.12s - 709.20s
   13. "use" -> 709.36s - 709.48s
   14. "your" -> 709.52s - 709.64s
-  15. "massive" -> 709.70s - 710.06s
+  15. "massive" -> 709.70s - 710.08s
   16. "user" -> 710.21s - 710.42s
   17. "base" -> 710.45s - 710.69s
   18. "to" -> 710.73s - 710.79s
   19. "crush" -> 710.85s - 711.11s
-  20. "them." -> 711.15s - 711.77s
+  20. "them." -> 711.15s - 711.27s
 
 --------------------------------------------------
 
-SEGMENT 194: [711.79s - 716.26s]
+SEGMENT 202: [711.79s - 716.26s]
 Text: "Search Engine Kong, better known as Google, started with the motto, don't be evil."
 Word-level timestamps:
    1. "Search" -> 711.79s - 712.01s
-   2. "Engine" -> 712.05s - 712.31s
+   2. "Engine" -> 712.05s - 712.29s
    3. "Kong," -> 712.33s - 712.67s
    4. "better" -> 712.95s - 713.15s
    5. "known" -> 713.19s - 713.39s
@@ -3087,7 +3135,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 195: [716.70s - 717.62s]
+SEGMENT 203: [716.70s - 717.62s]
 Text: "They drop that motto."
 Word-level timestamps:
    1. "They" -> 716.70s - 716.82s
@@ -3097,7 +3145,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 196: [718.10s - 718.85s]
+SEGMENT 204: [718.10s - 718.85s]
 Text: "Let that sink in."
 Word-level timestamps:
    1. "Let" -> 718.10s - 718.20s
@@ -3107,7 +3155,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 197: [719.31s - 722.98s]
+SEGMENT 205: [719.31s - 722.98s]
 Text: "They literally removed, don't be evil from their code of conduct."
 Word-level timestamps:
    1. "They" -> 719.31s - 719.47s
@@ -3124,7 +3172,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 198: [722.96s - 724.18s]
+SEGMENT 206: [722.96s - 724.18s]
 Text: "That should tell you everything."
 Word-level timestamps:
    1. "That" -> 722.96s - 723.18s
@@ -3135,7 +3183,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 199: [724.60s - 726.24s]
+SEGMENT 207: [724.60s - 726.24s]
 Text: "They control what information you see."
 Word-level timestamps:
    1. "They" -> 724.60s - 724.72s
@@ -3147,7 +3195,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 200: [726.26s - 729.76s]
+SEGMENT 208: [726.26s - 729.76s]
 Text: "They track you across 80% of the jungle's websites."
 Word-level timestamps:
    1. "They" -> 726.26s - 726.80s
@@ -3162,7 +3210,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 201: [730.30s - 732.04s]
+SEGMENT 209: [730.30s - 732.04s]
 Text: "They read your emails to target ads."
 Word-level timestamps:
    1. "They" -> 730.30s - 730.42s
@@ -3175,7 +3223,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 202: [732.57s - 738.67s]
+SEGMENT 210: [732.57s - 738.67s]
 Text: "They know your search history, which reveals your deepest concerns, health issues, and secret desires."
 Word-level timestamps:
    1. "They" -> 732.57s - 732.71s
@@ -3196,7 +3244,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 203: [739.19s - 745.50s]
+SEGMENT 211: [739.19s - 745.50s]
 Text: "And they're facing antitrust investigations in multiple jungles because they've used their dominance to crush competition."
 Word-level timestamps:
    1. "And" -> 739.19s - 739.25s
@@ -3218,7 +3266,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 204: [745.96s - 752.62s]
+SEGMENT 212: [745.96s - 752.62s]
 Text: "They pay billions to be the default search engine everywhere, making it nearly impossible for alternatives to compete."
 Word-level timestamps:
    1. "They" -> 745.96s - 746.12s
@@ -3242,11 +3290,11 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 205: [752.61s - 760.12s]
+SEGMENT 213: [752.61s - 760.12s]
 Text: "Shopping Elephant, aka Amazon, has devices sitting in your home listening to everything you say, allegedly for your convenience."
 Word-level timestamps:
    1. "Shopping" -> 752.61s - 753.03s
-   2. "Elephant," -> 753.09s - 753.43s
+   2. "Elephant," -> 753.09s - 753.45s
    3. "aka" -> 753.89s - 754.25s
    4. "Amazon," -> 754.35s - 754.79s
    5. "has" -> 755.11s - 755.23s
@@ -3267,7 +3315,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 206: [760.66s - 763.60s]
+SEGMENT 214: [760.66s - 763.60s]
 Text: "But those recordings, they get reviewed by contractors."
 Word-level timestamps:
    1. "But" -> 760.66s - 760.76s
@@ -3281,7 +3329,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 207: [764.20s - 769.45s]
+SEGMENT 215: [764.20s - 769.45s]
 Text: "Sometimes they're used in criminal investigations, and nobody really knows what else happens with them."
 Word-level timestamps:
    1. "Sometimes" -> 764.20s - 764.60s
@@ -3302,25 +3350,25 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 208: [769.43s - 773.89s]
-Text: "Fruit company or Apple claims they're the privacy-focused alternative."
+SEGMENT 216: [769.43s - 773.90s]
+Text: "Fruit company, or Apple, claims they're the privacy-focused alternative."
 Word-level timestamps:
    1. "Fruit" -> 769.43s - 769.69s
-   2. "company" -> 769.73s - 770.07s
+   2. "company," -> 769.73s - 770.09s
    3. "or" -> 770.53s - 770.59s
-   4. "Apple" -> 770.75s - 771.01s
+   4. "Apple," -> 770.75s - 771.03s
    5. "claims" -> 771.37s - 771.61s
    6. "they're" -> 771.65s - 771.79s
    7. "the" -> 771.81s - 771.89s
-   8. "privacy-focused" -> 771.95s - 772.85s
-   9. "alternative." -> 772.89s - 773.89s
+   8. "privacy-focused" -> 771.95s - 772.86s
+   9. "alternative." -> 772.89s - 773.90s
 
 --------------------------------------------------
 
-SEGMENT 209: [773.91s - 776.28s]
+SEGMENT 217: [773.92s - 776.28s]
 Text: "What happens on your fruit phone stays on your fruit phone."
 Word-level timestamps:
-   1. "What" -> 773.91s - 774.04s
+   1. "What" -> 773.92s - 774.04s
    2. "happens" -> 774.10s - 774.38s
    3. "on" -> 774.46s - 774.52s
    4. "your" -> 774.54s - 774.66s
@@ -3334,40 +3382,40 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 210: [776.66s - 778.62s]
+SEGMENT 218: [776.66s - 778.60s]
 Text: "They say, but they still collect data."
 Word-level timestamps:
-   1. "They" -> 776.66s - 776.80s
+   1. "They" -> 776.66s - 776.78s
    2. "say," -> 776.84s - 777.04s
    3. "but" -> 777.50s - 777.58s
    4. "they" -> 777.62s - 777.74s
    5. "still" -> 777.76s - 777.96s
    6. "collect" -> 778.00s - 778.28s
-   7. "data." -> 778.32s - 778.62s
+   7. "data." -> 778.32s - 778.60s
 
 --------------------------------------------------
 
-SEGMENT 211: [779.00s - 782.67s]
+SEGMENT 219: [779.00s - 782.67s]
 Text: "They still profit from the app store where all the data harvesting apps live."
 Word-level timestamps:
    1. "They" -> 779.00s - 779.14s
    2. "still" -> 779.18s - 779.38s
-   3. "profit" -> 779.46s - 779.82s
-   4. "from" -> 779.86s - 779.98s
-   5. "the" -> 780.00s - 780.08s
-   6. "app" -> 780.20s - 780.34s
-   7. "store" -> 780.36s - 780.64s
-   8. "where" -> 780.68s - 780.84s
-   9. "all" -> 780.98s - 781.12s
-  10. "the" -> 781.14s - 781.22s
-  11. "data" -> 781.30s - 781.57s
+   3. "profit" -> 779.46s - 779.83s
+   4. "from" -> 779.87s - 779.99s
+   5. "the" -> 780.00s - 780.09s
+   6. "app" -> 780.21s - 780.35s
+   7. "store" -> 780.37s - 780.65s
+   8. "where" -> 780.69s - 780.85s
+   9. "all" -> 780.99s - 781.13s
+  10. "the" -> 781.15s - 781.23s
+  11. "data" -> 781.31s - 781.57s
   12. "harvesting" -> 781.61s - 782.07s
-  13. "apps" -> 782.14s - 782.33s
+  13. "apps" -> 782.15s - 782.33s
   14. "live." -> 782.39s - 782.67s
 
 --------------------------------------------------
 
-SEGMENT 212: [783.09s - 785.11s]
+SEGMENT 220: [783.09s - 785.11s]
 Text: "They still comply with surveillance requests."
 Word-level timestamps:
    1. "They" -> 783.09s - 783.23s
@@ -3379,27 +3427,27 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 213: [785.61s - 788.63s]
+SEGMENT 221: [785.61s - 788.64s]
 Text: "They're just better at marketing privacy than actually providing it."
 Word-level timestamps:
    1. "They're" -> 785.61s - 785.77s
    2. "just" -> 785.81s - 785.95s
    3. "better" -> 786.03s - 786.25s
-   4. "at" -> 786.29s - 786.33s
-   5. "marketing" -> 786.43s - 786.81s
-   6. "privacy" -> 786.91s - 787.41s
-   7. "than" -> 787.47s - 787.57s
-   8. "actually" -> 787.61s - 787.99s
-   9. "providing" -> 788.07s - 788.51s
-  10. "it." -> 788.57s - 788.63s
+   4. "at" -> 786.29s - 786.35s
+   5. "marketing" -> 786.43s - 786.82s
+   6. "privacy" -> 786.91s - 787.42s
+   7. "than" -> 787.48s - 787.58s
+   8. "actually" -> 787.62s - 788.00s
+   9. "providing" -> 788.08s - 788.52s
+  10. "it." -> 788.58s - 788.64s
 
 --------------------------------------------------
 
-SEGMENT 214: [789.17s - 795.84s]
+SEGMENT 222: [789.18s - 795.81s]
 Text: "Short video dragon, known as TikTok, is the newest plantation owner and possibly the most concerning."
 Word-level timestamps:
-   1. "Short" -> 789.17s - 789.39s
-   2. "video" -> 789.47s - 789.79s
+   1. "Short" -> 789.18s - 789.40s
+   2. "video" -> 789.48s - 789.80s
    3. "dragon," -> 789.84s - 790.22s
    4. "known" -> 790.60s - 790.84s
    5. "as" -> 790.88s - 790.96s
@@ -3408,109 +3456,109 @@ Word-level timestamps:
    8. "the" -> 792.04s - 792.12s
    9. "newest" -> 792.26s - 792.54s
   10. "plantation" -> 792.60s - 793.20s
-  11. "owner" -> 793.26s - 793.46s
-  12. "and" -> 793.88s - 793.96s
-  13. "possibly" -> 794.04s - 794.56s
-  14. "the" -> 794.60s - 794.72s
-  15. "most" -> 794.76s - 794.96s
-  16. "concerning." -> 795.02s - 795.84s
+  11. "owner" -> 793.26s - 793.47s
+  12. "and" -> 793.88s - 793.97s
+  13. "possibly" -> 794.04s - 794.57s
+  14. "the" -> 794.61s - 794.73s
+  15. "most" -> 794.77s - 794.97s
+  16. "concerning." -> 795.03s - 795.81s
 
 --------------------------------------------------
 
-SEGMENT 215: [795.82s - 801.86s]
+SEGMENT 223: [795.79s - 801.86s]
 Text: "It's owned by a company in Pandas jungle, and there's credible evidence they're sharing data with Pandas government."
 Word-level timestamps:
-   1. "It's" -> 795.82s - 796.04s
-   2. "owned" -> 796.10s - 796.26s
-   3. "by" -> 796.28s - 796.42s
-   4. "a" -> 796.48s - 796.50s
-   5. "company" -> 796.58s - 797.00s
-   6. "in" -> 797.23s - 797.30s
-   7. "Pandas" -> 797.37s - 797.81s
-   8. "jungle," -> 797.87s - 798.23s
-   9. "and" -> 798.61s - 798.67s
+   1. "It's" -> 795.79s - 796.05s
+   2. "owned" -> 796.11s - 796.25s
+   3. "by" -> 796.29s - 796.43s
+   4. "a" -> 796.49s - 796.51s
+   5. "company" -> 796.59s - 797.01s
+   6. "in" -> 797.03s - 797.31s
+   7. "Pandas" -> 797.37s - 797.79s
+   8. "jungle," -> 797.85s - 798.21s
+   9. "and" -> 798.59s - 798.65s
   10. "there's" -> 798.69s - 798.85s
-  11. "credible" -> 798.97s - 799.33s
-  12. "evidence" -> 799.45s - 799.77s
-  13. "they're" -> 799.81s - 800.05s
-  14. "sharing" -> 800.11s - 800.45s
-  15. "data" -> 800.51s - 800.79s
-  16. "with" -> 800.85s - 800.99s
-  17. "Pandas" -> 801.05s - 801.43s
-  18. "government." -> 801.45s - 801.86s
+  11. "credible" -> 798.95s - 799.33s
+  12. "evidence" -> 799.46s - 799.77s
+  13. "they're" -> 799.82s - 800.04s
+  14. "sharing" -> 800.12s - 800.44s
+  15. "data" -> 800.50s - 800.80s
+  16. "with" -> 800.86s - 800.98s
+  17. "Pandas" -> 801.06s - 801.42s
+  18. "government." -> 801.46s - 801.86s
 
 --------------------------------------------------
 
-SEGMENT 216: [802.28s - 806.08s]
+SEGMENT 224: [802.28s - 806.07s]
 Text: "They're literally a foreign surveillance tool disguised as a fun app."
 Word-level timestamps:
    1. "They're" -> 802.28s - 802.44s
-   2. "literally" -> 802.50s - 802.88s
-   3. "a" -> 802.96s - 803.00s
+   2. "literally" -> 802.48s - 802.88s
+   3. "a" -> 802.94s - 803.00s
    4. "foreign" -> 803.08s - 803.34s
-   5. "surveillance" -> 803.38s - 803.84s
+   5. "surveillance" -> 803.38s - 803.82s
    6. "tool" -> 803.90s - 804.16s
    7. "disguised" -> 804.36s - 804.88s
    8. "as" -> 804.94s - 805.00s
-   9. "a" -> 805.04s - 805.08s
-  10. "fun" -> 805.16s - 805.36s
-  11. "app." -> 805.50s - 806.08s
+   9. "a" -> 805.04s - 805.09s
+  10. "fun" -> 805.16s - 805.35s
+  11. "app." -> 805.50s - 806.07s
 
 --------------------------------------------------
 
-SEGMENT 217: [806.10s - 807.55s]
+SEGMENT 225: [806.09s - 807.55s]
 Text: "And here's the really cynical part."
 Word-level timestamps:
-   1. "And" -> 806.10s - 806.18s
-   2. "here's" -> 806.22s - 806.42s
-   3. "the" -> 806.49s - 806.57s
-   4. "really" -> 806.62s - 806.87s
-   5. "cynical" -> 806.90s - 807.25s
+   1. "And" -> 806.09s - 806.17s
+   2. "here's" -> 806.23s - 806.43s
+   3. "the" -> 806.47s - 806.57s
+   4. "really" -> 806.63s - 806.85s
+   5. "cynical" -> 806.91s - 807.25s
    6. "part." -> 807.29s - 807.55s
 
 --------------------------------------------------
 
-SEGMENT 218: [808.01s - 810.25s]
+SEGMENT 226: [807.99s - 810.25s]
 Text: "These plantation owners invest in each other."
 Word-level timestamps:
-   1. "These" -> 808.01s - 808.19s
-   2. "plantation" -> 808.23s - 808.81s
-   3. "owners" -> 808.83s - 809.25s
-   4. "invest" -> 809.33s - 809.75s
-   5. "in" -> 809.79s - 809.85s
+   1. "These" -> 807.99s - 808.19s
+   2. "plantation" -> 808.23s - 808.79s
+   3. "owners" -> 808.83s - 809.23s
+   4. "invest" -> 809.31s - 809.75s
+   5. "in" -> 809.79s - 809.83s
    6. "each" -> 809.89s - 810.01s
-   7. "other." -> 810.09s - 810.25s
+   7. "other." -> 810.07s - 810.25s
 
 --------------------------------------------------
 
-SEGMENT 219: [810.73s - 813.78s]
+SEGMENT 227: [810.74s - 813.78s]
 Text: "They buy up any startup that threatens their dominance."
 Word-level timestamps:
-   1. "They" -> 810.73s - 810.87s
-   2. "buy" -> 810.91s - 811.09s
-   3. "up" -> 811.17s - 811.25s
-   4. "any" -> 811.43s - 811.60s
-   5. "startup" -> 811.63s - 812.00s
-   6. "that" -> 812.06s - 812.18s
+   1. "They" -> 810.74s - 810.88s
+   2. "buy" -> 810.91s - 811.08s
+   3. "up" -> 811.17s - 811.26s
+   4. "any" -> 811.28s - 811.58s
+   5. "startup" -> 811.64s - 812.00s
+   6. "that" -> 812.04s - 812.16s
    7. "threatens" -> 812.28s - 812.62s
-   8. "their" -> 812.68s - 812.82s
-   9. "dominance." -> 812.86s - 813.78s
+   8. "their" -> 812.66s - 812.80s
+   9. "dominance." -> 812.84s - 813.78s
 
 --------------------------------------------------
 
-SEGMENT 220: [813.76s - 816.12s]
+SEGMENT 228: [813.76s - 816.12s]
 Text: "They lobby governments to prevent regulation."
 Word-level timestamps:
    1. "They" -> 813.76s - 813.94s
    2. "lobby" -> 814.02s - 814.30s
-   3. "governments" -> 814.36s - 814.82s
+   3. "governments" -> 814.36s - 814.84s
    4. "to" -> 814.92s - 815.02s
    5. "prevent" -> 815.08s - 815.44s
    6. "regulation." -> 815.52s - 816.12s
 
 --------------------------------------------------
 
-SEGMENT 221: [816.56s - 822.41s]
+SEGMENT 229: [816.56s - 822.41s]
 Text: "They put former employees in government positions and higher former government officials to work for them."
 Word-level timestamps:
    1. "They" -> 816.56s - 816.66s
@@ -3532,21 +3580,21 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 222: [822.43s - 825.01s]
+SEGMENT 230: [822.43s - 825.01s]
 Text: "It's a revolving door of power and influence."
 Word-level timestamps:
    1. "It's" -> 822.43s - 822.53s
    2. "a" -> 822.59s - 822.61s
    3. "revolving" -> 822.67s - 823.17s
    4. "door" -> 823.27s - 823.57s
-   5. "of" -> 823.61s - 823.67s
+   5. "of" -> 823.63s - 823.67s
    6. "power" -> 823.79s - 824.21s
    7. "and" -> 824.37s - 824.45s
    8. "influence." -> 824.55s - 825.01s
 
 --------------------------------------------------
 
-SEGMENT 223: [825.60s - 829.60s]
+SEGMENT 231: [825.60s - 829.60s]
 Text: "When confronted about any of this, their defense is always the same."
 Word-level timestamps:
    1. "When" -> 825.60s - 825.70s
@@ -3558,13 +3606,13 @@ Word-level timestamps:
    7. "their" -> 827.50s - 827.66s
    8. "defense" -> 827.72s - 828.20s
    9. "is" -> 828.54s - 828.60s
-  10. "always" -> 828.84s - 829.14s
+  10. "always" -> 828.84s - 829.12s
   11. "the" -> 829.20s - 829.28s
   12. "same." -> 829.36s - 829.60s
 
 --------------------------------------------------
 
-SEGMENT 224: [830.08s - 831.94s]
+SEGMENT 232: [830.08s - 831.94s]
 Text: "We provide valuable free services."
 Word-level timestamps:
    1. "We" -> 830.08s - 830.20s
@@ -3575,7 +3623,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 225: [832.58s - 834.59s]
+SEGMENT 233: [832.58s - 834.59s]
 Text: "Users consent in the terms of service."
 Word-level timestamps:
    1. "Users" -> 832.58s - 832.86s
@@ -3588,7 +3636,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 226: [835.15s - 837.45s]
+SEGMENT 234: [835.15s - 837.45s]
 Text: "We need data to improve the user experience."
 Word-level timestamps:
    1. "We" -> 835.15s - 835.25s
@@ -3602,7 +3650,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 227: [837.99s - 839.85s]
+SEGMENT 235: [837.99s - 839.85s]
 Text: "Classic corporate double speak."
 Word-level timestamps:
    1. "Classic" -> 837.99s - 838.39s
@@ -3612,7 +3660,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 228: [839.83s - 844.76s]
+SEGMENT 236: [839.83s - 844.76s]
 Text: "The terms of service no one reads because they're deliberately written to be incomprehensible."
 Word-level timestamps:
    1. "The" -> 839.83s - 840.03s
@@ -3632,7 +3680,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 229: [845.24s - 848.55s]
+SEGMENT 237: [845.24s - 848.55s]
 Text: "The consent that's mandatory if you want to participate in modern life."
 Word-level timestamps:
    1. "The" -> 845.24s - 845.32s
@@ -3644,13 +3692,13 @@ Word-level timestamps:
    7. "want" -> 846.92s - 847.04s
    8. "to" -> 847.07s - 847.11s
    9. "participate" -> 847.16s - 847.79s
-  10. "in" -> 847.85s - 847.89s
+  10. "in" -> 847.81s - 847.89s
   11. "modern" -> 847.97s - 848.25s
   12. "life." -> 848.33s - 848.55s
 
 --------------------------------------------------
 
-SEGMENT 230: [849.07s - 852.53s]
+SEGMENT 238: [849.07s - 852.53s]
 Text: "The improvements that are really about making the surveillance more effective."
 Word-level timestamps:
    1. "The" -> 849.07s - 849.17s
@@ -3667,18 +3715,18 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 231: [853.02s - 853.92s]
+SEGMENT 239: [853.02s - 853.94s]
 Text: "Why you can't just quit."
 Word-level timestamps:
    1. "Why" -> 853.02s - 853.12s
    2. "you" -> 853.16s - 853.24s
    3. "can't" -> 853.28s - 853.42s
    4. "just" -> 853.44s - 853.60s
-   5. "quit." -> 853.68s - 853.92s
+   5. "quit." -> 853.68s - 853.94s
 
 --------------------------------------------------
 
-SEGMENT 232: [854.42s - 858.39s]
+SEGMENT 240: [854.42s - 858.39s]
 Text: "Now some monkeys might be thinking, why don't people just stop using these platforms?"
 Word-level timestamps:
    1. "Now" -> 854.42s - 854.52s
@@ -3691,14 +3739,14 @@ Word-level timestamps:
    8. "don't" -> 856.28s - 856.40s
    9. "people" -> 856.46s - 856.72s
   10. "just" -> 856.80s - 856.94s
-  11. "stop" -> 857.00s - 857.30s
+  11. "stop" -> 857.00s - 857.28s
   12. "using" -> 857.32s - 857.60s
   13. "these" -> 857.64s - 857.76s
   14. "platforms?" -> 857.83s - 858.39s
 
 --------------------------------------------------
 
-SEGMENT 233: [858.93s - 859.49s]
+SEGMENT 241: [858.93s - 859.49s]
 Text: "Great question."
 Word-level timestamps:
    1. "Great" -> 858.93s - 859.09s
@@ -3706,7 +3754,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 234: [859.93s - 861.79s]
+SEGMENT 242: [859.93s - 861.79s]
 Text: "Let me introduce you to Marcus' story."
 Word-level timestamps:
    1. "Let" -> 859.93s - 860.03s
@@ -3714,12 +3762,12 @@ Word-level timestamps:
    3. "introduce" -> 860.19s - 860.61s
    4. "you" -> 860.67s - 860.77s
    5. "to" -> 860.81s - 860.87s
-   6. "Marcus'" -> 860.95s - 861.37s
+   6. "Marcus'" -> 860.95s - 861.39s
    7. "story." -> 861.43s - 861.79s
 
 --------------------------------------------------
 
-SEGMENT 235: [862.27s - 863.92s]
+SEGMENT 243: [862.27s - 863.92s]
 Text: "See, Marcus got fed up."
 Word-level timestamps:
    1. "See," -> 862.27s - 862.43s
@@ -3730,7 +3778,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 236: [863.90s - 870.16s]
+SEGMENT 244: [863.90s - 870.16s]
 Text: "After learning about all the surveillance, all the manipulation, all the exploitation, he decided to quit."
 Word-level timestamps:
    1. "After" -> 863.90s - 864.22s
@@ -3744,7 +3792,7 @@ Word-level timestamps:
    9. "manipulation," -> 866.52s - 867.24s
   10. "all" -> 867.70s - 867.80s
   11. "the" -> 867.84s - 867.94s
-  12. "exploitation," -> 868.08s - 868.82s
+  12. "exploitation," -> 868.08s - 868.80s
   13. "he" -> 869.20s - 869.28s
   14. "decided" -> 869.32s - 869.73s
   15. "to" -> 869.76s - 869.83s
@@ -3752,7 +3800,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 237: [870.61s - 873.03s]
+SEGMENT 245: [870.61s - 873.03s]
 Text: "Delete Blue Book, ditch search engine con."
 Word-level timestamps:
    1. "Delete" -> 870.61s - 870.89s
@@ -3765,7 +3813,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 238: [873.51s - 874.47s]
+SEGMENT 246: [873.51s - 874.47s]
 Text: "Abandoned video tube."
 Word-level timestamps:
    1. "Abandoned" -> 873.51s - 873.87s
@@ -3774,7 +3822,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 239: [874.93s - 875.93s]
+SEGMENT 247: [874.93s - 875.93s]
 Text: "He lasted three days."
 Word-level timestamps:
    1. "He" -> 874.93s - 875.03s
@@ -3784,14 +3832,14 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 240: [876.50s - 876.72s]
+SEGMENT 248: [876.50s - 876.72s]
 Text: "Why?"
 Word-level timestamps:
    1. "Why?" -> 876.50s - 876.72s
 
 --------------------------------------------------
 
-SEGMENT 241: [877.14s - 879.50s]
+SEGMENT 249: [877.14s - 879.50s]
 Text: "Because he's being held hostage by the network effect."
 Word-level timestamps:
    1. "Because" -> 877.14s - 877.40s
@@ -3806,7 +3854,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 242: [880.02s - 882.10s]
+SEGMENT 250: [880.02s - 882.10s]
 Text: "First, the social hostage situation."
 Word-level timestamps:
    1. "First," -> 880.02s - 880.30s
@@ -3817,7 +3865,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 243: [882.58s - 885.39s]
+SEGMENT 251: [882.58s - 885.39s]
 Text: "Marcus' entire family coordinates on Blue Book."
 Word-level timestamps:
    1. "Marcus'" -> 882.58s - 883.04s
@@ -3830,7 +3878,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 244: [885.85s - 887.91s]
+SEGMENT 252: [885.85s - 887.91s]
 Text: "His grandmother posts updates there."
 Word-level timestamps:
    1. "His" -> 885.85s - 885.97s
@@ -3841,7 +3889,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 245: [887.89s - 891.56s]
+SEGMENT 253: [887.89s - 891.56s]
 Text: "His cousins organized family reunions through blue book events."
 Word-level timestamps:
    1. "His" -> 887.89s - 888.09s
@@ -3856,7 +3904,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 246: [892.14s - 894.74s]
+SEGMENT 254: [892.14s - 894.74s]
 Text: "His kids school sends announcements through blue book groups."
 Word-level timestamps:
    1. "His" -> 892.14s - 892.24s
@@ -3871,7 +3919,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 247: [895.30s - 898.79s]
+SEGMENT 255: [895.30s - 898.79s]
 Text: "When Marcus deleted his account, he stopped getting invited to things."
 Word-level timestamps:
    1. "When" -> 895.30s - 895.42s
@@ -3888,7 +3936,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 248: [899.37s - 902.85s]
+SEGMENT 256: [899.37s - 902.85s]
 Text: "He missed his nephew's birthday party because he didn't see the invitation."
 Word-level timestamps:
    1. "He" -> 899.37s - 899.47s
@@ -3906,7 +3954,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 249: [903.29s - 906.68s]
+SEGMENT 257: [903.29s - 906.68s]
 Text: "His mother got upset because he wasn't liking her posts anymore."
 Word-level timestamps:
    1. "His" -> 903.29s - 903.41s
@@ -3923,13 +3971,13 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 250: [906.66s - 909.06s]
+SEGMENT 258: [906.66s - 909.06s]
 Text: "His friends thought he was being weird and antisocial."
 Word-level timestamps:
    1. "His" -> 906.66s - 906.86s
    2. "friends" -> 906.90s - 907.12s
    3. "thought" -> 907.18s - 907.38s
-   4. "he" -> 907.42s - 907.50s
+   4. "he" -> 907.42s - 907.48s
    5. "was" -> 907.52s - 907.62s
    6. "being" -> 907.68s - 907.90s
    7. "weird" -> 908.00s - 908.32s
@@ -3938,12 +3986,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 251: [909.52s - 912.43s]
+SEGMENT 259: [909.52s - 912.43s]
 Text: "Just check Blue Book, they'd say when trying to share something."
 Word-level timestamps:
    1. "Just" -> 909.52s - 909.68s
    2. "check" -> 909.78s - 910.02s
-   3. "Blue" -> 910.06s - 910.26s
+   3. "Blue" -> 910.06s - 910.24s
    4. "Book," -> 910.32s - 910.92s
    5. "they'd" -> 910.94s - 911.16s
    6. "say" -> 911.23s - 911.38s
@@ -3955,7 +4003,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 252: [912.85s - 913.81s]
+SEGMENT 260: [912.85s - 913.81s]
 Text: "But he couldn't anymore."
 Word-level timestamps:
    1. "But" -> 912.85s - 912.95s
@@ -3965,7 +4013,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 253: [914.29s - 916.69s]
+SEGMENT 261: [914.29s - 916.69s]
 Text: "Leaving these platforms means social isolation."
 Word-level timestamps:
    1. "Leaving" -> 914.29s - 914.53s
@@ -3977,7 +4025,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 254: [917.15s - 920.28s]
+SEGMENT 262: [917.15s - 920.28s]
 Text: "And for social creatures like monkeys, that's not really an option."
 Word-level timestamps:
    1. "And" -> 917.15s - 917.22s
@@ -3994,7 +4042,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 255: [920.72s - 922.26s]
+SEGMENT 263: [920.72s - 922.26s]
 Text: "Then there's infrastructure dependence."
 Word-level timestamps:
    1. "Then" -> 920.72s - 920.82s
@@ -4004,13 +4052,13 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 256: [922.84s - 926.37s]
+SEGMENT 264: [922.82s - 926.37s]
 Text: "Marcus's email from Search Engine Kong, connected to everything."
 Word-level timestamps:
-   1. "Marcus's" -> 922.84s - 923.26s
+   1. "Marcus's" -> 922.82s - 923.26s
    2. "email" -> 923.35s - 923.61s
    3. "from" -> 923.64s - 923.77s
-   4. "Search" -> 923.87s - 924.09s
+   4. "Search" -> 923.87s - 924.07s
    5. "Engine" -> 924.11s - 924.33s
    6. "Kong," -> 924.35s - 924.63s
    7. "connected" -> 925.05s - 925.41s
@@ -4019,7 +4067,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 257: [926.35s - 937.13s]
+SEGMENT 265: [926.35s - 937.11s]
 Text: "His banking app, his work account, his shopping accounts, his other social media logins, changing it meant updating hundreds of accounts, and some services won't let you change your email at all."
 Word-level timestamps:
    1. "His" -> 926.35s - 926.55s
@@ -4044,7 +4092,7 @@ Word-level timestamps:
   20. "of" -> 933.52s - 933.56s
   21. "accounts," -> 933.64s - 934.08s
   22. "and" -> 934.52s - 934.61s
-  23. "some" -> 934.68s - 934.85s
+  23. "some" -> 934.66s - 934.85s
   24. "services" -> 934.91s - 935.33s
   25. "won't" -> 935.37s - 935.65s
   26. "let" -> 935.71s - 935.81s
@@ -4053,11 +4101,11 @@ Word-level timestamps:
   29. "your" -> 936.33s - 936.45s
   30. "email" -> 936.53s - 936.81s
   31. "at" -> 936.87s - 936.91s
-  32. "all." -> 936.99s - 937.13s
+  32. "all." -> 936.99s - 937.11s
 
 --------------------------------------------------
 
-SEGMENT 258: [937.57s - 943.16s]
+SEGMENT 266: [937.57s - 943.16s]
 Text: "His photos and videos all backed up to the cloud services run by these plantation owners."
 Word-level timestamps:
    1. "His" -> 937.57s - 937.69s
@@ -4079,12 +4127,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 259: [943.14s - 946.18s]
+SEGMENT 267: [943.14s - 946.18s]
 Text: "years of memories all locked in their ecosystem."
 Word-level timestamps:
    1. "years" -> 943.14s - 943.56s
    2. "of" -> 943.62s - 943.66s
-   3. "memories" -> 943.78s - 944.20s
+   3. "memories" -> 943.70s - 944.20s
    4. "all" -> 944.68s - 944.82s
    5. "locked" -> 944.92s - 945.22s
    6. "in" -> 945.28s - 945.32s
@@ -4093,20 +4141,20 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 260: [946.66s - 953.85s]
-Text: "The maps he uses to navigate on by Search Engine Kong, the alternatives, either terrible or also collecting his data."
+SEGMENT 268: [946.66s - 953.85s]
+Text: "The maps he uses to navigate, owned by Search Engine Kong, the alternatives, either terrible or also collecting his data."
 Word-level timestamps:
    1. "The" -> 946.66s - 946.76s
    2. "maps" -> 946.83s - 947.13s
    3. "he" -> 947.19s - 947.27s
    4. "uses" -> 947.31s - 947.61s
    5. "to" -> 947.65s - 947.71s
-   6. "navigate" -> 947.79s - 948.19s
-   7. "on" -> 948.69s - 948.81s
+   6. "navigate," -> 947.79s - 948.19s
+   7. "owned" -> 948.69s - 948.81s
    8. "by" -> 948.83s - 948.95s
    9. "Search" -> 949.03s - 949.25s
   10. "Engine" -> 949.29s - 949.53s
-  11. "Kong," -> 949.55s - 949.85s
+  11. "Kong," -> 949.55s - 950.23s
   12. "the" -> 950.25s - 950.33s
   13. "alternatives," -> 950.39s - 950.97s
   14. "either" -> 951.55s - 951.75s
@@ -4119,7 +4167,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 261: [954.27s - 956.00s]
+SEGMENT 269: [954.27s - 956.00s]
 Text: "The alternative's problem is real."
 Word-level timestamps:
    1. "The" -> 954.27s - 954.38s
@@ -4130,7 +4178,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 262: [956.54s - 960.86s]
+SEGMENT 270: [956.54s - 960.86s]
 Text: "Sure, there are privacy-focused alternatives, but they have a fraction of the users."
 Word-level timestamps:
    1. "Sure," -> 956.54s - 956.74s
@@ -4149,7 +4197,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 263: [961.40s - 964.33s]
+SEGMENT 271: [961.40s - 963.93s]
 Text: "Trying to get your friends to join a different messaging app?"
 Word-level timestamps:
    1. "Trying" -> 961.40s - 961.62s
@@ -4162,11 +4210,11 @@ Word-level timestamps:
    8. "a" -> 962.88s - 962.90s
    9. "different" -> 962.97s - 963.21s
   10. "messaging" -> 963.25s - 963.59s
-  11. "app?" -> 963.77s - 964.33s
+  11. "app?" -> 963.77s - 963.93s
 
 --------------------------------------------------
 
-SEGMENT 264: [964.35s - 964.75s]
+SEGMENT 272: [964.35s - 964.75s]
 Text: "Good luck."
 Word-level timestamps:
    1. "Good" -> 964.35s - 964.49s
@@ -4174,7 +4222,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 265: [965.17s - 969.87s]
+SEGMENT 273: [965.17s - 969.87s]
 Text: "They're already on Blue Book Messenger, and they're not downloading another app just for you."
 Word-level timestamps:
    1. "They're" -> 965.17s - 965.37s
@@ -4188,14 +4236,14 @@ Word-level timestamps:
    9. "not" -> 967.51s - 967.65s
   10. "downloading" -> 967.73s - 968.19s
   11. "another" -> 968.27s - 968.53s
-  12. "app" -> 968.65s - 968.77s
+  12. "app" -> 968.67s - 968.77s
   13. "just" -> 968.95s - 969.15s
   14. "for" -> 969.21s - 969.33s
   15. "you." -> 969.37s - 969.87s
 
 --------------------------------------------------
 
-SEGMENT 266: [969.85s - 971.08s]
+SEGMENT 274: [969.85s - 971.08s]
 Text: "And here's the ironic part."
 Word-level timestamps:
    1. "And" -> 969.85s - 970.01s
@@ -4206,7 +4254,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 267: [971.58s - 975.18s]
+SEGMENT 275: [971.58s - 975.18s]
 Text: "Many of the privacy-focused alternatives, they still collect some data."
 Word-level timestamps:
    1. "Many" -> 971.58s - 971.78s
@@ -4222,7 +4270,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 268: [975.58s - 980.11s]
+SEGMENT 276: [975.58s - 980.11s]
 Text: "They just collect less of it, where they charge you bananas for the privilege of not being surveilled."
 Word-level timestamps:
    1. "They" -> 975.58s - 975.70s
@@ -4230,7 +4278,7 @@ Word-level timestamps:
    3. "collect" -> 975.92s - 976.18s
    4. "less" -> 976.24s - 976.44s
    5. "of" -> 976.50s - 976.54s
-   6. "it," -> 976.64s - 976.70s
+   6. "it," -> 976.62s - 976.70s
    7. "where" -> 977.14s - 977.25s
    8. "they" -> 977.28s - 977.40s
    9. "charge" -> 977.47s - 977.73s
@@ -4246,7 +4294,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 269: [980.59s - 986.76s]
+SEGMENT 277: [980.59s - 986.76s]
 Text: "So your choice becomes, surrender your data for free access, or pay money to surrender slightly less data."
 Word-level timestamps:
    1. "So" -> 980.59s - 980.69s
@@ -4270,7 +4318,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 270: [987.20s - 988.50s]
+SEGMENT 278: [987.20s - 988.50s]
 Text: "Either way, you're paying."
 Word-level timestamps:
    1. "Either" -> 987.20s - 987.38s
@@ -4280,7 +4328,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 271: [989.00s - 990.92s]
+SEGMENT 279: [989.00s - 990.92s]
 Text: "Finally, there's the convenience addiction."
 Word-level timestamps:
    1. "Finally," -> 989.00s - 989.38s
@@ -4291,7 +4339,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 272: [991.37s - 993.45s]
+SEGMENT 280: [991.37s - 993.45s]
 Text: "Marcus got used to one click ordering."
 Word-level timestamps:
    1. "Marcus" -> 991.37s - 991.66s
@@ -4304,7 +4352,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 273: [993.43s - 996.43s]
+SEGMENT 281: [993.43s - 996.43s]
 Text: "personalized recommendations that actually match his taste."
 Word-level timestamps:
    1. "personalized" -> 993.43s - 994.07s
@@ -4317,91 +4365,91 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 274: [996.98s - 1006.71s]
+SEGMENT 282: [996.97s - 1006.70s]
 Text: "All his devices sinking automatically, remembering passwords for him, auto-filling forms, going back to the old way of doing things felt like time traveling to the Stone Age."
 Word-level timestamps:
-   1. "All" -> 996.98s - 997.10s
-   2. "his" -> 997.13s - 997.24s
-   3. "devices" -> 997.29s - 997.76s
-   4. "sinking" -> 997.92s - 998.22s
-   5. "automatically," -> 998.32s - 998.92s
-   6. "remembering" -> 999.38s - 999.78s
+   1. "All" -> 996.97s - 997.09s
+   2. "his" -> 997.13s - 997.23s
+   3. "devices" -> 997.29s - 997.75s
+   4. "sinking" -> 997.91s - 998.21s
+   5. "automatically," -> 998.31s - 998.91s
+   6. "remembering" -> 999.38s - 999.77s
    7. "passwords" -> 999.82s - 1000.30s
    8. "for" -> 1000.34s - 1000.46s
    9. "him," -> 1000.50s - 1000.62s
   10. "auto-filling" -> 1001.10s - 1001.62s
   11. "forms," -> 1001.68s - 1002.00s
-  12. "going" -> 1002.57s - 1002.79s
-  13. "back" -> 1002.87s - 1003.07s
-  14. "to" -> 1003.13s - 1003.19s
-  15. "the" -> 1003.23s - 1003.31s
-  16. "old" -> 1003.43s - 1003.57s
-  17. "way" -> 1003.63s - 1003.75s
-  18. "of" -> 1003.79s - 1003.83s
-  19. "doing" -> 1003.91s - 1004.15s
-  20. "things" -> 1004.21s - 1004.45s
-  21. "felt" -> 1004.57s - 1004.75s
-  22. "like" -> 1004.83s - 1004.97s
-  23. "time" -> 1005.03s - 1005.33s
-  24. "traveling" -> 1005.41s - 1005.85s
-  25. "to" -> 1005.91s - 1005.99s
-  26. "the" -> 1006.03s - 1006.09s
-  27. "Stone" -> 1006.13s - 1006.41s
-  28. "Age." -> 1006.49s - 1006.71s
+  12. "going" -> 1002.56s - 1002.78s
+  13. "back" -> 1002.86s - 1003.06s
+  14. "to" -> 1003.12s - 1003.18s
+  15. "the" -> 1003.22s - 1003.30s
+  16. "old" -> 1003.42s - 1003.56s
+  17. "way" -> 1003.62s - 1003.74s
+  18. "of" -> 1003.78s - 1003.82s
+  19. "doing" -> 1003.90s - 1004.14s
+  20. "things" -> 1004.20s - 1004.44s
+  21. "felt" -> 1004.56s - 1004.74s
+  22. "like" -> 1004.82s - 1004.96s
+  23. "time" -> 1005.02s - 1005.30s
+  24. "traveling" -> 1005.40s - 1005.84s
+  25. "to" -> 1005.90s - 1005.98s
+  26. "the" -> 1006.02s - 1006.08s
+  27. "Stone" -> 1006.12s - 1006.40s
+  28. "Age." -> 1006.48s - 1006.70s
 
 --------------------------------------------------
 
-SEGMENT 275: [1007.23s - 1011.96s]
+SEGMENT 283: [1007.22s - 1011.95s]
 Text: "Look up directions manually, type in your address every time, remember all your passwords?"
 Word-level timestamps:
-   1. "Look" -> 1007.23s - 1007.37s
-   2. "up" -> 1007.43s - 1007.51s
-   3. "directions" -> 1007.55s - 1008.03s
-   4. "manually," -> 1008.10s - 1008.56s
-   5. "type" -> 1008.98s - 1009.18s
-   6. "in" -> 1009.22s - 1009.28s
-   7. "your" -> 1009.30s - 1009.42s
-   8. "address" -> 1009.46s - 1009.80s
-   9. "every" -> 1009.86s - 1010.04s
-  10. "time," -> 1010.08s - 1010.32s
-  11. "remember" -> 1010.78s - 1011.10s
-  12. "all" -> 1011.20s - 1011.30s
-  13. "your" -> 1011.34s - 1011.44s
-  14. "passwords?" -> 1011.48s - 1011.96s
+   1. "Look" -> 1007.22s - 1007.36s
+   2. "up" -> 1007.42s - 1007.50s
+   3. "directions" -> 1007.54s - 1008.02s
+   4. "manually," -> 1008.09s - 1008.54s
+   5. "type" -> 1008.97s - 1009.17s
+   6. "in" -> 1009.21s - 1009.27s
+   7. "your" -> 1009.29s - 1009.41s
+   8. "address" -> 1009.45s - 1009.79s
+   9. "every" -> 1009.85s - 1010.03s
+  10. "time," -> 1010.07s - 1010.31s
+  11. "remember" -> 1010.77s - 1011.09s
+  12. "all" -> 1011.19s - 1011.29s
+  13. "your" -> 1011.33s - 1011.43s
+  14. "passwords?" -> 1011.47s - 1011.95s
 
 --------------------------------------------------
 
-SEGMENT 276: [1012.52s - 1016.97s]
+SEGMENT 284: [1012.51s - 1016.96s]
 Text: "It's not impossible, but it's annoying, and the plantation owners know this."
 Word-level timestamps:
-   1. "It's" -> 1012.52s - 1012.62s
-   2. "not" -> 1012.68s - 1012.80s
-   3. "impossible," -> 1012.86s - 1013.42s
-   4. "but" -> 1013.73s - 1013.83s
-   5. "it's" -> 1013.87s - 1013.97s
-   6. "annoying," -> 1014.03s - 1014.45s
-   7. "and" -> 1014.91s - 1014.97s
-   8. "the" -> 1014.99s - 1015.07s
-   9. "plantation" -> 1015.11s - 1015.67s
-  10. "owners" -> 1015.81s - 1016.03s
-  11. "know" -> 1016.11s - 1016.27s
-  12. "this." -> 1016.31s - 1016.97s
+   1. "It's" -> 1012.51s - 1012.61s
+   2. "not" -> 1012.67s - 1012.79s
+   3. "impossible," -> 1012.85s - 1013.41s
+   4. "but" -> 1013.71s - 1013.81s
+   5. "it's" -> 1013.85s - 1013.95s
+   6. "annoying," -> 1014.01s - 1014.43s
+   7. "and" -> 1014.89s - 1014.95s
+   8. "the" -> 1014.97s - 1015.05s
+   9. "plantation" -> 1015.09s - 1015.65s
+  10. "owners" -> 1015.79s - 1016.01s
+  11. "know" -> 1016.09s - 1016.25s
+  12. "this." -> 1016.29s - 1016.96s
 
 --------------------------------------------------
 
-SEGMENT 277: [1016.95s - 1024.22s]
+SEGMENT 285: [1016.93s - 1024.22s]
 Text: "They've made their services so convenient, so integrated into every aspect of life that leaving feels like punishment."
 Word-level timestamps:
-   1. "They've" -> 1016.95s - 1017.23s
-   2. "made" -> 1017.27s - 1017.41s
-   3. "their" -> 1017.45s - 1017.61s
-   4. "services" -> 1017.69s - 1018.17s
-   5. "so" -> 1018.19s - 1018.53s
-   6. "convenient," -> 1018.62s - 1019.26s
-   7. "so" -> 1019.64s - 1019.82s
+   1. "They've" -> 1016.93s - 1017.24s
+   2. "made" -> 1017.27s - 1017.42s
+   3. "their" -> 1017.46s - 1017.60s
+   4. "services" -> 1017.70s - 1018.16s
+   5. "so" -> 1018.36s - 1018.54s
+   6. "convenient," -> 1018.62s - 1019.24s
+   7. "so" -> 1019.64s - 1019.80s
    8. "integrated" -> 1019.94s - 1020.44s
-   9. "into" -> 1020.58s - 1020.78s
-  10. "every" -> 1021.06s - 1021.28s
+   9. "into" -> 1020.46s - 1020.78s
+  10. "every" -> 1021.04s - 1021.28s
   11. "aspect" -> 1021.44s - 1021.80s
   12. "of" -> 1021.86s - 1021.90s
   13. "life" -> 1021.94s - 1022.26s
@@ -4413,83 +4461,83 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 278: [1024.74s - 1026.67s]
+SEGMENT 286: [1024.75s - 1026.67s]
 Text: "So Marcus re-downloaded Blue Book."
 Word-level timestamps:
-   1. "So" -> 1024.74s - 1024.90s
-   2. "Marcus" -> 1024.96s - 1025.31s
+   1. "So" -> 1024.75s - 1024.91s
+   2. "Marcus" -> 1024.97s - 1025.31s
    3. "re-downloaded" -> 1025.37s - 1026.01s
-   4. "Blue" -> 1026.13s - 1026.35s
+   4. "Blue" -> 1026.11s - 1026.35s
    5. "Book." -> 1026.41s - 1026.67s
 
 --------------------------------------------------
 
-SEGMENT 279: [1027.13s - 1028.99s]
+SEGMENT 287: [1027.13s - 1028.97s]
 Text: "He told himself he'd just use it less."
 Word-level timestamps:
-   1. "He" -> 1027.13s - 1027.23s
+   1. "He" -> 1027.13s - 1027.21s
    2. "told" -> 1027.27s - 1027.41s
    3. "himself" -> 1027.45s - 1027.79s
    4. "he'd" -> 1027.87s - 1028.05s
    5. "just" -> 1028.23s - 1028.39s
-   6. "use" -> 1028.49s - 1028.59s
+   6. "use" -> 1028.47s - 1028.59s
    7. "it" -> 1028.65s - 1028.69s
-   8. "less." -> 1028.73s - 1028.99s
+   8. "less." -> 1028.73s - 1028.97s
 
 --------------------------------------------------
 
-SEGMENT 280: [1029.55s - 1030.53s]
+SEGMENT 288: [1029.53s - 1030.55s]
 Text: "Check it only once a day."
 Word-level timestamps:
-   1. "Check" -> 1029.55s - 1029.71s
+   1. "Check" -> 1029.53s - 1029.69s
    2. "it" -> 1029.73s - 1029.79s
-   3. "only" -> 1029.85s - 1029.99s
-   4. "once" -> 1030.03s - 1030.23s
-   5. "a" -> 1030.29s - 1030.33s
-   6. "day." -> 1030.37s - 1030.53s
+   3. "only" -> 1029.83s - 1029.99s
+   4. "once" -> 1030.11s - 1030.23s
+   5. "a" -> 1030.29s - 1030.31s
+   6. "day." -> 1030.37s - 1030.55s
 
 --------------------------------------------------
 
-SEGMENT 281: [1030.99s - 1032.18s]
+SEGMENT 289: [1030.57s - 1032.18s]
 Text: "Turn off notifications."
 Word-level timestamps:
-   1. "Turn" -> 1030.99s - 1031.19s
-   2. "off" -> 1031.28s - 1031.39s
-   3. "notifications." -> 1031.47s - 1032.18s
+   1. "Turn" -> 1030.57s - 1031.19s
+   2. "off" -> 1031.26s - 1031.40s
+   3. "notifications." -> 1031.48s - 1032.18s
 
 --------------------------------------------------
 
-SEGMENT 282: [1032.70s - 1035.58s]
+SEGMENT 290: [1032.70s - 1035.58s]
 Text: "That lasted about a week before he was back to his old habits."
 Word-level timestamps:
    1. "That" -> 1032.70s - 1032.84s
    2. "lasted" -> 1032.90s - 1033.24s
-   3. "about" -> 1033.30s - 1033.46s
+   3. "about" -> 1033.28s - 1033.46s
    4. "a" -> 1033.50s - 1033.52s
    5. "week" -> 1033.58s - 1033.78s
-   6. "before" -> 1033.94s - 1034.28s
+   6. "before" -> 1033.94s - 1034.26s
    7. "he" -> 1034.30s - 1034.38s
    8. "was" -> 1034.42s - 1034.52s
    9. "back" -> 1034.58s - 1034.76s
   10. "to" -> 1034.82s - 1034.88s
   11. "his" -> 1034.92s - 1035.00s
-  12. "old" -> 1035.06s - 1035.16s
+  12. "old" -> 1035.04s - 1035.16s
   13. "habits." -> 1035.22s - 1035.58s
 
 --------------------------------------------------
 
-SEGMENT 283: [1036.14s - 1037.96s]
+SEGMENT 291: [1036.14s - 1037.96s]
 Text: "Because that's how addiction works."
 Word-level timestamps:
    1. "Because" -> 1036.14s - 1036.42s
    2. "that's" -> 1036.44s - 1036.64s
-   3. "how" -> 1036.68s - 1036.78s
+   3. "how" -> 1036.66s - 1036.76s
    4. "addiction" -> 1036.82s - 1037.16s
    5. "works." -> 1037.22s - 1037.96s
 
 --------------------------------------------------
 
-SEGMENT 284: [1037.94s - 1040.11s]
+SEGMENT 292: [1037.94s - 1040.11s]
 Text: "and these platforms are designed to be addictive."
 Word-level timestamps:
    1. "and" -> 1037.94s - 1038.11s
@@ -4498,12 +4546,12 @@ Word-level timestamps:
    4. "are" -> 1038.91s - 1038.99s
    5. "designed" -> 1039.01s - 1039.41s
    6. "to" -> 1039.43s - 1039.49s
-   7. "be" -> 1039.53s - 1039.63s
+   7. "be" -> 1039.55s - 1039.63s
    8. "addictive." -> 1039.67s - 1040.11s
 
 --------------------------------------------------
 
-SEGMENT 285: [1040.55s - 1043.86s]
+SEGMENT 293: [1040.55s - 1043.86s]
 Text: "The resistance fights back, but it's not all doom and gloom."
 Word-level timestamps:
    1. "The" -> 1040.55s - 1040.63s
@@ -4520,7 +4568,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 286: [1044.28s - 1046.82s]
+SEGMENT 294: [1044.28s - 1046.82s]
 Text: "There are monkeys fighting back against the plantations."
 Word-level timestamps:
    1. "There" -> 1044.28s - 1044.40s
@@ -4534,7 +4582,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 287: [1047.40s - 1048.96s]
+SEGMENT 295: [1047.40s - 1048.96s]
 Text: "Regulatory pressure is building."
 Word-level timestamps:
    1. "Regulatory" -> 1047.40s - 1047.96s
@@ -4544,7 +4592,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 288: [1049.38s - 1051.65s]
+SEGMENT 296: [1049.38s - 1051.65s]
 Text: "The European Union has been leading the charge."
 Word-level timestamps:
    1. "The" -> 1049.38s - 1049.48s
@@ -4558,12 +4606,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 289: [1052.17s - 1058.90s]
+SEGMENT 297: [1052.17s - 1058.90s]
 Text: "The GDPR forced companies to be more transparent about data collection and gave monkeys the right to delete their data."
 Word-level timestamps:
    1. "The" -> 1052.17s - 1052.27s
    2. "GDPR" -> 1052.33s - 1052.99s
-   3. "forced" -> 1053.11s - 1053.39s
+   3. "forced" -> 1053.11s - 1053.41s
    4. "companies" -> 1053.49s - 1053.89s
    5. "to" -> 1053.95s - 1054.01s
    6. "be" -> 1054.05s - 1054.15s
@@ -4571,7 +4619,7 @@ Word-level timestamps:
    8. "transparent" -> 1054.51s - 1055.19s
    9. "about" -> 1055.29s - 1055.49s
   10. "data" -> 1055.58s - 1055.80s
-  11. "collection" -> 1055.84s - 1056.28s
+  11. "collection" -> 1055.84s - 1056.30s
   12. "and" -> 1056.58s - 1056.66s
   13. "gave" -> 1056.70s - 1056.92s
   14. "monkeys" -> 1057.02s - 1057.32s
@@ -4584,7 +4632,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 290: [1059.32s - 1061.02s]
+SEGMENT 298: [1059.32s - 1061.02s]
 Text: "It's not perfect, but it's something."
 Word-level timestamps:
    1. "It's" -> 1059.32s - 1059.44s
@@ -4596,7 +4644,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 291: [1061.46s - 1063.65s]
+SEGMENT 299: [1061.46s - 1063.65s]
 Text: "Now they're pushing the Digital Markets Act."
 Word-level timestamps:
    1. "Now" -> 1061.46s - 1061.57s
@@ -4609,7 +4657,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 292: [1063.63s - 1078.79s]
+SEGMENT 300: [1063.63s - 1078.79s]
 Text: "which aims to prevent the plantation owners from abusing their dominant positions, forcing interoperability, preventing anti-competitive practices, actual competition, and the fines, they're getting serious, billions of bananas for violations."
 Word-level timestamps:
    1. "which" -> 1063.63s - 1063.87s
@@ -4645,7 +4693,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 293: [1078.77s - 1081.07s]
+SEGMENT 301: [1078.77s - 1081.07s]
 Text: "Blue Book Monkey has been fine multiple times."
 Word-level timestamps:
    1. "Blue" -> 1078.77s - 1079.03s
@@ -4659,7 +4707,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 294: [1081.71s - 1084.87s]
+SEGMENT 302: [1081.71s - 1084.87s]
 Text: "Search Engine Kong has been hit with record-breaking penalties."
 Word-level timestamps:
    1. "Search" -> 1081.71s - 1081.95s
@@ -4674,7 +4722,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 295: [1085.45s - 1090.50s]
+SEGMENT 303: [1085.45s - 1090.50s]
 Text: "Of course, to these companies, even billionaire fines are just the cost of doing business."
 Word-level timestamps:
    1. "Of" -> 1085.45s - 1085.49s
@@ -4695,7 +4743,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 296: [1091.04s - 1091.96s]
+SEGMENT 304: [1091.04s - 1091.96s]
 Text: "But at least it's something."
 Word-level timestamps:
    1. "But" -> 1091.04s - 1091.14s
@@ -4706,7 +4754,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 297: [1092.38s - 1094.23s]
+SEGMENT 305: [1092.38s - 1094.23s]
 Text: "Class action lawsuits are emerging."
 Word-level timestamps:
    1. "Class" -> 1092.38s - 1092.66s
@@ -4717,7 +4765,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 298: [1094.69s - 1102.48s]
+SEGMENT 306: [1094.69s - 1102.48s]
 Text: "Regular monkeys are banding together to sue these companies for privacy violations, data breaches, and anti-competitive behavior."
 Word-level timestamps:
    1. "Regular" -> 1094.69s - 1095.05s
@@ -4740,7 +4788,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 299: [1102.46s - 1104.92s]
+SEGMENT 307: [1102.46s - 1104.92s]
 Text: "Some settlements have reached billions of bananas."
 Word-level timestamps:
    1. "Some" -> 1102.46s - 1102.76s
@@ -4753,7 +4801,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 300: [1105.44s - 1110.72s]
+SEGMENT 308: [1105.44s - 1110.72s]
 Text: "Though, let's be honest, the victims usually see pennies while the lawyers get the bulk of the settlement."
 Word-level timestamps:
    1. "Though," -> 1105.44s - 1105.66s
@@ -4777,7 +4825,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 301: [1111.16s - 1112.40s]
+SEGMENT 309: [1111.16s - 1112.40s]
 Text: "But again, it's pressure."
 Word-level timestamps:
    1. "But" -> 1111.16s - 1111.26s
@@ -4787,7 +4835,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 302: [1112.94s - 1113.98s]
+SEGMENT 310: [1112.94s - 1113.98s]
 Text: "Awareness is growing."
 Word-level timestamps:
    1. "Awareness" -> 1112.94s - 1113.40s
@@ -4796,7 +4844,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 303: [1114.42s - 1118.37s]
+SEGMENT 311: [1114.42s - 1118.37s]
 Text: "Documentaries like the social dilemma exposed how these systems work."
 Word-level timestamps:
    1. "Documentaries" -> 1114.42s - 1115.05s
@@ -4812,7 +4860,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 304: [1118.35s - 1120.64s]
+SEGMENT 312: [1118.35s - 1120.64s]
 Text: "More monkeys are waking up to the manipulation."
 Word-level timestamps:
    1. "More" -> 1118.35s - 1118.62s
@@ -4826,7 +4874,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 305: [1121.10s - 1122.96s]
+SEGMENT 313: [1121.10s - 1122.96s]
 Text: "Privacy is becoming a selling point."
 Word-level timestamps:
    1. "Privacy" -> 1121.10s - 1121.56s
@@ -4838,7 +4886,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 306: [1123.50s - 1128.51s]
+SEGMENT 314: [1123.50s - 1128.51s]
 Text: "Even teenagers, the demographic most addicted to these platforms, are starting to question them."
 Word-level timestamps:
    1. "Even" -> 1123.50s - 1123.68s
@@ -4858,7 +4906,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 307: [1128.95s - 1131.38s]
+SEGMENT 315: [1128.95s - 1131.38s]
 Text: "Delete blue book movements trend regularly."
 Word-level timestamps:
    1. "Delete" -> 1128.95s - 1129.24s
@@ -4870,7 +4918,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 308: [1131.86s - 1135.47s]
+SEGMENT 316: [1131.86s - 1135.47s]
 Text: "Monkeys are more skeptical of tech companies than ever before."
 Word-level timestamps:
    1. "Monkeys" -> 1131.86s - 1132.16s
@@ -4878,7 +4926,7 @@ Word-level timestamps:
    3. "more" -> 1132.32s - 1132.46s
    4. "skeptical" -> 1132.52s - 1133.04s
    5. "of" -> 1133.10s - 1133.14s
-   6. "tech" -> 1133.22s - 1133.46s
+   6. "tech" -> 1133.22s - 1133.44s
    7. "companies" -> 1133.50s - 1133.94s
    8. "than" -> 1134.16s - 1134.29s
    9. "ever" -> 1134.51s - 1134.65s
@@ -4886,7 +4934,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 309: [1135.45s - 1137.45s]
+SEGMENT 317: [1135.45s - 1137.45s]
 Text: "Alternative platforms are emerging."
 Word-level timestamps:
    1. "Alternative" -> 1135.45s - 1136.07s
@@ -4896,24 +4944,24 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 310: [1137.87s - 1140.54s]
+SEGMENT 318: [1137.87s - 1140.54s]
 Text: "Decentralize social networks that don't collect data."
 Word-level timestamps:
    1. "Decentralize" -> 1137.87s - 1138.57s
    2. "social" -> 1138.63s - 1138.93s
    3. "networks" -> 1138.99s - 1139.35s
-   4. "that" -> 1139.45s - 1139.57s
-   5. "don't" -> 1139.65s - 1139.83s
-   6. "collect" -> 1139.89s - 1140.19s
+   4. "that" -> 1139.45s - 1139.58s
+   5. "don't" -> 1139.65s - 1139.84s
+   6. "collect" -> 1139.89s - 1140.20s
    7. "data." -> 1140.26s - 1140.54s
 
 --------------------------------------------------
 
-SEGMENT 311: [1140.96s - 1143.98s]
+SEGMENT 319: [1140.96s - 1143.98s]
 Text: "Privacy first messaging apps with end-to-end encryption."
 Word-level timestamps:
    1. "Privacy" -> 1140.96s - 1141.40s
-   2. "first" -> 1141.48s - 1141.70s
+   2. "first" -> 1141.46s - 1141.70s
    3. "messaging" -> 1141.78s - 1142.30s
    4. "apps" -> 1142.32s - 1142.50s
    5. "with" -> 1142.62s - 1142.74s
@@ -4922,20 +4970,20 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 312: [1144.50s - 1146.96s]
+SEGMENT 320: [1144.50s - 1146.97s]
 Text: "Open source alternatives to the major platforms."
 Word-level timestamps:
    1. "Open" -> 1144.50s - 1144.70s
    2. "source" -> 1144.74s - 1144.98s
    3. "alternatives" -> 1145.02s - 1145.62s
-   4. "to" -> 1145.86s - 1145.96s
-   5. "the" -> 1145.98s - 1146.06s
-   6. "major" -> 1146.12s - 1146.38s
-   7. "platforms." -> 1146.42s - 1146.96s
+   4. "to" -> 1145.87s - 1145.96s
+   5. "the" -> 1145.98s - 1146.07s
+   6. "major" -> 1146.12s - 1146.39s
+   7. "platforms." -> 1146.43s - 1146.97s
 
 --------------------------------------------------
 
-SEGMENT 313: [1147.61s - 1152.31s]
+SEGMENT 321: [1147.61s - 1152.32s]
 Text: "User-owned cooperatives where the monkeys control the platform instead of corporate overlords."
 Word-level timestamps:
    1. "User-owned" -> 1147.61s - 1148.03s
@@ -4949,25 +4997,25 @@ Word-level timestamps:
    9. "instead" -> 1150.81s - 1151.19s
   10. "of" -> 1151.21s - 1151.25s
   11. "corporate" -> 1151.29s - 1151.73s
-  12. "overlords." -> 1151.79s - 1152.31s
+  12. "overlords." -> 1151.79s - 1152.32s
 
 --------------------------------------------------
 
-SEGMENT 314: [1152.83s - 1155.26s]
+SEGMENT 322: [1152.84s - 1155.26s]
 Text: "These alternatives are small now, but they're growing."
 Word-level timestamps:
-   1. "These" -> 1152.83s - 1153.01s
-   2. "alternatives" -> 1153.05s - 1153.59s
-   3. "are" -> 1153.67s - 1153.73s
-   4. "small" -> 1153.79s - 1154.05s
-   5. "now," -> 1154.11s - 1154.31s
-   6. "but" -> 1154.62s - 1154.69s
-   7. "they're" -> 1154.73s - 1154.91s
-   8. "growing." -> 1154.95s - 1155.26s
+   1. "These" -> 1152.84s - 1153.02s
+   2. "alternatives" -> 1153.06s - 1153.60s
+   3. "are" -> 1153.68s - 1153.74s
+   4. "small" -> 1153.80s - 1154.06s
+   5. "now," -> 1154.12s - 1154.32s
+   6. "but" -> 1154.62s - 1154.70s
+   7. "they're" -> 1154.74s - 1154.92s
+   8. "growing." -> 1154.94s - 1155.26s
 
 --------------------------------------------------
 
-SEGMENT 315: [1155.70s - 1158.32s]
+SEGMENT 323: [1155.70s - 1158.33s]
 Text: "And they prove that the current system isn't inevitable."
 Word-level timestamps:
    1. "And" -> 1155.70s - 1155.76s
@@ -4978,162 +5026,162 @@ Word-level timestamps:
    6. "current" -> 1156.58s - 1156.86s
    7. "system" -> 1156.96s - 1157.32s
    8. "isn't" -> 1157.60s - 1157.78s
-   9. "inevitable." -> 1157.84s - 1158.32s
+   9. "inevitable." -> 1157.84s - 1158.33s
 
 --------------------------------------------------
 
-SEGMENT 316: [1158.76s - 1160.80s]
-Text: "There are other ways to build a digital jungle."
+SEGMENT 324: [1158.77s - 1160.81s]
+Text: "There are other ways to build the digital jungle."
 Word-level timestamps:
-   1. "There" -> 1158.76s - 1158.90s
-   2. "are" -> 1158.92s - 1159.02s
-   3. "other" -> 1159.10s - 1159.26s
-   4. "ways" -> 1159.30s - 1159.54s
-   5. "to" -> 1159.62s - 1159.70s
-   6. "build" -> 1159.76s - 1159.96s
-   7. "a" -> 1160.04s - 1160.06s
-   8. "digital" -> 1160.12s - 1160.44s
-   9. "jungle." -> 1160.48s - 1160.80s
+   1. "There" -> 1158.77s - 1158.91s
+   2. "are" -> 1158.93s - 1159.03s
+   3. "other" -> 1159.11s - 1159.27s
+   4. "ways" -> 1159.31s - 1159.55s
+   5. "to" -> 1159.63s - 1159.71s
+   6. "build" -> 1159.77s - 1159.97s
+   7. "the" -> 1159.99s - 1160.07s
+   8. "digital" -> 1160.13s - 1160.45s
+   9. "jungle." -> 1160.49s - 1160.81s
 
 --------------------------------------------------
 
-SEGMENT 317: [1161.24s - 1162.81s]
+SEGMENT 325: [1161.25s - 1162.77s]
 Text: "There have been some victories."
 Word-level timestamps:
-   1. "There" -> 1161.24s - 1161.36s
-   2. "have" -> 1161.40s - 1161.48s
-   3. "been" -> 1161.50s - 1161.62s
-   4. "some" -> 1161.66s - 1161.81s
-   5. "victories." -> 1161.87s - 1162.81s
+   1. "There" -> 1161.25s - 1161.37s
+   2. "have" -> 1161.41s - 1161.49s
+   3. "been" -> 1161.51s - 1161.63s
+   4. "some" -> 1161.67s - 1161.81s
+   5. "victories." -> 1161.87s - 1162.77s
 
 --------------------------------------------------
 
-SEGMENT 318: [1162.79s - 1168.81s]
+SEGMENT 326: [1162.75s - 1168.80s]
 Text: "Fruit company introduced app tracking transparency, forcing apps to ask permission before tracking you."
 Word-level timestamps:
-   1. "Fruit" -> 1162.79s - 1163.05s
+   1. "Fruit" -> 1162.75s - 1163.03s
    2. "company" -> 1163.09s - 1163.43s
-   3. "introduced" -> 1163.53s - 1164.03s
-   4. "app" -> 1164.07s - 1164.49s
+   3. "introduced" -> 1163.51s - 1164.03s
+   4. "app" -> 1164.07s - 1164.47s
    5. "tracking" -> 1164.55s - 1164.91s
-   6. "transparency," -> 1164.97s - 1165.71s
-   7. "forcing" -> 1166.09s - 1166.45s
-   8. "apps" -> 1166.55s - 1166.73s
-   9. "to" -> 1166.85s - 1166.93s
-  10. "ask" -> 1167.17s - 1167.33s
-  11. "permission" -> 1167.39s - 1167.85s
-  12. "before" -> 1167.93s - 1168.21s
-  13. "tracking" -> 1168.29s - 1168.63s
-  14. "you." -> 1168.69s - 1168.81s
+   6. "transparency," -> 1164.97s - 1165.72s
+   7. "forcing" -> 1166.10s - 1166.44s
+   8. "apps" -> 1166.56s - 1166.74s
+   9. "to" -> 1166.86s - 1166.94s
+  10. "ask" -> 1167.18s - 1167.34s
+  11. "permission" -> 1167.40s - 1167.86s
+  12. "before" -> 1167.92s - 1168.22s
+  13. "tracking" -> 1168.28s - 1168.64s
+  14. "you." -> 1168.68s - 1168.80s
 
 --------------------------------------------------
 
-SEGMENT 319: [1169.29s - 1172.99s]
+SEGMENT 327: [1169.28s - 1172.99s]
 Text: "Most monkeys said no, costing blue book billions in ad revenue."
 Word-level timestamps:
-   1. "Most" -> 1169.29s - 1169.49s
-   2. "monkeys" -> 1169.57s - 1169.89s
-   3. "said" -> 1169.95s - 1170.11s
-   4. "no," -> 1170.19s - 1170.37s
-   5. "costing" -> 1170.71s - 1171.15s
-   6. "blue" -> 1171.27s - 1171.51s
-   7. "book" -> 1171.57s - 1171.79s
-   8. "billions" -> 1171.85s - 1172.27s
-   9. "in" -> 1172.33s - 1172.39s
-  10. "ad" -> 1172.47s - 1172.60s
-  11. "revenue." -> 1172.63s - 1172.99s
+   1. "Most" -> 1169.28s - 1169.48s
+   2. "monkeys" -> 1169.58s - 1169.90s
+   3. "said" -> 1169.96s - 1170.12s
+   4. "no," -> 1170.20s - 1170.38s
+   5. "costing" -> 1170.72s - 1171.16s
+   6. "blue" -> 1171.28s - 1171.52s
+   7. "book" -> 1171.58s - 1171.78s
+   8. "billions" -> 1171.86s - 1172.29s
+   9. "in" -> 1172.35s - 1172.40s
+  10. "ad" -> 1172.46s - 1172.59s
+  11. "revenue." -> 1172.62s - 1172.99s
 
 --------------------------------------------------
 
-SEGMENT 320: [1173.43s - 1178.34s]
+SEGMENT 328: [1173.45s - 1178.35s]
 Text: "Cookie consent requirements forced websites to ask before dropping tracking cookies."
 Word-level timestamps:
-   1. "Cookie" -> 1173.43s - 1173.72s
-   2. "consent" -> 1173.76s - 1174.14s
-   3. "requirements" -> 1174.18s - 1174.76s
-   4. "forced" -> 1175.00s - 1175.30s
-   5. "websites" -> 1175.36s - 1175.88s
-   6. "to" -> 1175.98s - 1176.06s
-   7. "ask" -> 1176.34s - 1176.54s
-   8. "before" -> 1176.68s - 1177.08s
-   9. "dropping" -> 1177.16s - 1177.54s
-  10. "tracking" -> 1177.62s - 1177.94s
-  11. "cookies." -> 1178.00s - 1178.34s
+   1. "Cookie" -> 1173.45s - 1173.73s
+   2. "consent" -> 1173.77s - 1174.13s
+   3. "requirements" -> 1174.19s - 1174.77s
+   4. "forced" -> 1175.01s - 1175.29s
+   5. "websites" -> 1175.35s - 1175.87s
+   6. "to" -> 1175.99s - 1176.07s
+   7. "ask" -> 1176.35s - 1176.53s
+   8. "before" -> 1176.67s - 1177.09s
+   9. "dropping" -> 1177.17s - 1177.55s
+  10. "tracking" -> 1177.63s - 1177.95s
+  11. "cookies." -> 1177.99s - 1178.35s
 
 --------------------------------------------------
 
-SEGMENT 321: [1178.92s - 1181.16s]
+SEGMENT 329: [1178.93s - 1181.16s]
 Text: "Not perfect, but at least you have to be told."
 Word-level timestamps:
-   1. "Not" -> 1178.92s - 1179.06s
-   2. "perfect," -> 1179.14s - 1179.54s
-   3. "but" -> 1179.88s - 1179.98s
-   4. "at" -> 1180.02s - 1180.06s
-   5. "least" -> 1180.10s - 1180.28s
-   6. "you" -> 1180.32s - 1180.44s
-   7. "have" -> 1180.50s - 1180.62s
-   8. "to" -> 1180.66s - 1180.70s
-   9. "be" -> 1180.74s - 1180.82s
-  10. "told." -> 1180.88s - 1181.16s
+   1. "Not" -> 1178.93s - 1179.07s
+   2. "perfect," -> 1179.13s - 1179.56s
+   3. "but" -> 1179.89s - 1179.97s
+   4. "at" -> 1180.04s - 1180.08s
+   5. "least" -> 1180.12s - 1180.30s
+   6. "you" -> 1180.34s - 1180.46s
+   7. "have" -> 1180.50s - 1180.64s
+   8. "to" -> 1180.66s - 1180.72s
+   9. "be" -> 1180.76s - 1180.84s
+  10. "told." -> 1180.90s - 1181.16s
 
 --------------------------------------------------
 
-SEGMENT 322: [1181.72s - 1185.39s]
+SEGMENT 330: [1181.74s - 1185.40s]
 Text: "Transparency reports show how often governments request your data."
 Word-level timestamps:
-   1. "Transparency" -> 1181.72s - 1182.38s
-   2. "reports" -> 1182.46s - 1182.86s
-   3. "show" -> 1183.12s - 1183.32s
-   4. "how" -> 1183.38s - 1183.54s
-   5. "often" -> 1183.72s - 1183.98s
-   6. "governments" -> 1184.03s - 1184.51s
-   7. "request" -> 1184.57s - 1184.90s
-   8. "your" -> 1184.94s - 1185.07s
-   9. "data." -> 1185.11s - 1185.39s
+   1. "Transparency" -> 1181.74s - 1182.40s
+   2. "reports" -> 1182.46s - 1182.88s
+   3. "show" -> 1183.14s - 1183.34s
+   4. "how" -> 1183.40s - 1183.56s
+   5. "often" -> 1183.74s - 1183.98s
+   6. "governments" -> 1184.04s - 1184.50s
+   7. "request" -> 1184.58s - 1184.92s
+   8. "your" -> 1184.96s - 1185.08s
+   9. "data." -> 1185.10s - 1185.40s
 
 --------------------------------------------------
 
-SEGMENT 323: [1185.87s - 1188.77s]
+SEGMENT 331: [1185.86s - 1188.77s]
 Text: "At least now we know it's happening, but let's not kid ourselves."
 Word-level timestamps:
-   1. "At" -> 1185.87s - 1185.91s
-   2. "least" -> 1185.95s - 1186.15s
-   3. "now" -> 1186.21s - 1186.33s
-   4. "we" -> 1186.37s - 1186.47s
-   5. "know" -> 1186.51s - 1186.63s
-   6. "it's" -> 1186.69s - 1186.81s
-   7. "happening," -> 1186.85s - 1187.23s
-   8. "but" -> 1187.65s - 1187.73s
-   9. "let's" -> 1187.77s - 1187.91s
-  10. "not" -> 1187.95s - 1188.07s
+   1. "At" -> 1185.86s - 1185.92s
+   2. "least" -> 1185.96s - 1186.16s
+   3. "now" -> 1186.22s - 1186.32s
+   4. "we" -> 1186.38s - 1186.48s
+   5. "know" -> 1186.52s - 1186.64s
+   6. "it's" -> 1186.70s - 1186.80s
+   7. "happening," -> 1186.84s - 1187.24s
+   8. "but" -> 1187.67s - 1187.75s
+   9. "let's" -> 1187.77s - 1187.93s
+  10. "not" -> 1187.97s - 1188.09s
   11. "kid" -> 1188.13s - 1188.27s
-  12. "ourselves." -> 1188.31s - 1188.77s
+  12. "ourselves." -> 1188.33s - 1188.77s
 
 --------------------------------------------------
 
-SEGMENT 324: [1189.33s - 1192.47s]
+SEGMENT 332: [1189.33s - 1192.47s]
 Text: "The plantation owners are already finding workarounds."
 Word-level timestamps:
-   1. "The" -> 1189.33s - 1189.39s
-   2. "plantation" -> 1189.43s - 1189.99s
-   3. "owners" -> 1190.07s - 1190.27s
-   4. "are" -> 1190.35s - 1190.43s
-   5. "already" -> 1190.55s - 1190.85s
-   6. "finding" -> 1190.95s - 1191.27s
+   1. "The" -> 1189.33s - 1189.41s
+   2. "plantation" -> 1189.45s - 1190.01s
+   3. "owners" -> 1190.07s - 1190.29s
+   4. "are" -> 1190.35s - 1190.45s
+   5. "already" -> 1190.57s - 1190.87s
+   6. "finding" -> 1190.97s - 1191.29s
    7. "workarounds." -> 1191.35s - 1192.47s
 
 --------------------------------------------------
 
-SEGMENT 325: [1192.45s - 1200.88s]
+SEGMENT 333: [1192.45s - 1200.89s]
 Text: "Fingerprinting your device instead of using cookies, building shadow profiles, working with data brokers who operate outside these regulations."
 Word-level timestamps:
    1. "Fingerprinting" -> 1192.45s - 1193.11s
    2. "your" -> 1193.13s - 1193.25s
    3. "device" -> 1193.29s - 1193.67s
-   4. "instead" -> 1193.91s - 1194.25s
-   5. "of" -> 1194.29s - 1194.33s
-   6. "using" -> 1194.45s - 1194.63s
-   7. "cookies," -> 1194.69s - 1195.06s
+   4. "instead" -> 1193.91s - 1194.26s
+   5. "of" -> 1194.30s - 1194.34s
+   6. "using" -> 1194.46s - 1194.64s
+   7. "cookies," -> 1194.70s - 1195.06s
    8. "building" -> 1195.58s - 1195.88s
    9. "shadow" -> 1195.94s - 1196.26s
   10. "profiles," -> 1196.32s - 1196.84s
@@ -5142,115 +5190,115 @@ Word-level timestamps:
   13. "data" -> 1197.92s - 1198.16s
   14. "brokers" -> 1198.20s - 1198.60s
   15. "who" -> 1198.66s - 1198.80s
-  16. "operate" -> 1199.00s - 1199.32s
-  17. "outside" -> 1199.44s - 1199.94s
-  18. "these" -> 1199.98s - 1200.18s
-  19. "regulations." -> 1200.24s - 1200.88s
+  16. "operate" -> 1199.00s - 1199.33s
+  17. "outside" -> 1199.44s - 1199.95s
+  18. "these" -> 1199.99s - 1200.19s
+  19. "regulations." -> 1200.25s - 1200.89s
 
 --------------------------------------------------
 
-SEGMENT 326: [1201.46s - 1203.79s]
+SEGMENT 334: [1201.47s - 1203.79s]
 Text: "For every hole we plug, they drill too more."
 Word-level timestamps:
-   1. "For" -> 1201.46s - 1201.56s
-   2. "every" -> 1201.66s - 1201.84s
-   3. "hole" -> 1201.88s - 1202.04s
-   4. "we" -> 1202.06s - 1202.18s
-   5. "plug," -> 1202.24s - 1202.54s
-   6. "they" -> 1202.86s - 1203.00s
-   7. "drill" -> 1203.06s - 1203.28s
-   8. "too" -> 1203.34s - 1203.50s
-   9. "more." -> 1203.56s - 1203.79s
+   1. "For" -> 1201.47s - 1201.57s
+   2. "every" -> 1201.67s - 1201.85s
+   3. "hole" -> 1201.89s - 1202.05s
+   4. "we" -> 1202.07s - 1202.19s
+   5. "plug," -> 1202.25s - 1202.55s
+   6. "they" -> 1202.87s - 1203.01s
+   7. "drill" -> 1203.07s - 1203.29s
+   8. "too" -> 1203.35s - 1203.51s
+   9. "more." -> 1203.57s - 1203.79s
 
 --------------------------------------------------
 
-SEGMENT 327: [1204.31s - 1204.65s]
+SEGMENT 335: [1204.31s - 1204.65s]
 Text: "What now?"
 Word-level timestamps:
-   1. "What" -> 1204.31s - 1204.42s
-   2. "now?" -> 1204.46s - 1204.65s
+   1. "What" -> 1204.31s - 1204.43s
+   2. "now?" -> 1204.47s - 1204.65s
 
 --------------------------------------------------
 
-SEGMENT 328: [1205.19s - 1206.13s]
+SEGMENT 336: [1205.19s - 1206.14s]
 Text: "So where does that leave us?"
 Word-level timestamps:
-   1. "So" -> 1205.19s - 1205.31s
-   2. "where" -> 1205.33s - 1205.45s
-   3. "does" -> 1205.47s - 1205.57s
-   4. "that" -> 1205.61s - 1205.73s
-   5. "leave" -> 1205.79s - 1205.97s
-   6. "us?" -> 1206.05s - 1206.13s
+   1. "So" -> 1205.19s - 1205.32s
+   2. "where" -> 1205.34s - 1205.46s
+   3. "does" -> 1205.48s - 1205.58s
+   4. "that" -> 1205.62s - 1205.74s
+   5. "leave" -> 1205.80s - 1205.98s
+   6. "us?" -> 1206.06s - 1206.14s
 
 --------------------------------------------------
 
-SEGMENT 329: [1206.69s - 1209.35s]
+SEGMENT 337: [1206.70s - 1209.36s]
 Text: "Look, we like to end these stories with a positive note."
 Word-level timestamps:
-   1. "Look," -> 1206.69s - 1206.89s
-   2. "we" -> 1207.25s - 1207.35s
-   3. "like" -> 1207.37s - 1207.53s
-   4. "to" -> 1207.57s - 1207.63s
-   5. "end" -> 1207.73s - 1207.83s
-   6. "these" -> 1207.87s - 1208.01s
-   7. "stories" -> 1208.07s - 1208.39s
-   8. "with" -> 1208.43s - 1208.53s
-   9. "a" -> 1208.59s - 1208.61s
-  10. "positive" -> 1208.67s - 1209.07s
-  11. "note." -> 1209.15s - 1209.35s
+   1. "Look," -> 1206.70s - 1207.24s
+   2. "we" -> 1207.26s - 1207.36s
+   3. "like" -> 1207.38s - 1207.54s
+   4. "to" -> 1207.58s - 1207.64s
+   5. "end" -> 1207.74s - 1207.84s
+   6. "these" -> 1207.88s - 1208.02s
+   7. "stories" -> 1208.08s - 1208.40s
+   8. "with" -> 1208.44s - 1208.54s
+   9. "a" -> 1208.60s - 1208.62s
+  10. "positive" -> 1208.68s - 1209.08s
+  11. "note." -> 1209.16s - 1209.36s
 
 --------------------------------------------------
 
-SEGMENT 330: [1209.73s - 1210.51s]
+SEGMENT 338: [1209.74s - 1210.53s]
 Text: "But let's be real."
 Word-level timestamps:
-   1. "But" -> 1209.73s - 1209.83s
-   2. "let's" -> 1209.85s - 1210.03s
-   3. "be" -> 1210.07s - 1210.17s
-   4. "real." -> 1210.27s - 1210.51s
+   1. "But" -> 1209.74s - 1209.84s
+   2. "let's" -> 1209.86s - 1210.04s
+   3. "be" -> 1210.08s - 1210.18s
+   4. "real." -> 1210.29s - 1210.53s
 
 --------------------------------------------------
 
-SEGMENT 331: [1210.99s - 1212.45s]
+SEGMENT 339: [1211.01s - 1212.47s]
 Text: "Nothing fundamental has changed."
 Word-level timestamps:
-   1. "Nothing" -> 1210.99s - 1211.23s
-   2. "fundamental" -> 1211.33s - 1211.81s
-   3. "has" -> 1211.85s - 1211.93s
-   4. "changed." -> 1212.01s - 1212.45s
+   1. "Nothing" -> 1211.01s - 1211.25s
+   2. "fundamental" -> 1211.35s - 1211.83s
+   3. "has" -> 1211.87s - 1211.95s
+   4. "changed." -> 1212.03s - 1212.47s
 
 --------------------------------------------------
 
-SEGMENT 332: [1212.93s - 1215.88s]
+SEGMENT 340: [1212.95s - 1215.89s]
 Text: "The plantation owners are more powerful than ever."
 Word-level timestamps:
-   1. "The" -> 1212.93s - 1213.02s
-   2. "plantation" -> 1213.06s - 1213.62s
-   3. "owners" -> 1213.68s - 1213.92s
-   4. "are" -> 1213.94s - 1214.16s
-   5. "more" -> 1214.26s - 1214.44s
-   6. "powerful" -> 1214.52s - 1215.02s
-   7. "than" -> 1215.06s - 1215.18s
-   8. "ever." -> 1215.26s - 1215.88s
+   1. "The" -> 1212.95s - 1213.03s
+   2. "plantation" -> 1213.07s - 1213.63s
+   3. "owners" -> 1213.69s - 1213.93s
+   4. "are" -> 1213.95s - 1214.17s
+   5. "more" -> 1214.27s - 1214.45s
+   6. "powerful" -> 1214.53s - 1215.03s
+   7. "than" -> 1215.07s - 1215.19s
+   8. "ever." -> 1215.27s - 1215.89s
 
 --------------------------------------------------
 
-SEGMENT 333: [1215.86s - 1217.32s]
+SEGMENT 341: [1215.88s - 1217.32s]
 Text: "Their stock prices keep climbing."
 Word-level timestamps:
-   1. "Their" -> 1215.86s - 1216.06s
-   2. "stock" -> 1216.08s - 1216.32s
+   1. "Their" -> 1215.88s - 1216.06s
+   2. "stock" -> 1216.10s - 1216.32s
    3. "prices" -> 1216.36s - 1216.70s
    4. "keep" -> 1216.74s - 1216.92s
    5. "climbing." -> 1216.98s - 1217.32s
 
 --------------------------------------------------
 
-SEGMENT 334: [1217.80s - 1219.68s]
+SEGMENT 342: [1217.82s - 1219.68s]
 Text: "New free services launch every day."
 Word-level timestamps:
-   1. "New" -> 1217.80s - 1217.94s
-   2. "free" -> 1218.00s - 1218.18s
+   1. "New" -> 1217.82s - 1217.94s
+   2. "free" -> 1218.00s - 1218.20s
    3. "services" -> 1218.24s - 1218.66s
    4. "launch" -> 1218.70s - 1219.06s
    5. "every" -> 1219.26s - 1219.44s
@@ -5258,37 +5306,37 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 335: [1220.16s - 1224.13s]
+SEGMENT 343: [1220.16s - 1224.13s]
 Text: "And AI is making their surveillance capabilities even more sophisticated."
 Word-level timestamps:
-   1. "And" -> 1220.16s - 1220.25s
-   2. "AI" -> 1220.43s - 1220.73s
-   3. "is" -> 1220.83s - 1220.89s
-   4. "making" -> 1220.97s - 1221.23s
-   5. "their" -> 1221.27s - 1221.41s
-   6. "surveillance" -> 1221.45s - 1221.95s
+   1. "And" -> 1220.16s - 1220.24s
+   2. "AI" -> 1220.42s - 1220.72s
+   3. "is" -> 1220.82s - 1220.88s
+   4. "making" -> 1220.96s - 1221.22s
+   5. "their" -> 1221.27s - 1221.40s
+   6. "surveillance" -> 1221.46s - 1221.95s
    7. "capabilities" -> 1222.01s - 1222.67s
    8. "even" -> 1222.95s - 1223.13s
    9. "more" -> 1223.19s - 1223.35s
-  10. "sophisticated." -> 1223.39s - 1224.13s
+  10. "sophisticated." -> 1223.41s - 1224.13s
 
 --------------------------------------------------
 
-SEGMENT 336: [1224.61s - 1229.36s]
+SEGMENT 344: [1224.61s - 1229.36s]
 Text: "Most monkeys will keep using these platforms because, well, where else are you going to go?"
 Word-level timestamps:
    1. "Most" -> 1224.61s - 1224.81s
    2. "monkeys" -> 1224.89s - 1225.19s
-   3. "will" -> 1225.23s - 1225.38s
+   3. "will" -> 1225.23s - 1225.37s
    4. "keep" -> 1225.41s - 1225.63s
-   5. "using" -> 1225.78s - 1225.98s
-   6. "these" -> 1226.02s - 1226.16s
-   7. "platforms" -> 1226.22s - 1226.78s
-   8. "because," -> 1226.88s - 1227.28s
-   9. "well," -> 1227.74s - 1227.94s
+   5. "using" -> 1225.77s - 1225.97s
+   6. "these" -> 1226.01s - 1226.15s
+   7. "platforms" -> 1226.21s - 1226.78s
+   8. "because," -> 1226.88s - 1227.26s
+   9. "well," -> 1227.74s - 1227.96s
   10. "where" -> 1228.46s - 1228.60s
   11. "else" -> 1228.64s - 1228.78s
-  12. "are" -> 1228.80s - 1228.88s
+  12. "are" -> 1228.82s - 1228.88s
   13. "you" -> 1228.92s - 1228.98s
   14. "going" -> 1229.00s - 1229.12s
   15. "to" -> 1229.14s - 1229.18s
@@ -5296,19 +5344,19 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 337: [1229.84s - 1232.41s]
+SEGMENT 345: [1229.84s - 1232.41s]
 Text: "Convenience trumps privacy every single time."
 Word-level timestamps:
    1. "Convenience" -> 1229.84s - 1230.32s
    2. "trumps" -> 1230.38s - 1230.62s
    3. "privacy" -> 1230.70s - 1231.20s
-   4. "every" -> 1231.51s - 1231.75s
+   4. "every" -> 1231.24s - 1231.74s
    5. "single" -> 1231.81s - 1232.09s
-   6. "time." -> 1232.15s - 1232.41s
+   6. "time." -> 1232.14s - 1232.41s
 
 --------------------------------------------------
 
-SEGMENT 338: [1232.87s - 1238.88s]
+SEGMENT 346: [1232.87s - 1238.88s]
 Text: "The AI have nothing to hide mentality persists despite all evidence that everyone has something to lose."
 Word-level timestamps:
    1. "The" -> 1232.87s - 1232.97s
@@ -5320,26 +5368,26 @@ Word-level timestamps:
    7. "mentality" -> 1234.13s - 1234.73s
    8. "persists" -> 1234.81s - 1235.25s
    9. "despite" -> 1235.33s - 1235.81s
-  10. "all" -> 1236.05s - 1236.17s
-  11. "evidence" -> 1236.29s - 1236.63s
+  10. "all" -> 1235.85s - 1236.17s
+  11. "evidence" -> 1236.31s - 1236.63s
   12. "that" -> 1236.69s - 1236.83s
   13. "everyone" -> 1237.04s - 1237.41s
-  14. "has" -> 1237.48s - 1237.62s
+  14. "has" -> 1237.47s - 1237.62s
   15. "something" -> 1237.70s - 1237.98s
   16. "to" -> 1238.02s - 1238.10s
   17. "lose." -> 1238.16s - 1238.88s
 
 --------------------------------------------------
 
-SEGMENT 339: [1238.86s - 1243.40s]
+SEGMENT 347: [1238.86s - 1243.40s]
 Text: "The system is designed to be inescapable, and it's working exactly as intended."
 Word-level timestamps:
    1. "The" -> 1238.86s - 1239.04s
    2. "system" -> 1239.10s - 1239.42s
    3. "is" -> 1239.48s - 1239.54s
    4. "designed" -> 1239.60s - 1240.06s
-   5. "to" -> 1240.08s - 1240.16s
-   6. "be" -> 1240.22s - 1240.30s
+   5. "to" -> 1240.10s - 1240.16s
+   6. "be" -> 1240.20s - 1240.30s
    7. "inescapable," -> 1240.54s - 1241.26s
    8. "and" -> 1241.62s - 1241.68s
    9. "it's" -> 1241.72s - 1241.82s
@@ -5350,7 +5398,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 340: [1243.82s - 1245.58s]
+SEGMENT 348: [1243.82s - 1245.58s]
 Text: "But there are small rebellions you can join."
 Word-level timestamps:
    1. "But" -> 1243.82s - 1243.92s
@@ -5364,7 +5412,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 341: [1246.11s - 1249.21s]
+SEGMENT 349: [1246.11s - 1249.21s]
 Text: "Use privacy-focused browsers like Firefox or Brave."
 Word-level timestamps:
    1. "Use" -> 1246.11s - 1246.24s
@@ -5377,7 +5425,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 342: [1249.65s - 1251.19s]
+SEGMENT 350: [1249.65s - 1251.19s]
 Text: "They block trackers by default."
 Word-level timestamps:
    1. "They" -> 1249.65s - 1249.79s
@@ -5388,12 +5436,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 343: [1251.67s - 1253.89s]
+SEGMENT 351: [1251.67s - 1253.89s]
 Text: "Install a VPN to mask your location."
 Word-level timestamps:
    1. "Install" -> 1251.67s - 1252.01s
    2. "a" -> 1252.07s - 1252.11s
-   3. "VPN" -> 1252.15s - 1252.73s
+   3. "VPN" -> 1252.15s - 1252.71s
    4. "to" -> 1252.85s - 1252.93s
    5. "mask" -> 1253.03s - 1253.27s
    6. "your" -> 1253.29s - 1253.39s
@@ -5401,10 +5449,10 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 344: [1254.41s - 1256.52s]
+SEGMENT 352: [1254.41s - 1256.52s]
 Text: "Use encrypted messaging apps like Signal."
 Word-level timestamps:
-   1. "Use" -> 1254.41s - 1254.55s
+   1. "Use" -> 1254.41s - 1254.53s
    2. "encrypted" -> 1254.57s - 1255.09s
    3. "messaging" -> 1255.17s - 1255.57s
    4. "apps" -> 1255.71s - 1255.87s
@@ -5413,12 +5461,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 345: [1257.02s - 1259.76s]
+SEGMENT 353: [1257.02s - 1259.76s]
 Text: "Run add blockers, though many sites will fight you on this."
 Word-level timestamps:
    1. "Run" -> 1257.02s - 1257.16s
    2. "add" -> 1257.22s - 1257.32s
-   3. "blockers," -> 1257.36s - 1257.82s
+   3. "blockers," -> 1257.36s - 1257.84s
    4. "though" -> 1258.18s - 1258.32s
    5. "many" -> 1258.36s - 1258.54s
    6. "sites" -> 1258.62s - 1258.86s
@@ -5430,7 +5478,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 346: [1260.40s - 1263.82s]
+SEGMENT 354: [1260.40s - 1263.82s]
 Text: "Actually, read the privacy settings and turn off everything you can."
 Word-level timestamps:
    1. "Actually," -> 1260.40s - 1260.74s
@@ -5447,7 +5495,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 347: [1264.28s - 1268.11s]
+SEGMENT 355: [1264.28s - 1268.11s]
 Text: "It won't stop all tracking, but it reduces the data they collect."
 Word-level timestamps:
    1. "It" -> 1264.28s - 1264.34s
@@ -5465,15 +5513,15 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 348: [1268.09s - 1269.19s]
+SEGMENT 356: [1268.09s - 1269.19s]
 Text: "Support regulation."
 Word-level timestamps:
-   1. "Support" -> 1268.09s - 1268.55s
+   1. "Support" -> 1268.09s - 1268.57s
    2. "regulation." -> 1268.59s - 1269.19s
 
 --------------------------------------------------
 
-SEGMENT 349: [1269.63s - 1274.30s]
+SEGMENT 357: [1269.63s - 1274.30s]
 Text: "When your jungle government considers privacy laws, let your representatives know you care."
 Word-level timestamps:
    1. "When" -> 1269.63s - 1269.73s
@@ -5492,7 +5540,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 350: [1274.82s - 1276.78s]
+SEGMENT 358: [1274.82s - 1276.78s]
 Text: "Vote for monkeys who take this seriously."
 Word-level timestamps:
    1. "Vote" -> 1274.82s - 1275.00s
@@ -5505,7 +5553,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 351: [1277.22s - 1280.13s]
+SEGMENT 359: [1277.22s - 1280.13s]
 Text: "Consider paying for services instead of using free ones."
 Word-level timestamps:
    1. "Consider" -> 1277.22s - 1277.55s
@@ -5520,7 +5568,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 352: [1280.71s - 1284.80s]
+SEGMENT 360: [1280.71s - 1284.80s]
 Text: "Yes, it costs bananas, but at least you're the customer instead of the product."
 Word-level timestamps:
    1. "Yes," -> 1280.71s - 1280.97s
@@ -5530,7 +5578,7 @@ Word-level timestamps:
    5. "but" -> 1282.74s - 1282.84s
    6. "at" -> 1282.88s - 1282.92s
    7. "least" -> 1282.98s - 1283.14s
-   8. "you're" -> 1283.16s - 1283.32s
+   8. "you're" -> 1283.18s - 1283.32s
    9. "the" -> 1283.34s - 1283.40s
   10. "customer" -> 1283.46s - 1283.88s
   11. "instead" -> 1283.94s - 1284.24s
@@ -5540,7 +5588,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 353: [1285.30s - 1287.55s]
+SEGMENT 361: [1285.30s - 1287.55s]
 Text: "And most importantly, talk about this."
 Word-level timestamps:
    1. "And" -> 1285.30s - 1285.36s
@@ -5552,7 +5600,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 354: [1287.53s - 1291.29s]
+SEGMENT 362: [1287.53s - 1291.29s]
 Text: "The plantation owners rely on monkeys not understanding what's happening."
 Word-level timestamps:
    1. "The" -> 1287.53s - 1287.71s
@@ -5568,7 +5616,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 355: [1291.73s - 1292.41s]
+SEGMENT 363: [1291.73s - 1292.41s]
 Text: "Spread awareness."
 Word-level timestamps:
    1. "Spread" -> 1291.73s - 1291.97s
@@ -5576,7 +5624,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 356: [1292.97s - 1293.82s]
+SEGMENT 364: [1292.97s - 1293.82s]
 Text: "Have conversations."
 Word-level timestamps:
    1. "Have" -> 1292.97s - 1293.12s
@@ -5584,7 +5632,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 357: [1294.40s - 1294.98s]
+SEGMENT 365: [1294.40s - 1294.98s]
 Text: "Make noise."
 Word-level timestamps:
    1. "Make" -> 1294.40s - 1294.54s
@@ -5592,7 +5640,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 358: [1295.50s - 1296.66s]
+SEGMENT 366: [1295.50s - 1296.66s]
 Text: "The uncomfortable truth."
 Word-level timestamps:
    1. "The" -> 1295.50s - 1295.60s
@@ -5601,7 +5649,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 359: [1297.18s - 1298.98s]
+SEGMENT 367: [1297.18s - 1298.98s]
 Text: "Marcus knows he's being exploited now."
 Word-level timestamps:
    1. "Marcus" -> 1297.18s - 1297.48s
@@ -5613,7 +5661,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 360: [1299.47s - 1304.41s]
+SEGMENT 368: [1299.47s - 1304.41s]
 Text: "He knows every time he opens blue book, every time he searches on search engine con."
 Word-level timestamps:
    1. "He" -> 1299.47s - 1299.55s
@@ -5635,7 +5683,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 361: [1304.43s - 1308.14s]
+SEGMENT 369: [1304.43s - 1308.14s]
 Text: "Every time he asks his home assistant a question, he's feeding the machine."
 Word-level timestamps:
    1. "Every" -> 1304.43s - 1304.63s
@@ -5654,7 +5702,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 362: [1308.58s - 1313.45s]
+SEGMENT 370: [1308.58s - 1313.45s]
 Text: "But he uses these services anyway, because his job requires video conference calls."
 Word-level timestamps:
    1. "But" -> 1308.58s - 1308.66s
@@ -5673,7 +5721,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 363: [1313.43s - 1315.25s]
+SEGMENT 371: [1313.43s - 1315.25s]
 Text: "because his friends are on these platforms."
 Word-level timestamps:
    1. "because" -> 1313.43s - 1313.75s
@@ -5686,7 +5734,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 364: [1315.79s - 1318.94s]
+SEGMENT 372: [1315.79s - 1318.94s]
 Text: "Because modern life in the jungle demands participation."
 Word-level timestamps:
    1. "Because" -> 1315.79s - 1316.07s
@@ -5695,12 +5743,12 @@ Word-level timestamps:
    4. "in" -> 1316.97s - 1317.03s
    5. "the" -> 1317.07s - 1317.15s
    6. "jungle" -> 1317.23s - 1317.60s
-   7. "demands" -> 1317.63s - 1318.14s
-   8. "participation." -> 1318.20s - 1318.94s
+   7. "demands" -> 1317.63s - 1318.13s
+   8. "participation." -> 1318.19s - 1318.94s
 
 --------------------------------------------------
 
-SEGMENT 365: [1319.42s - 1321.66s]
+SEGMENT 373: [1319.42s - 1321.66s]
 Text: "At least now he knows the real cost."
 Word-level timestamps:
    1. "At" -> 1319.42s - 1319.48s
@@ -5709,12 +5757,12 @@ Word-level timestamps:
    4. "he" -> 1320.06s - 1320.14s
    5. "knows" -> 1320.18s - 1320.38s
    6. "the" -> 1320.42s - 1320.52s
-   7. "real" -> 1320.56s - 1320.76s
+   7. "real" -> 1320.56s - 1320.74s
    8. "cost." -> 1320.82s - 1321.66s
 
 --------------------------------------------------
 
-SEGMENT 366: [1321.68s - 1324.14s]
+SEGMENT 374: [1321.68s - 1324.14s]
 Text: "He's not under the illusion that these services are free."
 Word-level timestamps:
    1. "He's" -> 1321.68s - 1321.80s
@@ -5730,12 +5778,12 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 367: [1324.59s - 1331.49s]
+SEGMENT 375: [1324.58s - 1331.49s]
 Text: "He understands he's paying with something far more valuable than bananas, his privacy, his attention, his peace of mind."
 Word-level timestamps:
-   1. "He" -> 1324.59s - 1324.66s
+   1. "He" -> 1324.58s - 1324.66s
    2. "understands" -> 1324.72s - 1325.27s
-   3. "he's" -> 1325.33s - 1325.47s
+   3. "he's" -> 1325.33s - 1325.46s
    4. "paying" -> 1325.53s - 1325.87s
    5. "with" -> 1325.93s - 1326.05s
    6. "something" -> 1326.11s - 1326.41s
@@ -5755,15 +5803,15 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 368: [1331.97s - 1334.30s]
+SEGMENT 376: [1331.97s - 1334.30s]
 Text: "And he tries to minimize the damage where he can."
 Word-level timestamps:
-   1. "And" -> 1331.97s - 1332.06s
-   2. "he" -> 1332.10s - 1332.16s
-   3. "tries" -> 1332.24s - 1332.52s
-   4. "to" -> 1332.58s - 1332.64s
-   5. "minimize" -> 1332.72s - 1333.16s
-   6. "the" -> 1333.20s - 1333.30s
+   1. "And" -> 1331.97s - 1332.05s
+   2. "he" -> 1332.09s - 1332.15s
+   3. "tries" -> 1332.23s - 1332.51s
+   4. "to" -> 1332.57s - 1332.63s
+   5. "minimize" -> 1332.71s - 1333.15s
+   6. "the" -> 1333.19s - 1333.30s
    7. "damage" -> 1333.36s - 1333.68s
    8. "where" -> 1333.72s - 1333.86s
    9. "he" -> 1333.90s - 1333.98s
@@ -5771,7 +5819,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 369: [1334.78s - 1339.49s]
+SEGMENT 377: [1334.78s - 1339.48s]
 Text: "A little bit of resistance in a system designed to make resistance nearly impossible."
 Word-level timestamps:
    1. "A" -> 1334.78s - 1334.82s
@@ -5785,204 +5833,204 @@ Word-level timestamps:
    9. "designed" -> 1336.78s - 1337.38s
   10. "to" -> 1337.42s - 1337.48s
   11. "make" -> 1337.54s - 1337.68s
-  12. "resistance" -> 1337.72s - 1338.35s
-  13. "nearly" -> 1338.53s - 1338.83s
-  14. "impossible." -> 1338.88s - 1339.49s
+  12. "resistance" -> 1337.72s - 1338.34s
+  13. "nearly" -> 1338.52s - 1338.82s
+  14. "impossible." -> 1338.88s - 1339.48s
 
 --------------------------------------------------
 
-SEGMENT 370: [1339.97s - 1340.47s]
+SEGMENT 378: [1339.96s - 1340.46s]
 Text: "Conclusion."
 Word-level timestamps:
-   1. "Conclusion." -> 1339.97s - 1340.47s
+   1. "Conclusion." -> 1339.96s - 1340.46s
 
 --------------------------------------------------
 
-SEGMENT 371: [1340.91s - 1342.17s]
+SEGMENT 379: [1340.90s - 1342.19s]
 Text: "Here's the bottom line."
 Word-level timestamps:
-   1. "Here's" -> 1340.91s - 1341.11s
+   1. "Here's" -> 1340.90s - 1341.11s
    2. "the" -> 1341.15s - 1341.21s
    3. "bottom" -> 1341.27s - 1341.53s
-   4. "line." -> 1341.57s - 1342.17s
+   4. "line." -> 1341.57s - 1342.19s
 
 --------------------------------------------------
 
-SEGMENT 372: [1342.15s - 1344.89s]
+SEGMENT 380: [1342.17s - 1344.87s]
 Text: "Free is the most expensive word in the modern jungle."
 Word-level timestamps:
-   1. "Free" -> 1342.15s - 1342.51s
-   2. "is" -> 1342.57s - 1342.65s
+   1. "Free" -> 1342.17s - 1342.53s
+   2. "is" -> 1342.59s - 1342.65s
    3. "the" -> 1342.71s - 1342.77s
    4. "most" -> 1342.83s - 1343.05s
    5. "expensive" -> 1343.11s - 1343.61s
-   6. "word" -> 1343.69s - 1343.93s
+   6. "word" -> 1343.69s - 1343.95s
    7. "in" -> 1343.99s - 1344.03s
    8. "the" -> 1344.07s - 1344.13s
    9. "modern" -> 1344.17s - 1344.49s
-  10. "jungle." -> 1344.56s - 1344.89s
+  10. "jungle." -> 1344.55s - 1344.87s
 
 --------------------------------------------------
 
-SEGMENT 373: [1345.36s - 1346.14s]
+SEGMENT 381: [1345.35s - 1346.13s]
 Text: "You're always paying."
 Word-level timestamps:
-   1. "You're" -> 1345.36s - 1345.52s
-   2. "always" -> 1345.54s - 1345.78s
-   3. "paying." -> 1345.84s - 1346.14s
+   1. "You're" -> 1345.35s - 1345.51s
+   2. "always" -> 1345.53s - 1345.77s
+   3. "paying." -> 1345.85s - 1346.13s
 
 --------------------------------------------------
 
-SEGMENT 374: [1346.60s - 1346.92s]
+SEGMENT 382: [1346.62s - 1346.92s]
 Text: "Always."
 Word-level timestamps:
-   1. "Always." -> 1346.60s - 1346.92s
+   1. "Always." -> 1346.62s - 1346.92s
 
 --------------------------------------------------
 
-SEGMENT 375: [1347.48s - 1353.33s]
+SEGMENT 383: [1347.48s - 1353.33s]
 Text: "With your data, with your attention, with your mental health, with your privacy, with your democracy itself."
 Word-level timestamps:
    1. "With" -> 1347.48s - 1347.60s
-   2. "your" -> 1347.62s - 1347.76s
+   2. "your" -> 1347.64s - 1347.76s
    3. "data," -> 1347.80s - 1348.12s
    4. "with" -> 1348.52s - 1348.64s
    5. "your" -> 1348.68s - 1348.82s
    6. "attention," -> 1348.86s - 1349.32s
-   7. "with" -> 1349.66s - 1349.79s
-   8. "your" -> 1349.81s - 1349.94s
-   9. "mental" -> 1349.98s - 1350.29s
-  10. "health," -> 1350.33s - 1350.57s
-  11. "with" -> 1350.95s - 1351.05s
-  12. "your" -> 1351.07s - 1351.19s
-  13. "privacy," -> 1351.23s - 1351.73s
+   7. "with" -> 1349.66s - 1349.78s
+   8. "your" -> 1349.82s - 1349.94s
+   9. "mental" -> 1349.98s - 1350.28s
+  10. "health," -> 1350.32s - 1350.58s
+  11. "with" -> 1350.94s - 1351.04s
+  12. "your" -> 1351.09s - 1351.18s
+  13. "privacy," -> 1351.22s - 1351.73s
   14. "with" -> 1352.05s - 1352.17s
   15. "your" -> 1352.21s - 1352.33s
-  16. "democracy" -> 1352.37s - 1352.89s
+  16. "democracy" -> 1352.37s - 1352.91s
   17. "itself." -> 1352.97s - 1353.33s
 
 --------------------------------------------------
 
-SEGMENT 376: [1353.87s - 1360.45s]
+SEGMENT 384: [1353.87s - 1360.46s]
 Text: "The price tag is just hidden, buried in terms of service agreements and disguised behind convenient features."
 Word-level timestamps:
-   1. "The" -> 1353.87s - 1353.95s
+   1. "The" -> 1353.87s - 1353.97s
    2. "price" -> 1354.01s - 1354.29s
-   3. "tag" -> 1354.33s - 1354.62s
-   4. "is" -> 1354.65s - 1354.86s
-   5. "just" -> 1354.93s - 1355.18s
-   6. "hidden," -> 1355.24s - 1355.50s
-   7. "buried" -> 1355.88s - 1356.20s
+   3. "tag" -> 1354.35s - 1354.63s
+   4. "is" -> 1354.65s - 1354.85s
+   5. "just" -> 1354.93s - 1355.17s
+   6. "hidden," -> 1355.23s - 1355.49s
+   7. "buried" -> 1355.87s - 1356.19s
    8. "in" -> 1356.26s - 1356.30s
    9. "terms" -> 1356.38s - 1356.62s
-  10. "of" -> 1356.68s - 1356.72s
+  10. "of" -> 1356.68s - 1356.74s
   11. "service" -> 1356.76s - 1357.20s
-  12. "agreements" -> 1357.24s - 1357.70s
+  12. "agreements" -> 1357.26s - 1357.72s
   13. "and" -> 1357.94s - 1358.02s
-  14. "disguised" -> 1358.08s - 1358.60s
+  14. "disguised" -> 1358.08s - 1358.62s
   15. "behind" -> 1358.68s - 1359.02s
   16. "convenient" -> 1359.12s - 1359.58s
-  17. "features." -> 1359.66s - 1360.45s
+  17. "features." -> 1359.66s - 1360.46s
 
 --------------------------------------------------
 
-SEGMENT 377: [1360.43s - 1366.30s]
+SEGMENT 385: [1360.44s - 1366.29s]
 Text: "The plantation owners have built trillion banana empires by convincing monkeys that they're getting something for nothing."
 Word-level timestamps:
-   1. "The" -> 1360.43s - 1360.65s
-   2. "plantation" -> 1360.69s - 1361.25s
-   3. "owners" -> 1361.35s - 1361.57s
-   4. "have" -> 1361.63s - 1361.75s
-   5. "built" -> 1361.77s - 1361.97s
+   1. "The" -> 1360.44s - 1360.64s
+   2. "plantation" -> 1360.68s - 1361.26s
+   3. "owners" -> 1361.36s - 1361.58s
+   4. "have" -> 1361.62s - 1361.74s
+   5. "built" -> 1361.79s - 1361.96s
    6. "trillion" -> 1362.01s - 1362.53s
-   7. "banana" -> 1362.55s - 1362.91s
+   7. "banana" -> 1362.57s - 1362.91s
    8. "empires" -> 1363.01s - 1363.49s
    9. "by" -> 1363.59s - 1363.71s
   10. "convincing" -> 1363.79s - 1364.31s
-  11. "monkeys" -> 1364.39s - 1364.78s
-  12. "that" -> 1364.84s - 1364.93s
-  13. "they're" -> 1364.95s - 1365.16s
-  14. "getting" -> 1365.20s - 1365.42s
-  15. "something" -> 1365.50s - 1365.80s
-  16. "for" -> 1365.84s - 1365.94s
-  17. "nothing." -> 1366.00s - 1366.30s
+  11. "monkeys" -> 1364.41s - 1364.77s
+  12. "that" -> 1364.83s - 1364.93s
+  13. "they're" -> 1364.95s - 1365.15s
+  14. "getting" -> 1365.19s - 1365.41s
+  15. "something" -> 1365.49s - 1365.79s
+  16. "for" -> 1365.83s - 1365.95s
+  17. "nothing." -> 1366.01s - 1366.29s
 
 --------------------------------------------------
 
-SEGMENT 378: [1366.72s - 1367.58s]
+SEGMENT 386: [1366.71s - 1367.57s]
 Text: "But nothing is free."
 Word-level timestamps:
-   1. "But" -> 1366.72s - 1366.82s
-   2. "nothing" -> 1366.88s - 1367.14s
-   3. "is" -> 1367.20s - 1367.26s
-   4. "free." -> 1367.36s - 1367.58s
+   1. "But" -> 1366.71s - 1366.81s
+   2. "nothing" -> 1366.89s - 1367.13s
+   3. "is" -> 1367.19s - 1367.25s
+   4. "free." -> 1367.35s - 1367.57s
 
 --------------------------------------------------
 
-SEGMENT 379: [1368.08s - 1368.24s]
+SEGMENT 387: [1368.09s - 1368.23s]
 Text: "Ever."
 Word-level timestamps:
-   1. "Ever." -> 1368.08s - 1368.24s
+   1. "Ever." -> 1368.09s - 1368.23s
 
 --------------------------------------------------
 
-SEGMENT 380: [1368.74s - 1372.27s]
+SEGMENT 388: [1368.75s - 1372.26s]
 Text: "The cost just comes later in ways you don't immediately see."
 Word-level timestamps:
-   1. "The" -> 1368.74s - 1368.84s
-   2. "cost" -> 1368.88s - 1369.20s
-   3. "just" -> 1369.30s - 1369.48s
-   4. "comes" -> 1369.57s - 1369.74s
-   5. "later" -> 1369.79s - 1370.09s
-   6. "in" -> 1370.13s - 1370.61s
-   7. "ways" -> 1370.69s - 1370.89s
-   8. "you" -> 1370.93s - 1371.05s
-   9. "don't" -> 1371.13s - 1371.33s
-  10. "immediately" -> 1371.39s - 1371.95s
-  11. "see." -> 1372.05s - 1372.27s
+   1. "The" -> 1368.75s - 1368.83s
+   2. "cost" -> 1368.87s - 1369.19s
+   3. "just" -> 1369.29s - 1369.47s
+   4. "comes" -> 1369.55s - 1369.73s
+   5. "later" -> 1369.77s - 1370.08s
+   6. "in" -> 1370.12s - 1370.60s
+   7. "ways" -> 1370.67s - 1370.88s
+   8. "you" -> 1370.92s - 1371.04s
+   9. "don't" -> 1371.12s - 1371.32s
+  10. "immediately" -> 1371.38s - 1371.94s
+  11. "see." -> 1372.04s - 1372.26s
 
 --------------------------------------------------
 
-SEGMENT 381: [1372.75s - 1374.89s]
+SEGMENT 389: [1372.74s - 1374.90s]
 Text: "Your data generating profits you'll never see."
 Word-level timestamps:
-   1. "Your" -> 1372.75s - 1372.87s
-   2. "data" -> 1372.91s - 1373.17s
-   3. "generating" -> 1373.23s - 1373.67s
-   4. "profits" -> 1373.73s - 1374.15s
-   5. "you'll" -> 1374.19s - 1374.41s
-   6. "never" -> 1374.45s - 1374.63s
-   7. "see." -> 1374.71s - 1374.89s
+   1. "Your" -> 1372.74s - 1372.86s
+   2. "data" -> 1372.90s - 1373.16s
+   3. "generating" -> 1373.22s - 1373.66s
+   4. "profits" -> 1373.72s - 1374.14s
+   5. "you'll" -> 1374.20s - 1374.40s
+   6. "never" -> 1374.44s - 1374.62s
+   7. "see." -> 1374.70s - 1374.90s
 
 --------------------------------------------------
 
-SEGMENT 382: [1375.38s - 1377.80s]
+SEGMENT 390: [1375.36s - 1377.78s]
 Text: "Your attention being sold to the highest bidder."
 Word-level timestamps:
-   1. "Your" -> 1375.38s - 1375.52s
-   2. "attention" -> 1375.58s - 1376.02s
-   3. "being" -> 1376.08s - 1376.32s
-   4. "sold" -> 1376.46s - 1376.78s
-   5. "to" -> 1376.90s - 1376.98s
-   6. "the" -> 1377.02s - 1377.10s
-   7. "highest" -> 1377.16s - 1377.48s
-   8. "bidder." -> 1377.56s - 1377.80s
+   1. "Your" -> 1375.36s - 1375.52s
+   2. "attention" -> 1375.56s - 1376.00s
+   3. "being" -> 1376.06s - 1376.30s
+   4. "sold" -> 1376.44s - 1376.76s
+   5. "to" -> 1376.88s - 1376.96s
+   6. "the" -> 1377.00s - 1377.08s
+   7. "highest" -> 1377.16s - 1377.46s
+   8. "bidder." -> 1377.54s - 1377.78s
 
 --------------------------------------------------
 
-SEGMENT 383: [1378.30s - 1381.17s]
+SEGMENT 391: [1378.29s - 1381.17s]
 Text: "Your psychology being manipulated for engagement."
 Word-level timestamps:
-   1. "Your" -> 1378.30s - 1378.44s
-   2. "psychology" -> 1378.46s - 1379.14s
-   3. "being" -> 1379.22s - 1379.44s
-   4. "manipulated" -> 1379.48s - 1380.13s
-   5. "for" -> 1380.21s - 1380.31s
-   6. "engagement." -> 1380.37s - 1381.17s
+   1. "Your" -> 1378.29s - 1378.42s
+   2. "psychology" -> 1378.44s - 1379.13s
+   3. "being" -> 1379.21s - 1379.43s
+   4. "manipulated" -> 1379.47s - 1380.13s
+   5. "for" -> 1380.19s - 1380.29s
+   6. "engagement." -> 1380.35s - 1381.17s
 
 --------------------------------------------------
 
-SEGMENT 384: [1381.15s - 1386.20s]
+SEGMENT 392: [1381.15s - 1386.20s]
 Text: "Your information being used in ways you never consented to and probably don't even know about."
 Word-level timestamps:
    1. "Your" -> 1381.15s - 1381.45s
@@ -6004,7 +6052,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 385: [1386.24s - 1393.93s]
+SEGMENT 393: [1386.24s - 1393.95s]
 Text: "So the next time you see the word free attached to an app, a service, a platform, ask yourself, what am I really trading for this?"
 Word-level timestamps:
    1. "So" -> 1386.24s - 1386.82s
@@ -6032,11 +6080,11 @@ Word-level timestamps:
   23. "really" -> 1392.95s - 1393.21s
   24. "trading" -> 1393.27s - 1393.57s
   25. "for" -> 1393.61s - 1393.71s
-  26. "this?" -> 1393.75s - 1393.93s
+  26. "this?" -> 1393.75s - 1393.95s
 
 --------------------------------------------------
 
-SEGMENT 386: [1394.49s - 1395.37s]
+SEGMENT 394: [1394.49s - 1395.37s]
 Text: "What's the hidden price?"
 Word-level timestamps:
    1. "What's" -> 1394.49s - 1394.65s
@@ -6046,7 +6094,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 387: [1395.93s - 1398.11s]
+SEGMENT 395: [1395.93s - 1398.11s]
 Text: "What am I giving up in exchange for this convenience?"
 Word-level timestamps:
    1. "What" -> 1395.93s - 1396.01s
@@ -6062,7 +6110,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 388: [1398.65s - 1402.08s]
+SEGMENT 396: [1398.65s - 1402.08s]
 Text: "Remember, if it seems too good to be true, it definitely is."
 Word-level timestamps:
    1. "Remember," -> 1398.65s - 1398.99s
@@ -6080,7 +6128,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 389: [1402.66s - 1406.35s]
+SEGMENT 397: [1402.66s - 1406.35s]
 Text: "And as we like to say on this channel, always follow the bananas."
 Word-level timestamps:
    1. "And" -> 1402.66s - 1402.74s
@@ -6091,7 +6139,7 @@ Word-level timestamps:
    6. "say" -> 1403.44s - 1403.62s
    7. "on" -> 1403.68s - 1403.74s
    8. "this" -> 1403.76s - 1403.88s
-   9. "channel," -> 1403.94s - 1404.24s
+   9. "channel," -> 1403.94s - 1404.26s
   10. "always" -> 1404.72s - 1405.02s
   11. "follow" -> 1405.08s - 1405.32s
   12. "the" -> 1405.37s - 1405.42s
@@ -6099,7 +6147,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 390: [1406.33s - 1412.88s]
+SEGMENT 398: [1406.33s - 1412.88s]
 Text: "In this case, your data is the bananas, and the plantation owners are collecting trillions of them while you see nothing."
 Word-level timestamps:
    1. "In" -> 1406.33s - 1406.49s
@@ -6126,7 +6174,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 391: [1413.38s - 1414.18s]
+SEGMENT 399: [1413.38s - 1414.18s]
 Text: "But there's still hope."
 Word-level timestamps:
    1. "But" -> 1413.38s - 1413.46s
@@ -6136,10 +6184,10 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 392: [1414.70s - 1416.22s]
+SEGMENT 400: [1414.68s - 1416.22s]
 Text: "Awareness is the first step."
 Word-level timestamps:
-   1. "Awareness" -> 1414.70s - 1415.16s
+   1. "Awareness" -> 1414.68s - 1415.16s
    2. "is" -> 1415.36s - 1415.44s
    3. "the" -> 1415.48s - 1415.56s
    4. "first" -> 1415.66s - 1415.88s
@@ -6147,7 +6195,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 393: [1416.70s - 1417.88s]
+SEGMENT 401: [1416.70s - 1417.88s]
 Text: "Collective action can work."
 Word-level timestamps:
    1. "Collective" -> 1416.70s - 1417.08s
@@ -6157,7 +6205,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 394: [1418.34s - 1420.15s]
+SEGMENT 402: [1418.34s - 1420.15s]
 Text: "We've seen governments start to push back."
 Word-level timestamps:
    1. "We've" -> 1418.34s - 1418.50s
@@ -6170,7 +6218,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 395: [1420.63s - 1422.25s]
+SEGMENT 403: [1420.63s - 1422.25s]
 Text: "We've seen class action lawsuits."
 Word-level timestamps:
    1. "We've" -> 1420.63s - 1420.81s
@@ -6181,21 +6229,21 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 396: [1422.77s - 1424.79s]
+SEGMENT 404: [1422.77s - 1424.79s]
 Text: "We've seen alternative platforms emerge."
 Word-level timestamps:
    1. "We've" -> 1422.77s - 1422.95s
-   2. "seen" -> 1422.97s - 1423.15s
+   2. "seen" -> 1422.99s - 1423.15s
    3. "alternative" -> 1423.19s - 1423.77s
    4. "platforms" -> 1423.83s - 1424.35s
    5. "emerge." -> 1424.43s - 1424.79s
 
 --------------------------------------------------
 
-SEGMENT 397: [1425.37s - 1427.38s]
+SEGMENT 405: [1425.35s - 1427.38s]
 Text: "It won't be easy, and it won't be quick."
 Word-level timestamps:
-   1. "It" -> 1425.37s - 1425.41s
+   1. "It" -> 1425.35s - 1425.41s
    2. "won't" -> 1425.47s - 1425.65s
    3. "be" -> 1425.71s - 1425.81s
    4. "easy," -> 1425.95s - 1426.23s
@@ -6207,7 +6255,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 398: [1427.86s - 1429.60s]
+SEGMENT 406: [1427.86s - 1429.60s]
 Text: "But monkeys strong together."
 Word-level timestamps:
    1. "But" -> 1427.86s - 1427.96s
@@ -6217,7 +6265,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 399: [1429.58s - 1442.92s]
+SEGMENT 407: [1429.58s - 1442.92s]
 Text: "If enough of us demand better, if enough of us support regulation, if enough of us vote with our attention and our data, maybe, just maybe, we can build a digital jungle that actually serves the monkeys instead of exploiting them."
 Word-level timestamps:
    1. "If" -> 1429.58s - 1429.76s
@@ -6238,7 +6286,7 @@ Word-level timestamps:
   16. "us" -> 1434.39s - 1434.45s
   17. "vote" -> 1434.53s - 1434.71s
   18. "with" -> 1434.77s - 1434.87s
-  19. "our" -> 1434.93s - 1435.05s
+  19. "our" -> 1434.95s - 1435.05s
   20. "attention" -> 1435.09s - 1435.59s
   21. "and" -> 1435.79s - 1435.87s
   22. "our" -> 1435.91s - 1436.01s
@@ -6264,7 +6312,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 400: [1443.36s - 1448.87s]
+SEGMENT 408: [1443.36s - 1448.87s]
 Text: "Until then, at least you know what you're paying every time you click I agree without reading the terms of service."
 Word-level timestamps:
    1. "Until" -> 1443.36s - 1443.62s
@@ -6281,7 +6329,7 @@ Word-level timestamps:
   12. "you" -> 1446.22s - 1446.32s
   13. "click" -> 1446.40s - 1446.60s
   14. "I" -> 1446.70s - 1446.78s
-  15. "agree" -> 1446.84s - 1447.16s
+  15. "agree" -> 1446.84s - 1447.18s
   16. "without" -> 1447.34s - 1447.70s
   17. "reading" -> 1447.76s - 1448.01s
   18. "the" -> 1448.03s - 1448.11s
@@ -6291,15 +6339,15 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 401: [1449.49s - 1459.30s]
+SEGMENT 409: [1449.49s - 1459.30s]
 Text: "If any monkeys are confused, just remember that this is a simple satirical explainer about how free digital services actually operate and the real costs associated with them."
 Word-level timestamps:
    1. "If" -> 1449.49s - 1449.55s
    2. "any" -> 1449.63s - 1449.77s
    3. "monkeys" -> 1449.83s - 1450.15s
    4. "are" -> 1450.21s - 1450.29s
-   5. "confused," -> 1450.33s - 1450.89s
-   6. "just" -> 1451.27s - 1451.41s
+   5. "confused," -> 1450.35s - 1450.89s
+   6. "just" -> 1451.27s - 1451.43s
    7. "remember" -> 1451.47s - 1451.81s
    8. "that" -> 1451.89s - 1451.99s
    9. "this" -> 1452.03s - 1452.19s
@@ -6314,9 +6362,9 @@ Word-level timestamps:
   18. "digital" -> 1454.91s - 1455.28s
   19. "services" -> 1455.34s - 1455.80s
   20. "actually" -> 1455.84s - 1456.40s
-  21. "operate" -> 1456.58s - 1456.96s
+  21. "operate" -> 1456.58s - 1456.94s
   22. "and" -> 1457.18s - 1457.26s
-  23. "the" -> 1457.30s - 1457.36s
+  23. "the" -> 1457.28s - 1457.36s
   24. "real" -> 1457.44s - 1457.64s
   25. "costs" -> 1457.70s - 1458.02s
   26. "associated" -> 1458.06s - 1458.64s
@@ -6325,7 +6373,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 402: [1459.28s - 1462.27s]
+SEGMENT 410: [1459.28s - 1462.27s]
 Text: "This video is purely for educational purposes only."
 Word-level timestamps:
    1. "This" -> 1459.28s - 1459.54s
@@ -6339,24 +6387,24 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 403: [1462.75s - 1468.04s]
-Text: "Any resemblance to actual companies, real or fictitious is purely coincidental."
+SEGMENT 411: [1462.75s - 1468.04s]
+Text: "Any resemblance to actual companies, real or fictitious, is purely coincidental."
 Word-level timestamps:
    1. "Any" -> 1462.75s - 1462.89s
    2. "resemblance" -> 1462.95s - 1463.47s
    3. "to" -> 1463.55s - 1463.63s
    4. "actual" -> 1463.81s - 1464.11s
    5. "companies," -> 1464.19s - 1464.61s
-   6. "real" -> 1465.19s - 1465.49s
+   6. "real" -> 1465.19s - 1465.47s
    7. "or" -> 1465.67s - 1465.73s
-   8. "fictitious" -> 1465.79s - 1466.36s
-   9. "is" -> 1466.40s - 1466.86s
+   8. "fictitious," -> 1465.79s - 1466.36s
+   9. "is" -> 1466.80s - 1466.86s
   10. "purely" -> 1466.96s - 1467.34s
   11. "coincidental." -> 1467.40s - 1468.04s
 
 --------------------------------------------------
 
-SEGMENT 404: [1468.50s - 1476.46s]
+SEGMENT 412: [1468.50s - 1476.46s]
 Text: "The metaphorical framework using monkeys, bananas, and plantations is used to make complex topics more accessible and entertaining."
 Word-level timestamps:
    1. "The" -> 1468.50s - 1468.60s
@@ -6380,7 +6428,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 405: [1476.90s - 1477.98s]
+SEGMENT 413: [1476.90s - 1477.98s]
 Text: "Please do not sue monkey."
 Word-level timestamps:
    1. "Please" -> 1476.90s - 1477.10s
@@ -6391,7 +6439,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 406: [1478.40s - 1480.33s]
+SEGMENT 414: [1478.40s - 1480.33s]
 Text: "Let me know what you'd like to see me cover next."
 Word-level timestamps:
    1. "Let" -> 1478.40s - 1478.50s
@@ -6408,7 +6456,7 @@ Word-level timestamps:
 
 --------------------------------------------------
 
-SEGMENT 407: [1480.85s - 1482.35s]
+SEGMENT 415: [1480.85s - 1482.35s]
 Text: "Thank you so much for watching."
 Word-level timestamps:
    1. "Thank" -> 1480.85s - 1481.01s

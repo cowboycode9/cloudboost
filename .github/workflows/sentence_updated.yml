@@ -31,129 +31,121 @@ jobs:
 
       - name: Generate sentence-level transcription  
         run: |  
-          python3 << 'EOF'  
-          import json  
-          import os  
-          import re  
-          from datetime import datetime  
-          from difflib import SequenceMatcher  
+          python3 - << 'PYTHON_SCRIPT_END'
+          import json
+          import os
+          import re
+          from datetime import datetime
+          from difflib import SequenceMatcher
 
-          def clean_text(text):  
-              """Universal text cleaning: lowercase and alphanumeric only."""  
+          def normalize(text):
+              """Strips everything but lowercase letters and numbers for universal matching."""
               if not text: return ""
-              return re.sub(r"[^a-z0-9\s]", '', text.lower()).strip()
+              return re.sub(r"[^a-z0-9]", '', text.lower())
 
-          def get_similarity(a, b):  
-              """Calculate similarity ratio between two normalized strings."""  
-              return SequenceMatcher(None, a, b).ratio()  
+          def get_sim(a, b):
+              return SequenceMatcher(None, a, b).ratio()
 
-          def main():  
-              trans_path = "Trans/transcription.json"  
-              visuals_path = "Visuals/visuals.json"  
-                
-              if not os.path.exists(trans_path) or not os.path.exists(visuals_path):  
-                  print("Error: Missing source files at " + trans_path + " or " + visuals_path)  
-                  return  
+          def main():
+              trans_p = "Trans/transcription.json"
+              vis_p = "Visuals/visuals.json"
+              
+              if not os.path.exists(trans_p) or not os.path.exists(vis_p):
+                  print(f"File missing: {trans_p} or {vis_p}")
+                  return
 
-              with open(trans_path, 'r', encoding='utf-8') as f:  
-                  trans_data = json.load(f)  
-              with open(visuals_path, 'r', encoding='utf-8') as f:  
-                  visuals = json.load(f)  
+              with open(trans_p, 'r') as f: trans_data = json.load(f)
+              with open(vis_p, 'r') as f: visuals = json.load(f)
 
-              # Extract all words with their metadata into a flat list
-              all_words = []  
-              for seg in trans_data.get("segments", []):  
-                  if "words" in seg:  
-                      for w in seg["words"]:  
-                          all_words.append({  
-                              "clean": clean_text(w["word"]),  
-                              "start": w["start"],  
-                              "end": w["end"]  
-                          })  
+              # Flatten transcript into individual words
+              words_db = []
+              for seg in trans_data.get("segments", []):
+                  for w in seg.get("words", []):
+                      words_db.append({
+                          "raw": w["word"],
+                          "norm": normalize(w["word"]),
+                          "start": w["start"],
+                          "end": w["end"]
+                      })
 
-              results = []  
-              current_ptr = 0  
-              last_end_time = 0.0  
+              results = []
+              db_ptr = 0
+              last_time = 0.0
 
-              for item in visuals:  
-                  sentence = item.get("sentence", "")  
-                  target = clean_text(sentence)  
-                  target_word_count = len(target.split())
+              for item in visuals:
+                  orig_sent = item.get("sentence", "")
+                  # Split target into normalized words
+                  target_words = [normalize(w) for w in orig_sent.split() if normalize(w)]
+                  target_norm = "".join(target_words)
                   
-                  if not target: continue  
+                  if not target_norm: continue
 
-                  best_match = None  
-                  highest_score = 0  
+                  best_match = None
+                  high_score = 0.0
                   
-                  # Universal Sliding Window: 
-                  # We search from the current pointer up to a reasonable 'lookahead' (30 words)
-                  # to find the window of words that most closely resembles the target sentence.
-                  search_limit = min(current_ptr + 30, len(all_words))
+                  # Lookahead window: Search up to 50 words ahead from current position
+                  # This makes it universal for short or long sentences
+                  search_range = min(db_ptr + 50, len(words_db))
                   
-                  for start_i in range(current_ptr, search_limit):
-                      # We check spans of words similar in length to our target sentence
-                      # (+/- 5 words to account for transcription differences)
-                      for length in range(max(1, target_word_count - 5), target_word_count + 8):
+                  for start_i in range(db_ptr, search_range):
+                      # Check various lengths around the expected word count
+                      for length in range(max(1, len(target_words)-3), len(target_words)+6):
                           end_i = start_i + length
-                          if end_i > len(all_words): break
+                          if end_i > len(words_db): break
                           
-                          candidate_segment = " ".join([all_words[k]["clean"] for k in range(start_i, end_i)])
-                          score = get_similarity(target, candidate_segment)
+                          candidate_norm = "".join([words_db[k]["norm"] for k in range(start_i, end_i)])
+                          score = get_sim(target_norm, candidate_norm)
                           
-                          if score > highest_score:
-                              highest_score = score
+                          if score > high_score:
+                              high_score = score
                               best_match = (start_i, end_i)
+                          if score > 0.95: break # Optimization: Good enough
 
-                  # If match is decent (> 0.5 similarity), use the timestamps
-                  if highest_score > 0.5 and best_match:
+                  if high_score > 0.4 and best_match:
                       s_idx, e_idx = best_match
-                      start_val = all_words[s_idx]["start"]
-                      end_val = all_words[e_idx-1]["end"]
+                      s_time = words_db[s_idx]["start"]
+                      e_time = words_db[e_idx-1]["end"]
                       
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": sentence,
-                          "start": round(start_val, 3),
-                          "end": round(end_val, 3),
-                          "duration": round(end_val - start_val, 3)
+                          "sentence": orig_sent,
+                          "start": round(s_time, 3),
+                          "end": round(e_time, 3),
+                          "duration": round(e_time - s_time, 3)
                       })
-                      # Move the pointer to the end of this match to maintain sequential order
-                      current_ptr = e_idx
-                      last_end_time = end_val
+                      db_ptr = e_idx
+                      last_time = e_time
                   else:
-                      # Fallback logic for visual-only items or failed matches
-                      duration = 1.5 # Default fallback
-                      start_val = round(last_end_time + 0.05, 3)
-                      end_val = round(start_val + duration, 3)
+                      # Universal fallback: If audio doesn't match, give it a 1s buffer
+                      s_time = round(last_time + 0.01, 3)
+                      e_time = round(s_time + 1.0, 3)
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": sentence,
-                          "start": start_val,
-                          "end": end_val,
-                          "duration": duration
+                          "sentence": orig_sent,
+                          "start": s_time,
+                          "end": e_time,
+                          "duration": 1.0
                       })
-                      last_end_time = end_val
+                      last_time = e_time
 
-              output = {  
-                  "metadata": {  
-                      "created_at": datetime.utcnow().isoformat() + "Z",  
-                      "total_sentences": len(results),  
-                      "source_files": {"visuals": visuals_path, "transcription": trans_path}  
-                  },  
-                  "sentence_transcriptions": results  
-              }  
+              output = {
+                  "metadata": {
+                      "created_at": datetime.utcnow().isoformat() + "Z",
+                      "total": len(results)
+                  },
+                  "sentence_transcriptions": results
+              }
 
-              os.makedirs("Edits", exist_ok=True)  
-              with open("Edits/edit.json", "w", encoding="utf-8") as f:  
-                  json.dump(output, f, indent=2, ensure_ascii=False)  
-                
-              print(f"✅ Success: Processed {len(results)} sentences.")  
+              os.makedirs("Edits", exist_ok=True)
+              with open("Edits/edit.json", "w") as f:
+                  json.dump(output, f, indent=2)
+              print(f"Processed {len(results)} sentences successfully.")
 
-          if __name__ == "__main__":  
-              main()  
-          EOF  
+          if __name__ == "__main__":
+              main()
+          PYTHON_SCRIPT_END
 
       - name: Configure Git  
         run: |  

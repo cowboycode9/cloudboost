@@ -3,7 +3,8 @@ name: Sentence Level Transcription
 on:
   workflow_run:
     workflows: ["Transcript"]
-    types: [completed]
+    types:
+      - completed
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -19,104 +20,164 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    steps:  
+      - name: Checkout repository  
+        uses: actions/checkout@v3  
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      - name: Set up Python  
+        uses: actions/setup-python@v4  
+        with:  
+          python-version: '3.10'  
 
-      - name: Generate sentence-level transcription
-        run: |
-          python3 << 'EOF'
-          import json
-          import os
-          import re
-          from datetime import datetime
+      - name: Generate sentence-level transcription  
+        run: |  
+          python3 << 'EOF'  
+          import json  
+          import os  
+          import re  
+          from datetime import datetime  
+          from difflib import SequenceMatcher  
 
-          # ----------------------------
-          # Helpers
-          # ----------------------------
-          def clean(text):
-              return re.sub(r"[^\w\s]", "", text.lower()).split()
+          def clean_text(text):  
+              """Remove punctuation and normalize text for matching."""  
+              text = re.sub(r"[^\w\s]", '', text.lower())  
+              # Handle common contractions to improve matching
+              contractions = {  
+                  "dont": "do not", "cant": "cannot", "hes": "he is",   
+                  "im": "i am", "youre": "you are", "theyre": "they are",  
+                  "wont": "will not", "didnt": "did not", "isnt": "is not",  
+                  "arent": "are not", "wasnt": "was not", "werent": "were not",  
+                  "havent": "have not", "hasnt": "has not", "hadnt": "had not",  
+                  "wouldnt": "would not", "shouldnt": "should not", "couldnt": "could not"  
+              }  
+              words = text.split()  
+              return " ".join([contractions.get(w, w) for w in words])  
 
-          def flatten_words(segments):
-              words = []
-              for seg in segments:
-                  for w in seg.get("words", []):
-                      cleaned = clean(w["word"])
-                      if not cleaned:
-                          continue
-                      words.append({
-                          "word": cleaned[0],
-                          "start": w["start"],
-                          "end": w["end"]
-                      })
-              return words
+          def get_similarity(a, b):  
+              """Calculate similarity ratio between two strings."""  
+              return SequenceMatcher(None, a, b).ratio()  
 
-          def find_sentence_span(sentence, words, start_idx):
-              target = clean(sentence)
-              if not target:
-                  return None, None, start_idx
+          def main():  
+              trans_path = "Trans/transcription.json"  
+              visuals_path = "Visuals/visuals.json"  
+                
+              if not os.path.exists(trans_path) or not os.path.exists(visuals_path):  
+                  print("Missing source files")  
+                  return  
 
-              i = start_idx
+              with open(trans_path, 'r', encoding='utf-8') as f:  
+                  trans_data = json.load(f)  
+              with open(visuals_path, 'r', encoding='utf-8') as f:  
+                  visuals = json.load(f)  
 
-              while i < len(words):
-                  if words[i]["word"] == target[0]:
-                      j = i
-                      k = 0
-                      matched = []
+              # Flatten all words from transcription into a single list
+              all_words = []  
+              for seg in trans_data.get("segments", []):  
+                  if "words" in seg:  
+                      for w in seg["words"]:  
+                          all_words.append({  
+                              "word": clean_text(w["word"]),  
+                              "start": w["start"],  
+                              "end": w["end"]  
+                          })  
 
-                      while j < len(words) and k < len(target):
-                          if words[j]["word"] == target[k]:
-                              matched.append(j)
-                              k += 1
-                          j += 1
+              results = []  
+              current_word_idx = 0  
+              last_end_time = 0.0  
 
-                      if k == len(target):
-                          return (
-                              words[matched[0]]["start"],
-                              words[matched[-1]]["end"],
-                              matched[-1] + 1
-                          )
-                  i += 1
+              for item in visuals:  
+                  sentence = item["sentence"]  
+                  cleaned_sentence = clean_text(sentence)  
+                  sentence_words = cleaned_sentence.split()  
+                  
+                  if not sentence_words:  
+                      continue  
 
-              return None, None, start_idx
+                  best_span = None  
+                  max_sim = 0  
+                  # We look ahead in the transcript from our current position
+                  # We search a window of 40 words ahead to find the best match for this sentence
+                  search_window = 40  
+                  
+                  for start_i in range(current_word_idx, min(current_word_idx + 15, len(all_words))):  
+                      for end_i in range(start_i + 1, min(start_i + len(sentence_words) + 10, len(all_words) + 1)):  
+                          transcript_segment = " ".join([all_words[k]["word"] for k in range(start_i, end_i)])  
+                          sim = get_similarity(cleaned_sentence, transcript_segment)  
+                          
+                          if sim > max_sim:  
+                              max_sim = sim  
+                              best_span = (start_i, end_i)  
 
-          # ----------------------------
-          # Main
-          # ----------------------------
-          trans_path = "Trans/transcription.json"
-          visuals_path = "Visuals/visuals.json"
+                  if max_sim > 0.5 and best_span:  
+                      # Found a match  
+                      start_idx, end_idx = best_span  
+                      start_time = all_words[start_idx]["start"]  
+                      end_time = all_words[end_idx-1]["end"]  
+                      
+                      results.append({  
+                          "id": f"i{item['number']}",  
+                          "number": item["number"],  
+                          "sentence": sentence,  
+                          "start": round(start_time, 3),  
+                          "end": round(end_time, 3),  
+                          "duration": round(end_time - start_time, 3)  
+                      })  
+                      
+                      # Update pointers  
+                      current_word_idx = end_idx  
+                      last_end_time = end_time  
+                  else:  
+                      # Fallback for visual-only or missed sentences  
+                      ghost_start = round(last_end_time + 0.05, 3)  
+                      ghost_end = round(ghost_start + 1.5, 3)  # Default 1.5s for unmatched text  
+                      results.append({  
+                          "id": f"i{item['number']}",  
+                          "number": item["number"],  
+                          "sentence": sentence,  
+                          "start": ghost_start,  
+                          "end": ghost_end,  
+                          "duration": 1.5  
+                      })  
+                      last_end_time = ghost_end  
 
-          if not os.path.exists(trans_path) or not os.path.exists(visuals_path):
-              raise FileNotFoundError("Missing transcription.json or visuals.json")
+              output = {  
+                  "metadata": {  
+                      "created_at": datetime.utcnow().isoformat() + "Z",  
+                      "total_sentences": len(results),  
+                      "source_files": {  
+                          "visuals": visuals_path,  
+                          "transcription": trans_path  
+                      }  
+                  },  
+                  "sentence_transcriptions": results  
+              }  
 
-          with open(trans_path, "r", encoding="utf-8") as f:
-              trans = json.load(f)
+              os.makedirs("Edits", exist_ok=True)  
+              with open("Edits/edit.json", "w", encoding="utf-8") as f:  
+                  json.dump(output, f, indent=2, ensure_ascii=False)  
+                
+              print(f"✅ Generated {len(results)} transcriptions with sequential tracking.")  
 
-          with open(visuals_path, "r", encoding="utf-8") as f:
-              visuals = json.load(f)
+          if __name__ == "__main__":  
+              main()  
+          EOF  
 
-          words = flatten_words(trans.get("segments", []))
+      - name: Configure Git  
+        run: |  
+          git config --global user.name "intellectra9"  
+          git config --global user.email "intellectra9@outlook.com"  
 
-          results = []
-          cursor = 0
-
-          for item in visuals:
-              sentence = item["sentence"]
-
-              start, end, cursor = find_sentence_span(sentence, words, cursor)
-
-              # Fallback for visual-only sentences
-              if start is None or end is None:
-                  if results:
-                      start = round(results[-1]["end"] + 0.01, 3)
-                  else:
-                      start = 0.0
-                  end = round(start + 0.5, 3)
+      - name: Commit and push transcription file  
+        env:  
+          GH_PAT: ${{ secrets.GH_PAT }}  
+        run: |  
+          git stash --include-untracked  
+          git pull origin main --rebase || echo "No rebase needed"  
+          git stash pop || true  
+          git add Edits/edit.json  
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")  
+          git commit -m "🔄 Word-Level Timestamp Sync: ${timestamp}" || echo "No changes"  
+          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
 
               results.append({
                   "id": f"i{item['number']}",

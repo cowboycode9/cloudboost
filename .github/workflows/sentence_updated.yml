@@ -39,22 +39,12 @@ jobs:
           from difflib import SequenceMatcher  
 
           def clean_text(text):  
-              """Remove punctuation and normalize text for matching."""  
-              text = re.sub(r"[^\w\s]", '', text.lower())  
-              # Handle common contractions to improve matching
-              contractions = {  
-                  "dont": "do not", "cant": "cannot", "hes": "he is",   
-                  "im": "i am", "youre": "you are", "theyre": "they are",  
-                  "wont": "will not", "didnt": "did not", "isnt": "is not",  
-                  "arent": "are not", "wasnt": "was not", "werent": "were not",  
-                  "havent": "have not", "hasnt": "has not", "hadnt": "had not",  
-                  "wouldnt": "would not", "shouldnt": "should not", "couldnt": "could not"  
-              }  
-              words = text.split()  
-              return " ".join([contractions.get(w, w) for w in words])  
+              """Universal text cleaning: lowercase and alphanumeric only."""  
+              if not text: return ""
+              return re.sub(r"[^a-z0-9\s]", '', text.lower()).strip()
 
           def get_similarity(a, b):  
-              """Calculate similarity ratio between two strings."""  
+              """Calculate similarity ratio between two normalized strings."""  
               return SequenceMatcher(None, a, b).ratio()  
 
           def main():  
@@ -62,7 +52,7 @@ jobs:
               visuals_path = "Visuals/visuals.json"  
                 
               if not os.path.exists(trans_path) or not os.path.exists(visuals_path):  
-                  print("Missing source files")  
+                  print("Error: Missing source files at " + trans_path + " or " + visuals_path)  
                   return  
 
               with open(trans_path, 'r', encoding='utf-8') as f:  
@@ -70,84 +60,87 @@ jobs:
               with open(visuals_path, 'r', encoding='utf-8') as f:  
                   visuals = json.load(f)  
 
-              # Flatten all words from transcription into a single list
+              # Extract all words with their metadata into a flat list
               all_words = []  
               for seg in trans_data.get("segments", []):  
                   if "words" in seg:  
                       for w in seg["words"]:  
                           all_words.append({  
-                              "word": clean_text(w["word"]),  
+                              "clean": clean_text(w["word"]),  
                               "start": w["start"],  
                               "end": w["end"]  
                           })  
 
               results = []  
-              current_word_idx = 0  
+              current_ptr = 0  
               last_end_time = 0.0  
 
               for item in visuals:  
-                  sentence = item["sentence"]  
-                  cleaned_sentence = clean_text(sentence)  
-                  sentence_words = cleaned_sentence.split()  
+                  sentence = item.get("sentence", "")  
+                  target = clean_text(sentence)  
+                  target_word_count = len(target.split())
                   
-                  if not sentence_words:  
-                      continue  
+                  if not target: continue  
 
-                  best_span = None  
-                  max_sim = 0  
-                  # We look ahead in the transcript from our current position
-                  # We search a window of 40 words ahead to find the best match for this sentence
-                  search_window = 40  
+                  best_match = None  
+                  highest_score = 0  
                   
-                  for start_i in range(current_word_idx, min(current_word_idx + 15, len(all_words))):  
-                      for end_i in range(start_i + 1, min(start_i + len(sentence_words) + 10, len(all_words) + 1)):  
-                          transcript_segment = " ".join([all_words[k]["word"] for k in range(start_i, end_i)])  
-                          sim = get_similarity(cleaned_sentence, transcript_segment)  
+                  # Universal Sliding Window: 
+                  # We search from the current pointer up to a reasonable 'lookahead' (30 words)
+                  # to find the window of words that most closely resembles the target sentence.
+                  search_limit = min(current_ptr + 30, len(all_words))
+                  
+                  for start_i in range(current_ptr, search_limit):
+                      # We check spans of words similar in length to our target sentence
+                      # (+/- 5 words to account for transcription differences)
+                      for length in range(max(1, target_word_count - 5), target_word_count + 8):
+                          end_i = start_i + length
+                          if end_i > len(all_words): break
                           
-                          if sim > max_sim:  
-                              max_sim = sim  
-                              best_span = (start_i, end_i)  
+                          candidate_segment = " ".join([all_words[k]["clean"] for k in range(start_i, end_i)])
+                          score = get_similarity(target, candidate_segment)
+                          
+                          if score > highest_score:
+                              highest_score = score
+                              best_match = (start_i, end_i)
 
-                  if max_sim > 0.5 and best_span:  
-                      # Found a match  
-                      start_idx, end_idx = best_span  
-                      start_time = all_words[start_idx]["start"]  
-                      end_time = all_words[end_idx-1]["end"]  
+                  # If match is decent (> 0.5 similarity), use the timestamps
+                  if highest_score > 0.5 and best_match:
+                      s_idx, e_idx = best_match
+                      start_val = all_words[s_idx]["start"]
+                      end_val = all_words[e_idx-1]["end"]
                       
-                      results.append({  
-                          "id": f"i{item['number']}",  
-                          "number": item["number"],  
-                          "sentence": sentence,  
-                          "start": round(start_time, 3),  
-                          "end": round(end_time, 3),  
-                          "duration": round(end_time - start_time, 3)  
-                      })  
-                      
-                      # Update pointers  
-                      current_word_idx = end_idx  
-                      last_end_time = end_time  
-                  else:  
-                      # Fallback for visual-only or missed sentences  
-                      ghost_start = round(last_end_time + 0.05, 3)  
-                      ghost_end = round(ghost_start + 1.5, 3)  # Default 1.5s for unmatched text  
-                      results.append({  
-                          "id": f"i{item['number']}",  
-                          "number": item["number"],  
-                          "sentence": sentence,  
-                          "start": ghost_start,  
-                          "end": ghost_end,  
-                          "duration": 1.5  
-                      })  
-                      last_end_time = ghost_end  
+                      results.append({
+                          "id": f"i{item['number']}",
+                          "number": item["number"],
+                          "sentence": sentence,
+                          "start": round(start_val, 3),
+                          "end": round(end_val, 3),
+                          "duration": round(end_val - start_val, 3)
+                      })
+                      # Move the pointer to the end of this match to maintain sequential order
+                      current_ptr = e_idx
+                      last_end_time = end_val
+                  else:
+                      # Fallback logic for visual-only items or failed matches
+                      duration = 1.5 # Default fallback
+                      start_val = round(last_end_time + 0.05, 3)
+                      end_val = round(start_val + duration, 3)
+                      results.append({
+                          "id": f"i{item['number']}",
+                          "number": item["number"],
+                          "sentence": sentence,
+                          "start": start_val,
+                          "end": end_val,
+                          "duration": duration
+                      })
+                      last_end_time = end_val
 
               output = {  
                   "metadata": {  
                       "created_at": datetime.utcnow().isoformat() + "Z",  
                       "total_sentences": len(results),  
-                      "source_files": {  
-                          "visuals": visuals_path,  
-                          "transcription": trans_path  
-                      }  
+                      "source_files": {"visuals": visuals_path, "transcription": trans_path}  
                   },  
                   "sentence_transcriptions": results  
               }  
@@ -156,7 +149,7 @@ jobs:
               with open("Edits/edit.json", "w", encoding="utf-8") as f:  
                   json.dump(output, f, indent=2, ensure_ascii=False)  
                 
-              print(f"✅ Generated {len(results)} transcriptions with sequential tracking.")  
+              print(f"✅ Success: Processed {len(results)} sentences.")  
 
           if __name__ == "__main__":  
               main()  
@@ -176,83 +169,7 @@ jobs:
           git stash pop || true  
           git add Edits/edit.json  
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")  
-          git commit -m "🔄 Word-Level Timestamp Sync: ${timestamp}" || echo "No changes"  
+          git commit -m "🔄 Universal Word-Level Sync: ${timestamp}" || echo "No changes"  
           git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
 
-              results.append({
-                  "id": f"i{item['number']}",
-                  "number": item["number"],
-                  "sentence": sentence,
-                  "start": round(start, 3),
-                  "end": round(end, 3),
-                  "duration": round(end - start, 3)
-              })
 
-          output = {
-              "metadata": {
-                  "created_at": datetime.utcnow().isoformat() + "Z",
-                  "total_sentences": len(results),
-                  "source_files": {
-                      "visuals": visuals_path,
-                      "transcription": trans_path
-                  }
-              },
-              "sentence_transcriptions": results
-          }
-
-          os.makedirs("Edits", exist_ok=True)
-          with open("Edits/edit.json", "w", encoding="utf-8") as f:
-              json.dump(output, f, indent=2, ensure_ascii=False)
-
-          print(f"✅ Successfully generated {len(results)} sentence transcriptions")
-          EOF
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit and push edit.json
-        run: |
-          git add Edits/edit.json
-          git commit -m "✅ Fixed sentence-level timestamps (word-accurate)" || echo "No changes"
-          git push origin main              results.append({
-                  "id": f"i{item['number']}",
-                  "number": item["number"],
-                  "sentence": sentence,
-                  "start": round(start, 3),
-                  "end": round(end, 3),
-                  "duration": round(end - start, 3)
-              })
-
-          output = {
-              "metadata": {
-                  "created_at": datetime.utcnow().isoformat() + "Z",
-                  "total_sentences": len(results),
-                  "source_files": {
-                      "visuals": visuals_path,
-                      "transcription": trans_path
-                  }
-              },
-              "sentence_transcriptions": results
-          }
-
-          os.makedirs("Edits", exist_ok=True)
-          with open("Edits/edit.json", "w", encoding="utf-8") as f:
-              json.dump(output, f, indent=2, ensure_ascii=False)
-
-          print(f"✅ Successfully generated {len(results)} sentence transcriptions")
-          EOF
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "intellectra9"
-          git config --global user.email "intellectra9@outlook.com"
-
-      - name: Commit and push transcription file
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git add Edits/edit.json
-          git commit -m "✅ Fixed sentence-level timestamps (word-accurate)" || echo "No changes"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main

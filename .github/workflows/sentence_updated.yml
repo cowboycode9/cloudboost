@@ -38,15 +38,83 @@ jobs:
           from datetime import datetime
           from difflib import SequenceMatcher
 
-          def clean(text):
-              # Remove punctuation and normalize for better matching
+          def clean_text(text):
+              """Remove punctuation and normalize text for matching."""
               text = re.sub(r"[^\w\s]", '', text.lower())
-              contractions = {"dont": "do not", "cant": "cannot", "hes": "he is", "im": "i am", "youre": "you are", "theyre": "they are"}
+              contractions = {
+                  "dont": "do not", "cant": "cannot", "hes": "he is", 
+                  "im": "i am", "youre": "you are", "theyre": "they are",
+                  "wont": "will not", "didnt": "did not", "isnt": "is not",
+                  "arent": "are not", "wasnt": "was not", "werent": "were not",
+                  "havent": "have not", "hasnt": "has not", "hadnt": "had not",
+                  "wouldnt": "would not", "shouldnt": "should not", "couldnt": "could not"
+              }
               words = text.split()
               return " ".join([contractions.get(w, w) for w in words])
 
           def get_similarity(a, b):
-              return SequenceMatcher(None, clean(a), clean(b)).ratio()
+              """Calculate similarity ratio between two texts."""
+              return SequenceMatcher(None, clean_text(a), clean_text(b)).ratio()
+
+          def find_word_timestamps(sentence, segments):
+              """
+              Find start and end timestamps by matching sentence words 
+              against word-level timestamps in segments.
+              """
+              sentence_words = clean_text(sentence).split()
+              if not sentence_words:
+                  return None, None
+              
+              # Build flat list of all words with timestamps
+              all_words = []
+              for seg in segments:
+                  if "words" in seg:
+                      for word_obj in seg["words"]:
+                          all_words.append({
+                              "word": clean_text(word_obj["word"]),
+                              "start": word_obj["start"],
+                              "end": word_obj["end"]
+                          })
+              
+              if not all_words:
+                  return None, None
+              
+              # Find best matching sequence
+              best_match_start = None
+              best_match_end = None
+              best_score = 0
+              
+              # Sliding window approach
+              for i in range(len(all_words) - len(sentence_words) + 1):
+                  window_words = [all_words[j]["word"] for j in range(i, min(i + len(sentence_words) + 5, len(all_words)))]
+                  window_text = " ".join(window_words)
+                  sentence_text = " ".join(sentence_words)
+                  
+                  score = get_similarity(sentence_text, window_text)
+                  
+                  if score > best_score:
+                      best_score = score
+                      # Find exact word boundaries
+                      matched_indices = []
+                      word_idx = 0
+                      
+                      for j in range(i, min(i + len(sentence_words) + 5, len(all_words))):
+                          if word_idx < len(sentence_words):
+                              if get_similarity(sentence_words[word_idx], all_words[j]["word"]) > 0.7:
+                                  matched_indices.append(j)
+                                  word_idx += 1
+                              if word_idx >= len(sentence_words):
+                                  break
+                      
+                      if matched_indices:
+                          best_match_start = all_words[matched_indices[0]]["start"]
+                          best_match_end = all_words[matched_indices[-1]]["end"]
+              
+              # Return timestamps if match quality is good enough
+              if best_score > 0.6:  # Threshold for acceptable match
+                  return best_match_start, best_match_end
+              
+              return None, None
 
           def main():
               trans_path = "Trans/transcription.json"
@@ -56,57 +124,55 @@ jobs:
                   print("Missing source files")
                   return
 
-              with open(trans_path, 'r') as f:
+              with open(trans_path, 'r', encoding='utf-8') as f:
                   trans_data = json.load(f)
-              with open(visuals_path, 'r') as f:
+              with open(visuals_path, 'r', encoding='utf-8') as f:
                   visuals = json.load(f)
 
               segments = trans_data.get("segments", [])
               results = []
-              last_seg_idx = 0
+              last_end_time = 0
 
               for item in visuals:
-                  target_text = item["sentence"]
-                  best_match = None
-                  best_score = 0.45  # Flexible threshold for "ghost" sentences
+                  sentence = item["sentence"]
                   
-                  # Look ahead 20 segments to find the next spoken line
-                  search_limit = min(last_seg_idx + 20, len(segments))
-                  for i in range(last_seg_idx, search_limit):
-                      score = get_similarity(target_text, segments[i]["text"])
-                      if score > best_score:
-                          best_score = score
-                          best_match = segments[i]
-                          last_seg_idx = i # Update anchor to current best match
-
-                  if best_match:
+                  # Try to find word-level timestamps
+                  start_time, end_time = find_word_timestamps(sentence, segments)
+                  
+                  if start_time is not None and end_time is not None:
+                      # Valid match found
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": target_text,
-                          "start": round(best_match["start"], 3),
-                          "end": round(best_match["end"], 3),
-                          "duration": round(best_match["end"] - best_match["start"], 3)
+                          "sentence": sentence,
+                          "start": round(start_time, 3),
+                          "end": round(end_time, 3),
+                          "duration": round(end_time - start_time, 3)
                       })
-                      # FIX: Force the index to move forward by 1 to prevent matching the exact same segment twice (collision)
-                      last_seg_idx += 1
+                      last_end_time = end_time
                   else:
-                      # If sentence is NOT in audio, place it slightly after the last match
-                      prev_end = results[-1]["end"] if results else 0
+                      # No match found - this might be a visual-only sentence
+                      # Place it slightly after the last known timestamp
+                      ghost_start = round(last_end_time + 0.01, 3)
+                      ghost_end = round(ghost_start + 0.5, 3)
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
-                          "sentence": target_text,
-                          "start": round(prev_end + 0.01, 3),
-                          "end": round(prev_end + 0.51, 3),
+                          "sentence": sentence,
+                          "start": ghost_start,
+                          "end": ghost_end,
                           "duration": 0.5
                       })
+                      last_end_time = ghost_end
 
               output = {
                   "metadata": {
                       "created_at": datetime.utcnow().isoformat() + "Z",
                       "total_sentences": len(results),
-                      "source_files": {"visuals": visuals_path, "transcription": trans_path}
+                      "source_files": {
+                          "visuals": visuals_path,
+                          "transcription": trans_path
+                      }
                   },
                   "sentence_transcriptions": results
               }
@@ -114,6 +180,8 @@ jobs:
               os.makedirs("Edits", exist_ok=True)
               with open("Edits/edit.json", "w", encoding="utf-8") as f:
                   json.dump(output, f, indent=2, ensure_ascii=False)
+              
+              print(f"✅ Successfully generated {len(results)} sentence transcriptions")
 
           if __name__ == "__main__":
               main()
@@ -133,5 +201,6 @@ jobs:
           git stash pop || true
           git add Edits/edit.json
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🔄 Final Sync Fix: ${timestamp}" || echo "No changes"
+          git commit -m "🔄 Word-Level Timestamp Sync: ${timestamp}" || echo "No changes"
           git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
+

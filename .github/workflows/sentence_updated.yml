@@ -20,18 +20,25 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: Generate sentence-level transcription
         run: |
           python3 << 'EOF'
-          import json, os, re
+          import json
+          import os
+          import re
           from datetime import datetime
 
+          # ----------------------------
+          # Helpers
+          # ----------------------------
           def clean(text):
               return re.sub(r"[^\w\s]", "", text.lower()).split()
 
@@ -39,8 +46,11 @@ jobs:
               words = []
               for seg in segments:
                   for w in seg.get("words", []):
+                      cleaned = clean(w["word"])
+                      if not cleaned:
+                          continue
                       words.append({
-                          "word": clean(w["word"])[0] if clean(w["word"]) else "",
+                          "word": cleaned[0],
                           "start": w["start"],
                           "end": w["end"]
                       })
@@ -49,48 +59,69 @@ jobs:
           def find_sentence_span(sentence, words, start_idx):
               target = clean(sentence)
               if not target:
-                  return None, None, start_idx explaining
+                  return None, None, start_idx
+
               i = start_idx
-              matched = []
 
               while i < len(words):
                   if words[i]["word"] == target[0]:
                       j = i
                       k = 0
-                      temp = []
+                      matched = []
+
                       while j < len(words) and k < len(target):
                           if words[j]["word"] == target[k]:
-                              temp.append(j)
+                              matched.append(j)
                               k += 1
                           j += 1
+
                       if k == len(target):
                           return (
-                              words[temp[0]]["start"],
-                              words[temp[-1]]["end"],
-                              temp[-1] + 1
+                              words[matched[0]]["start"],
+                              words[matched[-1]]["end"],
+                              matched[-1] + 1
                           )
                   i += 1
+
               return None, None, start_idx
 
-          trans = json.load(open("Trans/transcription.json", encoding="utf-8"))
-          visuals = json.load(open("Visuals/visuals.json", encoding="utf-8"))
+          # ----------------------------
+          # Main
+          # ----------------------------
+          trans_path = "Trans/transcription.json"
+          visuals_path = "Visuals/visuals.json"
 
-          words = flatten_words(trans["segments"])
-          cursor = 0
+          if not os.path.exists(trans_path) or not os.path.exists(visuals_path):
+              raise FileNotFoundError("Missing transcription.json or visuals.json")
+
+          with open(trans_path, "r", encoding="utf-8") as f:
+              trans = json.load(f)
+
+          with open(visuals_path, "r", encoding="utf-8") as f:
+              visuals = json.load(f)
+
+          words = flatten_words(trans.get("segments", []))
+
           results = []
+          cursor = 0
 
           for item in visuals:
-              s = item["sentence"]
-              start, end, cursor = find_sentence_span(s, words, cursor)
+              sentence = item["sentence"]
 
-              if start is None:
-                  start = results[-1]["end"] + 0.01 if results else 0.0
-                  end = start + 0.5
+              start, end, cursor = find_sentence_span(sentence, words, cursor)
+
+              # Fallback for visual-only sentences
+              if start is None or end is None:
+                  if results:
+                      start = round(results[-1]["end"] + 0.01, 3)
+                  else:
+                      start = 0.0
+                  end = round(start + 0.5, 3)
 
               results.append({
                   "id": f"i{item['number']}",
                   "number": item["number"],
-                  "sentence": s,
+                  "sentence": sentence,
                   "start": round(start, 3),
                   "end": round(end, 3),
                   "duration": round(end - start, 3)
@@ -99,23 +130,31 @@ jobs:
           output = {
               "metadata": {
                   "created_at": datetime.utcnow().isoformat() + "Z",
-                  "total_sentences": len(results)
+                  "total_sentences": len(results),
+                  "source_files": {
+                      "visuals": visuals_path,
+                      "transcription": trans_path
+                  }
               },
               "sentence_transcriptions": results
           }
 
           os.makedirs("Edits", exist_ok=True)
-          json.dump(output, open("Edits/edit.json", "w", encoding="utf-8"), indent=2, ensure_ascii=False)
-          print("✅ Sentence timestamps synced perfectly")
+          with open("Edits/edit.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, indent=2, ensure_ascii=False)
+
+          print(f"✅ Successfully generated {len(results)} sentence transcriptions")
           EOF
 
-      - run: |
+      - name: Configure Git
+        run: |
           git config --global user.name "intellectra9"
           git config --global user.email "intellectra9@outlook.com"
 
-      - env:
+      - name: Commit and push transcription file
+        env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git add Edits/edit.json
-          git commit -m "✅ Exact word-level sentence timestamp fix"
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
+          git commit -m "✅ Fixed sentence-level timestamps (word-accurate)" || echo "No changes"
+          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main

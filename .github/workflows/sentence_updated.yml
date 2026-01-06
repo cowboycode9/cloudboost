@@ -148,6 +148,43 @@ jobs:
 
       - name: Configure Git
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push edit.json
+        run: |
+          git add Edits/edit.json
+          git commit -m "✅ Fixed sentence-level timestamps (word-accurate)" || echo "No changes"
+          git push origin main              results.append({
+                  "id": f"i{item['number']}",
+                  "number": item["number"],
+                  "sentence": sentence,
+                  "start": round(start, 3),
+                  "end": round(end, 3),
+                  "duration": round(end - start, 3)
+              })
+
+          output = {
+              "metadata": {
+                  "created_at": datetime.utcnow().isoformat() + "Z",
+                  "total_sentences": len(results),
+                  "source_files": {
+                      "visuals": visuals_path,
+                      "transcription": trans_path
+                  }
+              },
+              "sentence_transcriptions": results
+          }
+
+          os.makedirs("Edits", exist_ok=True)
+          with open("Edits/edit.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, indent=2, ensure_ascii=False)
+
+          print(f"✅ Successfully generated {len(results)} sentence transcriptions")
+          EOF
+
+      - name: Configure Git
+        run: |
           git config --global user.name "intellectra9"
           git config --global user.email "intellectra9@outlook.com"
 

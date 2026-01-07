@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "created_at": "2026-01-07T12:48:27.803553Z",
+    "created_at": "2026-01-07T15:37:58.919727Z",
     "total": 313
   },
   "sentence_transcriptions": [
@@ -825,8 +825,8 @@
       "number": 103,
       "sentence": "Oh no.",
       "start": 232.923,
-      "end": 233.203,
-      "duration": 0.28
+      "end": 233.223,
+      "duration": 0.3
     },
     {
       "id": "i104",
@@ -1273,8 +1273,8 @@
       "number": 159,
       "sentence": "How?",
       "start": 374.838,
-      "end": 375.108,
-      "duration": 0.27
+      "end": 375.138,
+      "duration": 0.3
     },
     {
       "id": "i160",
@@ -2416,9 +2416,9 @@
       "id": "i302",
       "number": 302,
       "sentence": "With your data, attention, mental health, privacy, democracy.",
-      "start": 1348.52,
-      "end": 1351.726,
-      "duration": 3.206
+      "start": 1347.477,
+      "end": 1350.584,
+      "duration": 3.107
     },
     {
       "id": "i303",
@@ -2496,9 +2496,9 @@
       "id": "i312",
       "number": 312,
       "sentence": "Until then, at least you know what you're paying.",
-      "start": 1443.359,
+      "start": 1441.676,
       "end": 1445.461,
-      "duration": 2.102
+      "duration": 3.785
     },
     {
       "id": "i313",

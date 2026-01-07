@@ -76,31 +76,30 @@ jobs:
                   target_words = [normalize(w) for w in orig_sent.split() if normalize(w)]
                   target_norm = "".join(target_words)
                   
-                  # Handle visual-only/empty sentences
+                  # Handle visual-only/empty sentences - IMPROVED
                   if not target_norm: 
+                      # Instead of fixed duration, use a smaller value to prevent long gaps
                       start_t = round(last_time + 0.01, 3)
-                      end_t = round(start_t + 1.0, 3)
+                      end_t = round(start_t + 0.3, 3)  # REDUCED from 1.0s to 0.3s
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
                           "sentence": orig_sent,
                           "start": start_t,
                           "end": end_t,
-                          "duration": 1.0
+                          "duration": 0.3
                       })
                       last_time = end_t
+                      # DON'T advance pointer - next sentence should start from same position
                       continue
 
-                  # === STRATEGY PART 1: IMMEDIATE NEIGHBOR CHECK ===
-                  # This answers your request: "If it ended at 'you', check 'welcome' next."
-                  # We check ONLY the words immediately following the pointer.
+                  # === STRATEGY PART 1: IMMEDIATE NEIGHBOR CHECK - IMPROVED ===
                   immediate_match = None
                   immediate_score = 0.0
                   
-                  min_len = max(1, len(target_words) - 2)
-                  max_len = len(target_words) + 4
+                  min_len = max(1, len(target_words) - 3)  # More flexible
+                  max_len = len(target_words) + 5  # Allow more variation
                   
-                  # Only check if we are within bounds
                   if db_ptr < len(words_db):
                       for length in range(min_len, max_len):
                           end_i = db_ptr + length
@@ -113,15 +112,21 @@ jobs:
                               immediate_score = score
                               immediate_match = (db_ptr, end_i)
 
-                  # If the immediate next words are a good match (>80%), TAKE THEM.
-                  # Do not even look at the rest of the file. This prevents confusion.
-                  if immediate_score > 0.8:
+                  # LOWERED threshold from 0.8 to 0.65 for better matching
+                  if immediate_score > 0.65:
                       s_idx, e_idx = immediate_match
                       s_time = words_db[s_idx]["start"]
                       e_time = words_db[e_idx-1]["end"]
                       
-                      if s_time < last_time: s_time = last_time + 0.01
-                      if e_time <= s_time: e_time = s_time + 0.5
+                      # Ensure no overlap with previous segment
+                      if s_time < last_time: 
+                          s_time = last_time + 0.01
+                      if e_time <= s_time: 
+                          e_time = s_time + 0.5
+                      
+                      # Ensure minimum duration of 0.3s for readability
+                      if (e_time - s_time) < 0.3:
+                          e_time = s_time + 0.3
 
                       results.append({
                           "id": f"i{item['number']}",
@@ -133,16 +138,14 @@ jobs:
                       })
                       db_ptr = e_idx
                       last_time = e_time
-                      continue # SKIP PART 2
+                      continue
 
-                  # === STRATEGY PART 2: WIDE SEARCH (Only if Part 1 Failed) ===
-                  # This runs only if the immediate words didn't match (Visual Gap).
-                  
+                  # === STRATEGY PART 2: WIDE SEARCH - IMPROVED ===
                   best_match_span = None
                   best_weighted_score = -1.0
-                  search_limit = min(db_ptr + 2500, len(words_db))
-                  base_threshold = 0.75 if len(target_words) < 5 else 0.6
-                  dist_penalty = 0.001 
+                  search_limit = min(db_ptr + 3000, len(words_db))  # Extended search range
+                  base_threshold = 0.55 if len(target_words) < 5 else 0.5  # LOWERED thresholds
+                  dist_penalty = 0.0005  # REDUCED penalty from 0.001 to 0.0005
 
                   for start_i in range(db_ptr, search_limit):
                       distance = start_i - db_ptr
@@ -161,7 +164,6 @@ jobs:
                               best_weighted_score = weighted_score
                               best_match_span = (start_i, end_i)
 
-                  # Finalize Match from Search
                   final_raw_score = 0
                   if best_match_span:
                       s, e = best_match_span
@@ -173,8 +175,14 @@ jobs:
                       s_time = words_db[s_idx]["start"]
                       e_time = words_db[e_idx-1]["end"]
                       
-                      if s_time < last_time: s_time = last_time + 0.01
-                      if e_time <= s_time: e_time = s_time + 0.5
+                      if s_time < last_time: 
+                          s_time = last_time + 0.01
+                      if e_time <= s_time: 
+                          e_time = s_time + 0.5
+                      
+                      # Ensure minimum duration
+                      if (e_time - s_time) < 0.3:
+                          e_time = s_time + 0.3
 
                       results.append({
                           "id": f"i{item['number']}",
@@ -187,19 +195,19 @@ jobs:
                       db_ptr = e_idx
                       last_time = e_time
                   else:
-                      # Fallback: Visual Gap / Not Found
-                      # We stay at db_ptr so the NEXT sentence can try to match "Welcome".
+                      # Fallback: Visual Gap / Not Found - IMPROVED
                       s_time = round(last_time + 0.01, 3)
-                      e_time = round(s_time + 1.5, 3)
+                      e_time = round(s_time + 0.5, 3)  # REDUCED from 1.5s to 0.5s
                       results.append({
                           "id": f"i{item['number']}",
                           "number": item["number"],
                           "sentence": orig_sent,
                           "start": s_time,
                           "end": e_time,
-                          "duration": 1.5
+                          "duration": 0.5
                       })
                       last_time = e_time
+                      # DON'T advance db_ptr - let next sentence try from same position
 
               output = {
                   "metadata": {
@@ -212,7 +220,7 @@ jobs:
               os.makedirs("Edits", exist_ok=True)
               with open("Edits/edit.json", "w") as f:
                   json.dump(output, f, indent=2)
-              print(f"Processed {len(results)} sentences.")
+              print(f"✅ Processed {len(results)} sentences with improved sync.")
 
           if __name__ == "__main__":
               main()
@@ -232,5 +240,6 @@ jobs:
           git stash pop || true  
           git add Edits/edit.json  
           timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")  
-          git commit -m "🔄 Universal Sync (Hybrid Priority): ${timestamp}" || echo "No changes"  
+          git commit -m "🎯 Improved Sync (Fixed Thresholds): ${timestamp}" || echo "No changes"  
           git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
+

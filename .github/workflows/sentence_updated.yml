@@ -227,6 +227,144 @@ jobs:
 
           # Run the generated script
           python3 align_timestamps.py
+          
+          # Clean up the script file
+          rm align_timestamps.py
+
+      - name: Commit and push transcription file
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
+        run: |
+          git config --global user.name "intellectra9"
+          git config --global user.email "intellectra9@outlook.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          git stash --include-untracked
+          git pull origin main --rebase || echo "No rebase needed"
+          git stash pop || true
+
+          git add Edits/edit.json
+
+          if git diff --cached --quiet; then
+            echo "No changes detected. Skipping commit."
+            exit 0
+          fi
+
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+          # Removed parentheses from commit message to be extra safe
+          git commit -m "🎯 Fixed Sync Robust Matching: ${timestamp}"
+
+          # CRITICAL FIX: Quotes added around the URL
+          git push "https://x-access-token:${GH_PAT}@github.com/${REPO}.git" HEAD:main                              is_match = False
+                              break
+                          if words_pool[i + j]['text'] != target_words[j]:
+                              is_match = False
+                              break
+                      
+                      if is_match:
+                          # We found the start! Now find the end.
+                          last_word_target = target_words[-1]
+                          
+                          # Search for the last word, starting from the found start
+                          end_search_limit = min(pool_len, i + target_len + 10)
+                          
+                          best_end_idx = i # Default to start if 1 word
+                          
+                          # Reverse search for the last word to find the furthest matching one
+                          for k in range(end_search_limit - 1, i - 1, -1):
+                              if words_pool[k]['text'] == last_word_target:
+                                  best_end_idx = k
+                                  return i, best_end_idx
+                          
+                          # Fallback: strict word count mapping
+                          estimated_end = min(pool_len - 1, i + target_len - 1)
+                          return i, estimated_end
+
+              return None, None
+
+          def main():
+              print('Starting robust alignment process...')
+              all_words = load_transcription_words(TRANSCRIPT_PATH)
+              visual_sentences = load_visuals(VISUALS_PATH)
+              
+              aligned_sentences = []
+              db_ptr = 0
+              last_end_time = 0.0
+
+              for idx, item in enumerate(visual_sentences):
+                  sentence_text = item.get('sentence', '')
+                  norm_text = normalize(sentence_text)
+                  sentence_words = norm_text.split()
+                  scene_number = item.get('number', idx + 1)
+                  
+                  start_time = 0.0
+                  end_time = 0.0
+                  duration = 0.0
+                  
+                  if not sentence_words:
+                      start_time = last_end_time
+                      end_time = start_time + 0.5
+                  else:
+                      # Attempt to find the sentence in the word pool
+                      start_idx, end_idx = find_sequence_match(all_words, sentence_words, db_ptr)
+                      
+                      if start_idx is not None:
+                          # --- HIT ---
+                          raw_start = all_words[start_idx]['start']
+                          raw_end = all_words[end_idx]['end']
+                          
+                          # Fix overlaps
+                          if raw_start < last_end_time:
+                              raw_start = last_end_time
+                          
+                          # Ensure duration
+                          if raw_end <= raw_start:
+                              raw_end = raw_start + max(0.5, len(sentence_words) * 0.3)
+                              
+                          start_time = raw_start
+                          end_time = raw_end
+                          
+                          # Update pointer
+                          db_ptr = end_idx + 1
+                      else:
+                          # --- MISS ---
+                          start_time = last_end_time
+                          est_duration = max(1.0, len(sentence_words) * 0.35)
+                          end_time = start_time + est_duration
+                          print(f'Warning: No match for "{sentence_text[:20]}...". contentFetchId estimated time.')
+                  
+                  duration = round(end_time - start_time, 3)
+                  
+                  aligned_sentences.append({
+                      "id": f"i{idx+1}",
+                      "number": scene_number,
+                      "sentence": sentence_text,
+                      "start": round(start_time, 3),
+                      "end": round(end_time, 3),
+                      "duration": duration
+                  })
+                  
+                  last_end_time = end_time
+
+              final_output = {
+                  "metadata": {
+                      "created_at": datetime.now(timezone.utc).isoformat(),
+                      "total": len(aligned_sentences)
+                  },
+                  "sentence_transcriptions": aligned_sentences
+              }
+              
+              with open(OUTPUT_PATH, 'w') as f:
+                  json.dump(final_output, f, indent=2)
+              print('Finished.')
+
+          if __name__ == '__main__':
+              main()
+          EOF
+
+          # Run the generated script
+          python3 align_timestamps.py
 
       - name: Commit and push transcription file
         env:

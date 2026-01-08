@@ -51,13 +51,11 @@ jobs:
           os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
           def normalize(text):
-              """Normalize text for comparison: lowercase, remove punctuation."""
               if not text: return \"\"
               # Remove everything except alphanumeric and spaces
               return re.sub(r'[^\w\s]', '', text).lower().strip()
 
           def load_transcription_words(path):
-              """Flattens nested Whisper-style JSON into a single list of words."""
               if not os.path.exists(path):
                   print(f'Error: {path} not found.')
                   sys.exit(1)
@@ -66,22 +64,18 @@ jobs:
                   data = json.load(f)
               
               flat_words = []
-              
-              # Handle different JSON structures (segments vs top-level)
               segments = data.get('segments', [])
               if not segments and isinstance(data, list):
-                  segments = data # Handle case where root is a list of segments
+                  segments = data
                   
               for segment in segments:
                   if 'words' in segment:
                       for w in segment['words']:
-                          # Ensure required keys exist
                           if 'word' in w and 'start' in w and 'end' in w:
                               flat_words.append({
                                   'text': normalize(w['word']),
                                   'start': float(w['start']),
-                                  'end': float(w['end']),
-                                  'raw': w['word']
+                                  'end': float(w['end'])
                               })
               
               print(f'Loaded {len(flat_words)} words from transcription.')
@@ -96,131 +90,71 @@ jobs:
 
           def main():
               print('Starting alignment process...')
-              
               all_words = load_transcription_words(TRANSCRIPT_PATH)
               visual_sentences = load_visuals(VISUALS_PATH)
               
               aligned_sentences = []
-              
-              # Pointer to the index in all_words
               db_ptr = 0
-              
-              # Track end time of the previous sentence to prevent overlaps
               last_sentence_end_time = 0.0
 
               for idx, item in enumerate(visual_sentences):
                   sentence_text = item.get('sentence', '')
                   sentence_norm = normalize(sentence_text)
                   sentence_words = sentence_norm.split()
-                  
                   scene_number = item.get('number', idx + 1)
                   
-                  # Default fallback values
                   start_time = last_sentence_end_time
-                  end_time = start_time + 2.0 # Default 2s duration if no match
-                  
-                  match_found = False
+                  end_time = start_time + 2.0 
                   
                   if not sentence_words:
-                      # Handle empty sentences (visual gaps)
                       end_time = start_time + 0.5
                   elif db_ptr < len(all_words):
-                      
-                      # --- STEP 1: FIND START WORD ---
-                      # Look for the first word of the sentence starting from db_ptr
                       start_match_idx = -1
-                      
-                      # Search window: Don't look too far ahead to avoid false positives 
-                      # (e.g., 'the' appearing 50 sentences later)
-                      # Dynamic window: 200 words or rest of list
                       search_limit = min(len(all_words), db_ptr + 500) 
-                      
                       target_start_word = sentence_words[0]
                       
                       for i in range(db_ptr, search_limit):
                           if all_words[i]['text'] == target_start_word:
-                              # Potential start found. 
-                              # Optional: Verify next word also matches for better accuracy if len > 1
                               start_match_idx = i
                               break
                       
                       if start_match_idx != -1:
-                          # --- STEP 2: FIND END WORD ---
-                          # Start searching for the last word AFTER the start word
                           target_end_word = sentence_words[-1]
                           end_match_idx = -1
-                          
-                          # Search from start_match_idx forward
-                          # We assume the sentence ends before the next 50 words usually
                           sub_search_limit = min(len(all_words), start_match_idx + len(sentence_words) + 20)
-                          
-                          # Iterate backwards from limit to find the *last* occurrence 
-                          # that fits strictly within a reasonable range? 
-                          # No, prompt says 'Find the last word of the sentence'
-                          # We iterate forward to find the first occurrence of the last word
-                          # relative to the start word sequence.
                           
                           for i in range(start_match_idx, sub_search_limit):
                               if all_words[i]['text'] == target_end_word:
                                   end_match_idx = i
-                                  # Keep updating if we find the word again? 
-                                  # E.g. \"matches for better accuracy if...\"
-                                  # If we stop at first 'better', we cut short. 
-                                  # But simple logic is usually: Find start, walk through text.
-                                  # Let's trust the 'find last word' logic in the prompt.
-                                  # We will take the matched index that is roughly count(words) away.
                           
                           if end_match_idx != -1:
-                              # --- ASSIGN TIMESTAMPS ---
-                              # Logic: start = first matching word start
                               raw_start = all_words[start_match_idx]['start']
-                              
-                              # Logic: end = last matching word end
                               raw_end = all_words[end_match_idx]['end']
                               
-                              # Rule: Next sentence start = last word end of previous + epsilon?
-                              # Prompt: \"Take the last word end time of previous sentence... Find next word... That word becomes start\"
-                              # This implies we rely on the word timestamps found.
-                              
-                              # ENFORCE RULES
-                              # 1. No overlaps / Backward timestamps
                               if raw_start < last_sentence_end_time:
                                   raw_start = last_sentence_end_time
-                              
-                              # 2. End must be > Start
                               if raw_end <= raw_start:
-                                  raw_end = raw_start + 0.5 # Minimum duration
+                                  raw_end = raw_start + 0.5
                                   
                               start_time = raw_start
                               end_time = raw_end
-                              
-                              # Update pointer for next iteration
-                              # Start searching next sentence AFTER this sentence's last word
                               db_ptr = end_match_idx + 1
-                              match_found = True
 
-                  # --- FALLBACK / CONTINUITY ---
-                  # If we didn't find words, or words were processed:
-                  # Ensure strict forward progression
                   if start_time < last_sentence_end_time:
                       start_time = last_sentence_end_time
                   
                   duration = round(end_time - start_time, 3)
                   
-                  # Create Output Object
-                  aligned_obj = {
+                  aligned_sentences.append({
                       \"id\": f\"i{idx+1}\",
                       \"number\": scene_number,
                       \"sentence\": sentence_text,
                       \"start\": round(start_time, 3),
                       \"end\": round(end_time, 3),
                       \"duration\": duration
-                  }
-                  
-                  aligned_sentences.append(aligned_obj)
+                  })
                   last_sentence_end_time = end_time
 
-              # --- CONSTRUCT FINAL JSON ---
               final_output = {
                   \"metadata\": {
                       \"created_at\": datetime.now(timezone.utc).isoformat(),
@@ -230,154 +164,40 @@ jobs:
               }
               
               print(f'Generated alignment for {len(aligned_sentences)} sentences.')
-              
               with open(OUTPUT_PATH, 'w') as f:
                   json.dump(final_output, f, indent=2)
-                  
+          
           if __name__ == '__main__':
               main()
           "
 
-      - name: Commit and Push Changes
+      - name: Commit and push transcription file
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
         run: |
-          # Git Configuration
+          # Git Config
           git config --global user.name "intellectra9"
           git config --global user.email "intellectra9@outlook.com"
-          
-          # Add the generated file
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+          # Safety Sync: Stash local changes, pull latest remote, pop stash
+          git stash --include-untracked
+          git pull origin main --rebase || echo "No rebase needed - origin likely empty or consistent"
+          git stash pop || true
+
+          # Stage file
           git add Edits/edit.json
-          
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
+
+          # Check for changes
+          if git diff --cached --quiet; then
             echo "No changes detected. Skipping commit."
-          else
-            echo "Changes detected. Committing..."
-            git commit -m "Auto-update sentence timestamps [skip ci]"
-            
-            # Push using PAT for authentication
-            git push "https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git" main
-          fi                      # Ensure no overlap with previous segment
-                      if s_time < last_time: 
-                          s_time = last_time + 0.01
-                      if e_time <= s_time: 
-                          e_time = s_time + 0.5
-                      
-                      # Ensure minimum duration of 0.3s for readability
-                      if (e_time - s_time) < 0.3:
-                          e_time = s_time + 0.3
+            exit 0
+          fi
 
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": orig_sent,
-                          "start": round(s_time, 3),
-                          "end": round(e_time, 3),
-                          "duration": round(e_time - s_time, 3)
-                      })
-                      db_ptr = e_idx
-                      last_time = e_time
-                      continue
+          # Commit with Timestamp
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+          git commit -m "🎯 Improved Sync: ${timestamp}"
 
-                  # === STRATEGY PART 2: WIDE SEARCH - IMPROVED ===
-                  best_match_span = None
-                  best_weighted_score = -1.0
-                  search_limit = min(db_ptr + 3000, len(words_db))  # Extended search range
-                  base_threshold = 0.55 if len(target_words) < 5 else 0.5  # LOWERED thresholds
-                  dist_penalty = 0.0005  # REDUCED penalty from 0.001 to 0.0005
-
-                  for start_i in range(db_ptr, search_limit):
-                      distance = start_i - db_ptr
-                      penalty = distance * dist_penalty
-                      if (1.0 - penalty) < best_weighted_score: break
-
-                      for length in range(min_len, max_len):
-                          end_i = start_i + length
-                          if end_i > len(words_db): break
-                          
-                          candidate_norm = "".join([words_db[k]["norm"] for k in range(start_i, end_i)])
-                          raw_score = get_sim(target_norm, candidate_norm)
-                          
-                          weighted_score = raw_score - penalty
-                          if weighted_score > best_weighted_score:
-                              best_weighted_score = weighted_score
-                              best_match_span = (start_i, end_i)
-
-                  final_raw_score = 0
-                  if best_match_span:
-                      s, e = best_match_span
-                      candidate_norm = "".join([words_db[k]["norm"] for k in range(s, e)])
-                      final_raw_score = get_sim(target_norm, candidate_norm)
-
-                  if final_raw_score > base_threshold and best_match_span:
-                      s_idx, e_idx = best_match_span
-                      s_time = words_db[s_idx]["start"]
-                      e_time = words_db[e_idx-1]["end"]
-                      
-                      if s_time < last_time: 
-                          s_time = last_time + 0.01
-                      if e_time <= s_time: 
-                          e_time = s_time + 0.5
-                      
-                      # Ensure minimum duration
-                      if (e_time - s_time) < 0.3:
-                          e_time = s_time + 0.3
-
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": orig_sent,
-                          "start": round(s_time, 3),
-                          "end": round(e_time, 3),
-                          "duration": round(e_time - s_time, 3)
-                      })
-                      db_ptr = e_idx
-                      last_time = e_time
-                  else:
-                      # Fallback: Visual Gap / Not Found - IMPROVED
-                      s_time = round(last_time + 0.01, 3)
-                      e_time = round(s_time + 0.5, 3)  # REDUCED from 1.5s to 0.5s
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": orig_sent,
-                          "start": s_time,
-                          "end": e_time,
-                          "duration": 0.5
-                      })
-                      last_time = e_time
-                      # DON'T advance db_ptr - let next sentence try from same position
-
-              output = {
-                  "metadata": {
-                      "created_at": datetime.utcnow().isoformat() + "Z",
-                      "total": len(results)
-                  },
-                  "sentence_transcriptions": results
-              }
-
-              os.makedirs("Edits", exist_ok=True)
-              with open("Edits/edit.json", "w") as f:
-                  json.dump(output, f, indent=2)
-              print(f"✅ Processed {len(results)} sentences with improved sync.")
-
-          if __name__ == "__main__":
-              main()
-          PYTHON_SCRIPT_END
-
-      - name: Configure Git  
-        run: |  
-          git config --global user.name "intellectra9"  
-          git config --global user.email "intellectra9@outlook.com"  
-
-      - name: Commit and push transcription file  
-        env:  
-          GH_PAT: ${{ secrets.GH_PAT }}  
-        run: |  
-          git stash --include-untracked  
-          git pull origin main --rebase || echo "No rebase needed"  
-          git stash pop || true  
-          git add Edits/edit.json  
-          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")  
-          git commit -m "🎯 Improved Sync (Fixed Thresholds): ${timestamp}" || echo "No changes"  
-          git push https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git HEAD:main
-
+          # Push using Environment Variables (SAFE)
+          git push https://x-access-token:${GH_PAT}@github.com/${REPO}.git HEAD:main

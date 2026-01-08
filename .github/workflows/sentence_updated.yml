@@ -1,4 +1,4 @@
-name: Sentence Level Transcription
+name: Sentence Timestamp Alignment
 
 on:
   workflow_run:
@@ -16,109 +16,247 @@ permissions:
   contents: write
 
 jobs:
-  generate-transcription:
+  generate-timestamps:
+    name: Align Sentences and Update Edits
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name != 'workflow_run' }}
 
-    steps:  
-      - name: Checkout repository  
-        uses: actions/checkout@v3  
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure full history for git operations
 
-      - name: Set up Python  
-        uses: actions/setup-python@v4  
-        with:  
-          python-version: '3.10'  
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-      - name: Generate sentence-level transcription  
-        run: |  
-          python3 - << 'PYTHON_SCRIPT_END'
+      - name: Execute Alignment Script
+        id: aligner
+        run: |
+          python3 -c "
           import json
           import os
           import re
-          from datetime import datetime
-          from difflib import SequenceMatcher
+          import sys
+          from datetime import datetime, timezone
+
+          # --- CONFIGURATION ---
+          TRANSCRIPT_PATH = 'Trans/transcription.json'
+          VISUALS_PATH = 'Visuals/visuals.json'
+          OUTPUT_PATH = 'Edits/edit.json'
+          
+          # Ensure output directory exists
+          os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
           def normalize(text):
-              """Strips everything but lowercase letters and numbers."""
-              if not text: return ""
-              return re.sub(r"[^a-z0-9]", '', text.lower())
+              """Normalize text for comparison: lowercase, remove punctuation."""
+              if not text: return \"\"
+              # Remove everything except alphanumeric and spaces
+              return re.sub(r'[^\w\s]', '', text).lower().strip()
 
-          def get_sim(a, b):
-              return SequenceMatcher(None, a, b).ratio()
+          def load_transcription_words(path):
+              """Flattens nested Whisper-style JSON into a single list of words."""
+              if not os.path.exists(path):
+                  print(f'Error: {path} not found.')
+                  sys.exit(1)
+              
+              with open(path, 'r') as f:
+                  data = json.load(f)
+              
+              flat_words = []
+              
+              # Handle different JSON structures (segments vs top-level)
+              segments = data.get('segments', [])
+              if not segments and isinstance(data, list):
+                  segments = data # Handle case where root is a list of segments
+                  
+              for segment in segments:
+                  if 'words' in segment:
+                      for w in segment['words']:
+                          # Ensure required keys exist
+                          if 'word' in w and 'start' in w and 'end' in w:
+                              flat_words.append({
+                                  'text': normalize(w['word']),
+                                  'start': float(w['start']),
+                                  'end': float(w['end']),
+                                  'raw': w['word']
+                              })
+              
+              print(f'Loaded {len(flat_words)} words from transcription.')
+              return flat_words
+
+          def load_visuals(path):
+              if not os.path.exists(path):
+                  print(f'Error: {path} not found.')
+                  sys.exit(1)
+              with open(path, 'r') as f:
+                  return json.load(f)
 
           def main():
-              trans_p = "Trans/transcription.json"
-              vis_p = "Visuals/visuals.json"
+              print('Starting alignment process...')
               
-              if not os.path.exists(trans_p) or not os.path.exists(vis_p):
-                  print(f"File missing: {trans_p} or {vis_p}")
-                  return
-
-              with open(trans_p, 'r') as f: trans_data = json.load(f)
-              with open(vis_p, 'r') as f: visuals = json.load(f)
-
-              # Flatten transcript into individual words
-              words_db = []
-              for seg in trans_data.get("segments", []):
-                  for w in seg.get("words", []):
-                      words_db.append({
-                          "norm": normalize(w["word"]),
-                          "start": w["start"],
-                          "end": w["end"]
-                      })
-
-              results = []
+              all_words = load_transcription_words(TRANSCRIPT_PATH)
+              visual_sentences = load_visuals(VISUALS_PATH)
+              
+              aligned_sentences = []
+              
+              # Pointer to the index in all_words
               db_ptr = 0
-              last_time = 0.0
+              
+              # Track end time of the previous sentence to prevent overlaps
+              last_sentence_end_time = 0.0
 
-              for item in visuals:
-                  orig_sent = item.get("sentence", "")
-                  target_words = [normalize(w) for w in orig_sent.split() if normalize(w)]
-                  target_norm = "".join(target_words)
+              for idx, item in enumerate(visual_sentences):
+                  sentence_text = item.get('sentence', '')
+                  sentence_norm = normalize(sentence_text)
+                  sentence_words = sentence_norm.split()
                   
-                  # Handle visual-only/empty sentences - IMPROVED
-                  if not target_norm: 
-                      # Instead of fixed duration, use a smaller value to prevent long gaps
-                      start_t = round(last_time + 0.01, 3)
-                      end_t = round(start_t + 0.3, 3)  # REDUCED from 1.0s to 0.3s
-                      results.append({
-                          "id": f"i{item['number']}",
-                          "number": item["number"],
-                          "sentence": orig_sent,
-                          "start": start_t,
-                          "end": end_t,
-                          "duration": 0.3
-                      })
-                      last_time = end_t
-                      # DON'T advance pointer - next sentence should start from same position
-                      continue
-
-                  # === STRATEGY PART 1: IMMEDIATE NEIGHBOR CHECK - IMPROVED ===
-                  immediate_match = None
-                  immediate_score = 0.0
+                  scene_number = item.get('number', idx + 1)
                   
-                  min_len = max(1, len(target_words) - 3)  # More flexible
-                  max_len = len(target_words) + 5  # Allow more variation
+                  # Default fallback values
+                  start_time = last_sentence_end_time
+                  end_time = start_time + 2.0 # Default 2s duration if no match
                   
-                  if db_ptr < len(words_db):
-                      for length in range(min_len, max_len):
-                          end_i = db_ptr + length
-                          if end_i > len(words_db): break
-                          
-                          candidate_norm = "".join([words_db[k]["norm"] for k in range(db_ptr, end_i)])
-                          score = get_sim(target_norm, candidate_norm)
-                          
-                          if score > immediate_score:
-                              immediate_score = score
-                              immediate_match = (db_ptr, end_i)
-
-                  # LOWERED threshold from 0.8 to 0.65 for better matching
-                  if immediate_score > 0.65:
-                      s_idx, e_idx = immediate_match
-                      s_time = words_db[s_idx]["start"]
-                      e_time = words_db[e_idx-1]["end"]
+                  match_found = False
+                  
+                  if not sentence_words:
+                      # Handle empty sentences (visual gaps)
+                      end_time = start_time + 0.5
+                  elif db_ptr < len(all_words):
                       
-                      # Ensure no overlap with previous segment
+                      # --- STEP 1: FIND START WORD ---
+                      # Look for the first word of the sentence starting from db_ptr
+                      start_match_idx = -1
+                      
+                      # Search window: Don't look too far ahead to avoid false positives 
+                      # (e.g., 'the' appearing 50 sentences later)
+                      # Dynamic window: 200 words or rest of list
+                      search_limit = min(len(all_words), db_ptr + 500) 
+                      
+                      target_start_word = sentence_words[0]
+                      
+                      for i in range(db_ptr, search_limit):
+                          if all_words[i]['text'] == target_start_word:
+                              # Potential start found. 
+                              # Optional: Verify next word also matches for better accuracy if len > 1
+                              start_match_idx = i
+                              break
+                      
+                      if start_match_idx != -1:
+                          # --- STEP 2: FIND END WORD ---
+                          # Start searching for the last word AFTER the start word
+                          target_end_word = sentence_words[-1]
+                          end_match_idx = -1
+                          
+                          # Search from start_match_idx forward
+                          # We assume the sentence ends before the next 50 words usually
+                          sub_search_limit = min(len(all_words), start_match_idx + len(sentence_words) + 20)
+                          
+                          # Iterate backwards from limit to find the *last* occurrence 
+                          # that fits strictly within a reasonable range? 
+                          # No, prompt says 'Find the last word of the sentence'
+                          # We iterate forward to find the first occurrence of the last word
+                          # relative to the start word sequence.
+                          
+                          for i in range(start_match_idx, sub_search_limit):
+                              if all_words[i]['text'] == target_end_word:
+                                  end_match_idx = i
+                                  # Keep updating if we find the word again? 
+                                  # E.g. \"matches for better accuracy if...\"
+                                  # If we stop at first 'better', we cut short. 
+                                  # But simple logic is usually: Find start, walk through text.
+                                  # Let's trust the 'find last word' logic in the prompt.
+                                  # We will take the matched index that is roughly count(words) away.
+                          
+                          if end_match_idx != -1:
+                              # --- ASSIGN TIMESTAMPS ---
+                              # Logic: start = first matching word start
+                              raw_start = all_words[start_match_idx]['start']
+                              
+                              # Logic: end = last matching word end
+                              raw_end = all_words[end_match_idx]['end']
+                              
+                              # Rule: Next sentence start = last word end of previous + epsilon?
+                              # Prompt: \"Take the last word end time of previous sentence... Find next word... That word becomes start\"
+                              # This implies we rely on the word timestamps found.
+                              
+                              # ENFORCE RULES
+                              # 1. No overlaps / Backward timestamps
+                              if raw_start < last_sentence_end_time:
+                                  raw_start = last_sentence_end_time
+                              
+                              # 2. End must be > Start
+                              if raw_end <= raw_start:
+                                  raw_end = raw_start + 0.5 # Minimum duration
+                                  
+                              start_time = raw_start
+                              end_time = raw_end
+                              
+                              # Update pointer for next iteration
+                              # Start searching next sentence AFTER this sentence's last word
+                              db_ptr = end_match_idx + 1
+                              match_found = True
+
+                  # --- FALLBACK / CONTINUITY ---
+                  # If we didn't find words, or words were processed:
+                  # Ensure strict forward progression
+                  if start_time < last_sentence_end_time:
+                      start_time = last_sentence_end_time
+                  
+                  duration = round(end_time - start_time, 3)
+                  
+                  # Create Output Object
+                  aligned_obj = {
+                      \"id\": f\"i{idx+1}\",
+                      \"number\": scene_number,
+                      \"sentence\": sentence_text,
+                      \"start\": round(start_time, 3),
+                      \"end\": round(end_time, 3),
+                      \"duration\": duration
+                  }
+                  
+                  aligned_sentences.append(aligned_obj)
+                  last_sentence_end_time = end_time
+
+              # --- CONSTRUCT FINAL JSON ---
+              final_output = {
+                  \"metadata\": {
+                      \"created_at\": datetime.now(timezone.utc).isoformat(),
+                      \"total\": len(aligned_sentences)
+                  },
+                  \"sentence_transcriptions\": aligned_sentences
+              }
+              
+              print(f'Generated alignment for {len(aligned_sentences)} sentences.')
+              
+              with open(OUTPUT_PATH, 'w') as f:
+                  json.dump(final_output, f, indent=2)
+                  
+          if __name__ == '__main__':
+              main()
+          "
+
+      - name: Commit and Push Changes
+        run: |
+          # Git Configuration
+          git config --global user.name "intellectra9"
+          git config --global user.email "intellectra9@outlook.com"
+          
+          # Add the generated file
+          git add Edits/edit.json
+          
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes detected. Skipping commit."
+          else
+            echo "Changes detected. Committing..."
+            git commit -m "Auto-update sentence timestamps [skip ci]"
+            
+            # Push using PAT for authentication
+            git push "https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git" main
+          fi                      # Ensure no overlap with previous segment
                       if s_time < last_time: 
                           s_time = last_time + 0.01
                       if e_time <= s_time: 

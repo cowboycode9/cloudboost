@@ -36,7 +36,7 @@ jobs:
         id: aligner
         shell: bash
         run: |
-          # Write the Python script to a file to avoid YAML indentation errors
+          # Write the Python script to a file
           cat << 'EOF' > align_timestamps.py
           import json
           import os
@@ -49,10 +49,12 @@ jobs:
           VISUALS_PATH = 'Visuals/visuals.json'
           OUTPUT_PATH = 'Edits/edit.json'
 
+          # Ensure output directory exists
           os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
           def normalize(text):
               if not text: return ""
+              # aggressive normalization: lowercase, remove all non-alphanumeric
               return re.sub(r'[^\w\s]', '', text).lower().strip()
 
           def load_transcription_words(path):
@@ -64,6 +66,7 @@ jobs:
                   data = json.load(f)
               
               flat_words = []
+              # Handle Whisper structure (segments -> words) OR flat list
               segments = data.get('segments', [])
               if not segments and isinstance(data, list):
                   segments = data
@@ -75,7 +78,8 @@ jobs:
                               flat_words.append({
                                   'text': normalize(w['word']),
                                   'start': float(w['start']),
-                                  'end': float(w['end'])
+                                  'end': float(w['end']),
+                                  'raw': w['word']
                               })
               
               print(f'Loaded {len(flat_words)} words from transcription.')
@@ -88,43 +92,72 @@ jobs:
               with open(path, 'r') as f:
                   return json.load(f)
 
-          def find_sequence_match(words_pool, target_words, start_index):
-              if not target_words: return None, None
-              
+          def find_sentence_span(words_pool, sentence_words, start_search_idx):
+              """
+              Finds the start word and end word of a sentence independently.
+              Allows for gaps (silence) between sentences.
+              """
+              if not sentence_words:
+                  return None, None, start_search_idx
+
               pool_len = len(words_pool)
-              target_len = len(target_words)
-              search_limit = min(pool_len, start_index + 500)
+              # Lookahead limit: don't search the whole file, just the next 500 words
+              limit = min(pool_len, start_search_idx + 500)
+
+              # 1. FIND START WORD
+              start_idx = -1
+              target_start = sentence_words[0]
               
-              for i in range(start_index, search_limit):
-                  if words_pool[i]['text'] == target_words[0]:
-                      # Check first few words to confirm match
-                      check_len = min(target_len, 5)
-                      is_match = True
-                      for j in range(1, check_len):
-                          if (i + j) >= pool_len or words_pool[i + j]['text'] != target_words[j]:
-                              is_match = False
+              for i in range(start_search_idx, limit):
+                  if words_pool[i]['text'] == target_start:
+                      # Optimization: If sentence has >1 words, check the second word to confirm
+                      if len(sentence_words) > 1 and (i + 1) < pool_len:
+                          if words_pool[i+1]['text'] == sentence_words[1]:
+                              start_idx = i
                               break
-                      
-                      if is_match:
-                          last_word = target_words[-1]
-                          end_search_limit = min(pool_len, i + target_len + 15)
-                          
-                          # Reverse search for best end match
-                          for k in range(end_search_limit - 1, i - 1, -1):
-                              if words_pool[k]['text'] == last_word:
-                                  return i, k
-                          
-                          return i, min(pool_len - 1, i + target_len - 1)
-              return None, None
+                          # If first matches but second doesn't, keep searching? 
+                          # Ideally yes, but let's be loose to catch partial matches.
+                          # For now, if 1st word matches, we take it as candidate.
+                          start_idx = i
+                          break
+                      else:
+                          start_idx = i
+                          break
+              
+              if start_idx == -1:
+                  return None, None, start_search_idx # Start not found
+
+              # 2. FIND END WORD (Searching forward from start_idx)
+              target_end = sentence_words[-1]
+              end_idx = -1
+              
+              # We expect the end word to be within (sentence_length + buffer) words
+              search_window = len(sentence_words) + 20
+              end_limit = min(pool_len, start_idx + search_window)
+
+              # Search backwards from the limit to finding the *last* occurrence 
+              # (helpful if the same word appears twice in the sentence)
+              for i in range(end_limit - 1, start_idx - 1, -1):
+                  if words_pool[i]['text'] == target_end:
+                      end_idx = i
+                      break
+              
+              if end_idx == -1:
+                  # If we found start but not end, guess based on length
+                  end_idx = min(pool_len - 1, start_idx + len(sentence_words) - 1)
+
+              return start_idx, end_idx, end_idx + 1
 
           def main():
-              print('Starting robust alignment...')
+              print('Starting Precise Alignment...')
               all_words = load_transcription_words(TRANSCRIPT_PATH)
               visual_sentences = load_visuals(VISUALS_PATH)
               
               aligned_sentences = []
-              db_ptr = 0
-              last_end_time = 0.0
+              db_ptr = 0 # Pointer to where we are in the word list
+              
+              # Track end of previous sentence to prevent backward overlaps
+              prev_end_timestamp = 0.0
 
               for idx, item in enumerate(visual_sentences):
                   sentence_text = item.get('sentence', '')
@@ -136,28 +169,44 @@ jobs:
                   end_time = 0.0
                   
                   if not sentence_words:
-                      start_time = last_end_time
+                      # Visual gap (no text)
+                      start_time = prev_end_timestamp
                       end_time = start_time + 0.5
                   else:
-                      start_idx, end_idx = find_sequence_match(all_words, sentence_words, db_ptr)
+                      s_idx, e_idx, next_ptr = find_sentence_span(all_words, sentence_words, db_ptr)
                       
-                      if start_idx is not None:
-                          raw_start = all_words[start_idx]['start']
-                          raw_end = all_words[end_idx]['end']
+                      if s_idx is not None:
+                          # --- MATCH FOUND ---
+                          raw_start = all_words[s_idx]['start']
+                          raw_end = all_words[e_idx]['end']
                           
-                          if raw_start < last_end_time: raw_start = last_end_time
-                          if raw_end <= raw_start: raw_end = raw_start + max(0.5, len(sentence_words) * 0.3)
+                          # LOGIC 1: Allow gaps, but prevent overlaps.
+                          # If audio starts BEFORE previous sentence ended, clamp it.
+                          if raw_start < prev_end_timestamp:
+                              raw_start = prev_end_timestamp
+                          
+                          # LOGIC 2: Ensure positive duration
+                          if raw_end <= raw_start:
+                              raw_end = raw_start + 0.5
                               
                           start_time = raw_start
                           end_time = raw_end
-                          db_ptr = end_idx + 1
+                          
+                          # Update pointer
+                          db_ptr = next_ptr
                       else:
-                          # Fallback logic
-                          start_time = last_end_time
-                          end_time = start_time + max(1.0, len(sentence_words) * 0.35)
-                          print(f'Warning: No match for "{sentence_text[:15]}..."')
-                  
+                          # --- NO MATCH (Fallback) ---
+                          # If we can't find words, assume it starts right after previous
+                          start_time = prev_end_timestamp
+                          # Estimate duration: 0.3s per word
+                          duration_est = max(1.0, len(sentence_words) * 0.3)
+                          end_time = start_time + duration_est
+                          
+                          print(f"Warning: Could not match sentence {scene_number}: '{sentence_text[:20]}...'")
+
+                  # Final safety check
                   duration = round(end_time - start_time, 3)
+                  
                   aligned_sentences.append({
                       "id": f"i{idx+1}",
                       "number": scene_number,
@@ -166,7 +215,8 @@ jobs:
                       "end": round(end_time, 3),
                       "duration": duration
                   })
-                  last_end_time = end_time
+                  
+                  prev_end_timestamp = end_time
 
               final_output = {
                   "metadata": {
@@ -178,36 +228,38 @@ jobs:
               
               with open(OUTPUT_PATH, 'w') as f:
                   json.dump(final_output, f, indent=2)
-              print('Finished.')
+              print(f'Finished processing {len(aligned_sentences)} sentences.')
 
           if __name__ == '__main__':
               main()
           EOF
 
-          # Run the script
+          # Run the generated script
           python3 align_timestamps.py
+          
+          # Clean up
           rm align_timestamps.py
 
       - name: Commit and push changes
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          # 1. Setup Auth so 'origin' accepts the PAT
+          # 1. Setup Auth
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           
           git config --global user.name "intellectra9"
           git config --global user.email "intellectra9@outlook.com"
 
-          # 2. Add the EDITS file (Corrected from Trans/ to Edits/)
+          # 2. Add the EDITS file
           git add Edits/
           
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            echo "Committing updated sentence timestamps..."
+            echo "Committing updated timestamps..."
             timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
             
-            git commit -m "🎯 Improved Sync: ${timestamp}"
+            git commit -m "🎯 Precise Sync Update: ${timestamp}"
             
             echo "Pulling latest changes..."
             git pull origin main --rebase || { 

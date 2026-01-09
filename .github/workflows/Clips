@@ -1,0 +1,112 @@
+name: Generate Video Clips
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Generate Sentence Voiceovers"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  create-clips:
+    runs-on: ubuntu-latest
+    # Run if triggered manually or if the voiceover workflow succeeded
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Generate MP4 Clips
+        shell: bash
+        run: |
+          python3 - <<EOF
+          import json
+          import os
+          import subprocess
+
+          # --- CONFIGURATION ---
+          VISUALS_PATH = 'Visuals/visuals.json'
+          AUDIO_DIR = 'Audio'
+          IMAGE_DIR = 'Images'
+          CLIPS_DIR = 'Clips'
+
+          def create_clip(num):
+              audio_path = os.path.join(AUDIO_DIR, f"a{num}.mp3")
+              image_path = os.path.join(IMAGE_DIR, f"i{num}.png")
+              output_path = os.path.join(CLIPS_DIR, f"c{num}.mp4")
+
+              if not os.path.exists(audio_path) or not os.path.exists(image_path):
+                  print(f"Skipping {num}: Missing audio or image.")
+                  return
+
+              # FFmpeg Command:
+              # -loop 1: Loop image
+              # -shortest: End video when audio ends
+              # -pix_fmt yuv420p: Compatibility for most players
+              cmd = [
+                  'ffmpeg', '-y',
+                  '-loop', '1', '-i', image_path,
+                  '-i', audio_path,
+                  '-c:v', 'libx264', '-tune', 'stillimage',
+                  '-c:a', 'aac', '-b:a', '192k',
+                  '-pix_fmt', 'yuv420p',
+                  '-shortest',
+                  output_path
+              ]
+              
+              subprocess.run(cmd, check=True)
+              print(f"Created Clip: {output_path}")
+
+          def main():
+              if not os.path.exists(VISUALS_PATH):
+                  print("Visuals file not found.")
+                  return
+              
+              os.makedirs(CLIPS_DIR, exist_ok=True)
+
+              with open(VISUALS_PATH, 'r') as f:
+                  data = json.load(f)
+
+              for item in data:
+                  num = item.get('number')
+                  if num:
+                      create_clip(num)
+
+          if __name__ == "__main__":
+              main()
+          EOF
+
+      - name: Commit and Push Clips
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "cowboycode9"
+          git config --global user.email "cowboycode9@outlook.com"
+          
+          if [ -n "$GH_PAT" ]; then
+            git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
+          fi
+
+          git add Clips/*.mp4
+          
+          if git diff --staged --quiet; then
+            echo "No new clips to commit."
+          else
+            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+            git commit -m "🎬 Generated video clips: ${timestamp}"
+            git pull origin main --rebase
+            git push origin main
+          fi
+

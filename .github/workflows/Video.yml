@@ -37,7 +37,7 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Merge Clips into Final Video (16:9)
+      - name: Merge Clips into Final Video (16:9 Crop)
         shell: bash
         run: |
           python3 <<'EOF'
@@ -110,8 +110,8 @@ jobs:
 
           filter_complex = (
               f"concat=n={len(clips)}:v=1:a=1[v];"
-              f"[v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=decrease,"
-              f"pad={TARGET_W}:{TARGET_H}:(ow-iw)/2:(oh-ih)/2,"
+              f"[v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=increase,"
+              f"crop={TARGET_W}:{TARGET_H},"
               f"setsar=1[vout]"
           )
 

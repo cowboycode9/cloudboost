@@ -13,12 +13,14 @@ permissions:
 jobs:
   create-clips:
     runs-on: ubuntu-latest
-    # Run if triggered manually or if the voiceover workflow succeeded
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,10 +33,11 @@ jobs:
       - name: Generate MP4 Clips
         shell: bash
         run: |
-          python3 - <<EOF
+          python3 - <<'EOF'
           import json
           import os
           import subprocess
+          import sys
 
           # --- CONFIGURATION ---
           VISUALS_PATH = 'Visuals/visuals.json'
@@ -42,71 +45,232 @@ jobs:
           IMAGE_DIR = 'Images'
           CLIPS_DIR = 'Clips'
 
+          def validate_audio(audio_path):
+              """Validate audio file exists and has content"""
+              if not os.path.exists(audio_path):
+                  return False, "File not found"
+              
+              size = os.path.getsize(audio_path)
+              if size < 100:  # Less than 100 bytes is suspicious
+                  return False, f"File too small ({size} bytes)"
+              
+              try:
+                  result = subprocess.run(
+                      ['ffprobe', '-v', 'error', '-show_entries', 
+                       'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1',
+                       audio_path],
+                      capture_output=True,
+                      text=True,
+                      timeout=5
+                  )
+                  if result.returncode != 0:
+                      return False, "Invalid audio format"
+                  
+                  duration = result.stdout.strip()
+                  if not duration or float(duration) <= 0:
+                      return False, "Zero duration"
+                  
+                  return True, f"Valid ({duration}s)"
+              except Exception as e:
+                  return False, str(e)
+
+          def validate_image(image_path):
+              """Validate image file exists and is readable"""
+              if not os.path.exists(image_path):
+                  return False, "File not found"
+              
+              size = os.path.getsize(image_path)
+              if size < 100:
+                  return False, f"File too small ({size} bytes)"
+              
+              try:
+                  result = subprocess.run(
+                      ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
+                       '-show_entries', 'stream=width,height', '-of', 'csv=p=0',
+                       image_path],
+                      capture_output=True,
+                      text=True,
+                      timeout=5
+                  )
+                  if result.returncode != 0:
+                      return False, "Invalid image format"
+                  
+                  dims = result.stdout.strip()
+                  if not dims or ',' not in dims:
+                      return False, "Cannot read dimensions"
+                  
+                  return True, f"Valid ({dims})"
+              except Exception as e:
+                  return False, str(e)
+
           def create_clip(num):
+              """Create a single video clip from audio and image"""
               audio_path = os.path.join(AUDIO_DIR, f"a{num}.mp3")
               image_path = os.path.join(IMAGE_DIR, f"i{num}.png")
               output_path = os.path.join(CLIPS_DIR, f"c{num}.mp4")
 
-              if not os.path.exists(audio_path) or not os.path.exists(image_path):
-                  print(f"Skipping {num}: Missing audio or image.")
-                  return
+              print(f"\n{'='*60}")
+              print(f"Processing Clip {num}")
+              print(f"{'='*60}")
 
-              # FFmpeg Command:
-              # -loop 1: Loop image
-              # -shortest: End video when audio ends
-              # -pix_fmt yuv420p: Compatibility for most players
+              # Validate audio
+              audio_valid, audio_msg = validate_audio(audio_path)
+              print(f"Audio: {audio_msg}")
+              if not audio_valid:
+                  print(f"❌ Skipping clip {num}: {audio_msg}")
+                  return False
+
+              # Validate image
+              image_valid, image_msg = validate_image(image_path)
+              print(f"Image: {image_msg}")
+              if not image_valid:
+                  print(f"❌ Skipping clip {num}: {image_msg}")
+                  return False
+
+              # FFmpeg Command with better encoding settings
               cmd = [
                   'ffmpeg', '-y',
-                  '-loop', '1', '-i', image_path,
+                  '-loop', '1',
+                  '-i', image_path,
                   '-i', audio_path,
-                  '-c:v', 'libx264', '-tune', 'stillimage',
-                  '-c:a', 'aac', '-b:a', '192k',
+                  '-c:v', 'libx264',
+                  '-tune', 'stillimage',
+                  '-preset', 'medium',          # Better quality/speed balance
+                  '-crf', '23',                 # Quality level (lower = better)
+                  '-c:a', 'aac',
+                  '-b:a', '192k',
+                  '-ar', '44100',               # Audio sample rate
                   '-pix_fmt', 'yuv420p',
+                  '-movflags', '+faststart',    # Enable streaming
                   '-shortest',
                   output_path
               ]
               
-              subprocess.run(cmd, check=True)
-              print(f"Created Clip: {output_path}")
+              try:
+                  result = subprocess.run(
+                      cmd, 
+                      capture_output=True, 
+                      text=True, 
+                      timeout=60,
+                      check=True
+                  )
+                  
+                  # Verify output
+                  if os.path.exists(output_path):
+                      size = os.path.getsize(output_path)
+                      print(f"✅ Created: {output_path} ({size:,} bytes)")
+                      return True
+                  else:
+                      print(f"❌ Failed: Output file not created")
+                      return False
+                      
+              except subprocess.CalledProcessError as e:
+                  print(f"❌ FFmpeg error: {e.stderr}")
+                  return False
+              except subprocess.TimeoutExpired:
+                  print(f"❌ Timeout creating clip {num}")
+                  return False
+              except Exception as e:
+                  print(f"❌ Unexpected error: {e}")
+                  return False
 
           def main():
               if not os.path.exists(VISUALS_PATH):
-                  print("Visuals file not found.")
-                  return
+                  print("❌ ERROR: Visuals file not found.")
+                  sys.exit(1)
               
               os.makedirs(CLIPS_DIR, exist_ok=True)
 
               with open(VISUALS_PATH, 'r') as f:
                   data = json.load(f)
 
+              print(f"\n🎬 Starting clip generation for {len(data)} items...")
+              
+              success_count = 0
+              fail_count = 0
+              
               for item in data:
                   num = item.get('number')
                   if num:
-                      create_clip(num)
+                      if create_clip(num):
+                          success_count += 1
+                      else:
+                          fail_count += 1
+                  else:
+                      print(f"⚠️  Warning: Item missing 'number' field: {item}")
+
+              print(f"\n{'='*60}")
+              print(f"📊 Summary:")
+              print(f"   ✅ Success: {success_count}")
+              print(f"   ❌ Failed:  {fail_count}")
+              print(f"   📁 Total:   {len(data)}")
+              print(f"{'='*60}\n")
+
+              if success_count == 0:
+                  print("❌ No clips were created successfully!")
+                  sys.exit(1)
 
           if __name__ == "__main__":
               main()
           EOF
 
+      - name: Setup Git LFS (if needed)
+        run: |
+          # Check if any clip is larger than 50MB
+          if find Clips -name "*.mp4" -size +50M 2>/dev/null | grep -q .; then
+            echo "Large files detected, setting up Git LFS..."
+            git lfs install
+            git lfs track "*.mp4"
+            git add .gitattributes
+          else
+            echo "No large files detected, skipping LFS setup."
+          fi
+
       - name: Commit and Push Clips
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config --global user.name "cowboycode9"
-          git config --global user.email "cowboycode9@outlook.com"
+          git config --global user.name "intellectra9"
+          git config --global user.email "intellectra9@outlook.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           
           if [ -n "$GH_PAT" ]; then
             git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           fi
 
-          git add Clips/*.mp4
+          # Add all clips
+          git add Clips/*.mp4 2>/dev/null || echo "No MP4 files to add"
+          git add .gitattributes 2>/dev/null || echo "No .gitattributes changes"
           
           if git diff --staged --quiet; then
             echo "No new clips to commit."
           else
             timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-            git commit -m "🎬 Generated video clips: ${timestamp}"
-            git pull origin main --rebase
-            git push origin main
+            
+            # Count clips
+            clip_count=$(git diff --staged --name-only | grep -c "\.mp4$" || echo "0")
+            
+            git commit -m "🎬 Generated ${clip_count} video clips: ${timestamp}"
+            
+            # Pull with rebase, fallback to merge if conflicts
+            git pull origin main --rebase || git pull origin main --strategy-option=ours
+            
+            # Push with retry logic
+            max_retries=3
+            retry_count=0
+            
+            while [ $retry_count -lt $max_retries ]; do
+              if git push origin main; then
+                echo "✅ Successfully pushed clips!"
+                exit 0
+              else
+                retry_count=$((retry_count + 1))
+                echo "⚠️  Push failed, retrying ($retry_count/$max_retries)..."
+                sleep 5
+                git pull origin main --rebase || git pull origin main --strategy-option=ours
+              fi
+            done
+            
+            echo "❌ Failed to push after $max_retries attempts"
+            exit 1
           fi
-

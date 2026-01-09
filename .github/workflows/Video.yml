@@ -1,553 +1,118 @@
-name: Generate Video (Animated + Captions)
+name: Final Video Assembly
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Generate Video Clips"]
+    types:
+      - completed
 
 permissions:
   contents: write
 
 jobs:
-  generate-video:
+  merge-final-video:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
-    steps:  
-      - name: Checkout repository  
+    steps:
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          lfs: true 
+          python-version: '3.10'
 
-      - name: Set up Python  
-        uses: actions/setup-python@v5  
-        with:  
-          python-version: '3.11'  
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Install system dependencies
+      - name: Merge Clips into Final Video
+        shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg git-lfs
-          git lfs install
+          python3 - <<EOF
+          import json
+          import os
+          import subprocess
 
-      - name: Install Python dependencies  
-        run: |  
-          pip install requests pillow
+          # --- CONFIGURATION ---
+          VISUALS_PATH = 'Visuals/visuals.json'
+          CLIPS_DIR = 'Clips'
+          VIDEO_DIR = 'Video'
+          CONCAT_FILE = 'clips_to_merge.txt'
+          OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')
 
-      - name: Create generation script
-        run: |
-          cat > generate_video.py << 'EOF'
-          import os, json, subprocess, sys
-          from PIL import Image
-          from concurrent.futures import ThreadPoolExecutor
-
-          # Config
-          AUDIO_FILE = "Audio/a1.mp3"
-          EDIT_JSON = "Edits/edit.json"
-          TRANS_JSON = "Trans/transcription.json"
-          IMAGES_DIR = "Images"
-          OUTPUT_DIR = "Video"
-          TEMP_DIR = "temp_gen"
-          OUTPUT_FILE = "final_video.mp4"
-          
-          os.makedirs(OUTPUT_DIR, exist_ok=True)
-          os.makedirs(TEMP_DIR, exist_ok=True)
-
-          def format_ass_time(s):
-              return f"{int(s//3600):01d}:{int((s%3600)//60):02d}:{int(s%60):02d}.{int((s*100)%100):02d}"
-
-          # Load Data
-          with open(EDIT_JSON) as f: edit_data = json.load(f)
-          with open(TRANS_JSON) as f: trans_data = json.load(f)
-
-          sentence_transcriptions = edit_data.get("sentence_transcriptions", [])
-
-          # === Generate Word-Level Subtitles ===
-          def generate_subtitles(trans_data, output_path):
-              ass_content = "[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Default,Arial Black,80,&H00FFFFFF,&H0000FFFF,&H00000000,&H80000000,-1,0,1,4,0,2,10,10,60,1\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
-              events = []
+          def main():
+              if not os.path.exists(VISUALS_PATH):
+                  print("Visuals file not found.")
+                  return
               
-              for seg in trans_data.get("segments", []):
-                  words = seg.get("words", [])
-                  for j in range(len(words)):
-                      current_word_idx = j
-                      state_start = words[j]['start']
-                      
-                      if j < len(words) - 1:
-                          state_end = words[j+1]['start']
-                      else:
-                          state_end = words[j]['end']
-                          
-                      text_parts = []
-                      for k, word_obj in enumerate(words):
-                          word_text = word_obj['word']
-                          if k <= current_word_idx:
-                              text_parts.append(f"{{\\c&H00FFFF&}}{{\\b1}}{word_text}")
-                          else:
-                              text_parts.append(f"{{\\c&HFFFFFF&}}{{\\b1}}{word_text}")
-                      
-                      full_text = " ".join(text_parts)
-                      events.append(f"Dialogue: 0,{format_ass_time(state_start)},{format_ass_time(state_end)},Default,,0,0,0,,{full_text}")
+              os.makedirs(VIDEO_DIR, exist_ok=True)
 
-              with open(output_path, "w") as f:
-                  f.write(ass_content + "\n".join(events))
-              
-              print(f"✅ Captions generated: {output_path}")
+              with open(VISUALS_PATH, 'r') as f:
+                  data = json.load(f)
 
-          generate_subtitles(trans_data, "captions.ass")
+              # Create the list of clips in the correct order based on visuals.json
+              clips = []
+              for item in data:
+                  num = item.get('number')
+                  clip_path = os.path.join(CLIPS_DIR, f"c{num}.mp4")
+                  if os.path.exists(clip_path):
+                      # FFmpeg concat demuxer requires 'file' prefix
+                      clips.append(f"file '{clip_path}'")
+                  else:
+                      print(f"Warning: Clip {clip_path} missing, skipping.")
 
-          # === Get audio duration ===
-          try:
-              duration_cmd = [
-                  "ffprobe", "-v", "quiet", "-show_entries", "format=duration", 
-                  "-of", "csv=p=0", AUDIO_FILE
-              ]
-              result = subprocess.run(duration_cmd, capture_output=True, text=True, check=True)
-              total_duration = float(result.stdout.strip())
-          except Exception as e:
-              print(f"❌ Error getting audio duration: {e}")
-              sys.exit(1)
+              if not clips:
+                  print("No clips found to merge.")
+                  return
 
-          # === Animation Logic ===
-          def create_animated_segment(image_path, duration, segment_id, index):
-              frames = int(duration * 30)
-              segment_output = os.path.join(TEMP_DIR, f"animated_{segment_id}.mp4")
-              z = 1.2
-              
-              if index % 2 == 0:
-                  y_expr = f"'ih*(1-1/{z})*on/{frames}'"
-              else:
-                  y_expr = f"'ih*(1-1/{z})*(1-on/{frames})'"
+              # Write the concat list to a temporary text file
+              with open(CONCAT_FILE, 'w') as f:
+                  f.write('\n'.join(clips))
 
-              x_expr = f"'iw*(1-1/{z})/2'"
-              zoom_filter = f"zoompan=z='{z}':d={frames}:x={x_expr}:y={y_expr}:s=1920x1080:fps=30"
-              
+              # Run FFmpeg Concat
+              # -f concat: Use concat demuxer
+              # -safe 0: Allow absolute/relative paths
+              # -c copy: Stream copy (fastest, no re-encoding)
               cmd = [
-                  "ffmpeg", "-y", "-loop", "1", "-i", image_path,
-                  "-vf", f"{zoom_filter},format=yuv420p",
-                  "-t", str(duration),
-                  "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-                  "-pix_fmt", "yuv420p", "-an", segment_output
+                  'ffmpeg', '-y',
+                  '-f', 'concat',
+                  '-safe', '0',
+                  '-i', CONCAT_FILE,
+                  '-c', 'copy',
+                  OUTPUT_VIDEO
               ]
-              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-              return segment_output
-
-          # === Process Images ===
-          def process_and_animate_image(segment_data):
-              i, segment = segment_data
-              segment_id = segment.get("id", f"i{i+1}")
-              start_time = segment.get("start", 0)
-              end_time = segment.get("end", 0)
-              duration = end_time - start_time
               
-              # IMPROVED: Enforce minimum duration of 0.3s
-              if duration < 0.3:
-                  duration = 0.3
-                  end_time = start_time + duration
+              subprocess.run(cmd, check=True)
+              print(f"Final Video Created: {OUTPUT_VIDEO}")
+              
+              # Cleanup temp file
+              if os.path.exists(CONCAT_FILE):
+                  os.remove(CONCAT_FILE)
 
-              image_path = os.path.join(IMAGES_DIR, f"{segment_id}.png")
-              if not os.path.exists(image_path): return None
-
-              try:
-                  with Image.open(image_path) as img:
-                      if img.mode != 'RGB': img = img.convert('RGB')
-                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
-                      processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
-                      new_img.save(processed_path, "PNG", optimize=True)
-
-                  return {
-                      "id": segment_id,
-                      "video_path": create_animated_segment(processed_path, duration, segment_id, i),
-                      "start": start_time,
-                      "end": end_time
-                  }
-              except Exception as e:
-                  print(f"Error: {e}")
-                  return None
-
-          print("🎨 Creating animated segments...")
-          with ThreadPoolExecutor(max_workers=4) as executor:
-              results = list(executor.map(process_and_animate_image, enumerate(sentence_transcriptions)))
-
-          valid_segments = [r for r in results if r and r["video_path"]]
-          valid_segments.sort(key=lambda x: x["start"])
-
-          if not valid_segments: 
-              print("❌ No valid segments found.")
-              sys.exit(1)
-
-          # === Check for gaps and extend - IMPROVED ===
-          for i, segment in enumerate(valid_segments):
-              if i < len(valid_segments) - 1:
-                  gap_end = valid_segments[i + 1]["start"]
-                  # INCREASED threshold from 0.1 to 0.25 to prevent premature extensions
-                  if gap_end > segment["end"] + 0.25:
-                      segment["duration"] = gap_end - segment["start"]
-                      segment["end"] = gap_end
-                      img_path = os.path.join(TEMP_DIR, f"processed_{segment['id']}.png")
-                      segment["video_path"] = create_animated_segment(img_path, segment["duration"], f"{segment['id']}_ext", i)
-
-          # Extend last segment
-          last = valid_segments[-1]
-          if last["end"] < total_duration - 0.1:  # Small buffer
-              last["duration"] = total_duration - last["start"]
-              img_path = os.path.join(TEMP_DIR, f"processed_{last['id']}.png")
-              last["video_path"] = create_animated_segment(img_path, last["duration"], f"{last['id']}_final", len(valid_segments)-1)
-
-          # === Concatenate and Add Subtitles ===
-          print("🎥 Concatenating and burning captions...")
-          segments_file = os.path.join(TEMP_DIR, "segments.txt")
-          with open(segments_file, "w") as f:
-              for s in valid_segments:
-                  f.write(f"file '{os.path.abspath(s['video_path'])}'\n")
-
-          concat_cmd = [
-              "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-              "-i", segments_file, "-i", AUDIO_FILE,
-              "-vf", "subtitles=captions.ass",
-              "-c:v", "libx264", "-c:a", "aac", "-b:a", "192k",
-              "-shortest", "-movflags", "+faststart",
-              os.path.join(OUTPUT_DIR, OUTPUT_FILE)
-          ]
-          
-          try:
-              subprocess.run(concat_cmd, check=True, stderr=subprocess.PIPE)
-              print(f"✅ Success! Output: {os.path.join(OUTPUT_DIR, OUTPUT_FILE)}")
-          except subprocess.CalledProcessError as e:
-              print(f"❌ Final render failed: {e.stderr.decode()}")
-              sys.exit(1)
-          
+          if __name__ == "__main__":
+              main()
           EOF
 
-      - name: Run animated video generation
-        run: python3 generate_video.py
-
-      - name: Configure Git  
-        run: |  
-          git config --global user.name "intellect9"  
-          git config --global user.email "intellectra9@outlook.com"  
-
-      - name: Commit and push generated video  
-        env:  
-          GH_PAT: ${{ secrets.GH_PAT }}  
-        run: |  
-          git stash --include-untracked  
-          git pull origin main --rebase || echo "No rebase needed"  
-          git stash pop || true  
-
-          git add Video/  
-          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🎬 Generated video with improved sync: ${timestamp}" || echo "No changes to commit"  
-
-          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
-          git push origin HEAD:main
-          exit 0
-              
-              if index % 2 == 0:
-                  y_expr = f"'ih*(1-1/{z})*on/{frames}'" # Pan Down
-              else:
-                  y_expr = f"'ih*(1-1/{z})*(1-on/{frames})'" # Pan Up
-
-              x_expr = f"'iw*(1-1/{z})/2'"
-              zoom_filter = f"zoompan=z='{z}':d={frames}:x={x_expr}:y={y_expr}:s=1920x1080:fps=30"
-              
-              cmd = [
-                  "ffmpeg", "-y", "-loop", "1", "-i", image_path,
-                  "-vf", f"{zoom_filter},format=yuv420p",
-                  "-t", str(duration),
-                  "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-                  "-pix_fmt", "yuv420p", "-an", segment_output
-              ]
-              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-              return segment_output
-
-          # === Process Images ===
-          def process_and_animate_image(segment_data):
-              i, segment = segment_data
-              segment_id = segment.get("id", f"i{i+1}")
-              start_time = segment.get("start", 0)
-              end_time = segment.get("end", 0)
-              duration = end_time - start_time
-              
-              if duration <= 0: return None
-
-              image_path = os.path.join(IMAGES_DIR, f"{segment_id}.png")
-              if not os.path.exists(image_path): return None
-
-              try:
-                  with Image.open(image_path) as img:
-                      if img.mode != 'RGB': img = img.convert('RGB')
-                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
-                      processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
-                      new_img.save(processed_path, "PNG", optimize=True)
-
-                  return {
-                      "id": segment_id,
-                      "video_path": create_animated_segment(processed_path, duration, segment_id, i),
-                      "start": start_time,
-                      "end": end_time
-                  }
-              except Exception as e:
-                  print(f"Error: {e}")
-                  return None
-
-          print("🎨 Creating animated segments...")
-          with ThreadPoolExecutor(max_workers=4) as executor:
-              results = list(executor.map(process_and_animate_image, enumerate(sentence_transcriptions)))
-
-          valid_segments = [r for r in results if r and r["video_path"]]
-          valid_segments.sort(key=lambda x: x["start"])
-
-          if not valid_segments: 
-              print("❌ No valid segments found.")
-              sys.exit(1)
-
-          # === Check for gaps and extend ===
-          for i, segment in enumerate(valid_segments):
-              if i < len(valid_segments) - 1:
-                  gap_end = valid_segments[i + 1]["start"]
-                  if gap_end > segment["end"] + 0.1:
-                      segment["duration"] = gap_end - segment["start"]
-                      segment["end"] = gap_end
-                      # Re-render extended segment
-                      img_path = os.path.join(TEMP_DIR, f"processed_{segment['id']}.png")
-                      segment["video_path"] = create_animated_segment(img_path, segment["duration"], f"{segment['id']}_ext", i)
-
-          # Extend last segment
-          last = valid_segments[-1]
-          if last["end"] < total_duration:
-              last["duration"] = total_duration - last["start"]
-              img_path = os.path.join(TEMP_DIR, f"processed_{last['id']}.png")
-              last["video_path"] = create_animated_segment(img_path, last["duration"], f"{last['id']}_final", len(valid_segments)-1)
-
-          # === Concatenate and Add Subtitles ===
-          print("🎥 Concatenating and burning captions...")
-          segments_file = os.path.join(TEMP_DIR, "segments.txt")
-          with open(segments_file, "w") as f:
-              for s in valid_segments:
-                  f.write(f"file '{os.path.abspath(s['video_path'])}'\n")
-
-          concat_cmd = [
-              "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-              "-i", segments_file, "-i", AUDIO_FILE,
-              "-vf", "subtitles=captions.ass",
-              "-c:v", "libx264", "-c:a", "aac", "-b:a", "192k",
-              "-shortest", "-movflags", "+faststart",
-              os.path.join(OUTPUT_DIR, OUTPUT_FILE)
-          ]
+      - name: Commit and Push Final Video
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "cowboycode9"
+          git config --global user.email "cowboycode9@outlook.com"
           
-          try:
-              subprocess.run(concat_cmd, check=True, stderr=subprocess.PIPE)
-              print(f"✅ Success! Output: {os.path.join(OUTPUT_DIR, OUTPUT_FILE)}")
-          except subprocess.CalledProcessError as e:
-              print(f"❌ Final render failed: {e.stderr.decode()}")
-              sys.exit(1)
-          
-          EOF
+          if [ -n "$GH_PAT" ]; then
+            git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
+          fi
 
-      - name: Run animated video generation
-        run: python3 generate_video.py
-
-      - name: Configure Git  
-        run: |  
-          git config --global user.name "intellect9"  
-          git config --global user.email "intellectra9@outlook.com"  
-
-      - name: Commit and push generated video  
-        env:  
-          GH_PAT: ${{ secrets.GH_PAT }}  
-        run: |  
-          git stash --include-untracked  
-          git pull origin main --rebase || echo "No rebase needed"  
-          git stash pop || true  
-
-          git add Video/  
-          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🎬 Generated video with BOLD captions: ${timestamp}" || echo "No changes to commit"  
-
-          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
-          git push origin HEAD:main
-          exit 0          
-          # Force LFS for the push
-          git lfs install
-          
-          # Clean up
-          rm -rf temp_gen captions.ass generate_video.py
-          
           git add Video/final_video.mp4
-          git commit -m "🎬 Generated LFS video: $(date)" || exit 0
           
-          # Authentication for LFS push
-          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
-          git pull origin main --rebase
-          git push origin HEAD:main
-          # Duration of this state is until the next word starts
-                          if j < len(chunk) - 1:
-                              state_end = chunk[j+1]['start']
-                          else:
-                              state_end = chunk[j]['end']
-                              
-                          # Build the text string for this state
-                          text_parts = []
-                          for k, word_obj in enumerate(chunk):
-                              word_text = word_obj['word']
-                              # ASS Color Tags: {\c&H00FFFF&} = Yellow, {\c&HFFFFFF&} = White
-                              # We add {\b1} to ensure bold is forced on every word
-                              if k <= current_word_idx:
-                                  # Highlighted (Yellow)
-                                  text_parts.append(f"{{\\c&H00FFFF&}}{{\\b1}}{word_text}")
-                              else:
-                                  # Not yet spoken (White)
-                                  text_parts.append(f"{{\\c&HFFFFFF&}}{{\\b1}}{word_text}")
-                          
-                          full_text = " ".join(text_parts)
-                          events.append(f"Dialogue: 0,{format_ass_time(state_start)},{format_ass_time(state_end)},Default,,0,0,0,,{full_text}")
-
-              with open(output_path, "w") as f:
-                  f.write(ass_content + "\n".join(events))
-              
-              print(f"✅ Captions generated: {output_path}")
-
-          # === Generate the Subtitles ===
-          generate_subtitles(transcription_data, "captions.ass")
-
-          # === Get audio duration ===
-          try:
-              duration_cmd = [
-                  "ffprobe", "-v", "quiet", "-show_entries", "format=duration", 
-                  "-of", "csv=p=0", AUDIO_FILE
-              ]
-              result = subprocess.run(duration_cmd, capture_output=True, text=True, check=True)
-              total_duration = float(result.stdout.strip())
-          except Exception as e:
-              print(f"❌ Error getting audio duration: {e}")
-              sys.exit(1)
-
-          # === Animation Logic ===
-          def create_animated_segment(image_path, duration, segment_id, index):
-              frames = int(duration * 30)
-              segment_output = os.path.join(TEMP_DIR, f"animated_{segment_id}.mp4")
-              z = 1.2
-              
-              if index % 2 == 0:
-                  y_expr = f"'ih*(1-1/{z})*on/{frames}'" # Pan Down
-              else:
-                  y_expr = f"'ih*(1-1/{z})*(1-on/{frames})'" # Pan Up
-
-              x_expr = f"'iw*(1-1/{z})/2'"
-              zoom_filter = f"zoompan=z='{z}':d={frames}:x={x_expr}:y={y_expr}:s=1920x1080:fps=30"
-              
-              cmd = [
-                  "ffmpeg", "-y", "-loop", "1", "-i", image_path,
-                  "-vf", f"{zoom_filter},format=yuv420p",
-                  "-t", str(duration),
-                  "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-                  "-pix_fmt", "yuv420p", "-an", segment_output
-              ]
-              subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-              return segment_output
-
-          # === Process Images ===
-          def process_and_animate_image(segment_data):
-              i, segment = segment_data
-              segment_id = segment.get("id", f"i{i+1}")
-              start_time = segment.get("start", 0)
-              end_time = segment.get("end", 0)
-              duration = end_time - start_time
-              
-              if duration <= 0: return None
-
-              image_path = os.path.join(IMAGES_DIR, f"{segment_id}.png")
-              if not os.path.exists(image_path): return None
-
-              try:
-                  with Image.open(image_path) as img:
-                      if img.mode != 'RGB': img = img.convert('RGB')
-                      new_img = img.resize((1920, 1080), Image.Resampling.LANCZOS)
-                      processed_path = os.path.join(TEMP_DIR, f"processed_{segment_id}.png")
-                      new_img.save(processed_path, "PNG", optimize=True)
-
-                  return {
-                      "id": segment_id,
-                      "video_path": create_animated_segment(processed_path, duration, segment_id, i),
-                      "start": start_time,
-                      "end": end_time
-                  }
-              except Exception as e:
-                  print(f"Error: {e}")
-                  return None
-
-          print("🎨 Creating animated segments...")
-          with ThreadPoolExecutor(max_workers=4) as executor:
-              results = list(executor.map(process_and_animate_image, enumerate(sentence_transcriptions)))
-
-          valid_segments = [r for r in results if r and r["video_path"]]
-          valid_segments.sort(key=lambda x: x["start"])
-
-          if not valid_segments: 
-              print("❌ No valid segments found.")
-              sys.exit(1)
-
-          # === Check for gaps and extend ===
-          for i, segment in enumerate(valid_segments):
-              if i < len(valid_segments) - 1:
-                  gap_end = valid_segments[i + 1]["start"]
-                  if gap_end > segment["end"] + 0.1:
-                      segment["duration"] = gap_end - segment["start"]
-                      segment["end"] = gap_end
-                      # Re-render extended segment
-                      img_path = os.path.join(TEMP_DIR, f"processed_{segment['id']}.png")
-                      segment["video_path"] = create_animated_segment(img_path, segment["duration"], f"{segment['id']}_ext", i)
-
-          # Extend last segment
-          last = valid_segments[-1]
-          if last["end"] < total_duration:
-              last["duration"] = total_duration - last["start"]
-              img_path = os.path.join(TEMP_DIR, f"processed_{last['id']}.png")
-              last["video_path"] = create_animated_segment(img_path, last["duration"], f"{last['id']}_final", len(valid_segments)-1)
-
-          # === Concatenate and Add Subtitles ===
-          print("🎥 Concatenating and burning captions...")
-          segments_file = os.path.join(TEMP_DIR, "segments.txt")
-          with open(segments_file, "w") as f:
-              for s in valid_segments:
-                  f.write(f"file '{os.path.abspath(s['video_path'])}'\n")
-
-          concat_cmd = [
-              "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-              "-i", segments_file, "-i", AUDIO_FILE,
-              "-vf", "subtitles=captions.ass",
-              "-c:v", "libx264", "-c:a", "aac", "-b:a", "192k",
-              "-shortest", "-movflags", "+faststart",
-              os.path.join(OUTPUT_DIR, OUTPUT_FILE)
-          ]
-          
-          try:
-              subprocess.run(concat_cmd, check=True, stderr=subprocess.PIPE)
-              print(f"✅ Success! Output: {os.path.join(OUTPUT_DIR, OUTPUT_FILE)}")
-          except subprocess.CalledProcessError as e:
-              print(f"❌ Final render failed: {e.stderr.decode()}")
-              sys.exit(1)
-          
-          EOF
-
-      - name: Run animated video generation
-        run: python3 generate_video.py
-
-      - name: Configure Git  
-        run: |  
-          git config --global user.name "intellect9"  
-          git config --global user.email "intellectra9@outlook.com"  
-
-      - name: Commit and push generated video  
-        env:  
-          GH_PAT: ${{ secrets.GH_PAT }}  
-        run: |  
-          git stash --include-untracked  
-          git pull origin main --rebase || echo "No rebase needed"  
-          git stash pop || true  
-
-          git add Video/  
-          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-          git commit -m "🎬 Generated video with BOLD captions: ${timestamp}" || echo "No changes to commit"  
-
-          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
-          git push origin HEAD:main
-          exit 0
+          if git diff --staged --quiet; then
+            echo "No changes in final video."
+          else
+            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+            git commit -m "🚀 Final Video Rendered: ${timestamp}"
+            git pull origin main --rebase
+            git push origin main
+          fi

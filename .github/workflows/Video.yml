@@ -17,8 +17,6 @@ permissions:
 jobs:
   merge-final-video:
     runs-on: ubuntu-latest
-
-    # SAFE conditional (prevents undefined workflow_run errors)
     if: >
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'push' ||
@@ -39,14 +37,11 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Merge Clips into Final Video
+      - name: Merge Clips into Final Video (16:9)
         shell: bash
         run: |
           python3 <<'EOF'
-          import json
-          import os
-          import subprocess
-          import sys
+          import json, os, subprocess, sys
 
           VISUALS_PATH = 'Visuals/visuals.json'
           CLIPS_DIR = 'Clips'
@@ -54,80 +49,91 @@ jobs:
           CONCAT_FILE = 'clips_to_merge.txt'
           OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')
 
-          def validate_video(path):
+          TARGET_W = 1920
+          TARGET_H = 1080
+
+          def get_video_info(path):
               try:
                   r = subprocess.run(
                       ['ffprobe','-v','error','-select_streams','v:0',
-                       '-show_entries','stream=codec_name,width,height:format=duration',
+                       '-show_entries','stream=width,height:format=duration',
                        '-of','json', path],
-                      capture_output=True, text=True, timeout=10
+                      capture_output=True, text=True
                   )
-                  if r.returncode != 0:
-                      return False, "ffprobe failed"
                   d = json.loads(r.stdout)
-                  if not d.get("streams"):
-                      return False, "no video stream"
-                  dur = float(d["format"]["duration"])
-                  if dur <= 0:
-                      return False, "zero duration"
-                  s = d["streams"][0]
-                  return True, f'{s.get("width")}x{s.get("height")} {dur:.2f}s'
-              except Exception as e:
-                  return False, str(e)
+                  s = d['streams'][0]
+                  return True, s['width'], s['height'], float(d['format']['duration'])
+              except:
+                  return False, None, None, None
 
-          def main():
-              if not os.path.exists(VISUALS_PATH):
-                  print("❌ visuals.json missing")
-                  sys.exit(1)
+          os.makedirs(VIDEO_DIR, exist_ok=True)
 
-              os.makedirs(VIDEO_DIR, exist_ok=True)
+          if not os.path.exists(VISUALS_PATH):
+              sys.exit(1)
 
-              data = json.load(open(VISUALS_PATH))
-              valid = []
+          data = json.load(open(VISUALS_PATH))
+          clips = []
 
-              for item in data:
-                  n = item.get("number")
-                  p = os.path.join(CLIPS_DIR, f"c{n}.mp4")
-                  if not os.path.exists(p):
-                      print(f"❌ Missing {p}")
-                      continue
-                  ok, info = validate_video(p)
-                  if not ok:
-                      print(f"❌ Invalid {p}: {info}")
-                      continue
-                  valid.append(p)
-                  print(f"✅ {p} ({info})")
+          for item in data:
+              n = item.get("number")
+              p = os.path.join(CLIPS_DIR, f"c{n}.mp4")
+              ok, w, h, d = get_video_info(p) if os.path.exists(p) else (False,None,None,None)
+              if not ok:
+                  continue
+              clips.append(p)
 
-              if not valid:
-                  print("❌ No valid clips")
-                  sys.exit(1)
+          if not clips:
+              sys.exit(1)
 
+          all_16_9 = True
+          for c in clips:
+              ok, w, h, _ = get_video_info(c)
+              if not ok or abs((w / h) - (16 / 9)) > 0.01:
+                  all_16_9 = False
+                  break
+
+          if all_16_9:
               with open(CONCAT_FILE, "w") as f:
-                  for v in valid:
-                      f.write(f"file '{v}'\n")
+                  for c in clips:
+                      f.write(f"file '{c}'\n")
 
-              cmd = [
+              r = subprocess.run([
                   'ffmpeg','-y','-f','concat','-safe','0',
                   '-i',CONCAT_FILE,'-c','copy',
                   '-movflags','+faststart',OUTPUT_VIDEO
-              ]
+              ])
 
-              r = subprocess.run(cmd, capture_output=True, text=True)
-              if r.returncode != 0:
-                  print("⚠️ Copy concat failed, re-encoding…")
-                  inputs = sum([['-i',v] for v in valid], [])
-                  fc = f'concat=n={len(valid)}:v=1:a=1[outv][outa]'
-                  cmd = ['ffmpeg','-y'] + inputs + [
-                      '-filter_complex',fc,
-                      '-map','[outv]','-map','[outa]',
-                      '-c:v','libx264','-c:a','aac',
-                      OUTPUT_VIDEO
-                  ]
-                  subprocess.check_call(cmd)
+              if r.returncode == 0:
+                  sys.exit(0)
 
-              print("🎉 Final video ready")
+          inputs = sum([['-i',c] for c in clips], [])
 
-          main()
+          filter_complex = (
+              f"concat=n={len(clips)}:v=1:a=1[v];"
+              f"[v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=decrease,"
+              f"pad={TARGET_W}:{TARGET_H}:(ow-iw)/2:(oh-ih)/2,"
+              f"setsar=1[vout]"
+          )
+
+          cmd = (
+              ['ffmpeg','-y'] +
+              inputs +
+              ['-filter_complex', filter_complex,
+               '-map','[vout]',
+               '-map','0:a?',
+               '-c:v','libx264',
+               '-profile:v','high',
+               '-level','4.2',
+               '-pix_fmt','yuv420p',
+               '-preset','medium',
+               '-crf','23',
+               '-c:a','aac',
+               '-b:a','192k',
+               '-movflags','+faststart',
+               OUTPUT_VIDEO]
+          )
+
+          subprocess.check_call(cmd)
           EOF
 
       - name: Setup Git LFS if Needed
@@ -155,12 +161,10 @@ jobs:
           git add Video/final_video.mp4 .gitattributes || true
 
           if git diff --staged --quiet; then
-            echo "No changes"
             exit 0
           fi
 
           git commit -m "🎥 Final video assembled ($(date))"
-
           git pull origin main --rebase || git pull origin main --strategy=ours
           git push origin main
 
@@ -169,7 +173,7 @@ jobs:
         run: |
           echo "## 🎬 Final Video Assembly" >> $GITHUB_STEP_SUMMARY
           if [ -f "Video/final_video.mp4" ]; then
-            echo "✅ Final video created successfully" >> $GITHUB_STEP_SUMMARY
+            echo "✅ Final video created" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ Final video not created" >> $GITHUB_STEP_SUMMARY
+            echo "❌ Final video failed" >> $GITHUB_STEP_SUMMARY
           fi

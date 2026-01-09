@@ -17,6 +17,8 @@ permissions:
 jobs:
   merge-final-video:
     runs-on: ubuntu-latest
+
+    # SAFE conditional (prevents undefined workflow_run errors)
     if: >
       github.event_name == 'workflow_dispatch' ||
       github.event_name == 'push' ||
@@ -37,103 +39,158 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Merge Clips into Final Video (16:9 Crop)
+      - name: Merge Clips into Final Video (16:9)
         shell: bash
         run: |
           python3 <<'EOF'
-          import json, os, subprocess, sys
+          import json
+          import os
+          import subprocess
+          import sys
 
           VISUALS_PATH = 'Visuals/visuals.json'
           CLIPS_DIR = 'Clips'
           VIDEO_DIR = 'Video'
+          NORMALIZED_DIR = 'Clips/normalized'
           CONCAT_FILE = 'clips_to_merge.txt'
           OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')
 
-          TARGET_W = 1920
-          TARGET_H = 1080
+          # 16:9 aspect ratio settings
+          TARGET_WIDTH = 1920
+          TARGET_HEIGHT = 1080
 
-          def get_video_info(path):
+          def validate_video(path):
               try:
                   r = subprocess.run(
                       ['ffprobe','-v','error','-select_streams','v:0',
-                       '-show_entries','stream=width,height:format=duration',
+                       '-show_entries','stream=codec_name,width,height:format=duration',
                        '-of','json', path],
-                      capture_output=True, text=True
+                      capture_output=True, text=True, timeout=10
                   )
+                  if r.returncode != 0:
+                      return False, "ffprobe failed"
                   d = json.loads(r.stdout)
-                  s = d['streams'][0]
-                  return True, s['width'], s['height'], float(d['format']['duration'])
-              except:
-                  return False, None, None, None
+                  if not d.get("streams"):
+                      return False, "no video stream"
+                  dur = float(d["format"]["duration"])
+                  if dur <= 0:
+                      return False, "zero duration"
+                  s = d["streams"][0]
+                  return True, f'{s.get("width")}x{s.get("height")} {dur:.2f}s'
+              except Exception as e:
+                  return False, str(e)
 
-          os.makedirs(VIDEO_DIR, exist_ok=True)
+          def normalize_to_16_9(input_path, output_path):
+              """Convert video to 16:9 aspect ratio with padding/scaling"""
+              try:
+                  # Scale and pad to 16:9, maintaining aspect ratio
+                  # This adds black bars if needed
+                  filter_complex = (
+                      f"scale={TARGET_WIDTH}:{TARGET_HEIGHT}:force_original_aspect_ratio=decrease,"
+                      f"pad={TARGET_WIDTH}:{TARGET_HEIGHT}:(ow-iw)/2:(oh-ih)/2:black"
+                  )
+                  
+                  cmd = [
+                      'ffmpeg', '-y', '-i', input_path,
+                      '-vf', filter_complex,
+                      '-c:v', 'libx264',
+                      '-preset', 'medium',
+                      '-crf', '23',
+                      '-c:a', 'aac',
+                      '-b:a', '128k',
+                      '-r', '30',  # Standard 30fps
+                      output_path
+                  ]
+                  
+                  subprocess.run(cmd, capture_output=True, text=True, check=True)
+                  return True
+              except subprocess.CalledProcessError as e:
+                  print(f"❌ Normalization failed: {e.stderr}")
+                  return False
 
-          if not os.path.exists(VISUALS_PATH):
-              sys.exit(1)
+          def main():
+              if not os.path.exists(VISUALS_PATH):
+                  print("❌ visuals.json missing")
+                  sys.exit(1)
 
-          data = json.load(open(VISUALS_PATH))
-          clips = []
+              os.makedirs(VIDEO_DIR, exist_ok=True)
+              os.makedirs(NORMALIZED_DIR, exist_ok=True)
 
-          for item in data:
-              n = item.get("number")
-              p = os.path.join(CLIPS_DIR, f"c{n}.mp4")
-              ok, w, h, d = get_video_info(p) if os.path.exists(p) else (False,None,None,None)
-              if not ok:
-                  continue
-              clips.append(p)
+              data = json.load(open(VISUALS_PATH))
+              valid = []
+              normalized_clips = []
 
-          if not clips:
-              sys.exit(1)
+              print(f"🎬 Normalizing clips to {TARGET_WIDTH}x{TARGET_HEIGHT} (16:9)...")
 
-          all_16_9 = True
-          for c in clips:
-              ok, w, h, _ = get_video_info(c)
-              if not ok or abs((w / h) - (16 / 9)) > 0.01:
-                  all_16_9 = False
-                  break
+              for item in data:
+                  n = item.get("number")
+                  original_path = os.path.join(CLIPS_DIR, f"c{n}.mp4")
+                  normalized_path = os.path.join(NORMALIZED_DIR, f"c{n}_16x9.mp4")
+                  
+                  if not os.path.exists(original_path):
+                      print(f"❌ Missing {original_path}")
+                      continue
+                  
+                  ok, info = validate_video(original_path)
+                  if not ok:
+                      print(f"❌ Invalid {original_path}: {info}")
+                      continue
+                  
+                  print(f"📹 Processing {original_path} ({info})")
+                  
+                  # Normalize to 16:9
+                  if normalize_to_16_9(original_path, normalized_path):
+                      ok_norm, info_norm = validate_video(normalized_path)
+                      if ok_norm:
+                          normalized_clips.append(normalized_path)
+                          print(f"✅ Normalized to {normalized_path} ({info_norm})")
+                      else:
+                          print(f"❌ Normalized file invalid: {info_norm}")
+                  else:
+                      print(f"❌ Failed to normalize {original_path}")
 
-          if all_16_9:
+              if not normalized_clips:
+                  print("❌ No valid normalized clips")
+                  sys.exit(1)
+
+              # Create concat file with normalized clips
               with open(CONCAT_FILE, "w") as f:
-                  for c in clips:
-                      f.write(f"file '{c}'\n")
+                  for clip in normalized_clips:
+                      f.write(f"file '{clip}'\n")
 
-              r = subprocess.run([
+              print(f"🔗 Concatenating {len(normalized_clips)} clips...")
+
+              # Try concat with copy first
+              cmd = [
                   'ffmpeg','-y','-f','concat','-safe','0',
                   '-i',CONCAT_FILE,'-c','copy',
                   '-movflags','+faststart',OUTPUT_VIDEO
-              ])
+              ]
 
-              if r.returncode == 0:
-                  sys.exit(0)
+              r = subprocess.run(cmd, capture_output=True, text=True)
+              if r.returncode != 0:
+                  print("⚠️ Copy concat failed, re-encoding…")
+                  inputs = sum([['-i',v] for v in normalized_clips], [])
+                  fc = f'concat=n={len(normalized_clips)}:v=1:a=1[outv][outa]'
+                  cmd = ['ffmpeg','-y'] + inputs + [
+                      '-filter_complex',fc,
+                      '-map','[outv]','-map','[outa]',
+                      '-c:v','libx264','-preset','medium','-crf','23',
+                      '-c:a','aac','-b:a','128k',
+                      '-movflags','+faststart',
+                      OUTPUT_VIDEO
+                  ]
+                  subprocess.check_call(cmd)
 
-          inputs = sum([['-i',c] for c in clips], [])
+              # Verify final video
+              ok, info = validate_video(OUTPUT_VIDEO)
+              if ok:
+                  print(f"🎉 Final 16:9 video ready: {info}")
+              else:
+                  print(f"❌ Final video validation failed: {info}")
+                  sys.exit(1)
 
-          filter_complex = (
-              f"concat=n={len(clips)}:v=1:a=1[v];"
-              f"[v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=increase,"
-              f"crop={TARGET_W}:{TARGET_H},"
-              f"setsar=1[vout]"
-          )
-
-          cmd = (
-              ['ffmpeg','-y'] +
-              inputs +
-              ['-filter_complex', filter_complex,
-               '-map','[vout]',
-               '-map','0:a?',
-               '-c:v','libx264',
-               '-profile:v','high',
-               '-level','4.2',
-               '-pix_fmt','yuv420p',
-               '-preset','medium',
-               '-crf','23',
-               '-c:a','aac',
-               '-b:a','192k',
-               '-movflags','+faststart',
-               OUTPUT_VIDEO]
-          )
-
-          subprocess.check_call(cmd)
+          main()
           EOF
 
       - name: Setup Git LFS if Needed
@@ -161,19 +218,23 @@ jobs:
           git add Video/final_video.mp4 .gitattributes || true
 
           if git diff --staged --quiet; then
+            echo "No changes"
             exit 0
           fi
 
-          git commit -m "🎥 Final video assembled ($(date))"
+          git commit -m "🎥 Final 16:9 video assembled ($(date))"
+
           git pull origin main --rebase || git pull origin main --strategy=ours
           git push origin main
 
       - name: Summary
         if: always()
         run: |
-          echo "## 🎬 Final Video Assembly" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎬 Final Video Assembly (16:9)" >> $GITHUB_STEP_SUMMARY
           if [ -f "Video/final_video.mp4" ]; then
-            echo "✅ Final video created" >> $GITHUB_STEP_SUMMARY
+            echo "✅ Final 16:9 video created successfully" >> $GITHUB_STEP_SUMMARY
+            size=$(stat -c%s "Video/final_video.mp4" 2>/dev/null || echo 0)
+            echo "📦 File size: $(($size / 1048576)) MB" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ Final video failed" >> $GITHUB_STEP_SUMMARY
+            echo "❌ Final video not created" >> $GITHUB_STEP_SUMMARY
           fi

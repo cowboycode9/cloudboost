@@ -1,9 +1,9 @@
-name: Sync Google Drive Images
+name: Sync Google Drive Images (No LFS)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"   # Runs every 6 hours (change if needed)
+    - cron: "0 */6 * * *"   # Every 6 hours (optional)
 
 permissions:
   contents: write
@@ -16,16 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          lfs: true
-
-      - name: Set up Git LFS
-        run: |
-          git lfs install
-          git lfs track "*.jpg"
-          git lfs track "*.jpeg"
-          git lfs track "*.png"
-          git lfs track "*.webp"
-          git add .gitattributes
+          lfs: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,9 +26,13 @@ jobs:
       - name: Install Dependencies
         run: pip install gdown
 
-      - name: Download Images from Google Drive
+      - name: Clean Old Images
         run: |
           mkdir -p Images
+          rm -rf Images/*
+
+      - name: Download Images from Google Drive
+        run: |
           python3 - <<EOF
           import os
           import shutil
@@ -46,7 +41,6 @@ jobs:
           FOLDER_URL = "https://drive.google.com/drive/folders/1Eq5Qx94znqKnr9cIrPAgd5kW7iwISxVx"
           OUTPUT_DIR = "Images"
 
-          # Download entire folder
           gdown.download_folder(
               FOLDER_URL,
               output=OUTPUT_DIR,
@@ -54,7 +48,7 @@ jobs:
               use_cookies=False
           )
 
-          # Remove nested subfolder if created
+          # Flatten folder structure if Drive creates subfolders
           for root, dirs, files in os.walk(OUTPUT_DIR):
               for file in files:
                   src = os.path.join(root, file)
@@ -62,14 +56,14 @@ jobs:
                   if src != dst:
                       shutil.move(src, dst)
 
-          # Clean empty directories
+          # Remove empty directories
           for root, dirs, files in os.walk(OUTPUT_DIR, topdown=False):
               for d in dirs:
                   path = os.path.join(root, d)
                   if not os.listdir(path):
                       os.rmdir(path)
 
-          print("Download and flatten complete.")
+          print("Images synced successfully.")
           EOF
 
       - name: Commit and Push Images
@@ -84,7 +78,6 @@ jobs:
           fi
 
           git add Images/
-          git add .gitattributes
 
           if git diff --staged --quiet; then
             echo "No image changes detected."

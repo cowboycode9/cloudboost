@@ -29,10 +29,10 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Generate MP4 Clips
+      - name: Generate High Quality MP4 Clips
         shell: bash
         run: |
-          python3 - <<'EOF'
+          python3 <<'EOF'
           import json
           import os
           import subprocess
@@ -43,66 +43,100 @@ jobs:
           IMAGE_DIR = 'Images'
           CLIPS_DIR = 'Clips'
 
-          def create_clip(num):
-              audio_path = os.path.join(AUDIO_DIR, f"a{num}.mp3")
-              image_path = os.path.join(IMAGE_DIR, f"i{num}.png")
-              output_path = os.path.join(CLIPS_DIR, f"c{num}.mp4")
+          os.makedirs(CLIPS_DIR, exist_ok=True)
 
-              if not os.path.exists(audio_path):
-                  print(f"Missing audio: {audio_path}")
+          def validate_media(path, type_):
+              if not os.path.exists(path):
+                  return False
+              if os.path.getsize(path) < 1000:
+                  return False
+              return True
+
+          def validate_output(path):
+              try:
+                  r = subprocess.run(
+                      ['ffprobe','-v','error','-show_entries',
+                       'format=duration','-of',
+                       'default=noprint_wrappers=1:nokey=1', path],
+                      capture_output=True,text=True,timeout=10
+                  )
+                  if r.returncode != 0:
+                      return False
+                  dur = float(r.stdout.strip())
+                  return dur > 0
+              except:
                   return False
 
-              if not os.path.exists(image_path):
-                  print(f"Missing image: {image_path}")
+          def create_clip(num):
+              audio = os.path.join(AUDIO_DIR, f"a{num}.mp3")
+              image = os.path.join(IMAGE_DIR, f"i{num}.png")
+              output = os.path.join(CLIPS_DIR, f"c{num}.mp4")
+
+              print(f"\n--- Processing clip {num} ---")
+
+              if not validate_media(audio,"audio"):
+                  print("❌ Invalid audio")
+                  return False
+
+              if not validate_media(image,"image"):
+                  print("❌ Invalid image")
                   return False
 
               cmd = [
-                  'ffmpeg', '-y',
-                  '-loop', '1',
-                  '-i', image_path,
-                  '-i', audio_path,
-                  '-c:v', 'libx264',
-                  '-preset', 'medium',
-                  '-crf', '23',
-                  '-tune', 'stillimage',
-                  '-c:a', 'aac',
-                  '-b:a', '192k',
-                  '-pix_fmt', 'yuv420p',
-                  '-movflags', '+faststart',
+                  'ffmpeg','-y',
+                  '-loop','1',
+                  '-i',image,
+                  '-i',audio,
+                  '-vf','scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2',
+                  '-c:v','libx264',
+                  '-preset','slow',
+                  '-crf','20',
+                  '-profile:v','high',
+                  '-level','4.2',
+                  '-pix_fmt','yuv420p',
+                  '-c:a','aac',
+                  '-b:a','192k',
+                  '-ar','44100',
+                  '-movflags','+faststart',
                   '-shortest',
-                  output_path
+                  output
               ]
 
               try:
-                  subprocess.run(cmd, check=True)
-                  print(f"Created {output_path}")
-                  return True
+                  subprocess.run(cmd,check=True)
               except subprocess.CalledProcessError:
-                  print(f"Failed creating clip {num}")
+                  print("❌ FFmpeg failed")
                   return False
+
+              if not validate_output(output):
+                  print("❌ Output corrupted")
+                  if os.path.exists(output):
+                      os.remove(output)
+                  return False
+
+              size = os.path.getsize(output)
+              print(f"✅ Created {output} ({size//1024} KB)")
+              return True
 
           def main():
               if not os.path.exists(VISUALS_PATH):
-                  print("Visuals file missing.")
+                  print("❌ visuals.json missing")
                   sys.exit(1)
 
-              os.makedirs(CLIPS_DIR, exist_ok=True)
-
-              with open(VISUALS_PATH, 'r') as f:
-                  data = json.load(f)
-
+              data = json.load(open(VISUALS_PATH))
               success = 0
+
               for item in data:
                   num = item.get("number")
                   if num and create_clip(num):
                       success += 1
 
+              print(f"\n🎬 Successfully created {success} clips")
+
               if success == 0:
-                  print("No clips created.")
                   sys.exit(1)
 
-          if __name__ == "__main__":
-              main()
+          main()
           EOF
 
       - name: Commit and Push Clips
@@ -117,33 +151,17 @@ jobs:
             git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           fi
 
-          git add Clips/*.mp4 2>/dev/null || echo "No MP4 files to add"
+          git add Clips/*.mp4 2>/dev/null || echo "No MP4 files"
 
           if git diff --staged --quiet; then
-            echo "No new clips to commit."
-          else
-            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-            clip_count=$(git diff --staged --name-only | grep -c "\.mp4$" || echo "0")
-
-            git commit -m "🎬 Generated ${clip_count} video clips: ${timestamp}"
-
-            git pull origin main --rebase || git pull origin main --strategy-option=ours
-
-            max_retries=3
-            retry_count=0
-
-            while [ $retry_count -lt $max_retries ]; do
-              if git push origin main; then
-                echo "Successfully pushed clips."
-                exit 0
-              else
-                retry_count=$((retry_count + 1))
-                echo "Push failed, retrying ($retry_count/$max_retries)..."
-                sleep 5
-                git pull origin main --rebase || git pull origin main --strategy-option=ours
-              fi
-            done
-
-            echo "Failed to push after retries."
-            exit 1
+            echo "No new clips"
+            exit 0
           fi
+
+          timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+          clip_count=$(git diff --staged --name-only | grep -c "\.mp4$" || echo "0")
+
+          git commit -m "🎬 Generated ${clip_count} high-quality clips: ${timestamp}"
+
+          git pull origin main --rebase || git pull origin main --strategy-option=ours
+          git push origin main

@@ -1,0 +1,96 @@
+name: Sync Google Drive Images
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"   # Runs every 6 hours (change if needed)
+
+permissions:
+  contents: write
+
+jobs:
+  sync-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Git LFS
+        run: |
+          git lfs install
+          git lfs track "*.jpg"
+          git lfs track "*.jpeg"
+          git lfs track "*.png"
+          git lfs track "*.webp"
+          git add .gitattributes
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: pip install gdown
+
+      - name: Download Images from Google Drive
+        run: |
+          mkdir -p Images
+          python3 - <<EOF
+          import os
+          import shutil
+          import gdown
+
+          FOLDER_URL = "https://drive.google.com/drive/folders/1Eq5Qx94znqKnr9cIrPAgd5kW7iwISxVx"
+          OUTPUT_DIR = "Images"
+
+          # Download entire folder
+          gdown.download_folder(
+              FOLDER_URL,
+              output=OUTPUT_DIR,
+              quiet=False,
+              use_cookies=False
+          )
+
+          # Remove nested subfolder if created
+          for root, dirs, files in os.walk(OUTPUT_DIR):
+              for file in files:
+                  src = os.path.join(root, file)
+                  dst = os.path.join(OUTPUT_DIR, file)
+                  if src != dst:
+                      shutil.move(src, dst)
+
+          # Clean empty directories
+          for root, dirs, files in os.walk(OUTPUT_DIR, topdown=False):
+              for d in dirs:
+                  path = os.path.join(root, d)
+                  if not os.listdir(path):
+                      os.rmdir(path)
+
+          print("Download and flatten complete.")
+          EOF
+
+      - name: Commit and Push Images
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "cowboycode9"
+          git config --global user.email "cowboycode9@outlook.com"
+
+          if [ -n "$GH_PAT" ]; then
+            git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
+          fi
+
+          git add Images/
+          git add .gitattributes
+
+          if git diff --staged --quiet; then
+            echo "No image changes detected."
+          else
+            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+            git commit -m "🖼️ Drive Image Sync: ${timestamp}"
+            git pull origin main --rebase
+            git push origin main
+          fi

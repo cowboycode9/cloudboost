@@ -33,7 +33,76 @@ jobs:
         shell: bash
         run: |
           python3 - <<'EOF'
-          # (YOUR ENTIRE PYTHON CODE BLOCK REMAINS EXACTLY THE SAME HERE)
+          import json
+          import os
+          import subprocess
+          import sys
+
+          VISUALS_PATH = 'Visuals/visuals.json'
+          AUDIO_DIR = 'Audio'
+          IMAGE_DIR = 'Images'
+          CLIPS_DIR = 'Clips'
+
+          def create_clip(num):
+              audio_path = os.path.join(AUDIO_DIR, f"a{num}.mp3")
+              image_path = os.path.join(IMAGE_DIR, f"i{num}.png")
+              output_path = os.path.join(CLIPS_DIR, f"c{num}.mp4")
+
+              if not os.path.exists(audio_path):
+                  print(f"Missing audio: {audio_path}")
+                  return False
+
+              if not os.path.exists(image_path):
+                  print(f"Missing image: {image_path}")
+                  return False
+
+              cmd = [
+                  'ffmpeg', '-y',
+                  '-loop', '1',
+                  '-i', image_path,
+                  '-i', audio_path,
+                  '-c:v', 'libx264',
+                  '-preset', 'medium',
+                  '-crf', '23',
+                  '-tune', 'stillimage',
+                  '-c:a', 'aac',
+                  '-b:a', '192k',
+                  '-pix_fmt', 'yuv420p',
+                  '-movflags', '+faststart',
+                  '-shortest',
+                  output_path
+              ]
+
+              try:
+                  subprocess.run(cmd, check=True)
+                  print(f"Created {output_path}")
+                  return True
+              except subprocess.CalledProcessError:
+                  print(f"Failed creating clip {num}")
+                  return False
+
+          def main():
+              if not os.path.exists(VISUALS_PATH):
+                  print("Visuals file missing.")
+                  sys.exit(1)
+
+              os.makedirs(CLIPS_DIR, exist_ok=True)
+
+              with open(VISUALS_PATH, 'r') as f:
+                  data = json.load(f)
+
+              success = 0
+              for item in data:
+                  num = item.get("number")
+                  if num and create_clip(num):
+                      success += 1
+
+              if success == 0:
+                  print("No clips created.")
+                  sys.exit(1)
+
+          if __name__ == "__main__":
+              main()
           EOF
 
       - name: Commit and Push Clips
@@ -43,40 +112,38 @@ jobs:
           git config --global user.name "intellectra9"
           git config --global user.email "intellectra9@outlook.com"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          
+
           if [ -n "$GH_PAT" ]; then
             git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           fi
 
-          # Add all clips
           git add Clips/*.mp4 2>/dev/null || echo "No MP4 files to add"
-          
+
           if git diff --staged --quiet; then
             echo "No new clips to commit."
           else
             timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
-            
             clip_count=$(git diff --staged --name-only | grep -c "\.mp4$" || echo "0")
-            
+
             git commit -m "🎬 Generated ${clip_count} video clips: ${timestamp}"
-            
+
             git pull origin main --rebase || git pull origin main --strategy-option=ours
-            
+
             max_retries=3
             retry_count=0
-            
+
             while [ $retry_count -lt $max_retries ]; do
               if git push origin main; then
-                echo "✅ Successfully pushed clips!"
+                echo "Successfully pushed clips."
                 exit 0
               else
                 retry_count=$((retry_count + 1))
-                echo "⚠️ Push failed, retrying ($retry_count/$max_retries)..."
+                echo "Push failed, retrying ($retry_count/$max_retries)..."
                 sleep 5
                 git pull origin main --rebase || git pull origin main --strategy-option=ours
               fi
             done
-            
-            echo "❌ Failed to push after $max_retries attempts"
+
+            echo "Failed to push after retries."
             exit 1
           fi

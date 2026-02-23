@@ -1,9 +1,9 @@
-name: Sync Google Drive Images (No LFS)
+name: Sync Google Drive Images (Unlimited Files)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"   # Every 6 hours (optional)
+    - cron: "0 */6 * * *"   # Runs every 6 hours (optional)
 
 permissions:
   contents: write
@@ -24,46 +24,51 @@ jobs:
           python-version: "3.10"
 
       - name: Install Dependencies
-        run: pip install gdown
+        run: pip install requests gdown
 
       - name: Clean Old Images
         run: |
           mkdir -p Images
           rm -rf Images/*
 
-      - name: Download Images from Google Drive
+      - name: Download Images from Google Drive (Unlimited Files)
         run: |
           python3 - <<EOF
           import os
-          import shutil
+          import re
+          import requests
           import gdown
 
-          FOLDER_URL = "https://drive.google.com/drive/folders/1Eq5Qx94znqKnr9cIrPAgd5kW7iwISxVx"
+          FOLDER_ID = "1Eq5Qx94znqKnr9cIrPAgd5kW7iwISxVx"
           OUTPUT_DIR = "Images"
 
-          gdown.download_folder(
-              FOLDER_URL,
-              output=OUTPUT_DIR,
-              quiet=False,
-              use_cookies=False
-          )
+          os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-          # Flatten folder structure if Drive creates subfolders
-          for root, dirs, files in os.walk(OUTPUT_DIR):
-              for file in files:
-                  src = os.path.join(root, file)
-                  dst = os.path.join(OUTPUT_DIR, file)
-                  if src != dst:
-                      shutil.move(src, dst)
+          print("Fetching folder page...")
 
-          # Remove empty directories
-          for root, dirs, files in os.walk(OUTPUT_DIR, topdown=False):
-              for d in dirs:
-                  path = os.path.join(root, d)
-                  if not os.listdir(path):
-                      os.rmdir(path)
+          url = f"https://drive.google.com/drive/folders/{FOLDER_ID}"
+          response = requests.get(url)
+          html = response.text
 
-          print("Images synced successfully.")
+          # Extract file IDs and names
+          matches = re.findall(r'"id":"([a-zA-Z0-9_-]{28,})".*?"name":"([^"]+)"', html)
+
+          if not matches:
+              print("No files found. Make sure folder is public.")
+              exit(1)
+
+          print(f"Total files found: {len(matches)}")
+
+          for file_id, filename in matches:
+              output_path = os.path.join(OUTPUT_DIR, filename)
+              download_url = f"https://drive.google.com/uc?id={file_id}"
+              print(f"Downloading {filename}...")
+              try:
+                  gdown.download(download_url, output_path, quiet=False)
+              except Exception as e:
+                  print(f"Failed: {filename} -> {e}")
+
+          print("All images downloaded successfully.")
           EOF
 
       - name: Commit and Push Images

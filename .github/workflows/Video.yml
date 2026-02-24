@@ -2,6 +2,11 @@ name: Final Video Assembly
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Clips/*.mp4'
+      - 'Visuals/visuals.json'
   workflow_run:
     workflows: ["Generate Video Clips"]
     types: [completed]
@@ -12,8 +17,6 @@ permissions:
 jobs:
   merge-final-video:
     runs-on: ubuntu-latest
-    # Only run if the clips were generated successfully
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout Repository
@@ -29,124 +32,97 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Sync Latest Clips and Merge
+      - name: Merge Clips into Final Video
         shell: bash
         run: |
-          # CRITICAL: Pull the clips that were just pushed by the previous workflow
-          git pull origin main
-
-          python3 - <<'EOF'
+          python3 <<'EOF'
           import json
           import os
           import subprocess
           import sys
 
           VISUALS_PATH = 'Visuals/visuals.json'
-          CLIPS_DIR = 'Clips'
+          CLIPS_DIR = os.path.abspath('Clips')
           VIDEO_DIR = 'Video'
-          CONCAT_FILE = 'clips_to_merge.txt'
+          CONCAT_FILE = 'clips.txt'
           OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')
 
-          def validate_video(path):
-              if not os.path.exists(path):
-                  return False, "File does not exist"
-              try:
-                  r = subprocess.run(
-                      ['ffprobe','-v','error','-select_streams','v:0',
-                       '-show_entries','format=duration',
-                       '-of','default=noprint_wrappers=1:nokey=1', path],
-                      capture_output=True, text=True, timeout=15
-                  )
-                  if r.returncode != 0:
-                      return False, f"ffprobe exit code {r.returncode}"
-                  dur = float(r.stdout.strip())
-                  return (True, f"{dur:.2f}s") if dur > 0 else (False, "zero duration")
-              except Exception as e:
-                  return False, str(e)
+          if not os.path.exists(VISUALS_PATH):
+              sys.exit(1)
 
-          def main():
-              if not os.path.exists(VISUALS_PATH):
-                  print("❌ visuals.json missing")
-                  sys.exit(1)
+          os.makedirs(VIDEO_DIR, exist_ok=True)
 
-              os.makedirs(VIDEO_DIR, exist_ok=True)
-              data = json.load(open(VISUALS_PATH))
-              valid = []
+          data = json.load(open(VISUALS_PATH))
+          valid = []
 
-              print(f"--- Starting Validation of {len(data)} potential clips ---")
-              for item in data:
-                  n = item.get("number")
-                  p = os.path.join(CLIPS_DIR, f"c{n}.mp4")
-                  
-                  ok, info = validate_video(p)
-                  if ok:
-                      valid.append(p)
-                      print(f"✅ {p} found and valid ({info})")
-                  else:
-                      print(f"⚠️ Skipping {p}: {info}")
+          for item in data:
+              n = item.get("number")
+              clip = os.path.join(CLIPS_DIR, f"c{n}.mp4")
 
-              if not valid:
-                  print("❌ No valid clips found to merge. Check if 'Clips' folder is empty.")
-                  sys.exit(1)
+              if os.path.exists(clip) and os.path.getsize(clip) > 50000:
+                  valid.append(clip)
+                  print(f"✅ {clip}")
+              else:
+                  print(f"❌ Invalid {clip}")
 
-              # Write concat file
-              with open(CONCAT_FILE, "w") as f:
-                  for v in valid:
-                      # ffmpeg concat needs absolute paths or correctly escaped relative paths
-                      f.write(f"file '{os.path.abspath(v)}'\n")
+          if not valid:
+              sys.exit(1)
 
-              print(f"🎬 Merging {len(valid)} clips into {OUTPUT_VIDEO}...")
-              
-              # Try fast copy first
-              cmd = [
-                  'ffmpeg','-y','-f','concat','-safe','0',
-                  '-i',CONCAT_FILE,'-c','copy',
-                  '-movflags','+faststart',OUTPUT_VIDEO
+          with open(CONCAT_FILE, "w") as f:
+              for v in valid:
+                  f.write(f"file '{v}'\n")
+
+          cmd = [
+              'ffmpeg','-y',
+              '-f','concat',
+              '-safe','0',
+              '-i',CONCAT_FILE,
+              '-c','copy',
+              OUTPUT_VIDEO
+          ]
+
+          result = subprocess.run(cmd)
+
+          if result.returncode != 0:
+              inputs = []
+              for v in valid:
+                  inputs += ['-i', v]
+
+              filter_complex = f'concat=n={len(valid)}:v=1:a=1[outv][outa]'
+
+              cmd = ['ffmpeg','-y'] + inputs + [
+                  '-filter_complex', filter_complex,
+                  '-map','[outv]',
+                  '-map','[outa]',
+                  '-c:v','libx264',
+                  '-crf','20',
+                  '-preset','medium',
+                  '-c:a','aac',
+                  OUTPUT_VIDEO
               ]
 
-              r = subprocess.run(cmd, capture_output=True, text=True)
-              if r.returncode != 0:
-                  print("⚠️ Fast-copy failed. Attempting full re-encode merge...")
-                  # Fallback to re-encoding if clips have mismatched parameters
-                  filter_complex = "".join([f"[{i}:v][{i}:a]" for i in range(len(valid))])
-                  filter_complex += f"concat=n={len(valid)}:v=1:a=1[outv][outa]"
-                  
-                  inputs = []
-                  for v in valid:
-                      inputs.extend(['-i', v])
-                  
-                  re_cmd = ['ffmpeg','-y'] + inputs + [
-                      '-filter_complex', filter_complex,
-                      '-map', '[outv]', '-map', '[outa]',
-                      '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast',
-                      '-c:a', 'aac', '-b:a', '128k', OUTPUT_VIDEO
-                  ]
-                  subprocess.check_call(re_cmd)
+              subprocess.check_call(cmd)
 
-              print("🎉 Final video successfully created!")
-
-          main()
+          print("🎉 Final video created")
           EOF
 
-      - name: Commit and Push
+      - name: Commit and Push Final Video
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config --global user.name "intellectra9"
-          git config --global user.email "intellectra9@outlook.com"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global user.name "cowboycode9"
+          git config --global user.email "cowboycode9@outlook.com"
 
           if [ -n "$GH_PAT" ]; then
             git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
           fi
 
-          git add Video/final_video.mp4
+          git add Video/final_video.mp4 || true
 
           if git diff --staged --quiet; then
-            echo "No changes to commit"
-            exit 0
+            echo "No new final video."
+          else
+            timestamp=$(TZ="Asia/Kolkata" date +"%Y-%m-%d %H:%M:%S IST")
+            git commit -m "🎥 Final Video Update: ${timestamp}"
+            git push origin main
           fi
-
-          git commit -m "🎥 Final video assembled: $(date)"
-          git pull origin main --rebase
-          git push origin main

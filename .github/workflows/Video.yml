@@ -18,146 +18,145 @@ jobs:
   merge-final-video:
     runs-on: ubuntu-latest
 
-    # SAFE conditional (prevents undefined workflow_run errors)  
-    if: >  
-      github.event_name == 'workflow_dispatch' ||  
-      github.event_name == 'push' ||  
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')  
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
 
-    steps:  
-      - name: Checkout Repository  
-        uses: actions/checkout@v4  
-        with:  
-          fetch-depth: 0  
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Set up Python  
-        uses: actions/setup-python@v5  
-        with:  
-          python-version: '3.10'  
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-      - name: Install FFmpeg  
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg  
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Merge Clips into Final Video  
-        shell: bash  
-        run: |  
-          python3 <<'EOF'  
-          import json  
-          import os  
-          import subprocess  
-          import sys  
+      - name: Merge Clips into Final Video
+        shell: bash
+        run: |
+          python3 - <<'EOF'
+          import json
+          import os
+          import subprocess
+          import sys
 
-          VISUALS_PATH = 'Visuals/visuals.json'  
-          CLIPS_DIR = 'Clips'  
-          VIDEO_DIR = 'Video'  
-          CONCAT_FILE = 'clips_to_merge.txt'  
-          OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')  
+          VISUALS_PATH = 'Visuals/visuals.json'
+          CLIPS_DIR = 'Clips'
+          VIDEO_DIR = 'Video'
+          CONCAT_FILE = 'clips_to_merge.txt'
+          OUTPUT_VIDEO = os.path.join(VIDEO_DIR, 'final_video.mp4')
 
-          def validate_video(path):  
-              try:  
-                  r = subprocess.run(  
-                      ['ffprobe','-v','error','-select_streams','v:0',  
-                       '-show_entries','stream=codec_name,width,height:format=duration',  
-                       '-of','json', path],  
-                      capture_output=True, text=True, timeout=10  
-                  )  
-                  if r.returncode != 0:  
-                      return False, "ffprobe failed"  
-                  d = json.loads(r.stdout)  
-                  if not d.get("streams"):  
-                      return False, "no video stream"  
-                  dur = float(d["format"]["duration"])  
-                  if dur <= 0:  
-                      return False, "zero duration"  
-                  s = d["streams"][0]  
-                  return True, f'{s.get("width")}x{s.get("height")} {dur:.2f}s'  
-              except Exception as e:  
-                  return False, str(e)  
+          def validate_video(path):
+              try:
+                  r = subprocess.run(
+                      ['ffprobe','-v','error','-select_streams','v:0',
+                       '-show_entries','stream=codec_name,width,height:format=duration',
+                       '-of','json', path],
+                      capture_output=True, text=True, timeout=10
+                  )
+                  if r.returncode != 0:
+                      return False, "ffprobe failed"
+                  d = json.loads(r.stdout)
+                  if not d.get("streams"):
+                      return False, "no video stream"
+                  dur = float(d["format"]["duration"])
+                  if dur <= 0:
+                      return False, "zero duration"
+                  s = d["streams"][0]
+                  return True, f'{s.get("width")}x{s.get("height")} {dur:.2f}s'
+              except Exception as e:
+                  return False, str(e)
 
-          def main():  
-              if not os.path.exists(VISUALS_PATH):  
-                  print("❌ visuals.json missing")  
-                  sys.exit(1)  
+          def main():
+              if not os.path.exists(VISUALS_PATH):
+                  print("❌ visuals.json missing")
+                  sys.exit(1)
 
-              os.makedirs(VIDEO_DIR, exist_ok=True)  
+              os.makedirs(VIDEO_DIR, exist_ok=True)
 
-              data = json.load(open(VISUALS_PATH))  
-              valid = []  
+              data = json.load(open(VISUALS_PATH))
+              valid = []
 
-              for item in data:  
-                  n = item.get("number")  
-                  p = os.path.join(CLIPS_DIR, f"c{n}.mp4")  
-                  if not os.path.exists(p):  
-                      print(f"❌ Missing {p}")  
-                      continue  
-                  ok, info = validate_video(p)  
-                  if not ok:  
-                      print(f"❌ Invalid {p}: {info}")  
-                      continue  
-                  valid.append(p)  
-                  print(f"✅ {p} ({info})")  
+              for item in data:
+                  n = item.get("number")
+                  p = os.path.join(CLIPS_DIR, f"c{n}.mp4")
+                  if not os.path.exists(p):
+                      print(f"❌ Missing {p}")
+                      continue
+                  ok, info = validate_video(p)
+                  if not ok:
+                      print(f"❌ Invalid {p}: {info}")
+                      continue
+                  valid.append(p)
+                  print(f"✅ {p} ({info})")
 
-              if not valid:  
-                  print("❌ No valid clips")  
-                  sys.exit(1)  
+              if not valid:
+                  print("❌ No valid clips")
+                  sys.exit(1)
 
-              with open(CONCAT_FILE, "w") as f:  
-                  for v in valid:  
-                      f.write(f"file '{v}'\n")  
+              with open(CONCAT_FILE, "w") as f:
+                  for v in valid:
+                      f.write(f"file '{v}'\n")
 
-              cmd = [  
-                  'ffmpeg','-y','-f','concat','-safe','0',  
-                  '-i',CONCAT_FILE,'-c','copy',  
-                  '-movflags','+faststart',OUTPUT_VIDEO  
-              ]  
+              cmd = [
+                  'ffmpeg','-y','-f','concat','-safe','0',
+                  '-i',CONCAT_FILE,'-c','copy',
+                  '-movflags','+faststart',OUTPUT_VIDEO
+              ]
 
-              r = subprocess.run(cmd, capture_output=True, text=True)  
-              if r.returncode != 0:  
-                  print("⚠️ Copy concat failed, re-encoding…")  
-                  inputs = sum([['-i',v] for v in valid], [])  
-                  fc = f'concat=n={len(valid)}:v=1:a=1[outv][outa]'  
-                  cmd = ['ffmpeg','-y'] + inputs + [  
-                      '-filter_complex',fc,  
-                      '-map','[outv]','-map','[outa]',  
-                      '-c:v','libx264','-c:a','aac',  
-                      OUTPUT_VIDEO  
-                  ]  
-                  subprocess.check_call(cmd)  
+              r = subprocess.run(cmd, capture_output=True, text=True)
+              if r.returncode != 0:
+                  print("⚠️ Copy concat failed, re-encoding…")
+                  inputs = sum([['-i',v] for v in valid], [])
+                  fc = f'concat=n={len(valid)}:v=1:a=1[outv][outa]'
+                  cmd = ['ffmpeg','-y'] + inputs + [
+                      '-filter_complex',fc,
+                      '-map','[outv]','-map','[outa]',
+                      '-c:v','libx264','-c:a','aac',
+                      OUTPUT_VIDEO
+                  ]
+                  subprocess.check_call(cmd)
 
-              print("🎉 Final video ready")  
+              print("🎉 Final video ready")
 
-          main()  
-          EOF  
+          main()
+          EOF
 
-      - name: Commit and Push  
-        env:  
-          GH_PAT: ${{ secrets.GH_PAT }}  
-        run: |  
-          git config user.name "intellectra9"  
-          git config user.email "intellectra9@outlook.com"  
+      - name: Commit and Push
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config user.name "intellectra9"
+          git config user.email "intellectra9@outlook.com"
 
-          if [ -n "$GH_PAT" ]; then  
-            git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"  
-          fi  
+          if [ -n "$GH_PAT" ]; then
+            git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}.git"
+          fi
 
-          git add Video/final_video.mp4 || true  
+          git add Video/final_video.mp4 || true
 
-          if git diff --staged --quiet; then  
-            echo "No changes"  
-            exit 0  
-          fi  
+          if git diff --staged --quiet; then
+            echo "No changes"
+            exit 0
+          fi
 
-          git commit -m "🎥 Final video assembled ($(date))"  
+          git commit -m "🎥 Final video assembled ($(date))"
 
-          git pull origin main --rebase || git pull origin main --strategy=ours  
-          git push origin main  
+          git pull origin main --rebase || git pull origin main --strategy-option=ours
+          git push origin main
 
-      - name: Summary  
-        if: always()  
-        run: |  
-          echo "## 🎬 Final Video Assembly" >> $GITHUB_STEP_SUMMARY  
-          if [ -f "Video/final_video.mp4" ]; then  
-            echo "✅ Final video created successfully" >> $GITHUB_STEP_SUMMARY  
-          else  
-            echo "❌ Final video not created" >> $GITHUB_STEP_SUMMARY  
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🎬 Final Video Assembly" >> $GITHUB_STEP_SUMMARY
+          if [ -f "Video/final_video.mp4" ]; then
+            echo "✅ Final video created successfully" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Final video not created" >> $GITHUB_STEP_SUMMARY
           fi

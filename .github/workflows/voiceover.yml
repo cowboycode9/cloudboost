@@ -39,11 +39,12 @@ jobs:
           VISUALS_PATH = 'Visuals/visuals.json'
           AUDIO_FOLDER = 'Audio'
           VOICE = "en-US-JennyNeural"
+          RATE = "+5%"   # <-- Added +5% rate adjustment
 
           nest_asyncio.apply()
 
           async def generate_audio(text, output_path):
-              communicate = edge_tts.Communicate(text, VOICE)
+              communicate = edge_tts.Communicate(text, VOICE, rate=RATE)
               await communicate.save(output_path)
               print(f"Generated: {output_path}")
 

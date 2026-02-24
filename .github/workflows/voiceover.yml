@@ -38,7 +38,7 @@ jobs:
           # --- CONFIGURATION ---
           VISUALS_PATH = 'Visuals/visuals.json'
           AUDIO_FOLDER = 'Audio'
-          VOICE = "en-US-AndrewNeural"
+          VOICE = "en-US-JennyNeural"
 
           nest_asyncio.apply()
 
